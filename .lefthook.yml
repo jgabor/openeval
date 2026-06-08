@@ -32,7 +32,7 @@ pre-commit:
       stage_fixed: true
       glob: "*.go"
     docs:
-      run: npx markdownlint --dot --fix --disable MD013 MD024 MD029 MD033 MD036 MD040 MD060 -- {staged_files}
+      run: npx prettier --write {staged_files}
       stage_fixed: true
       glob: "*.md"
     configs:
