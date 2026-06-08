@@ -1,0 +1,83 @@
+header:
+  level: full
+  created: 2026-06-08
+  status: complete
+  reviewed: 2026-06-08
+  critic_issues: "4 found, 3 addressed, 1 dismissed"
+  title: OpenEval MVP — CLI, scenarios, and scoring loop
+what: Ship the first runnable openeval binary from README — instrument, run scenarios, score, compare.
+why: Repo is docs-only. MVP delivers the evidence loop vision requires before external integrations.
+constraints: Match README CLI and score.json v1. Privacy-by-default. Defer DeepSWE, Docker, full telemetry inventory.
+scope:
+  included:
+    - CLI, config, scenario YAML, run/compare/report/traces
+    - Cursor instrument, minimal OTLP, example-fixtures slice
+  excluded:
+    - deepswe, margin-eval, docker images, Pi/OpenCode adapters, full semconv inventory
+  deferred:
+    - external adapters, install scripts, generation batching
+design: Domain types, scenario loader, ./scenarios output layout, agent driver (Cursor first), script verifiers, commands on top.
+tasks:
+  - number: 1
+    name: Project scaffold and CLI skeleton
+    depends_on: []
+    status: complete
+    acceptance:
+      - GIVEN checkout WHEN mage install THEN openeval exposes run, instrument, report, compare, traces
+  - number: 2
+    name: Configuration and scenario loading
+    depends_on: [1]
+    status: complete
+    acceptance:
+      - GIVEN config.minimal.yaml WHEN loaded THEN aliases and telemetry settings resolve
+      - GIVEN scenario YAML WHEN --scenario used THEN id, tasks, and variations load
+  - number: 3
+    name: Run orchestration and output layout
+    depends_on: [2]
+    status: complete
+    acceptance:
+      - GIVEN no variation WHEN run completes THEN ./scenarios/<id>/runs/<n> auto-increments
+      - GIVEN named variation WHEN run completes THEN output uses ./scenarios/<id>/runs/<variation>
+      - GIVEN omitted --rounds WHEN run executes THEN default is three attempts per task
+  - number: 4
+    name: Verifier execution and agent driver
+    depends_on: [3]
+    status: complete
+    acceptance:
+      - GIVEN example-fixtures WHEN round runs THEN prompt is sent and script verifier returns pass or fail
+      - GIVEN variation YAML WHEN run starts THEN env and skills for that arm apply before tasks
+  - number: 5
+    name: score.json contract and pass@k aggregation
+    depends_on: [4]
+    status: complete
+    acceptance:
+      - GIVEN completed run WHEN score.json written THEN schema openeval.score.v1 with summary and by_task
+      - GIVEN mixed rounds WHEN aggregated THEN pass_at_1 and pass_at_3 match README semantics
+  - number: 6
+    name: report, compare, and traces commands
+    depends_on: [5]
+    status: complete
+    acceptance:
+      - GIVEN run dir WHEN report THEN output shows scenario, variation, pass@k, and tasks
+      - GIVEN two same-scenario runs WHEN compare THEN delta table shows pass@k and cost
+      - GIVEN mismatched scenario_id WHEN compare THEN command errors clearly
+  - number: 7
+    name: Cursor instrumentation
+    depends_on: [2]
+    status: complete
+    acceptance:
+      - GIVEN Cursor WHEN instrument --agent cursor THEN hooks and default config are installed
+      - GIVEN instrumented session WHEN agent runs THEN masked spans reach configured OTLP endpoint
+  - number: 8
+    name: Example-fixtures vertical slice and state sync
+    depends_on: [5, 6, 7]
+    status: complete
+    acceptance:
+      - GIVEN example-fixtures WHEN quick-start run completes THEN valid score.json under ./scenarios/example-fixtures/runs/1
+      - GIVEN MVP done WHEN README status reviewed THEN implemented vs deferred is accurate
+      - GIVEN all tasks done WHEN plan closes THEN statuses updated and plan archived
+overall_acceptance:
+  - GIVEN MVP WHEN engineer follows README THEN instrument, run example-fixtures, and compare frontend-tasks variations work
+  - GIVEN config change WHEN variation runs repeat THEN pass@k and cost compare without hand-picked paths
+surprises:
+  - Mock agent driver used when cursor CLI is absent; real Cursor task execution remains follow-up work.
