@@ -9,7 +9,7 @@ Drop-in, platform-agnostic instrumentation and evaluation for CLI coding agents.
 
 Run the same scenarios on Cursor, OpenCode, Pi, and other supported agents. Compare pass rates and cost without rebuilding your setup for each one. Better numbers upstream mean cheaper, more reliable agents for the teams and end users downstream.
 
-> **Status:** `0.0.0-dev` — CLI and hooks described here are the target interface. Example scenarios ship in this repo; the binary is not published yet.
+> **Status:** `0.0.0-dev` — MVP CLI ships in this repo (`mage install` or `go build -o bin/openeval ./cmd/openeval`). DeepSWE, margin-eval, Docker images, and full telemetry inventory are not implemented yet.
 
 ### Terminology
 
@@ -397,11 +397,41 @@ Host instrumentation is the default: hooks and plugins capture telemetry from th
 
 ## Agents
 
-| Agent    | Status                           |
-| -------- | -------------------------------- |
-| Cursor   | Hook-based OTEL export           |
-| OpenCode | Native OTEL plus plugin adapters |
-| Pi       | OTEL export via adapters         |
+| Agent    | Status                                      |
+| -------- | ------------------------------------------- |
+| Cursor   | `cursor-agent` subprocess driver + hooks    |
+| OpenCode | Native OTEL plus plugin adapters            |
+| Pi       | OTEL export via adapters                    |
+
+### Cursor (`--agent cursor`)
+
+OpenEval runs tasks with the headless **`cursor-agent`** CLI (not the `cursor` GUI binary). Each task round gets an isolated workspace under the run directory, seeded from the scenario `fixtures/` tree. Verifiers run in that same workspace after the agent finishes.
+
+**Prerequisites:**
+
+1. Install the Cursor CLI so `cursor-agent` is on your `PATH` (or set `agents.cursor.command` in config).
+2. Authenticate once: `cursor-agent login` (or set `CURSOR_API_KEY`).
+3. Optional: `openeval instrument --agent cursor` for hook-based OTLP export alongside runs.
+
+```bash
+cursor-agent login
+cursor-agent status    # should show an authenticated account
+
+openeval run --scenario example-fixtures --agent cursor --rounds 1
+```
+
+Override the binary path or token pricing estimates in config:
+
+```yaml
+agents:
+  cursor:
+    command: /usr/local/bin/cursor-agent
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
+```
+
+When `cursor-agent` is missing or not authenticated, `openeval run --agent cursor` fails with an actionable error. Tests use `--agent mock` (or the default mock driver) so CI does not require a live agent.
 
 **Hook-instrumented agents** (Cursor, and others without native export) send spans via the OpenEval config file — no OTLP env vars in the agent shell.
 

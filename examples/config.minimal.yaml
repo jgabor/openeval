@@ -9,3 +9,9 @@ privacy:
 scenarios:
   aliases:
     frontend-tasks: ./examples/scenarios/frontend-tasks/scenario.yaml
+agents:
+  cursor:
+    # command: /usr/local/bin/cursor-agent  # default: cursor-agent on PATH
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
