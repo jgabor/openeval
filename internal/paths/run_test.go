@@ -28,9 +28,7 @@ func TestResolveRunDirVariationOverwrite(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if err := os.Chdir(dir); err != nil {
-		t.Fatal(err)
-	}
+	t.Chdir(dir)
 	t.Cleanup(func() { _ = os.Chdir(wd) })
 	first, err := ResolveRunDir("example-fixtures", "baseline", "")
 	if err != nil {
