@@ -24,17 +24,22 @@ func TestNextRunIndex(t *testing.T) {
 
 func TestResolveRunDirVariationOverwrite(t *testing.T) {
 	dir := t.TempDir()
-	wd, _ := os.Getwd()
-	t.Chdir(dir)
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chdir(dir); err != nil {
+		t.Fatal(err)
+	}
 	t.Cleanup(func() { _ = os.Chdir(wd) })
-	first, err := ResolveRunDir("frontend-tasks", "baseline", "")
+	first, err := ResolveRunDir("example-fixtures", "baseline", "")
 	if err != nil {
 		t.Fatal(err)
 	}
 	if _, err := os.Stat(first); err != nil {
 		t.Fatal(err)
 	}
-	second, err := ResolveRunDir("frontend-tasks", "baseline", "")
+	second, err := ResolveRunDir("example-fixtures", "baseline", "")
 	if err != nil {
 		t.Fatal(err)
 	}

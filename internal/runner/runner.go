@@ -59,7 +59,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 	exporter := telemetry.New(cfg)
 	byTask := make([]score.TaskResult, 0, len(sc.Tasks))
 	sessions := 0
-	var costBySkill = map[string]float64{}
+	costBySkill := map[string]float64{}
 	for _, skill := range variation.Skills {
 		costBySkill[skill] = 0
 	}
@@ -70,12 +70,20 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 			if err := workspace.Seed(sc, workDir); err != nil {
 				return Result{}, fmt.Errorf("task %s round %d workspace: %w", task.ID, round, err)
 			}
+			if err := workspace.SeedSkills(workDir, variation.Skills, cfg); err != nil {
+				return Result{}, fmt.Errorf("task %s round %d skills: %w", task.ID, round, err)
+			}
+			pluginDirs, err := workspace.SkillPluginDirs(variation.Skills, cfg)
+			if err != nil {
+				return Result{}, fmt.Errorf("task %s round %d plugin dirs: %w", task.ID, round, err)
+			}
 			sess := agent.Session{
-				WorkDir:   workDir,
-				Agent:     opts.Agent,
-				Variation: variation,
-				Task:      task,
-				Round:     round,
+				WorkDir:    workDir,
+				Agent:      opts.Agent,
+				Variation:  variation,
+				Task:       task,
+				Round:      round,
+				PluginDirs: pluginDirs,
 			}
 			cost, traceID, err := driver.Run(ctx, sess)
 			if err != nil {

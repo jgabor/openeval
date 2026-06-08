@@ -77,7 +77,7 @@ tasks:
       - GIVEN MVP done WHEN README status reviewed THEN implemented vs deferred is accurate
       - GIVEN all tasks done WHEN plan closes THEN statuses updated and plan archived
 overall_acceptance:
-  - GIVEN MVP WHEN engineer follows README THEN instrument, run example-fixtures, and compare frontend-tasks variations work
+  - GIVEN MVP WHEN engineer follows README THEN instrument and run example-fixtures work
   - GIVEN config change WHEN variation runs repeat THEN pass@k and cost compare without hand-picked paths
 surprises:
   - Mock agent driver used when cursor CLI is absent; real Cursor task execution remains follow-up work.

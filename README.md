@@ -80,9 +80,6 @@ telemetry:
 privacy:
   mask_prompts: true
   mask_secrets: true
-scenarios:
-  aliases:
-    frontend-tasks: ./examples/scenarios/frontend-tasks/scenario.yaml
 ```
 
 Telemetry settings follow standard OTLP environment variable names. Hook-instrumented agents read this file, so you do not need export variables in the agent process.
@@ -95,16 +92,16 @@ Export options (set in config or via OTLP env vars):
 
 ### Scenarios and variations
 
-- **`--scenario`** selects which tasks to run: a built-in id (`example-fixtures`, `frontend-tasks`), a path to your YAML (`./evals/my-scenario.yaml`), a registered alias, or an integrated external scenario (`deepswe`, `margin-eval`).
+- **`--scenario`** selects which tasks to run: a built-in id (`example-fixtures`), a path to your YAML (`./evals/my-scenario.yaml`), a registered alias, or an integrated external scenario (`deepswe`, `margin-eval`).
 - **`--variation`** selects a named config arm defined in the scenario file (or `default` when omitted). Compare two runs that share the same scenario.
 - **`--rounds`** sets attempts per task (default: `3`). Use multiple rounds for pass@k; treat a single round as exploratory only.
 - **`--out`** is optional. Default layout:
   - no `--variation` (or `default`) → `./scenarios/<scenario>/runs/<n>` with auto-incrementing `n` per scenario; prior runs are kept
   - named `--variation` → `./scenarios/<scenario>/runs/<variation>`; re-running overwrites that directory unless you pass `--out`
 
-`<scenario>` is the resolved scenario id (`example-fixtures`, `frontend-tasks`, `deepswe`, …), not the agent name. Agent, rounds, and timestamps live in `score.json` and traces.
+`<scenario>` is the resolved scenario id (`example-fixtures`, `deepswe`, …), not the agent name. Agent, rounds, and timestamps live in `score.json` and traces.
 
-**How variations apply:** each scenario YAML lists `variations` with the agent config for that arm — skills to enable, env vars, prompt pins, and similar. `openeval run --variation removed-design-tokens` loads that block before starting tasks. The variation label is stored in `score.json`; skill names and telemetry reflect what actually ran.
+**How variations apply:** each scenario YAML lists `variations` with the agent config for that arm — skills to enable, env vars, prompt pins, and similar. `openeval run --variation <name>` loads that block before starting tasks. The variation label is stored in `score.json`; skill names and telemetry reflect what actually ran.
 
 **Compare rules:** `openeval compare` requires the same `scenario_id` in both `score.json` files. It warns when `agent` differs. Pass two run directories; labels come from each run's `variation` field.
 
@@ -112,24 +109,19 @@ Drop instrumentation that never changes scenario scores or cost (see [Supported 
 
 ### Scenario format
 
-Minimal shape (see `examples/scenarios/example-fixtures/scenario.yaml` and `examples/scenarios/frontend-tasks/scenario.yaml`):
+Minimal shape (see `examples/scenarios/example-fixtures/scenario.yaml`):
 
 ```yaml
-id: frontend-tasks
+id: example-fixtures
 tasks:
-  - id: token-audit
-    prompt: Audit design-token usage in src/components/Card.tsx
-    verifier: { type: script, run: ./verifiers/token-audit.sh }
-  - id: component-styles
-    prompt: Fix spacing in Card to match the design system
-    verifier: { type: script, run: ./verifiers/component-styles.sh }
+  - id: hello-verify
+    prompt: Verify the hello-world script prints the expected greeting
+    verifier: { type: script, run: ./verifiers/hello-verify.sh }
+  - id: edit-file
+    prompt: Add a one-line comment to src/main.py without changing behavior
+    verifier: { type: script, run: ./verifiers/edit-file.sh }
 variations:
-  baseline:
-    skills: [frontend-design]
-  removed-design-tokens:
-    skills: [frontend-design]
-    env:
-      DESIGN_TOKENS_ENABLED: "false"
+  default: {}
 ```
 
 ### Run
@@ -140,11 +132,6 @@ openeval run \
   --scenario example-fixtures \
   --agent cursor \
   --rounds 3
-
-# Example scenario with variations → ./scenarios/frontend-tasks/runs/1
-openeval run \
-  --scenario frontend-tasks \
-  --agent cursor
 
 # Custom scenario you author → ./scenarios/my-scenario/runs/1
 openeval run \
@@ -170,19 +157,6 @@ openeval run \
 Same scenario, two config arms — then diff pass@k and cost:
 
 ```bash
-# Example scenario: design tokens on vs off
-openeval run --scenario frontend-tasks --agent cursor \
-  --variation baseline --rounds 3
-# → ./scenarios/frontend-tasks/runs/baseline
-
-openeval run --scenario frontend-tasks --agent cursor \
-  --variation removed-design-tokens --rounds 3
-# → ./scenarios/frontend-tasks/runs/removed-design-tokens
-
-openeval compare \
-  ./scenarios/frontend-tasks/runs/baseline \
-  ./scenarios/frontend-tasks/runs/removed-design-tokens
-
 # External scenario: current release vs release candidate
 openeval run --scenario deepswe --agent cursor \
   --variation v1.2.3 --rounds 5
@@ -210,67 +184,58 @@ External scenarios delegate to the upstream runner and normalize scores into the
 
 ### Results (example)
 
-From `./scenarios/frontend-tasks/runs/removed-design-tokens/score.json`:
+From `./scenarios/example-fixtures/runs/1/score.json`:
 
 ```json
 {
   "schema": "openeval.score.v1",
-  "scenario_id": "frontend-tasks",
+  "scenario_id": "example-fixtures",
   "agent": "cursor",
-  "variation": "removed-design-tokens",
-  "rounds": 3,
+  "variation": "",
+  "rounds": 1,
   "tasks": 2,
   "summary": {
-    "pass_at_1": 0.5,
-    "pass_at_3": 0.5,
-    "tasks_passed": 1,
+    "pass_at_1": 1.0,
+    "pass_at_3": 1.0,
+    "tasks_passed": 2,
     "tasks_total": 2,
-    "cost_usd_total": 0.42,
-    "cost_usd_per_passed_task": 0.42,
-    "tokens_input_total": 18420,
-    "tokens_output_total": 3920
+    "cost_usd_total": 0.53,
+    "cost_usd_per_passed_task": 0.27,
+    "tokens_input_total": 0,
+    "tokens_output_total": 0
   },
   "by_task": [
     {
-      "task_id": "token-audit",
+      "task_id": "hello-verify",
       "verifier": "pass",
       "rounds": [
         {
           "round": 1,
           "verifier": "pass",
-          "cost_usd": 0.08,
+          "cost_usd": 0.21,
           "trace_id": "a1b2c3..."
-        },
-        {
-          "round": 2,
-          "verifier": "pass",
-          "cost_usd": 0.07,
-          "trace_id": "d4e5f6..."
-        },
-        {
-          "round": 3,
-          "verifier": "fail",
-          "cost_usd": 0.09,
-          "trace_id": "789abc..."
         }
       ],
-      "pass_at_k": { "1": 1.0, "3": 1.0 }
+      "pass_at_k": { "1": 1.0 }
     },
     {
-      "task_id": "component-styles",
-      "verifier": "fail",
+      "task_id": "edit-file",
+      "verifier": "pass",
       "rounds": [
-        { "round": 1, "verifier": "fail", "cost_usd": 0.06, "trace_id": "..." },
-        { "round": 2, "verifier": "fail", "cost_usd": 0.06, "trace_id": "..." },
-        { "round": 3, "verifier": "fail", "cost_usd": 0.06, "trace_id": "..." }
+        {
+          "round": 1,
+          "verifier": "pass",
+          "cost_usd": 0.32,
+          "trace_id": "d4e5f6..."
+        }
       ],
-      "pass_at_k": { "1": 0.0, "3": 0.0 }
+      "pass_at_k": { "1": 1.0 }
     }
   ],
   "telemetry": {
-    "skills_active": ["frontend-design"],
-    "cost_by_skill_usd": { "frontend-design": 0.42 },
-    "sessions": 6
+    "skills_active": [],
+    "cost_by_skill_usd": {},
+    "sessions": 2
   }
 }
 ```
@@ -278,42 +243,42 @@ From `./scenarios/frontend-tasks/runs/removed-design-tokens/score.json`:
 ### `openeval report` output (example)
 
 ```text
-scenario: frontend-tasks
+scenario: example-fixtures
 agent: cursor
-variation: removed-design-tokens
-rounds: 3
+variation: default
+rounds: 1
 
-pass@1: 0.50  (1/2 tasks passed on first attempt)
-pass@3: 0.50  (1/2 tasks passed within 3 attempts)
-cost:   $0.42 total  ($0.42 per passed task)
+pass@1: 1.00  (2/2 tasks passed on first attempt)
+pass@3: 1.00  (2/2 tasks passed within 1 attempt)
+cost:   $0.53 total  ($0.27 per passed task)
 
 tasks:
-  token-audit       PASS  pass@3=1.00  cost=$0.24
-  component-styles  FAIL  pass@3=0.00  cost=$0.18
+  hello-verify  PASS  pass@1=1.00  cost=$0.21
+  edit-file     PASS  pass@1=1.00  cost=$0.32
 
-traces: 6 sessions, OTLP service openeval-agent
+traces: 2 sessions, OTLP service openeval-agent
         open Jaeger with trace_id from score.json or run:
-        openeval traces ./scenarios/frontend-tasks/runs/removed-design-tokens --task token-audit --round 2
+        openeval traces ./scenarios/example-fixtures/runs/1 --task edit-file --round 1
 ```
 
 ### `openeval compare` output (example)
 
 ```text
-comparing: baseline to removed-design-tokens
-scenario:  frontend-tasks
+comparing: v1.2.3 to v1.3.0-rc1
+scenario:  deepswe
 agent:     cursor
 
-                    baseline    removed-design-tokens    delta
-pass@1                 0.50                  0.50      0.00
-pass@3                 0.50                  0.50      0.00
-cost_usd_total         0.38                  0.42     +0.04
-cost_per_passed        0.38                  0.42     +0.04
+                    v1.2.3    v1.3.0-rc1    delta
+pass@1                 0.40          0.55     +0.15
+pass@3                 0.60          0.70     +0.10
+cost_usd_total         4.20          3.85     -0.35
+cost_per_passed        7.00          5.50     -1.50
 
 results:
-  summary: pass@3 unchanged, cost up slightly
+  summary: pass@3 improved, cost per passed task down
   logs:
-    ./scenarios/frontend-tasks/runs/baseline/score.json
-    ./scenarios/frontend-tasks/runs/removed-design-tokens/score.json
+    ./scenarios/deepswe/runs/v1.2.3/score.json
+    ./scenarios/deepswe/runs/v1.3.0-rc1/score.json
 ```
 
 ## Supported telemetry
@@ -385,23 +350,22 @@ All captured data can be aggregated or broken down: average cost per session wit
 
 A scenario pins tasks, verifiers, and runtime versions so runs stay comparable. **`--variation`** is separate: it tags which agent config produced a given run. Compare only runs that share the same `--scenario`.
 
-| Scenario                                           | `--scenario` value                               | Source                                                               |
-| -------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------- |
-| Example fixtures                                   | `example-fixtures`                               | `examples/scenarios/example-fixtures/`                               |
-| Frontend tasks (example)                           | `frontend-tasks`                                 | `examples/scenarios/frontend-tasks/`; demonstrates variation compare |
-| Custom                                             | `./evals/my-scenario.yaml` or a registered alias | Your `evals/` directory; not shipped by OpenEval                     |
-| [DeepSWE](https://deepswe.datacurve.ai/)           | `deepswe`                                        | Integrated; long-horizon SWE tasks, behavior-based verification      |
-| [Margin Eval](https://github.com/Margin-Lab/evals) | `margin-eval`                                    | Integrated; run bundles, resume on failure, side-by-side comparison  |
+| Scenario                                           | `--scenario` value                               | Source                                                              |
+| -------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- |
+| Example fixtures                                   | `example-fixtures`                               | `examples/scenarios/example-fixtures/`                              |
+| Custom                                             | `./evals/my-scenario.yaml` or a registered alias | Your `evals/` directory; not shipped by OpenEval                    |
+| [DeepSWE](https://deepswe.datacurve.ai/)           | `deepswe`                                        | Integrated; long-horizon SWE tasks, behavior-based verification     |
+| [Margin Eval](https://github.com/Margin-Lab/evals) | `margin-eval`                                    | Integrated; run bundles, resume on failure, side-by-side comparison |
 
 Host instrumentation is the default: hooks and plugins capture telemetry from the agent setup engineers actually use. For reproducible and repeatable measurement, OpenEval also supports optional Docker packaging that bundles the agent runtime, skill configuration, and scenario into one image. The same image runs across many rounds to sample pass@k, cost, and outcome variance under fixed pins. Docker is optional infrastructure: use it when isolation and repeatability matter, use host instrumentation when fidelity to a real desktop or local setup matters.
 
 ## Agents
 
-| Agent    | Status                                      |
-| -------- | ------------------------------------------- |
-| Cursor   | `cursor-agent` subprocess driver + hooks    |
-| OpenCode | Native OTEL plus plugin adapters            |
-| Pi       | OTEL export via adapters                    |
+| Agent    | Status                                   |
+| -------- | ---------------------------------------- |
+| Cursor   | `cursor-agent` subprocess driver + hooks |
+| OpenCode | Native OTEL plus plugin adapters         |
+| Pi       | OTEL export via adapters                 |
 
 ### Cursor (`--agent cursor`)
 

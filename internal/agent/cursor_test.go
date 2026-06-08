@@ -164,6 +164,54 @@ func TestParseCursorJSONLastLine(t *testing.T) {
 	}
 }
 
+func TestCursorRunPassesPluginDirFlags(t *testing.T) {
+	dir := t.TempDir()
+	logPath := filepath.Join(dir, "invocation.log")
+	stub := filepath.Join(dir, "cursor-agent-stub.sh")
+	script := fmt.Sprintf(`#!/usr/bin/env bash
+set -euo pipefail
+printf '%%s\n' "$@" > %q
+printf '%%s\n' '{"type":"result","subtype":"success","session_id":"sess-plugin","usage":{}}'
+`, logPath)
+	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config.Default()
+	cfg.Agents.Cursor.Command = stub
+	driver, err := New("cursor", cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	workDir := filepath.Join(dir, "workspace")
+	if err := os.MkdirAll(workDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	pluginDir := filepath.Join(dir, "plugins", "example")
+
+	_, _, err = driver.Run(context.Background(), Session{
+		WorkDir:    workDir,
+		PluginDirs: []string{pluginDir},
+		Task:       scenario.Task{Prompt: "build"},
+		Round:      1,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	got, err := os.ReadFile(logPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	args := strings.TrimSpace(string(got))
+	for _, want := range []string{"--plugin-dir", pluginDir} {
+		if !strings.Contains(args, want) {
+			t.Fatalf("args %q missing %q", args, want)
+		}
+	}
+}
+
 func TestParseCursorJSONRoundTrip(t *testing.T) {
 	var resp cursorResponse
 	resp.Type = "result"

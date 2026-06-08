@@ -48,13 +48,17 @@ func configHint() string {
 }
 
 func (c Cursor) Run(ctx context.Context, s Session) (float64, string, error) {
-	cmd := exec.CommandContext(ctx, c.command,
+	args := []string{
 		"-p",
 		"--trust",
 		"--workspace", s.WorkDir,
 		"--output-format", "json",
-		s.Task.Prompt,
-	)
+	}
+	for _, dir := range s.PluginDirs {
+		args = append(args, "--plugin-dir", dir)
+	}
+	args = append(args, s.Task.Prompt)
+	cmd := exec.CommandContext(ctx, c.command, args...)
 	cmd.Env = os.Environ()
 	for k, v := range s.Variation.Env {
 		cmd.Env = append(cmd.Env, fmt.Sprintf("%s=%s", k, v))

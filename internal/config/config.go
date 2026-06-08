@@ -16,6 +16,7 @@ type Config struct {
 	Telemetry TelemetryConfig `yaml:"telemetry"`
 	Privacy   PrivacyConfig   `yaml:"privacy"`
 	Scenarios ScenarioAliases `yaml:"scenarios"`
+	Skills    SkillsConfig    `yaml:"skills"`
 	Agents    AgentsConfig    `yaml:"agents"`
 }
 
@@ -61,6 +62,7 @@ func Default() Config {
 			MaskSecrets: true,
 		},
 		Scenarios: ScenarioAliases{Aliases: map[string]string{}},
+		Skills:    SkillsConfig{Aliases: map[string]string{}},
 	}
 }
 
@@ -109,6 +111,9 @@ func Load() (Config, error) {
 	}
 	if cfg.Scenarios.Aliases == nil {
 		cfg.Scenarios.Aliases = map[string]string{}
+	}
+	if cfg.Skills.Aliases == nil {
+		cfg.Skills.Aliases = map[string]string{}
 	}
 	return cfg, nil
 }

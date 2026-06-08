@@ -11,11 +11,12 @@ import (
 )
 
 type Session struct {
-	WorkDir   string
-	Agent     string
-	Variation scenario.Variation
-	Task      scenario.Task
-	Round     int
+	WorkDir    string
+	Agent      string
+	Variation  scenario.Variation
+	Task       scenario.Task
+	Round      int
+	PluginDirs []string
 }
 
 type Driver interface {
