@@ -18,7 +18,7 @@ var reportCmd = &cobra.Command{
 		if err != nil {
 			exitErr(err)
 		}
-		fmt.Fprint(os.Stdout, report.Format(doc))
+		_, _ = fmt.Fprint(os.Stdout, report.Format(doc))
 	},
 }
 

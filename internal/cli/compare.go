@@ -17,6 +17,6 @@ var compareCmd = &cobra.Command{
 		if err != nil {
 			exitErr(err)
 		}
-		fmt.Fprint(os.Stdout, out)
+		_, _ = fmt.Fprint(os.Stdout, out)
 	},
 }

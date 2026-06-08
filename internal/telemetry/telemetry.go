@@ -68,7 +68,7 @@ func (e *Exporter) EmitSession(ctx context.Context, service, traceID string, cos
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	if resp.StatusCode >= 300 {
 		return fmt.Errorf("otlp export status %s", resp.Status)
 	}

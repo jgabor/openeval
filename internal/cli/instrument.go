@@ -17,7 +17,7 @@ var instrumentCmd = &cobra.Command{
 	Use:   "instrument",
 	Short: "Install hooks and default config for supported agents",
 	Run: func(cmd *cobra.Command, args []string) {
-		agents := []string{}
+		var agents []string
 		if instrumentAll {
 			agents = []string{"cursor"}
 		} else if instrumentAgent != "" {
