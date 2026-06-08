@@ -1,0 +1,11 @@
+version: 1
+telemetry:
+  protocol: http/json
+  endpoint: http://localhost:4318/v1/traces
+  insecure: true
+privacy:
+  mask_prompts: true
+  mask_secrets: true
+scenarios:
+  aliases:
+    frontend-tasks: ./examples/scenarios/frontend-tasks/scenario.yaml

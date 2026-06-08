@@ -1,0 +1,10 @@
+id: example-fixtures
+tasks:
+  - id: hello-verify
+    prompt: Verify the hello-world script prints the expected greeting
+    verifier: { type: script, run: ./verifiers/hello-verify.sh }
+  - id: edit-file
+    prompt: Add a one-line comment to src/main.py without changing behavior
+    verifier: { type: script, run: ./verifiers/edit-file.sh }
+variations:
+  default: {}

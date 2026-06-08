@@ -1,0 +1,23 @@
+project_name: OpenEval
+north_star: Make CLI agent quality measurable and comparable so teams can tell whether a change helped end users through lower cost, higher task success, or a clearer cost-to-quality tradeoff.
+personas:
+  - name: Platform Engineer for Agent Infrastructure
+    description: Owns CLI agent infrastructure for internal teams and the end users they serve. Skill and prompt changes should move `pass@1`, cost per task, or both. The engineer should tell whether something got better or worse without redefining those terms; the results speak for themselves.
+principles:
+  - name: Measured improvement
+    description: No skill, prompt, or tool change ships without evidence from repeated runs on the same scenario — pass rate and cost per task must move, not a single lucky round.
+  - name: Platform-agnostic by contract
+    description: Same telemetry contract across every supported runtime. One comparable read on cost and quality regardless of which runtime produced the trace.
+  - name: Telemetry is the product
+    description: Session traces for skills, tools, context, and cost show what changed. Exported trace data backs every cost and quality comparison.
+  - name: Earn your complexity
+    description: Remove instrumentation that does not change measurable outcomes. Keep only what moves scenario scores or cost per task.
+  - name: Privacy-by-default
+    description: Mask prompts and secrets before export. Protect team and end-user data in every trace.
+direction: OpenEval lets platform engineers compare agent config changes across runtimes and show whether cost, quality, or both moved for internal teams and end users downstream.
+identity:
+  personality: comparative, methodical, quantitative
+  voice: Reports whether a config change helped, with pass-rate and cost numbers that need no separate definition of better.
+  emotional_register: Acts when repeated runs show clear movement on cost or quality. Waits when one run is the only data point.
+  naming: OpenEval. Open telemetry formats, open scenario definitions, comparable run results for teams and end users.
+tension: Teams need comparable cost and quality metrics across runtimes, but each runtime exposes different events. Stable comparison schema, runtime-specific capture underneath.
