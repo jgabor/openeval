@@ -12,14 +12,30 @@ type SkillsConfig struct {
 }
 
 func (cfg Config) ResolveSkillPath(name string) (string, error) {
-	if cfg.Skills.Aliases == nil {
-		return "", fmt.Errorf("skill %q: no skills.aliases in config", name)
+	if cfg.Skills.Aliases != nil {
+		if raw, ok := cfg.Skills.Aliases[name]; ok {
+			return resolveSkillDir(name, expandHome(raw))
+		}
 	}
-	raw, ok := cfg.Skills.Aliases[name]
-	if !ok {
-		return "", fmt.Errorf("skill %q: not found in skills.aliases", name)
+	if path, ok := shippedSkillPath(name); ok {
+		return path, nil
 	}
-	path := expandHome(raw)
+	return "", fmt.Errorf("skill %q: not found in skills.aliases or shipped examples/skills", name)
+}
+
+func shippedSkillPath(name string) (string, bool) {
+	abs, err := filepath.Abs(filepath.Join("examples", "skills", name))
+	if err != nil {
+		return "", false
+	}
+	info, err := os.Stat(abs)
+	if err != nil || !info.IsDir() {
+		return "", false
+	}
+	return abs, true
+}
+
+func resolveSkillDir(name, path string) (string, error) {
 	abs, err := filepath.Abs(path)
 	if err != nil {
 		return "", err

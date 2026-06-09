@@ -60,6 +60,7 @@ func (c Cursor) Run(ctx context.Context, s Session) (float64, string, error) {
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, c.command, args...)
 	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, s.Run.Env()...)
 	for k, v := range s.Variation.Env {
 		cmd.Env = append(cmd.Env, fmt.Sprintf("%s=%s", k, v))
 	}
@@ -79,13 +80,18 @@ func (c Cursor) Run(ctx context.Context, s Session) (float64, string, error) {
 			msg,
 		)
 	}
-	traceID, usage, err := parseCursorJSON(stdout.Bytes())
+	cursorSessionID, usage, err := parseCursorJSON(stdout.Bytes())
 	if err != nil {
 		return 0, "", err
 	}
-	if traceID == "" {
+	if cursorSessionID == "" {
 		return 0, "", fmt.Errorf("cursor-agent returned no session_id or request_id in JSON output")
 	}
+	traceID := cursorSessionID
+	if s.Run.Active() {
+		traceID = s.Run.TraceID
+	}
+	_ = cursorSessionID
 	return estimateCost(usage, c.cost), traceID, nil
 }
 

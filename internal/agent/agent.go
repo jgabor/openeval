@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/scenario"
 )
 
@@ -17,6 +18,7 @@ type Session struct {
 	Task       scenario.Task
 	Round      int
 	PluginDirs []string
+	Run        runcontext.Context
 }
 
 type Driver interface {

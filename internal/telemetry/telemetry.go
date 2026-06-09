@@ -3,13 +3,17 @@ package telemetry
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 )
 
 type Exporter struct {
@@ -21,7 +25,38 @@ func New(cfg config.Config) *Exporter {
 	return &Exporter{cfg: cfg.Telemetry, priv: cfg.Privacy}
 }
 
-func (e *Exporter) EmitSession(ctx context.Context, service, traceID string, costUSD float64, skills []string) error {
+func (e *Exporter) EmitSession(ctx context.Context, service, traceID string, costUSD float64, skills []string, run runcontext.Context) error {
+	attrs := []map[string]any{
+		{"key": "openeval.cost_usd", "value": map[string]float64{"doubleValue": costUSD}},
+		{"key": "openeval.skills", "value": map[string]string{"stringValue": strings.Join(skills, ",")}},
+		{"key": "openeval.mask_prompts", "value": map[string]bool{"boolValue": e.priv.MaskPrompts}},
+	}
+	if run.Active() {
+		attrs = append(attrs,
+			map[string]any{"key": "openeval.scenario_id", "value": map[string]string{"stringValue": run.ScenarioID}},
+			map[string]any{"key": "openeval.variation", "value": map[string]string{"stringValue": run.Variation}},
+			map[string]any{"key": "openeval.task_id", "value": map[string]string{"stringValue": run.TaskID}},
+			map[string]any{"key": "openeval.round", "value": map[string]string{"stringValue": fmt.Sprintf("%d", run.Round)}},
+		)
+	}
+	return e.emitSpan(ctx, service, traceID, "openeval.session", attrs)
+}
+
+func (e *Exporter) EmitHookEvent(ctx context.Context, traceID, name string, attrs map[string]string) error {
+	spanAttrs := []map[string]any{
+		{"key": "openeval.mask_prompts", "value": map[string]bool{"boolValue": e.priv.MaskPrompts}},
+		{"key": "openeval.mask_secrets", "value": map[string]bool{"boolValue": e.priv.MaskSecrets}},
+	}
+	for k, v := range attrs {
+		spanAttrs = append(spanAttrs, map[string]any{
+			"key":   k,
+			"value": map[string]string{"stringValue": v},
+		})
+	}
+	return e.emitSpan(ctx, "openeval-hook-cursor", traceID, name, spanAttrs)
+}
+
+func (e *Exporter) emitSpan(ctx context.Context, service, traceID, name string, attrs []map[string]any) error {
 	if e.cfg.Endpoint == "" {
 		return nil
 	}
@@ -37,16 +72,12 @@ func (e *Exporter) EmitSession(ctx context.Context, service, traceID string, cos
 					{
 						"spans": []map[string]any{
 							{
-								"traceId":           traceID,
+								"traceId":           NormalizeTraceID(traceID),
 								"spanId":            spanID(traceID),
-								"name":              "openeval.session",
+								"name":              name,
 								"startTimeUnixNano": fmt.Sprintf("%d", time.Now().UnixNano()),
 								"endTimeUnixNano":   fmt.Sprintf("%d", time.Now().UnixNano()),
-								"attributes": []map[string]any{
-									{"key": "openeval.cost_usd", "value": map[string]float64{"doubleValue": costUSD}},
-									{"key": "openeval.skills", "value": map[string]string{"stringValue": strings.Join(skills, ",")}},
-									{"key": "openeval.mask_prompts", "value": map[string]bool{"boolValue": e.priv.MaskPrompts}},
-								},
+								"attributes":        attrs,
 							},
 						},
 					},
@@ -75,9 +106,33 @@ func (e *Exporter) EmitSession(ctx context.Context, service, traceID string, cos
 	return nil
 }
 
-func spanID(traceID string) string {
-	if len(traceID) >= 16 {
-		return traceID[:16]
+var hexTrace = regexp.MustCompile(`^[0-9a-fA-F]{32}$`)
+
+func NormalizeTraceID(id string) string {
+	id = strings.TrimSpace(id)
+	if hexTrace.MatchString(id) {
+		return strings.ToLower(id)
 	}
-	return fmt.Sprintf("%016x", traceID)
+	sum := sha256.Sum256([]byte(id))
+	return hex.EncodeToString(sum[:16])
+}
+
+func RandomTraceID() string {
+	sum := sha256.Sum256([]byte(fmt.Sprintf("%d", time.Now().UnixNano())))
+	return hex.EncodeToString(sum[:16])
+}
+
+func MaskSecrets(value string) string {
+	if strings.Contains(value, "sk-") || strings.Contains(value, "Bearer ") || strings.Contains(value, "api_key=") {
+		return "[masked]"
+	}
+	return value
+}
+
+func spanID(traceID string) string {
+	normalized := NormalizeTraceID(traceID)
+	if len(normalized) >= 16 {
+		return normalized[:16]
+	}
+	return fmt.Sprintf("%016x", normalized)
 }

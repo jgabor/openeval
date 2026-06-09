@@ -8,16 +8,29 @@ principles:
     description: No skill, prompt, or tool change ships without evidence from repeated runs on the same scenario — pass rate and cost per task must move, not a single lucky round.
   - name: Platform-agnostic by contract
     description: Same telemetry contract across every supported runtime. One comparable read on cost and quality regardless of which runtime produced the trace.
-  - name: Telemetry is the product
-    description: Session traces for skills, tools, context, and cost show what changed. Exported trace data backs every cost and quality comparison.
+  - name: Evidence is the product
+    description: >-
+      Verifier-backed scenario runs and comparable score artifacts are the
+      proof layer. Session traces for skills, tools, context, and cost explain
+      why scores moved and flag when to re-run the harness.
   - name: Earn your complexity
     description: Remove instrumentation that does not change measurable outcomes. Keep only what moves scenario scores or cost per task.
   - name: Privacy-by-default
     description: Mask prompts and secrets before export. Protect team and end-user data in every trace.
-direction: OpenEval lets platform engineers compare agent config changes across runtimes and show whether cost, quality, or both moved for internal teams and end users downstream.
+direction: >-
+  One openeval CLI is the control plane: instrument agents, run pinned
+  scenarios, compare variations, and correlate traces. Continuous plugin
+  observability watches real-session cost and behavior; the scenario harness
+  proves release quality on a schedule. Both feed the same comparison contract
+  so platform engineers can show whether a config change helped downstream teams
+  and end users.
 identity:
   personality: comparative, methodical, quantitative
   voice: Reports whether a config change helped, with pass-rate and cost numbers that need no separate definition of better.
   emotional_register: Acts when repeated runs show clear movement on cost or quality. Waits when one run is the only data point.
   naming: OpenEval. Open telemetry formats, open scenario definitions, comparable run results for teams and end users.
-tension: Teams need comparable cost and quality metrics across runtimes, but each runtime exposes different events. Stable comparison schema, runtime-specific capture underneath.
+tension: >-
+  Continuous observability measures noisy real usage; the harness supplies
+  controlled, verifier-backed proof — both are needed, not either/or. Underneath,
+  each runtime exposes different events while teams need one comparable schema
+  across runtimes and rhythms.

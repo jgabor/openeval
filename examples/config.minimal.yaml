@@ -6,6 +6,10 @@ telemetry:
 privacy:
   mask_prompts: true
   mask_secrets: true
+skills:
+  aliases:
+    demo-skill: ./examples/skills/demo-skill
+    plugin-skill: ./examples/skills/plugin-skill
 agents:
   cursor:
     # command: /usr/local/bin/cursor-agent  # default: cursor-agent on PATH

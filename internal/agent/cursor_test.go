@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/scenario"
 )
 
@@ -228,5 +229,69 @@ func TestParseCursorJSONRoundTrip(t *testing.T) {
 	}
 	if traceID != "sess" || usage.InputTokens != 1 {
 		t.Fatalf("got trace=%q usage=%+v", traceID, usage)
+	}
+}
+
+func TestCursorRunPropagatesOpenEvalContextEnv(t *testing.T) {
+	dir := t.TempDir()
+	envPath := filepath.Join(dir, "env.log")
+	stub := filepath.Join(dir, "cursor-agent-stub.sh")
+	script := "#!/usr/bin/env bash\nset -euo pipefail\nenv | sort > " + envPath + "\nprintf '%s\n' '{\"type\":\"result\",\"subtype\":\"success\",\"session_id\":\"sess-test-1\",\"usage\":{}}'\n"
+	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config.Default()
+	cfg.Agents.Cursor.Command = stub
+	driver, err := New("cursor", cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	workDir := filepath.Join(dir, "workspace")
+	if err := os.MkdirAll(workDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	correlationID := "abc123correlationtraceid00000001"
+	_cost, traceID, err := driver.Run(context.Background(), Session{
+		WorkDir: workDir,
+		Task:    scenario.Task{ID: "edit-file", Prompt: "go"},
+		Variation: scenario.Variation{
+			Env: map[string]string{"DESIGN_TOKENS_ENABLED": "false"},
+		},
+		Round: 2,
+		Run: runcontext.Context{
+			ScenarioID: "example-fixtures",
+			Variation:  "default",
+			TaskID:     "edit-file",
+			Round:      2,
+			TraceID:    correlationID,
+		},
+	})
+	_ = _cost
+	if err != nil {
+		t.Fatal(err)
+	}
+	if traceID != correlationID {
+		t.Fatalf("traceID = %q, want correlation id", traceID)
+	}
+
+	envGot, err := os.ReadFile(envPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	body := string(envGot)
+	for _, want := range []string{
+		"OPENEVAL_SCENARIO_ID=example-fixtures",
+		"OPENEVAL_VARIATION=default",
+		"OPENEVAL_TASK_ID=edit-file",
+		"OPENEVAL_ROUND=2",
+		"OPENEVAL_TRACE_ID=" + correlationID,
+		"DESIGN_TOKENS_ENABLED=false",
+	} {
+		if !strings.Contains(body, want) {
+			t.Fatalf("env missing %q:\n%s", want, body)
+		}
 	}
 }

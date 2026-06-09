@@ -1,0 +1,7 @@
+id: edit-file-only
+tasks:
+  - id: edit-file
+    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
+    verifier: { type: script, run: ./verifiers/edit-file.sh }
+variations:
+  default: {}

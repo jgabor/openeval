@@ -1,15 +1,22 @@
 # OpenEval
 
-Drop-in, platform-agnostic instrumentation and evaluation for CLI coding agents.
+One CLI control plane for measuring CLI coding agent quality: **harness proof** on pinned scenarios and **continuous observability** on real sessions.
 
-- Instrument: install hooks or adapters that export logs, metrics, and traces to an OTLP backend
-- Run: execute scenario tasks against the agent under test
-- Evaluate: score sessions, aggregate pass@k, compare cost and quality across variations
-- Results: publish run output linked to session traces (skills, tools, context, cost)
+| Rhythm | Commands | Question it answers |
+| ------ | -------- | ------------------- |
+| **Harness proof** (primary) | `run`, `compare`, `report`, `traces` | Did pass@k or cost per passed task move on release or on schedule? |
+| **Continuous observability** | `instrument`, `hook` (agent callback) | Did real-session cost, tokens, or tool usage drift after a skill change? |
 
-Run the same scenarios on Cursor, OpenCode, Pi, and other supported agents. Compare pass rates and cost without rebuilding your setup for each one. Better numbers upstream mean cheaper, more reliable agents for the teams and end users downstream.
+Both rhythms share one config file, one `score.json` contract, and correlated OTLP traces — not two separate products.
 
-> **Status:** `0.0.0-dev` — MVP CLI ships in this repo (`mage install` or `go build -o bin/openeval ./cmd/openeval`). DeepSWE, margin-eval, Docker images, and full telemetry inventory are not implemented yet.
+- **Run:** execute pinned scenario tasks with verifiers; aggregate pass@k and cost
+- **Compare:** diff two variation arms on the same scenario
+- **Instrument:** install hooks that export masked spans to your OTLP backend
+- **Traces:** link a harness round to the configured collector and Jaeger UI
+
+Run the same scenarios on Cursor, OpenCode, Pi, and other supported agents. Better numbers upstream mean cheaper, more reliable agents for the teams and end users downstream.
+
+> **Status:** `0.0.0-dev` — Core CLI ships in this repo (`mage install` or `go build -o bin/openeval ./cmd/openeval`). Cursor harness + hook instrumentation are implemented; DeepSWE, margin-eval, Docker images, and full cross-runtime telemetry inventory are deferred.
 
 ### Terminology
 
@@ -24,12 +31,28 @@ Shipped examples live under `examples/`. Your scenarios live under `evals/` (or 
 
 ## Quick start
 
+**Primary path:** install the CLI, run the shipped `example-fixtures` scenario, then optionally instrument Cursor for continuous OTLP export.
+
+```bash
+mage install   # or: go build -o bin/openeval ./cmd/openeval
+
+# 1. Harness proof — pinned tasks, verifiers, score.json
+openeval run --scenario example-fixtures --agent mock --rounds 1
+openeval report ./scenarios/example-fixtures/runs/1
+
+# 2. Continuous observability — optional, same config + OTLP endpoint
+cp examples/config.minimal.yaml "$XDG_CONFIG_HOME/openeval/config.yaml"
+openeval instrument --agent cursor
+```
+
+Use `--agent cursor` instead of `mock` when `cursor-agent` is installed and authenticated. See [Cursor](#cursor---agent-cursor) below.
+
 ### Prerequisites
 
 - Linux, macOS, or Windows
 - Docker (optional, for packaged eval runs)
-- An OTLP backend (Jaeger, Grafana Cloud, or any OTLP collector)
-- A supported CLI agent installed locally (Cursor, OpenCode, or Pi)
+- An OTLP backend (Jaeger, Grafana Cloud, or any OTLP collector) — for instrumentation and trace lookup
+- A supported CLI agent installed locally (Cursor, OpenCode, or Pi) — for production harness runs
 
 ### Install
 
@@ -46,16 +69,15 @@ go install github.com/magefile/mage@v1.17.2
 mage install
 ```
 
-Instrument detected agents (writes hooks or plugins and default config):
+### Instrument (continuous observability)
+
+Install hooks that read the shared OpenEval config and export masked spans to OTLP:
 
 ```bash
-openeval instrument --all
-
-# Or a single agent
 openeval instrument --agent cursor
 ```
 
-`openeval instrument` writes agent-specific hooks or plugins and creates the config file if missing (see [Configuration](#configuration)).
+`openeval instrument` merges hook entries into `~/.cursor/hooks.json` and creates the config file if missing (see [Configuration](#configuration)). Harness runs work without instrumentation; add it when you want real-session cost and behavior traces alongside periodic proof runs.
 
 ### Configuration
 
@@ -119,7 +141,7 @@ tasks:
     prompt: Verify the hello-world script prints the expected greeting
     verifier: { type: script, run: ./verifiers/hello-verify.sh }
   - id: edit-file
-    prompt: Add a one-line comment to src/main.py without changing behavior
+    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
     verifier: { type: script, run: ./verifiers/edit-file.sh }
 variations:
   default: {}
@@ -262,6 +284,37 @@ traces: 2 sessions, OTLP service openeval-agent
         openeval traces ./scenarios/example-fixtures/runs/1 --task edit-file --round 1
 ```
 
+### Trace lookup
+
+`openeval traces` prints the harness round `trace_id`, your configured OTLP endpoint, and a Jaeger UI link (default all-in-one install on port 16686):
+
+```bash
+openeval traces ./scenarios/example-fixtures/runs/1 --task edit-file --round 1
+```
+
+```text
+trace_id: a1b2c3...
+otlp_service: openeval-agent
+otlp_endpoint: http://localhost:4318/v1/traces
+jaeger_ui: http://localhost:16686/trace/<normalized-trace-id>
+```
+
+### Skill-backed variations
+
+`example-fixtures` ships skill variations for harness proof. Shipped skills live under `examples/skills/` and resolve from `skills.aliases` in config or from the built-in `examples/skills/<name>` path:
+
+```yaml
+variations:
+  with-demo-skill:
+    skills: [demo-skill]
+  with-plugin-skill:
+    skills: [plugin-skill]  # passes --plugin-dir when .claude-plugin is present
+```
+
+```bash
+openeval run --scenario example-fixtures --variation with-demo-skill --agent mock --rounds 1
+```
+
 ### `openeval compare` output (example)
 
 ```text
@@ -284,11 +337,13 @@ results:
 
 ## Supported telemetry
 
-OpenEval captures session metadata across supported agents. For resources, fields use the same names where applicable:
+Instrumentation explains **why** harness scores moved and flags when to re-run a scenario — it is not a parallel analytics product. Capture only what informs pass@k, cost per passed task, or justified rollups (see Decision: earn your complexity).
+
+When hooks or native OTEL export are enabled, OpenEval normalizes session metadata into OTLP spans that share the same config and trace correlation as harness runs. Planned and partial capture across runtimes:
 
 - Inventory: enabled resources in the session (listed per domain below)
 - Metadata: descriptors (names, descriptions, hooks)
-- Content: full captured text or payload
+- Content: full captured text or payload (privacy-masked by default)
 - Size: bytes and tokens
 
 ### Resources
@@ -340,7 +395,7 @@ Totals are exported per dimension. Averages are computed when filtering or compa
 
 Spans nest as session, generation, and hook events. Fields follow [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) where applicable (`gen_ai.tool.definitions`, `gen_ai.usage.*`).
 
-All captured data can be aggregated or broken down: average cost per session with a given skill on vs off, tool success and failure rates, total cost when a skill is used, and similar comparisons across any dimension above.
+Use this inventory to interpret harness deltas (for example, cost per skill on a variation arm) and to spot drift in real sessions that warrants another `openeval run`. Full cross-runtime capture and longitudinal CLI rollups are deferred.
 
 ## Privacy
 

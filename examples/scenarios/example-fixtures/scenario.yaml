@@ -4,7 +4,13 @@ tasks:
     prompt: Verify the hello-world script prints the expected greeting
     verifier: { type: script, run: ./verifiers/hello-verify.sh }
   - id: edit-file
-    prompt: Add a one-line comment to src/main.py without changing behavior
+    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
     verifier: { type: script, run: ./verifiers/edit-file.sh }
 variations:
   default: {}
+  with-demo-skill:
+    skills:
+      - demo-skill
+  with-plugin-skill:
+    skills:
+      - plugin-skill

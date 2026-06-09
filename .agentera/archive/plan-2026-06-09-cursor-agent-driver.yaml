@@ -1,0 +1,67 @@
+header:
+  level: full
+  created: 2026-06-08
+  status: active
+  reviewed: 2026-06-08
+  critic_issues: "3 found, 3 addressed, 0 dismissed"
+  title: cursor-agent driver for real eval runs
+  previous_plan_archived: plan-2026-06-08-openeval-mvp.yaml
+what: Replace the Cursor driver stub with a real cursor-agent subprocess integration so --agent cursor runs tasks against scenario workspaces.
+why: MVP mock driver only writes prompt.txt; README promises cursor runs but pass/fail ignores agent edits. Real driver unlocks meaningful scenario evidence.
+constraints: Keep mock for tests. Privacy-by-default. No vision changes. Fail clearly when cursor-agent missing or unauthenticated.
+scope:
+  included:
+    - binary resolution, workspace seeding, subprocess driver, result parsing
+    - runner/verifier wiring, tests, README
+  excluded:
+    - skills injection into Cursor, OTLP hook wiring, Pi/OpenCode drivers
+  deferred:
+    - per-skill Cursor plugin loading, trace correlation from hooks
+design: Seed scenario fixtures into per-round workspace; invoke cursor-agent headless; run verifiers in that workspace; parse JSON usage when present else estimate from config.
+tasks:
+  - number: 1
+    name: Agent config and session contract
+    depends_on: []
+    status: complete
+    acceptance:
+      - GIVEN openeval config WHEN agents.cursor.command is set THEN driver resolves that binary path
+      - GIVEN no config override WHEN cursor-agent is on PATH THEN driver selects cursor-agent not the cursor GUI binary
+  - number: 2
+    name: Workspace seeding per task round
+    depends_on: [1]
+    status: complete
+    acceptance:
+      - GIVEN example-fixtures WHEN a round starts THEN workspace contains a copy of scenario fixtures under the run directory
+      - GIVEN two rounds of the same task WHEN workspaces are prepared THEN each round uses an isolated directory
+  - number: 3
+    name: cursor-agent subprocess driver
+    depends_on: [2]
+    status: complete
+    acceptance:
+      - GIVEN a task prompt WHEN driver runs THEN cursor-agent is invoked with print, trust, and workspace flags
+      - GIVEN variation env vars WHEN driver runs THEN those vars are present in the agent subprocess environment
+      - GIVEN cursor-agent is missing WHEN --agent cursor THEN run fails with an actionable error not a silent mock fallback
+  - number: 4
+    name: Agent result and cost metadata
+    depends_on: [3]
+    status: complete
+    acceptance:
+      - GIVEN cursor-agent exits zero WHEN driver completes THEN round returns a non-empty trace identifier for score.json
+      - GIVEN JSON output with usage fields WHEN driver parses response THEN cost in score.json reflects parsed usage not a hardcoded placeholder
+  - number: 5
+    name: Runner and verifier workspace wiring
+    depends_on: [2]
+    status: complete
+    acceptance:
+      - GIVEN a completed agent round WHEN verifier runs THEN scripts execute against the agent workspace not an empty tasks folder
+      - GIVEN edit-file on example-fixtures WHEN cursor-agent adds the comment THEN verifier passes for that round
+  - number: 6
+    name: Tests and documentation
+    depends_on: [3, 4, 5]
+    status: complete
+    acceptance:
+      - GIVEN a stub cursor-agent script WHEN driver tests run THEN subprocess args and env are asserted without network
+      - GIVEN README agent section WHEN updated THEN documents cursor-agent auth requirements and --agent cursor behavior
+overall_acceptance:
+  - GIVEN authenticated cursor-agent WHEN engineer runs example-fixtures with --agent cursor THEN agent edits fixtures and score.json reflects verifier outcomes from real work
+surprises: []

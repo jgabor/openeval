@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/jgabor/openeval/internal/agent"
+	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/config"
 	"github.com/jgabor/openeval/internal/paths"
 	"github.com/jgabor/openeval/internal/scenario"
@@ -77,6 +78,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 			if err != nil {
 				return Result{}, fmt.Errorf("task %s round %d plugin dirs: %w", task.ID, round, err)
 			}
+			traceID := telemetry.RandomTraceID()
 			sess := agent.Session{
 				WorkDir:    workDir,
 				Agent:      opts.Agent,
@@ -84,6 +86,13 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 				Task:       task,
 				Round:      round,
 				PluginDirs: pluginDirs,
+				Run: runcontext.Context{
+					ScenarioID: sc.ID,
+					Variation:  variationName,
+					TaskID:     task.ID,
+					Round:      round,
+					TraceID:    traceID,
+				},
 			}
 			cost, traceID, err := driver.Run(ctx, sess)
 			if err != nil {
@@ -93,7 +102,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 			if err != nil {
 				return Result{}, err
 			}
-			_ = exporter.EmitSession(ctx, "openeval-agent", traceID, cost, variation.Skills)
+			_ = exporter.EmitSession(ctx, "openeval-agent", traceID, cost, variation.Skills, sess.Run)
 			rounds = append(rounds, score.RoundResult{
 				Round:    round,
 				Verifier: verdict,
