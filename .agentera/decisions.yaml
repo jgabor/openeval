@@ -1,0 +1,163 @@
+# Draft — architectural and product decisions from completed plans (pending approval).
+
+decisions:
+  - number: 1
+    date: 2026-06-08
+    question: What should OpenEval ship before expanding scope?
+    context: >-
+      The project started docs-only while vision already described measurable
+      agent comparison. External benchmarks and full telemetry coverage were
+      tempting but unproven without a core loop.
+    alternatives:
+      - name: "[Evidence loop first], chosen"
+        status: chosen
+        description: Runnable instrument → run → score → compare workflow.
+      - name: "[Full telemetry inventory first], rejected"
+        status: rejected
+        description: Complete cross-runtime capture before any comparable runs exist.
+      - name: "[External benchmark suites first], rejected"
+        status: rejected
+        description: Deep integrations and packaged environments before the core product works.
+    choice: >-
+      Ship the evidence loop first: a runnable tool that instruments agents,
+      runs scenarios, scores outcomes, and compares config changes.
+    reasoning: >-
+      Vision is about measurable improvement. Without a repeatable comparison
+      loop, broader telemetry and external suites add complexity without
+      proving whether changes help users.
+    confidence: firm
+    feeds_into: VISION.md, PLAN.md
+    satisfaction:
+      state: provisionally_satisfied
+      evidence: >-
+        MVP plan archived complete. End-to-end example scenario runs and
+        compare workflow delivered.
+
+  - number: 2
+    date: 2026-06-08
+    question: How narrow should the first delivery be?
+    context: >-
+      Many capabilities could ship together — multi-runtime adapters, Docker,
+      external eval suites, install automation, and deep telemetry inventories.
+      Privacy-by-default is a standing product constraint.
+    alternatives:
+      - name: "[Vertical slice], chosen"
+        status: chosen
+        description: Core CLI, scenarios, scoring, comparison, and one runtime path.
+      - name: "[Full platform parity], rejected"
+        status: rejected
+        description: All runtimes, packaging, and benchmark integrations in v1.
+      - name: "[Docs and design only], rejected"
+        status: rejected
+        description: Continue planning without runnable evidence.
+    choice: >-
+      Deliver a vertical slice: scenario-based evaluation with scoring and
+      comparison on one runtime. Defer multi-runtime parity, external benchmark
+      integrations, containerized environments, and broad install or generation
+      automation until the loop is proven.
+    reasoning: >-
+      A narrow first delivery validates the product thesis. Deferred breadth
+      does not block answering whether a config change moved pass rate or cost.
+    confidence: firm
+    feeds_into: VISION.md, PLAN.md, README.md
+    satisfaction:
+      state: provisionally_satisfied
+      evidence: >-
+        MVP scope completed and documented. Deferred items remain explicitly
+        out of initial delivery.
+
+  - number: 3
+    date: 2026-06-08
+    question: How should OpenEval balance one runtime now with many runtimes later?
+    context: >-
+      Vision commits to platform-agnostic comparison: same cost and quality read
+      regardless of runtime. Teams still need a working path before every
+      adapter exists.
+    alternatives:
+      - name: "[Cursor-first, contract-first], chosen"
+        status: chosen
+        description: Prove one runtime end-to-end while defining comparable telemetry and scores.
+      - name: "[Multi-runtime parity in v1], rejected"
+        status: rejected
+        description: Ship all adapters before any path is credible.
+      - name: "[Runtime-specific tools], rejected"
+        status: rejected
+        description: Separate eval stacks per runtime with no shared comparison model.
+    choice: >-
+      Integrate Cursor first to prove instrumentation, execution, verification,
+      and scoring end-to-end. Design telemetry and score outputs as a shared
+      contract so additional runtimes can plug in without redefining better.
+    reasoning: >-
+      Platform-agnostic-by-contract is the architecture; Cursor-first is the
+      delivery strategy. One credible path beats shallow parity everywhere.
+    confidence: firm
+    feeds_into: VISION.md, PLAN.md
+    satisfaction:
+      state: provisionally_satisfied
+      evidence: >-
+        Cursor instrumentation and driver plans completed. Comparable score and
+        telemetry outputs exist for the first runtime.
+
+  - number: 4
+    date: 2026-06-08
+    question: What makes an eval result trustworthy enough to compare?
+    context: >-
+      Vision requires measured improvement from repeated runs, not single lucky
+      outcomes. Teams need durable artifacts they can diff across config changes.
+    alternatives:
+      - name: "[Repeated runs with comparable artifacts], chosen"
+        status: chosen
+        description: Multiple attempts per task, pass@k semantics, versioned score outputs.
+      - name: "[Single-shot runs], rejected"
+        status: rejected
+        description: Fast but too noisy for config comparison.
+      - name: "[Ad hoc reporting], rejected"
+        status: rejected
+        description: Human-readable output only, no stable machine-readable contract.
+    choice: >-
+      Treat comparison as a first-class product behavior: run tasks multiple
+      times, aggregate pass@k and cost, and emit durable versioned score
+      artifacts that report and compare commands can rely on.
+    reasoning: >-
+      Measured improvement is the north star. Repeatability and a stable
+      comparison contract turn eval runs into evidence, not anecdotes.
+    confidence: firm
+    feeds_into: VISION.md, PLAN.md, README.md
+    satisfaction:
+      state: provisionally_satisfied
+      evidence: >-
+        Scoring, aggregation, report, and compare delivered in MVP. Both
+        completed plans assumed this model.
+
+  - number: 5
+    date: 2026-06-08
+    question: When should an eval run count as real agent work?
+    context: >-
+      Early delivery used test doubles to unblock the scoring loop. Product
+      credibility requires that production runs reflect actual agent behavior,
+      not silent stand-ins.
+    alternatives:
+      - name: "[Real execution in production paths], chosen"
+        status: chosen
+        description: Production evals invoke real agents; failures surface clearly.
+      - name: "[Silent mock fallback], rejected"
+        status: rejected
+        description: Scores look valid when no agent actually ran.
+      - name: "[Mock-only product], rejected"
+        status: rejected
+        description: Never integrate real agent execution.
+    choice: >-
+      Production evaluation paths must execute real agents and verify their
+      effects. Test doubles belong in automated tests only. When a requested
+      agent is unavailable, fail clearly rather than substituting a silent mock.
+    reasoning: >-
+      A comparison tool that can score without real agent work undermines the
+      product promise. Honest failure preserves trust in pass rate and cost
+      deltas.
+    confidence: firm
+    feeds_into: VISION.md, PLAN.md
+    satisfaction:
+      state: provisionally_satisfied
+      evidence: >-
+        cursor-agent driver plan completed after MVP. Production cursor runs
+        require real agent execution per plan acceptance.
