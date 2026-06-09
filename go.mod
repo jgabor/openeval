@@ -3,7 +3,6 @@ module github.com/jgabor/openeval
 go 1.26
 
 require (
-	github.com/magefile/mage v1.17.2
 	github.com/spf13/cobra v1.9.1
 	gopkg.in/yaml.v3 v3.0.1
 )

@@ -42,6 +42,7 @@ From source:
 ```bash
 git clone https://github.com/jgabor/openeval.git
 cd openeval
+go install github.com/magefile/mage@v1.17.2
 mage install
 ```
 
