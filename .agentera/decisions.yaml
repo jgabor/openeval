@@ -1,5 +1,3 @@
-# Draft — architectural and product decisions from completed plans (pending approval).
-
 decisions:
   - number: 1
     date: 2026-06-08
@@ -28,10 +26,14 @@ decisions:
     confidence: firm
     feeds_into: VISION.md, PLAN.md
     satisfaction:
-      state: provisionally_satisfied
+      state: user_confirmed_satisfied
       evidence: >-
         MVP plan archived complete. End-to-end example scenario runs and
-        compare workflow delivered.
+        compare workflow delivered. User confirmed satisfied 2026-06-09 after
+        acceptance rerun (instrument → run → score.json → traces on one CLI).
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
 
   - number: 2
     date: 2026-06-08
@@ -61,10 +63,14 @@ decisions:
     confidence: firm
     feeds_into: VISION.md, PLAN.md, README.md
     satisfaction:
-      state: provisionally_satisfied
+      state: user_confirmed_satisfied
       evidence: >-
         MVP scope completed and documented. Deferred items remain explicitly
-        out of initial delivery.
+        out of initial delivery. User confirmed satisfied 2026-06-09 after
+        Cursor vertical-slice acceptance rerun (2/2 tasks, demo-skill variation).
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
 
   - number: 3
     date: 2026-06-08
@@ -93,10 +99,15 @@ decisions:
     confidence: firm
     feeds_into: VISION.md, PLAN.md
     satisfaction:
-      state: provisionally_satisfied
+      state: user_confirmed_satisfied
       evidence: >-
         Cursor instrumentation and driver plans completed. Comparable score and
-        telemetry outputs exist for the first runtime.
+        telemetry outputs exist for the first runtime. User confirmed satisfied
+        2026-06-09 after real cursor-agent harness run with trace_id in
+        score.json and traces command correlation.
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
 
   - number: 4
     date: 2026-06-08
@@ -124,10 +135,15 @@ decisions:
     confidence: firm
     feeds_into: VISION.md, PLAN.md, README.md
     satisfaction:
-      state: provisionally_satisfied
+      state: user_confirmed_satisfied
       evidence: >-
         Scoring, aggregation, report, and compare delivered in MVP. Both
-        completed plans assumed this model.
+        completed plans assumed this model. User confirmed satisfied 2026-06-09;
+        acceptance run emitted openeval.score.v1 with pass@k, cost, and per-round
+        trace_id.
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
 
   - number: 5
     date: 2026-06-08
@@ -157,10 +173,15 @@ decisions:
     confidence: firm
     feeds_into: VISION.md, PLAN.md
     satisfaction:
-      state: provisionally_satisfied
+      state: user_confirmed_satisfied
       evidence: >-
         cursor-agent driver plan completed after MVP. Production cursor runs
-        require real agent execution per plan acceptance.
+        require real agent execution per plan acceptance. User confirmed
+        satisfied 2026-06-09; acceptance rerun used authenticated cursor-agent
+        (not mock), 2/2 verifier passes.
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
 
   - number: 6
     date: 2026-06-09
@@ -217,7 +238,12 @@ decisions:
     confidence: firm
     feeds_into: vision.yaml, README.md, PLAN.md
     satisfaction:
-      state: satisfied
+      state: user_confirmed_satisfied
       evidence: >-
-        Resonera deliberation 2026-06-09. User confirmed provisional
-        synthesis and requested vision wording update.
+        Plugin-harness synergy bridge plan complete. User confirmed satisfied
+        2026-06-09 after acceptance rerun: instrument wired hooks.json, harness
+        run with-demo-skill seeded demo-skill, score.json and traces share
+        trace_id and OTLP endpoint from config.
+      user_confirmation:
+        confirmed_by: user
+        confirmed_at: 2026-06-09
