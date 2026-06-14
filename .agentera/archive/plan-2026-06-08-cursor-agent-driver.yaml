@@ -34,7 +34,7 @@ tasks:
   - number: 1
     name: Config schema and factory wiring
     depends_on: []
-    status: complete
+    status: pending
     acceptance:
       - "GIVEN config with no agents.opencode block WHEN --agent opencode runs THEN driver uses opencode from PATH"
       - "GIVEN config with agents.opencode.command set WHEN --agent opencode runs THEN driver uses that binary path"
@@ -43,7 +43,7 @@ tasks:
   - number: 2
     name: opencode driver implementation
     depends_on: ["1"]
-    status: complete
+    status: pending
     acceptance:
       - "GIVEN a task prompt WHEN the driver runs THEN opencode is invoked with the task prompt and the per-round workspace"
       - "GIVEN variation env vars WHEN the driver runs THEN those vars are present in the opencode subprocess environment"
@@ -52,7 +52,7 @@ tasks:
   - number: 3
     name: Driver shell-stub tests
     depends_on: ["2"]
-    status: complete
+    status: pending
     acceptance:
       - "GIVEN a stub opencode script WHEN the driver tests run THEN subprocess args and env are asserted without network"
       - "GIVEN the stub returns invalid JSON WHEN the driver runs THEN the error message is actionable and the parse error is surfaced"
@@ -60,7 +60,7 @@ tasks:
   - number: 4
     name: README and CLI help updates
     depends_on: ["2", "3"]
-    status: complete
+    status: pending
     acceptance:
       - "GIVEN the README agents table WHEN updated THEN opencode is listed alongside cursor with the same prerequisite shape"
       - "GIVEN --agent --help WHEN shown THEN the help text mentions opencode as a valid value"

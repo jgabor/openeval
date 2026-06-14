@@ -31,8 +31,10 @@ func New(name string, cfg config.Config) (Driver, error) {
 		return Mock{}, nil
 	case "cursor":
 		return newCursor(cfg)
+	case "opencode":
+		return newOpenCode(cfg)
 	default:
-		return nil, fmt.Errorf("unsupported agent %q", name)
+		return nil, fmt.Errorf("unsupported agent %q (supported: mock, cursor, opencode)", name)
 	}
 }
 

@@ -1,0 +1,15 @@
+cycles:
+  - number: 1
+    timestamp: 2026-06-14 16:50
+    type: feat
+    phase: build
+    what: "Add opencode driver config schema and factory wiring"
+    inspiration: null
+    discovered: none
+    verified: "go test -count=1 ./... passes; openeval --agent opencode prints actionable error on missing binary and exits 1; --agent foo lists 'mock, cursor, opencode' as supported values; new opencode factory tests cover PATH resolution, command override, missing override, and unknown-agent error message"
+    next: "Task 2: opencode driver Run() implementation (subprocess, JSON parse, cost calc)"
+    context:
+      intent: "Extend Driver registry with a second runtime so --agent opencode is selectable"
+      constraints: "Mock and cursor drivers must remain unchanged; tests must not require a live opencode install on CI"
+      unknowns: "Exact opencode CLI flags and JSON output schema; deferred to task 2"
+      scope: "internal/config/config.go, internal/agent/agent.go, internal/agent/opencode.go, internal/agent/opencode_test.go"

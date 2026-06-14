@@ -21,7 +21,8 @@ type Config struct {
 }
 
 type AgentsConfig struct {
-	Cursor CursorAgentConfig `yaml:"cursor"`
+	Cursor   CursorAgentConfig   `yaml:"cursor"`
+	OpenCode OpenCodeAgentConfig `yaml:"opencode"`
 }
 
 type CursorAgentConfig struct {
@@ -30,6 +31,16 @@ type CursorAgentConfig struct {
 }
 
 type CursorCostConfig struct {
+	InputPerMillion  float64 `yaml:"input_per_million"`
+	OutputPerMillion float64 `yaml:"output_per_million"`
+}
+
+type OpenCodeAgentConfig struct {
+	Command string             `yaml:"command"`
+	Cost    OpenCodeCostConfig `yaml:"cost"`
+}
+
+type OpenCodeCostConfig struct {
 	InputPerMillion  float64 `yaml:"input_per_million"`
 	OutputPerMillion float64 `yaml:"output_per_million"`
 }
