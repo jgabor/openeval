@@ -163,3 +163,122 @@ printf '{"type":"step_finish","sessionID":"ses-test-1","part":{"type":"step-fini
 		t.Fatalf("OPENCODE_VARIATION = %q, want %q", got, "yes")
 	}
 }
+
+func TestOpenCodeRunCapturesStderrOnNonZeroExit(t *testing.T) {
+	dir := t.TempDir()
+	stub := filepath.Join(dir, "opencode-stub.sh")
+	script := `#!/usr/bin/env bash
+set -euo pipefail
+echo "auth: opencode session expired" >&2
+exit 1
+`
+	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	driver, err := New("opencode", cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	workDir := filepath.Join(dir, "workspace")
+	if err := os.MkdirAll(workDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	_, _, err = driver.Run(context.Background(), Session{
+		WorkDir: workDir,
+		Task:    scenario.Task{ID: "t1", Prompt: "hi"},
+	})
+	if err == nil {
+		t.Fatal("expected error when opencode exits non-zero")
+	}
+	msg := err.Error()
+	if !strings.Contains(msg, "opencode failed") {
+		t.Fatalf("error %q should be wrapped with 'opencode failed'", msg)
+	}
+	if !strings.Contains(msg, "auth: opencode session expired") {
+		t.Fatalf("error %q should include the captured stderr", msg)
+	}
+}
+
+func TestOpenCodeRunReportsEmptyOutput(t *testing.T) {
+	dir := t.TempDir()
+	stub := filepath.Join(dir, "opencode-stub.sh")
+	script := `#!/usr/bin/env bash
+set -euo pipefail
+exit 0
+`
+	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	driver, err := New("opencode", cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	workDir := filepath.Join(dir, "workspace")
+	if err := os.MkdirAll(workDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	_, _, err = driver.Run(context.Background(), Session{
+		WorkDir: workDir,
+		Task:    scenario.Task{ID: "t1", Prompt: "hi"},
+	})
+	if err == nil {
+		t.Fatal("expected error when opencode returns no events")
+	}
+	msg := err.Error()
+	if !strings.Contains(msg, "no sessionID") {
+		t.Fatalf("error %q should explain that no sessionID was returned", msg)
+	}
+}
+
+func TestOpenCodeRunSumsMultiStepTokens(t *testing.T) {
+	dir := t.TempDir()
+	stub := filepath.Join(dir, "opencode-stub.sh")
+	script := `#!/usr/bin/env bash
+set -euo pipefail
+printf '{"type":"step_start","sessionID":"ses-multi","part":{"type":"step-start"}}\n'
+printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":1000,"output":200,"cache":{"read":0,"write":0}},"cost":0}}\n'
+printf '{"type":"step_start","sessionID":"ses-multi","part":{"type":"step-start"}}\n'
+printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":3000,"output":800,"cache":{"read":0,"write":0}},"cost":0}}\n'
+`
+	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	cfg.Agents.OpenCode.Cost = config.OpenCodeCostConfig{InputPerMillion: 2, OutputPerMillion: 10}
+	driver, err := New("opencode", cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	workDir := filepath.Join(dir, "workspace")
+	if err := os.MkdirAll(workDir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+
+	cost, traceID, err := driver.Run(context.Background(), Session{
+		WorkDir: workDir,
+		Task:    scenario.Task{ID: "t1", Prompt: "multi"},
+	})
+	if err != nil {
+		t.Fatalf("Run failed: %v", err)
+	}
+	if traceID != "ses-multi" {
+		t.Fatalf("traceID = %q, want %q", traceID, "ses-multi")
+	}
+	wantCost := (float64(1000+3000)/1e6)*2 + (float64(200+800)/1e6)*10
+	if cost != wantCost {
+		t.Fatalf("cost = %f, want %f (sum of step_finish tokens at configured rates)", cost, wantCost)
+	}
+}
