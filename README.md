@@ -453,6 +453,36 @@ agents:
 
 When `cursor-agent` is missing or not authenticated, `openeval run --agent cursor` fails with an actionable error. Tests use `--agent mock` (or the default mock driver) so CI does not require a live agent.
 
+### OpenCode (`--agent opencode`)
+
+OpenEval runs tasks with the headless **`opencode run`** subcommand. The driver resolves the `opencode` binary from `PATH` (or `agents.opencode.command`), invokes it with `--format json --dir <workspace> <prompt>`, and parses the line-delimited event stream for the session ID and per-step token usage. Each task round gets an isolated workspace under the run directory, seeded from the scenario `fixtures/` tree. Verifiers run in that same workspace after the agent finishes.
+
+**Prerequisites:**
+
+1. Install the [opencode CLI](https://github.com/sst/opencode) so `opencode` is on your `PATH` (or set `agents.opencode.command` in config).
+2. Authenticate your provider: `opencode auth` (or set the provider's standard env vars).
+3. Optional: `opencode stats` to confirm the authenticated account and recent usage.
+
+```bash
+opencode auth
+opencode run "say hi"    # should succeed and print a session id
+
+openeval run --scenario example-fixtures --agent opencode --rounds 1
+```
+
+Override the binary path or token pricing estimates in config:
+
+```yaml
+agents:
+  opencode:
+    command: /usr/local/bin/opencode
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
+```
+
+When `opencode` is missing or not authenticated, `openeval run --agent opencode` fails with an actionable error that names the `agents.opencode.command` config key. Tests use shell stubs (no live `opencode` install) so CI does not require a live agent.
+
 **Hook-instrumented agents** (Cursor, and others without native export) send spans via the OpenEval config file — no OTLP env vars in the agent shell.
 
 **Agents with built-in OpenTelemetry** (OpenCode, Pi) can also export directly when not using hooks:
