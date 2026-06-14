@@ -175,3 +175,4 @@ Do not schedule these until the 0.0.x bar in AGENTS.md is met:
 - [ ] DeepSWE and margin-eval both production-ready (one only in `0.0.10`)
 - [ ] Docker packaging as the default run path
 - [ ] Full cursor-otel-hook parity beyond harness trace correlation
+- [milestone] 2026-06-14: opencode runtime driver plan (4 tasks) complete; see `.agentera/archive/plan-2026-06-14-opencode-runtime-driver.yaml`

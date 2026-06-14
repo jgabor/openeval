@@ -1,7 +1,7 @@
 header:
   level: light
   created: "2026-06-14"
-  status: active
+  status: complete
   title: opencode runtime driver
 what: |
   Add an `opencode` driver to the existing `agent.Driver` registry so engineers
