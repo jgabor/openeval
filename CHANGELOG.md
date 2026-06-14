@@ -4,4 +4,5 @@
 
 ### Added
 
-- `opencode` agent driver scaffold: config schema, factory case, and factory tests so `--agent opencode` is selectable end to end. Full subprocess integration and cost reporting land in the next plan task.
+- `opencode` agent driver: subprocess invocation (`opencode run --format json --dir <workspace> <prompt>`), JSON event-stream parser that sums `step_finish` tokens for accurate multi-step cost reporting, and config-driven `input_per_million` / `output_per_million` rates that fall back to the same defaults as the cursor driver.
+- Driver stub tests assert flag shape, env injection, sessionID capture, and non-zero cost from parsed usage.
