@@ -1,0 +1,6 @@
+id: xirsajvynt
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Smoke path completes at least one task/round on a real agent

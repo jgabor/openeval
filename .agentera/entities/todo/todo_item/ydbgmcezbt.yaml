@@ -1,0 +1,13 @@
+id: ydbgmcezbt
+artifact: todo
+record:
+  kind: external-benchmark
+  target_version: 0.0.10
+  title: One integrated external scenario end-to-end
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

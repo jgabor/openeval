@@ -1,0 +1,6 @@
+id: fkdegzmmjc
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Give each run and attempt a unique immutable ID

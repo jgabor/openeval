@@ -1,0 +1,6 @@
+id: zcqhswvoqq
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Check `cursor-agent` on PATH or `agents.cursor.command`

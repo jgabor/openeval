@@ -1,0 +1,6 @@
+id: jkvedkfuwd
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Scaffold runs with `--agent mock` after minimal edits

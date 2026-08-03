@@ -1,0 +1,6 @@
+id: uezrpburkb
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Missing or invalid config reports copy/fix steps

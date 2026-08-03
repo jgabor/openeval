@@ -1,0 +1,13 @@
+id: rxpmzvrxjd
+artifact: todo
+record:
+  kind: otel-in-a-box
+  target_version: 0.0.4
+  title: Bundled local OTLP for trace lookup
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

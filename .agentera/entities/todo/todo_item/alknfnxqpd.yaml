@@ -1,0 +1,13 @@
+id: alknfnxqpd
+artifact: todo
+record:
+  kind: immutable-attempt-artifacts
+  target_version: 0.0.14
+  title: Make run evidence immutable and reproducible
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

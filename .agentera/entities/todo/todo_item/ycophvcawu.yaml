@@ -1,0 +1,6 @@
+id: ycophvcawu
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Pair attempts by task, repetition, baseline, and candidate

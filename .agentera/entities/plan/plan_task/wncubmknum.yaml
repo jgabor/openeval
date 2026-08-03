@@ -1,0 +1,11 @@
+id: wncubmknum
+artifact: plan
+record:
+  name: Verifier execution and agent driver
+  depends_on:
+    - jiompokenq
+  status: complete
+  acceptance:
+    - GIVEN example-fixtures WHEN round runs THEN prompt is sent and script verifier returns pass or fail
+    - GIVEN variation YAML WHEN run starts THEN env and skills for that arm apply before tasks
+  plan: jzwbpoalyy

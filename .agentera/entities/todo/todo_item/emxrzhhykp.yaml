@@ -1,0 +1,6 @@
+id: emxrzhhykp
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Warn if OTLP endpoint unreachable (non-fatal)

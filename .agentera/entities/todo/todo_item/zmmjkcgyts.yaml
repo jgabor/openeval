@@ -1,0 +1,6 @@
+id: zmmjkcgyts
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Split README into **Shipped** vs **Planned** sections

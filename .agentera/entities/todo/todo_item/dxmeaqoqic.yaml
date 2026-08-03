@@ -1,0 +1,6 @@
+id: dxmeaqoqic
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Emit stable JSON from `compare` as well as human-readable text

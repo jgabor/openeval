@@ -1,0 +1,11 @@
+id: xxhixjrpxv
+artifact: plan
+record:
+  name: Cursor instrumentation
+  depends_on:
+    - lfzvgnspmv
+  status: complete
+  acceptance:
+    - GIVEN Cursor WHEN instrument --agent cursor THEN hooks and default config are installed
+    - GIVEN instrumented session WHEN agent runs THEN masked spans reach configured OTLP endpoint
+  plan: jzwbpoalyy

@@ -1,0 +1,13 @@
+id: mplkdxhdhj
+artifact: todo
+record:
+  kind: skill-compare-playbook
+  target_version: 0.0.12
+  title: Document skill-variation compare workflow
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

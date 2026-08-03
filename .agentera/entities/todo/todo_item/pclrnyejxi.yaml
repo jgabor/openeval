@@ -1,0 +1,6 @@
+id: pclrnyejxi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Report exact recorded-workload token and cost totals per repetition

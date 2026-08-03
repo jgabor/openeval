@@ -1,0 +1,13 @@
+id: fpmsiceutz
+artifact: todo
+record:
+  kind: milestone
+  target_version: null
+  title: "2026-06-14: opencode runtime driver plan (4 tasks) complete; see `.agentera/archive/plan-2026-06-14-opencode-runtime-driver.yaml`"
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

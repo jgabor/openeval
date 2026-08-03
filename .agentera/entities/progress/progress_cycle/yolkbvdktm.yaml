@@ -1,0 +1,16 @@
+id: yolkbvdktm
+artifact: progress
+record:
+  timestamp: 2026-06-14 17:30
+  type: docs
+  phase: build
+  what: Add OpenCode subsection to README Agents section, update --agent help text, and document the opencode config block
+  inspiration: Existing Cursor subsection in README.md as the shape template
+  discovered: none
+  verified: "go test -count=1 ./... passes (26/26); `openeval run --help` shows `Agent runtime (mock, cursor, opencode)`; README.md has the new ### OpenCode subsection with prerequisites, install + auth + run example, and config override example; gofmt clean, vet clean, diff --check clean"
+  next: "Plan complete: run the plan-completion sweep (progress summary, changelog finalization), archive plan, hand off to next-cycle work selection"
+  context:
+    intent: Land the last plan task so the opencode driver is discoverable from the user-facing docs and CLI help
+    constraints: Mock and cursor drivers must remain unchanged; tests must not require a live opencode install on CI
+    unknowns: none
+    scope: internal/cli/run.go, README.md, .agentera/plan.yaml, .agentera/progress.yaml, CHANGELOG.md

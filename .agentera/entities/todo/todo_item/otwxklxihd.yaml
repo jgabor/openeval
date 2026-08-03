@@ -1,0 +1,13 @@
+id: otwxklxihd
+artifact: todo
+record:
+  kind: paired-campaign-report
+  target_version: 0.0.18
+  title: Add task-paired resource and quality reporting
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

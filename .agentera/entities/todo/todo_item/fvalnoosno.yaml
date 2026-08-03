@@ -1,0 +1,13 @@
+id: fvalnoosno
+artifact: todo
+record:
+  kind: attempt-evidence-contract
+  target_version: 0.0.13
+  title: Retain one structured result per attempt
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

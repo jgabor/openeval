@@ -1,0 +1,12 @@
+id: mfkokmfilk
+artifact: plan
+record:
+  name: traces command and run metadata
+  depends_on:
+    - phlmcqvkbx
+  status: complete
+  acceptance:
+    - GIVEN a run directory WHEN openeval traces is invoked THEN output includes trace_id and configured OTLP endpoint from openeval config
+    - GIVEN score.json round WHEN traces prints THEN task and round flags resolve the matching trace_id
+    - GIVEN Jaeger or collector URL pattern WHEN documented THEN README shows how to open the trace for a harness round
+  plan: gtguqugvfh

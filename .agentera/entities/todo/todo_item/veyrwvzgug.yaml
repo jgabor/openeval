@@ -1,0 +1,13 @@
+id: veyrwvzgug
+artifact: todo
+record:
+  kind: ktx-paired-campaign-proof
+  target_version: 0.0.19
+  title: Prove the generic campaign contract with ktx
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

@@ -1,0 +1,27 @@
+id: jzwbpoalyy
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-06-08
+    status: archived
+    reviewed: 2026-06-08
+    critic_issues: 4 found, 3 addressed, 1 dismissed
+    title: OpenEval MVP — CLI, scenarios, and scoring loop
+  what: Ship the first runnable openeval binary from README — instrument, run scenarios, score, compare.
+  why: Repo is docs-only. MVP delivers the evidence loop vision requires before external integrations.
+  constraints: Match README CLI and score.json v1. Privacy-by-default. Defer DeepSWE, Docker, full telemetry inventory.
+  scope:
+    included:
+      - CLI, config, scenario YAML, run/compare/report/traces
+      - Cursor instrument, minimal OTLP, example-fixtures slice
+    excluded:
+      - deepswe, margin-eval, docker images, Pi/OpenCode adapters, full semconv inventory
+    deferred:
+      - external adapters, install scripts, generation batching
+  design: Domain types, scenario loader, ./scenarios output layout, agent driver (Cursor first), script verifiers, commands on top.
+  overall_acceptance:
+    - GIVEN MVP WHEN engineer follows README THEN instrument and run example-fixtures work
+    - GIVEN config change WHEN variation runs repeat THEN pass@k and cost compare without hand-picked paths
+  surprises:
+    - Mock agent driver used when cursor CLI is absent; real Cursor task execution remains follow-up work.

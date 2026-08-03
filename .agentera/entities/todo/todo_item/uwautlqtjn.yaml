@@ -1,0 +1,6 @@
+id: uwautlqtjn
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain enough diagnostics to classify setup and execution failures

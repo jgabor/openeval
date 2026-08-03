@@ -1,0 +1,6 @@
+id: gacybdrtia
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain changed-file, added-line, and deleted-line footprint metrics

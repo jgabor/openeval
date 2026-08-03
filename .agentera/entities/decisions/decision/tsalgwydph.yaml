@@ -1,0 +1,20 @@
+id: tsalgwydph
+artifact: decisions
+record:
+  date: 2026-06-08
+  question: What makes an eval result trustworthy enough to compare?
+  context: Vision requires measured improvement from repeated runs, not single lucky outcomes. Teams need durable artifacts they can diff across config changes.
+  alternatives:
+    - name: "[Repeated runs with comparable artifacts], chosen"
+      status: chosen
+      description: Multiple attempts per task, pass@k semantics, versioned score outputs.
+    - name: "[Single-shot runs], rejected"
+      status: rejected
+      description: Fast but too noisy for config comparison.
+    - name: "[Ad hoc reporting], rejected"
+      status: rejected
+      description: Human-readable output only, no stable machine-readable contract.
+  choice: "Treat comparison as a first-class product behavior: run tasks multiple times, aggregate pass@k and cost, and emit durable versioned score artifacts that report and compare commands can rely on."
+  reasoning: Measured improvement is the north star. Repeatability and a stable comparison contract turn eval runs into evidence, not anecdotes.
+  confidence: firm
+  feeds_into: VISION.md, PLAN.md, README.md

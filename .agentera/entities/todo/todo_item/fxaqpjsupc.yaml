@@ -1,0 +1,6 @@
+id: fxaqpjsupc
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Derive and retain a normalized patch against the frozen source

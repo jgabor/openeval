@@ -1,0 +1,13 @@
+id: wtvujimtam
+artifact: plan
+record:
+  name: Config schema and factory wiring
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN config with no agents.opencode block WHEN --agent opencode runs THEN driver uses opencode from PATH
+    - GIVEN config with agents.opencode.command set WHEN --agent opencode runs THEN driver uses that binary path
+    - GIVEN --agent opencode WHEN the opencode binary is missing THEN run fails with an actionable error that mentions the config hint
+    - GIVEN an unknown --agent value WHEN the driver factory runs THEN the error message lists opencode as a supported value alongside cursor and mock
+  plan: umrscxqooo

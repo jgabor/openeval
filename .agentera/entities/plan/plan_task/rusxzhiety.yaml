@@ -1,0 +1,12 @@
+id: rusxzhiety
+artifact: plan
+record:
+  name: Harness run context propagation
+  depends_on:
+    - mgdiiojmxw
+  status: complete
+  acceptance:
+    - GIVEN a harness round WHEN cursor-agent starts THEN subprocess env includes openeval scenario_id, variation, task_id, round, and trace_id
+    - GIVEN variation env vars in scenario YAML WHEN round runs THEN both variation env and openeval context env are present
+    - GIVEN mock agent driver WHEN tests run THEN no openeval context env is required for mock path
+  plan: gtguqugvfh

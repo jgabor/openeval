@@ -1,0 +1,6 @@
+id: uemgcurert
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Optional: curl script or Homebrew tap"

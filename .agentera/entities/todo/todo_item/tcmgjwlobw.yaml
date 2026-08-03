@@ -1,0 +1,6 @@
+id: tcmgjwlobw
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retry only infrastructure-invalid attempts under an explicit bounded policy

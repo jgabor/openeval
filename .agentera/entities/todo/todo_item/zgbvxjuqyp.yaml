@@ -1,0 +1,6 @@
+id: zgbvxjuqyp
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Add a no-agent preflight that prints the complete schedule and estimated attempt count

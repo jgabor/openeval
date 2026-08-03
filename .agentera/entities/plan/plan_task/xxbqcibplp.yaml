@@ -1,0 +1,11 @@
+id: xxbqcibplp
+artifact: plan
+record:
+  name: Agent result and cost metadata
+  depends_on:
+    - pfrdvuqfoh
+  status: complete
+  acceptance:
+    - GIVEN cursor-agent exits zero WHEN driver completes THEN round returns a non-empty trace identifier for score.json
+    - GIVEN JSON output with usage fields WHEN driver parses response THEN cost in score.json reflects parsed usage not a hardcoded placeholder
+  plan: unryurvthv

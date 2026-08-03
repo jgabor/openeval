@@ -1,0 +1,13 @@
+id: urzahlgtnq
+artifact: todo
+record:
+  kind: compare-first-quickstart
+  target_version: 0.0.1
+  title: Compare-first quick start (`cursor-agent`, not mock)
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

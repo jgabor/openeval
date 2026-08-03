@@ -1,0 +1,13 @@
+id: fziezutrgo
+artifact: plan
+record:
+  name: README and CLI help updates
+  depends_on:
+    - soeuqpzrap
+    - ljoyzvjdeo
+  status: complete
+  acceptance:
+    - GIVEN the README agents table WHEN updated THEN opencode is listed alongside cursor with the same prerequisite shape
+    - GIVEN --agent --help WHEN shown THEN the help text mentions opencode as a valid value
+    - GIVEN the config example block WHEN updated THEN it shows an opencode command override
+  plan: umrscxqooo

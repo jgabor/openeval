@@ -1,0 +1,16 @@
+id: tdcndwwosh
+artifact: progress
+record:
+  timestamp: 2026-06-14 17:18
+  type: test
+  phase: build
+  what: Expand opencode driver shell-stub coverage (stderr capture, empty output, multi-step token sum)
+  inspiration: Cursor driver's TestCursorRunInvokesStubWithFlagsAndEnv as the pattern
+  discovered: none
+  verified: go test -count=1 ./... passes (26/26); new tests cover non-zero exit + stderr capture, empty-output actionable error, and multi-step token summation with configured rates
+  next: "Task 4: README and CLI help updates (agents table, --agent help text, config example)"
+  context:
+    intent: Complete the driver test surface so CI can run without a live opencode install
+    constraints: Mock and cursor drivers must remain unchanged; tests must not require a live opencode install on CI
+    unknowns: none
+    scope: internal/agent/opencode_test.go

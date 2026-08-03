@@ -1,0 +1,6 @@
+id: gnqfxkmklm
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Non-chosen scenario remains marked deferred in README

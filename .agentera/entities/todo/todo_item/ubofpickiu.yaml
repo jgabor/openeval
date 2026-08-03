@@ -1,0 +1,6 @@
+id: ubofpickiu
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: README trace lookup references the bundled setup

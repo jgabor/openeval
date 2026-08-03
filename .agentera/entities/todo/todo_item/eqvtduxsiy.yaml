@@ -1,0 +1,6 @@
+id: eqvtduxsiy
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass

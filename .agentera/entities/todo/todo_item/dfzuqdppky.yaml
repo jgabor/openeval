@@ -1,0 +1,6 @@
+id: dfzuqdppky
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Document that a new user with authenticated `cursor-agent` should see a compare table from README alone

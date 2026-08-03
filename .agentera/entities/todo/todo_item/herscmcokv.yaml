@@ -1,0 +1,6 @@
+id: herscmcokv
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Add a versioned score schema and validate it when loading

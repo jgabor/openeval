@@ -1,0 +1,6 @@
+id: wazakrjrvw
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: README links the recipe under CI / release gates

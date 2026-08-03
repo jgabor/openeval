@@ -1,0 +1,6 @@
+id: dzuuyxkxec
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: README references doctor before first `run --agent cursor`

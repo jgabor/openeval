@@ -1,0 +1,6 @@
+id: owoitzsfkl
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain input, output, reasoning, cache-read, and cache-write tokens independently

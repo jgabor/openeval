@@ -1,0 +1,6 @@
+id: nsrfgfguxk
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)

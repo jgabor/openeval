@@ -1,0 +1,6 @@
+id: ghniublbux
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Preserve explicit numeric zero separately from unavailable or malformed fields

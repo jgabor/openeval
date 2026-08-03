@@ -1,0 +1,11 @@
+id: msrluzkbma
+artifact: plan
+record:
+  name: Agent config and session contract
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN openeval config WHEN agents.cursor.command is set THEN driver resolves that binary path
+    - GIVEN no config override WHEN cursor-agent is on PATH THEN driver selects cursor-agent not the cursor GUI binary
+  plan: unryurvthv

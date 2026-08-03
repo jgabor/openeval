@@ -1,0 +1,6 @@
+id: viyntmpjja
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "`openeval run --scenario <chosen>` works with documented prerequisites"

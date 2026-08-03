@@ -1,0 +1,6 @@
+id: ctrftnacrq
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Full cursor-otel-hook parity beyond harness trace correlation

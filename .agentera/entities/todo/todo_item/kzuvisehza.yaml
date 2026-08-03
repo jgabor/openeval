@@ -1,0 +1,6 @@
+id: kzuvisehza
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Report test, equivalence, review, and footprint win/loss/tie counts

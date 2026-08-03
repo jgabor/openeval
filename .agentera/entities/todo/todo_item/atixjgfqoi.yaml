@@ -1,0 +1,6 @@
+id: atixjgfqoi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "`openeval report` output reflects realistic task names and verifiers"

@@ -1,0 +1,6 @@
+id: uepazzynlp
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Counterbalance two-arm execution as AB/BA across pairs

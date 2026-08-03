@@ -1,0 +1,6 @@
+id: poezrkzicu
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Mock labeled CI/hermetic only

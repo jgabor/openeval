@@ -1,0 +1,6 @@
+id: hkznkqljtb
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain source provenance and digest without fetching during execution

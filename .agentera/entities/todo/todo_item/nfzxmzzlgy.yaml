@@ -1,0 +1,6 @@
+id: nfzxmzzlgy
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Give each attempt a new disposable `KTX_DB`, `HOME`, and XDG root

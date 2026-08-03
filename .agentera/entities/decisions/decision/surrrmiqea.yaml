@@ -1,0 +1,23 @@
+id: surrrmiqea
+artifact: decisions
+record:
+  date: 2026-06-09
+  question: How do drop-in plugin observability and the fixed scenario harness relate in OpenEval's product model?
+  context: "Vision and README describe both integrated instrumentation (hooks, OTLP, cursor-otel-hook lineage) and a scenario-based eval harness (pinned tasks, verifiers, pass@k, compare). These can read as competing identities unless their roles and entry point are explicit. Deliberation clarified two rhythms: continuous observability on real sessions versus periodic, verifier-backed proof on skill release or schedule."
+  alternatives:
+    - name: "[Harness-only product], rejected"
+      status: rejected
+      description: Scenario runs and score.json only; defer or drop drop-in instrumentation.
+    - name: "[Plugin-only product], rejected"
+      status: rejected
+      description: OTLP and session analytics only; no pinned scenario gate or compare contract.
+    - name: "[Single CLI hub, dual rhythm], chosen"
+      status: chosen
+      description: One openeval binary as control plane and evidence contract. Harness is the canonical release gate; instrumentation provides continuous cost and behavior observability; both share config, skill identity, and trace correlation.
+    - name: "[Parallel product tracks], rejected"
+      status: rejected
+      description: Separate plugin analytics product and harness product with no unified CLI or contract.
+  choice: Ship one openeval binary as the unified entry point. Scenario harness (run, compare, score.json) is the canonical proof layer for release gates and scheduled regression checks. Drop-in hooks and plugins provide continuous observability on real sessions (cost, tokens, skill and tool usage). The two synergize when plugin telemetry surfaces anomalies and the harness confirms or refutes on pinned tasks — linked by shared config, stable skill IDs, and trace_id correlation to OTLP.
+  reasoning: The harness supplies verifier-backed evidence the north star requires. Plugin telemetry answers longitudinal questions instrumentation was designed for (did costs drift after installing a skill?) but cannot alone prove task quality. A single CLI avoids split products; OTLP remains the span store while openeval owns config, orchestration, and comparison — not reimplementing a full trace database inside the binary.
+  confidence: firm
+  feeds_into: vision.yaml, README.md, PLAN.md

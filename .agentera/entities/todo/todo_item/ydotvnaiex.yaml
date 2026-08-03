@@ -1,0 +1,6 @@
+id: ydotvnaiex
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Implement the existing `--image` run flag

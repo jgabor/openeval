@@ -1,0 +1,6 @@
+id: waidrjanvx
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Keep optional LLM grading separate from deterministic test evidence and agent cost

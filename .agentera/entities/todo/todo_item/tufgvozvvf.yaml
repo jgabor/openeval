@@ -1,0 +1,6 @@
+id: tufgvozvvf
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Trim or relocate Supported telemetry content per `0.0.11`

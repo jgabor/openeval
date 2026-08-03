@@ -1,0 +1,12 @@
+id: jiompokenq
+artifact: plan
+record:
+  name: Run orchestration and output layout
+  depends_on:
+    - lfzvgnspmv
+  status: complete
+  acceptance:
+    - GIVEN no variation WHEN run completes THEN ./scenarios/<id>/runs/<n> auto-increments
+    - GIVEN named variation WHEN run completes THEN output uses ./scenarios/<id>/runs/<variation>
+    - GIVEN omitted --rounds WHEN run executes THEN default is three attempts per task
+  plan: jzwbpoalyy

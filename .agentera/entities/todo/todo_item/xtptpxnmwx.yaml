@@ -1,0 +1,6 @@
+id: xtptpxnmwx
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Verify unchanged task quality before interpreting resource movement as useful

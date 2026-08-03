@@ -1,0 +1,6 @@
+id: qdyygxwivr
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Label descriptive intervals as uncertainty, not causal or significance claims

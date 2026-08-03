@@ -1,0 +1,12 @@
+id: ljoyzvjdeo
+artifact: plan
+record:
+  name: Driver shell-stub tests
+  depends_on:
+    - soeuqpzrap
+  status: complete
+  acceptance:
+    - GIVEN a stub opencode script WHEN the driver tests run THEN subprocess args and env are asserted without network
+    - GIVEN the stub returns invalid JSON WHEN the driver runs THEN the error message is actionable and the parse error is surfaced
+    - GIVEN the stub exits non-zero WHEN the driver runs THEN stderr is captured into the error message
+  plan: umrscxqooo

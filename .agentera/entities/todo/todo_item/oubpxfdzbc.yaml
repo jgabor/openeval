@@ -1,0 +1,6 @@
+id: oubpxfdzbc
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Preserve ordinary independent `openeval run` and pass@k behavior

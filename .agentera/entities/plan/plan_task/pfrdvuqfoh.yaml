@@ -1,0 +1,12 @@
+id: pfrdvuqfoh
+artifact: plan
+record:
+  name: cursor-agent subprocess driver
+  depends_on:
+    - ybthynjaoz
+  status: complete
+  acceptance:
+    - GIVEN a task prompt WHEN driver runs THEN cursor-agent is invoked with print, trust, and workspace flags
+    - GIVEN variation env vars WHEN driver runs THEN those vars are present in the agent subprocess environment
+    - GIVEN cursor-agent is missing WHEN --agent cursor THEN run fails with an actionable error not a silent mock fallback
+  plan: unryurvthv

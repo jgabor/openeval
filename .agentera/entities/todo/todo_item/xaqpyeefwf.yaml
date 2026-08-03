@@ -1,0 +1,6 @@
+id: xaqpyeefwf
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Add `openeval validate <run-dir>` with stable JSON output and documented exit codes

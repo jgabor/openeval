@@ -1,0 +1,10 @@
+id: bkbguugrxg
+artifact: plan
+record:
+  name: Project scaffold and CLI skeleton
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN checkout WHEN mage install THEN openeval exposes run, instrument, report, compare, traces
+  plan: jzwbpoalyy

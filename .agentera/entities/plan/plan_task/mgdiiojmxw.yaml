@@ -1,0 +1,12 @@
+id: mgdiiojmxw
+artifact: plan
+record:
+  name: Cursor hook install contract
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN openeval config with telemetry endpoint WHEN instrument --agent cursor THEN Cursor hooks.json is updated without removing unrelated user hooks
+    - GIVEN instrument completes WHEN hook fires in a Cursor session THEN spans reach the configured OTLP endpoint with privacy masks applied
+    - GIVEN missing write permission to hooks path WHEN instrument THEN command fails with an actionable error
+  plan: gtguqugvfh

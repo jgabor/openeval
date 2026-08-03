@@ -1,0 +1,6 @@
+id: isrszmjiut
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Default to concurrency one; retain concurrency when explicitly changed

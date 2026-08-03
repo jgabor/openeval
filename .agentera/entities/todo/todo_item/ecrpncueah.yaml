@@ -1,0 +1,6 @@
+id: ecrpncueah
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Regenerate campaign summaries byte-identically from retained evidence

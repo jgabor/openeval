@@ -1,0 +1,6 @@
+id: tmcpooshed
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Accept two or more named variations in one run

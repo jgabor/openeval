@@ -1,0 +1,6 @@
+id: ltfzgpupsf
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Mount only the attempt workspace, declared artifacts, and read-only credentials

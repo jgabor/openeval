@@ -1,0 +1,20 @@
+id: tpbyphwehw
+artifact: decisions
+record:
+  date: 2026-06-08
+  question: How should OpenEval balance one runtime now with many runtimes later?
+  context: "Vision commits to platform-agnostic comparison: same cost and quality read regardless of runtime. Teams still need a working path before every adapter exists."
+  alternatives:
+    - name: "[Cursor-first, contract-first], chosen"
+      status: chosen
+      description: Prove one runtime end-to-end while defining comparable telemetry and scores.
+    - name: "[Multi-runtime parity in v1], rejected"
+      status: rejected
+      description: Ship all adapters before any path is credible.
+    - name: "[Runtime-specific tools], rejected"
+      status: rejected
+      description: Separate eval stacks per runtime with no shared comparison model.
+  choice: Integrate Cursor first to prove instrumentation, execution, verification, and scoring end-to-end. Design telemetry and score outputs as a shared contract so additional runtimes can plug in without redefining better.
+  reasoning: Platform-agnostic-by-contract is the architecture; Cursor-first is the delivery strategy. One credible path beats shallow parity everywhere.
+  confidence: firm
+  feeds_into: VISION.md, PLAN.md

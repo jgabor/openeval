@@ -1,0 +1,6 @@
+id: fgyozjkxul
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Preserve runtime-reported cost separately from any price-derived estimate

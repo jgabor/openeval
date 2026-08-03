@@ -1,0 +1,6 @@
+id: usnfolrcog
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Validate that score rows and artifacts belong to the declared campaign

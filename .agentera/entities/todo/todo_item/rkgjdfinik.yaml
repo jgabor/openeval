@@ -1,0 +1,6 @@
+id: rkgjdfinik
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain verifier stdout, stderr, exit status, and artifact hashes

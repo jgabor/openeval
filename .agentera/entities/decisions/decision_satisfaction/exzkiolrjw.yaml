@@ -1,0 +1,9 @@
+id: exzkiolrjw
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: cursor-agent driver plan completed after MVP. Production cursor runs require real agent execution per plan acceptance. User confirmed satisfied 2026-06-09; acceptance rerun used authenticated cursor-agent (not mock), 2/2 verifier passes.
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: cinfuntgpj

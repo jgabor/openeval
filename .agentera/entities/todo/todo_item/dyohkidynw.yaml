@@ -1,0 +1,6 @@
+id: dyohkidynw
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Move mock to a secondary path (CI / no API key)

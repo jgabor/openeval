@@ -1,0 +1,6 @@
+id: lbpjucpagj
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Use a retained deterministic seed for task ordering

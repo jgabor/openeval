@@ -1,0 +1,6 @@
+id: vgahkmjeen
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Document `--plugin-dir` for `.claude-plugin` skills

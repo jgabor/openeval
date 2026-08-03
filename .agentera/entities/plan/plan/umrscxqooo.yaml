@@ -1,0 +1,41 @@
+id: umrscxqooo
+artifact: plan
+record:
+  header:
+    level: light
+    created: 2026-06-14
+    status: archived
+    title: opencode runtime driver
+  what: |
+    Add an `opencode` driver to the existing `agent.Driver` registry so engineers
+    can run OpenEval scenarios against the opencode CLI via `--agent opencode`.
+    The new driver mirrors the cursor driver: it resolves the opencode binary
+    (config override, then PATH lookup), invokes it as a subprocess against the
+    per-round workspace, parses the response for a trace identifier and token
+    usage, and returns a cost estimate derived from configured rates.
+  why: |
+    README.md and the previous plan both advertise opencode as a supported agent
+    while deferring the driver implementation. The `agent.Driver` interface is
+    already pluggable via the `agent.New(name, cfg)` switch, so adding a new
+    runtime is small in cost and unblocks engineers who standardize on opencode
+    without requiring a separate fork. It also advances the vision principle of
+    platform-agnostic measurement by adding one more comparable runtime to the
+    eval grid.
+  constraints: |
+    - Mock and cursor drivers must remain unchanged and pass their existing tests.
+    - Privacy-by-default is preserved: the driver itself sends no telemetry.
+    - No vision or objective changes.
+    - Tests must not require a live opencode install on CI.
+    - Out of scope: opencode-specific OTEL/hook wiring, per-skill plugin loading,
+      and any other additional runtime (Pi, etc.) remain deferred.
+  overall_acceptance: |
+    GIVEN an authenticated opencode CLI WHEN an engineer runs example-fixtures
+    with --agent opencode THEN the agent edits fixtures and score.json reflects
+    verifier outcomes from real work. GIVEN the mock and cursor drivers WHEN
+    the full test suite runs THEN existing driver tests still pass unchanged.
+  surprises: ""
+  scope:
+    included:
+      []
+    excluded:
+      []

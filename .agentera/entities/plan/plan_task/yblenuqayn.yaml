@@ -1,0 +1,12 @@
+id: yblenuqayn
+artifact: plan
+record:
+  name: Skill variation vertical slice
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN example-fixtures scenario WHEN a skill-backed variation is defined THEN run seeds skills into workspace .agents/skills
+    - GIVEN a plugin-shaped skill alias WHEN variation lists that skill THEN cursor-agent receives --plugin-dir for that skill root
+    - GIVEN skill variation run WHEN score.json written THEN skills_active lists the variation skills
+  plan: gtguqugvfh

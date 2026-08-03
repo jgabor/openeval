@@ -1,0 +1,13 @@
+id: svkvvbwwxv
+artifact: todo
+record:
+  kind: demo-command
+  target_version: 0.0.2
+  title: "`openeval demo` for the compare-first flow"
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

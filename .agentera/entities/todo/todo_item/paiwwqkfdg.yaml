@@ -1,0 +1,6 @@
+id: paiwwqkfdg
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Does not require OTLP/Jaeger (see `0.0.4`)

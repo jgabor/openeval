@@ -1,0 +1,11 @@
+id: fuyqsvlxnu
+artifact: plan
+record:
+  name: score.json contract and pass@k aggregation
+  depends_on:
+    - wncubmknum
+  status: complete
+  acceptance:
+    - GIVEN completed run WHEN score.json written THEN schema openeval.score.v1 with summary and by_task
+    - GIVEN mixed rounds WHEN aggregated THEN pass_at_1 and pass_at_3 match README semantics
+  plan: jzwbpoalyy

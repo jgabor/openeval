@@ -1,0 +1,6 @@
+id: mewfoiqmle
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain `default` vs `with-demo-skill` variations for compare

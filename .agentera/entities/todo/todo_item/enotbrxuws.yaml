@@ -1,0 +1,6 @@
+id: enotbrxuws
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Keep OpenCode runtime usage and ktx delivery evidence as separate authorities

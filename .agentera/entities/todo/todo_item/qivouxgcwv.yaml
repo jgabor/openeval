@@ -1,0 +1,6 @@
+id: qivouxgcwv
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain a campaign manifest before agent execution

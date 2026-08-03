@@ -1,0 +1,6 @@
+id: xzppjsztey
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Missing `cursor-agent` reports install/login steps

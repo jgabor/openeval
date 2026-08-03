@@ -1,0 +1,13 @@
+id: aicjvrtqze
+artifact: todo
+record:
+  kind: historical-task-bundles
+  target_version: 0.0.15
+  title: Support frozen source and structured grading per task
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

@@ -1,0 +1,6 @@
+id: yecpkdfmqd
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Command runs baseline + skill variation + `compare` (or prints commands with `--dry-run`)

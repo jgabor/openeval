@@ -1,0 +1,6 @@
+id: grwshgeniw
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Let verifier scripts emit a versioned structured result

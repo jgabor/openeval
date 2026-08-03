@@ -1,0 +1,6 @@
+id: vpjeddglzo
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Keep existing score artifacts readable or document and test the intentional break

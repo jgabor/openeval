@@ -1,0 +1,6 @@
+id: ehocruylbs
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Quick start order: install → compare flow → optional instrument/traces"

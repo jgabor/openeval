@@ -1,0 +1,6 @@
+id: cqonolslmc
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets"

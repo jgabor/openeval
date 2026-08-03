@@ -1,0 +1,17 @@
+id: pmriifqgmr
+artifact: plan
+record:
+  name: Tests, docs, and plan closeout
+  depends_on:
+    - mgdiiojmxw
+    - rusxzhiety
+    - phlmcqvkbx
+    - yblenuqayn
+    - mfkokmfilk
+    - zjriqqtsyr
+  status: complete
+  acceptance:
+    - GIVEN stub hook script and cursor-agent WHEN integration tests run THEN hook install and env propagation are asserted without network
+    - GIVEN skill variation fixture WHEN tests run THEN SeedSkills and plugin-dir wiring are covered
+    - GIVEN all tasks complete WHEN plan closes THEN statuses updated and prior plan reference preserved in archive
+  plan: gtguqugvfh

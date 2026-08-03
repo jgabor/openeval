@@ -1,0 +1,6 @@
+id: spvohfzxoz
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Never replace missing measurements with zero

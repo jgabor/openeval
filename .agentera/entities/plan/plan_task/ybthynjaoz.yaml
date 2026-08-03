@@ -1,0 +1,11 @@
+id: ybthynjaoz
+artifact: plan
+record:
+  name: Workspace seeding per task round
+  depends_on:
+    - msrluzkbma
+  status: complete
+  acceptance:
+    - GIVEN example-fixtures WHEN a round starts THEN workspace contains a copy of scenario fixtures under the run directory
+    - GIVEN two rounds of the same task WHEN workspaces are prepared THEN each round uses an isolated directory
+  plan: unryurvthv

@@ -1,0 +1,6 @@
+id: ktprfgvdbt
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Report deterministic paired bootstrap intervals with a retained seed

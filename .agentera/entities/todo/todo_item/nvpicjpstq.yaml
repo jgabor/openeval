@@ -1,0 +1,6 @@
+id: nvpicjpstq
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain agent stdout and stderr as bounded artifacts with SHA-256 digests

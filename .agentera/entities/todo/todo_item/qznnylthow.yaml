@@ -1,0 +1,6 @@
+id: qznnylthow
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Check `skills.aliases` paths resolve for skill variations

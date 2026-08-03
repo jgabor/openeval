@@ -1,0 +1,6 @@
+id: fsoukojhaw
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim"

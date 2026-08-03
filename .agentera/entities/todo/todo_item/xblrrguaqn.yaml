@@ -1,0 +1,6 @@
+id: xblrrguaqn
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Separate agent-visible source from verifier-only and reference artifacts

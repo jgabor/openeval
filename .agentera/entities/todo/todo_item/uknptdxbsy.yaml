@@ -1,0 +1,6 @@
+id: uknptdxbsy
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Replace the driver tuple return with a structured attempt result

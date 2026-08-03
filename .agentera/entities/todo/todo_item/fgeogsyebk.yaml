@@ -1,0 +1,6 @@
+id: fgeogsyebk
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL

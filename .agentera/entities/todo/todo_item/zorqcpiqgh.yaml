@@ -1,0 +1,6 @@
+id: zorqcpiqgh
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: README custom-scenario section links to init

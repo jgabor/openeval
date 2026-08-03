@@ -1,0 +1,11 @@
+id: jgsmdarovf
+artifact: plan
+record:
+  name: Runner and verifier workspace wiring
+  depends_on:
+    - ybthynjaoz
+  status: complete
+  acceptance:
+    - GIVEN a completed agent round WHEN verifier runs THEN scripts execute against the agent workspace not an empty tasks folder
+    - GIVEN edit-file on example-fixtures WHEN cursor-agent adds the comment THEN verifier passes for that round
+  plan: unryurvthv

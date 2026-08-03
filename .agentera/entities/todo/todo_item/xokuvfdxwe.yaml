@@ -1,0 +1,6 @@
+id: xokuvfdxwe
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Optional: `--from <repo-path>` with language detection and verifier template"

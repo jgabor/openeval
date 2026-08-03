@@ -1,0 +1,6 @@
+id: hetrvwsjdd
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Record agent failures as attempts and continue the run

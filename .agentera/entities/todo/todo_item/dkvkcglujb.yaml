@@ -1,0 +1,6 @@
+id: dkvkcglujb
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: No README path presents mock scores as production eval evidence

@@ -1,0 +1,6 @@
+id: jnojozniki
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Allocate disposable `HOME` and XDG directories per attempt

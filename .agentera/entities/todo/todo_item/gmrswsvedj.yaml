@@ -1,0 +1,6 @@
+id: gmrswsvedj
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Report tool-call inflation, duration, patch size, and failure classes

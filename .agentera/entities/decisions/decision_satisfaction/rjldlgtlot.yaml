@@ -1,0 +1,9 @@
+id: rjldlgtlot
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: Cursor instrumentation and driver plans completed. Comparable score and telemetry outputs exist for the first runtime. User confirmed satisfied 2026-06-09 after real cursor-agent harness run with trace_id in score.json and traces command correlation.
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: tpbyphwehw

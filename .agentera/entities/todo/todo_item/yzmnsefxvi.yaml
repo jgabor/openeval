@@ -1,0 +1,6 @@
+id: yzmnsefxvi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas

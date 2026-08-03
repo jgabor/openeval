@@ -1,0 +1,6 @@
+id: ujaqmqbogk
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain an artifact manifest with path, size, and SHA-256

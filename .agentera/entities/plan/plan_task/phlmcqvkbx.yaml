@@ -1,0 +1,12 @@
+id: phlmcqvkbx
+artifact: plan
+record:
+  name: OTLP trace correlation attributes
+  depends_on:
+    - rusxzhiety
+  status: complete
+  acceptance:
+    - GIVEN a completed harness round WHEN runner exports OTLP THEN span traceId matches score.json trace_id for that round
+    - GIVEN exported span WHEN inspected THEN attributes include scenario_id, variation, task_id, and round
+    - GIVEN telemetry endpoint unset WHEN run completes THEN harness still writes score.json without export failure
+  plan: gtguqugvfh

@@ -1,0 +1,6 @@
+id: rimpwejcmi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and agent command

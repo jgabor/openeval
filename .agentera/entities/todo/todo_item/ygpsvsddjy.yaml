@@ -1,0 +1,6 @@
+id: ygpsvsddjy
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`

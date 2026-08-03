@@ -1,0 +1,6 @@
+id: mvzoajaygn
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Make runtime and verifier network policies explicit and separately configurable

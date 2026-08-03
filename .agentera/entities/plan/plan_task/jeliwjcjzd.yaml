@@ -1,0 +1,13 @@
+id: jeliwjcjzd
+artifact: plan
+record:
+  name: Tests and documentation
+  depends_on:
+    - pfrdvuqfoh
+    - xxbqcibplp
+    - jgsmdarovf
+  status: complete
+  acceptance:
+    - GIVEN a stub cursor-agent script WHEN driver tests run THEN subprocess args and env are asserted without network
+    - GIVEN README agent section WHEN updated THEN documents cursor-agent auth requirements and --agent cursor behavior
+  plan: unryurvthv

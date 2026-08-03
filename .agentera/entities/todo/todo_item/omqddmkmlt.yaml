@@ -1,0 +1,6 @@
+id: omqddmkmlt
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain invalid and superseding retry records without replacing evidence

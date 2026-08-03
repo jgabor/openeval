@@ -1,0 +1,6 @@
+id: odrqjazmno
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Treat repeated runs of one task as one task cluster when pooling

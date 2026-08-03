@@ -1,0 +1,6 @@
+id: dqnpbigikz
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Check `cursor-agent status` (authenticated)

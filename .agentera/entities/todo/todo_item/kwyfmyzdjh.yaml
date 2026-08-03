@@ -1,0 +1,6 @@
+id: kwyfmyzdjh
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Add `examples/ci/openeval.yml` (or similar) for consumers

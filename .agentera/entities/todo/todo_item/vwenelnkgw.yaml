@@ -1,0 +1,13 @@
+id: vwenelnkgw
+artifact: todo
+record:
+  kind: frictionless-install
+  target_version: 0.0.7
+  title: Single documented install path without cloning
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

@@ -1,0 +1,13 @@
+id: hmjzftjgjq
+artifact: todo
+record:
+  kind: doctor-command
+  target_version: 0.0.6
+  title: "`openeval doctor`"
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

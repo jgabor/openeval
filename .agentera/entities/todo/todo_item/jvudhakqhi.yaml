@@ -1,0 +1,6 @@
+id: jvudhakqhi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Clean up containers after success, failure, timeout, or interruption

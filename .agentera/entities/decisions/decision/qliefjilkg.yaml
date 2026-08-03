@@ -1,0 +1,20 @@
+id: qliefjilkg
+artifact: decisions
+record:
+  date: 2026-06-08
+  question: What should OpenEval ship before expanding scope?
+  context: The project started docs-only while vision already described measurable agent comparison. External benchmarks and full telemetry coverage were tempting but unproven without a core loop.
+  alternatives:
+    - name: "[Evidence loop first], chosen"
+      status: chosen
+      description: Runnable instrument → run → score → compare workflow.
+    - name: "[Full telemetry inventory first], rejected"
+      status: rejected
+      description: Complete cross-runtime capture before any comparable runs exist.
+    - name: "[External benchmark suites first], rejected"
+      status: rejected
+      description: Deep integrations and packaged environments before the core product works.
+  choice: "Ship the evidence loop first: a runnable tool that instruments agents, runs scenarios, scores outcomes, and compares config changes."
+  reasoning: Vision is about measurable improvement. Without a repeatable comparison loop, broader telemetry and external suites add complexity without proving whether changes help users.
+  confidence: firm
+  feeds_into: VISION.md, PLAN.md

@@ -1,0 +1,12 @@
+id: mogiklizjf
+artifact: plan
+record:
+  name: report, compare, and traces commands
+  depends_on:
+    - fuyqsvlxnu
+  status: complete
+  acceptance:
+    - GIVEN run dir WHEN report THEN output shows scenario, variation, pass@k, and tasks
+    - GIVEN two same-scenario runs WHEN compare THEN delta table shows pass@k and cost
+    - GIVEN mismatched scenario_id WHEN compare THEN command errors clearly
+  plan: jzwbpoalyy

@@ -1,0 +1,6 @@
+id: xshjzqwsrq
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Allow each task to select its own frozen source bundle

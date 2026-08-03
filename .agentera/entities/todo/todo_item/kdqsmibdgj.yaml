@@ -1,0 +1,6 @@
+id: kdqsmibdgj
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Report paired per-task percentage changes and their geometric mean

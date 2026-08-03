@@ -1,0 +1,6 @@
+id: cyjamdzmqk
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Recommend `--rounds 3` for pass@k stability

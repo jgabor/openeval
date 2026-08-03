@@ -1,0 +1,9 @@
+id: mpazdzwfla
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: Scoring, aggregation, report, and compare delivered in MVP. Both completed plans assumed this model. User confirmed satisfied 2026-06-09; acceptance run emitted openeval.score.v1 with pass@k, cost, and per-round trace_id.
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: tsalgwydph

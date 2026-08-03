@@ -1,0 +1,6 @@
+id: eulzgmlbvj
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Check config at `$XDG_CONFIG_HOME/openeval/config.yaml`

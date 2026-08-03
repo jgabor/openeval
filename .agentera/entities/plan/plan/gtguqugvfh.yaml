@@ -1,0 +1,36 @@
+id: gtguqugvfh
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-06-09
+    status: archived
+    reviewed: 2026-06-09
+    critic_issues: 3 found, 3 addressed, 0 dismissed
+    title: Plugin-harness synergy bridge
+    previous_plan_archived: plan-2026-06-09-cursor-agent-driver.yaml
+  what: Connect drop-in Cursor instrumentation with the scenario harness under one openeval CLI control plane. Ship the Decision 6 bridge deferred from the cursor-driver plan — real hook install, harness-run trace correlation, skill-backed variation proof, and README dual-rhythm positioning.
+  why: "Decision 6 chose a single binary with dual rhythm: continuous plugin observability plus periodic harness proof on the same comparison contract. The cursor-driver plan deferred OTLP hook wiring and per-skill plugin loading. Without this bridge, instrumentation and harness remain separate product stories in code even though vision and decisions align."
+  constraints: No vision.yaml edits. Privacy-by-default. Keep mock agent for tests. OTLP remains an external span store — do not embed a trace database. Fail clearly when hooks or cursor-agent are missing in production paths.
+  scope:
+    included:
+      - Cursor hooks.json install wired to openeval config OTLP endpoint
+      - OPENEVAL run-context env propagation into harness cursor-agent runs
+      - OTLP span attributes linking score.json trace_id to run context
+      - example-fixtures skill variation with config skills.aliases proof
+      - traces command prints configured OTLP endpoint and lookup hints
+      - README repositioning per Decision 6
+      - tests and docs for the bridge
+    excluded:
+      - openeval trends or OTLP query rollups
+      - Pi and OpenCode instrumentation
+      - DeepSWE, margin-eval, Docker packaging
+    deferred:
+      - longitudinal plugin analytics CLI
+      - full cursor-otel-hook feature parity beyond harness correlation
+  design: openeval instrument merges Cursor hook entries that read the shared config file and export masked spans to the configured OTLP endpoint. Before each harness round, the runner injects OPENEVAL scenario, variation, task, round, and trace identifiers into the cursor-agent subprocess environment so hook spans can join harness evidence. The telemetry exporter emits W3C-compatible session spans with the same trace_id stored in score.json plus run-context attributes. An example-fixtures variation declares skills resolved through config skills.aliases, exercising SeedSkills and --plugin-dir. README leads with CLI hub and dual rhythm; telemetry inventory moves below harness proof.
+  overall_acceptance:
+    - GIVEN instrumented Cursor and authenticated cursor-agent WHEN engineer runs example-fixtures with a skill variation THEN score.json, OTLP spans, and traces output share trace and run context for the same round
+    - GIVEN README after this plan WHEN a new engineer reads it THEN plugin observability and harness proof read as one CLI product per Decision 6
+  surprises:
+    []

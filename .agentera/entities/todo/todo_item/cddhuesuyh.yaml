@@ -1,0 +1,6 @@
+id: cddhuesuyh
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain status, process exit, trace/session ID, start/end time, and duration

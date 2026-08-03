@@ -1,0 +1,6 @@
+id: jfhrrbelvr
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Validate every attempt and regenerate the campaign summary before any paid expansion

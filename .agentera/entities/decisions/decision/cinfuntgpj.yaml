@@ -1,0 +1,20 @@
+id: cinfuntgpj
+artifact: decisions
+record:
+  date: 2026-06-08
+  question: When should an eval run count as real agent work?
+  context: Early delivery used test doubles to unblock the scoring loop. Product credibility requires that production runs reflect actual agent behavior, not silent stand-ins.
+  alternatives:
+    - name: "[Real execution in production paths], chosen"
+      status: chosen
+      description: Production evals invoke real agents; failures surface clearly.
+    - name: "[Silent mock fallback], rejected"
+      status: rejected
+      description: Scores look valid when no agent actually ran.
+    - name: "[Mock-only product], rejected"
+      status: rejected
+      description: Never integrate real agent execution.
+  choice: Production evaluation paths must execute real agents and verify their effects. Test doubles belong in automated tests only. When a requested agent is unavailable, fail clearly rather than substituting a silent mock.
+  reasoning: A comparison tool that can score without real agent work undermines the product promise. Honest failure preserves trust in pass rate and cost deltas.
+  confidence: firm
+  feeds_into: VISION.md, PLAN.md

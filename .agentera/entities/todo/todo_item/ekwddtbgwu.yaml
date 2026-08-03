@@ -1,0 +1,6 @@
+id: ekwddtbgwu
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Support test, semantic-equivalence, code-review, and footprint dimensions

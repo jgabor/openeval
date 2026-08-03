@@ -1,0 +1,6 @@
+id: pmpknacrog
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Run passthrough and compression arms with the same OpenCode and ktx instrumentation

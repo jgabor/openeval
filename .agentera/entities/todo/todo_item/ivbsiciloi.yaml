@@ -1,0 +1,6 @@
+id: ivbsiciloi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Mock job runs on GitHub Actions without cursor credentials

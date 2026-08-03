@@ -1,0 +1,6 @@
+id: nbarkeyirq
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Generated layout matches `examples/scenarios/example-fixtures/`

@@ -1,0 +1,13 @@
+id: naspbbtbil
+artifact: todo
+record:
+  kind: sandboxed-attempt-execution
+  target_version: 0.0.17
+  title: Implement explicit pinned-container runs
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

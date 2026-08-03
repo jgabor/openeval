@@ -1,0 +1,6 @@
+id: oomnrjbnrh
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "README: one recommended install path; source build under a separate heading"

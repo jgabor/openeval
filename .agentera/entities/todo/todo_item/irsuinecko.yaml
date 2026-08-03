@@ -1,0 +1,6 @@
+id: irsuinecko
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Cross-link `0.0.1` and `0.0.3` when complete

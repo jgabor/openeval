@@ -1,0 +1,6 @@
+id: tszefdfczi
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Retain ktx binary, configuration, pipeline, database, and artifact digests

@@ -1,0 +1,6 @@
+id: kgrflotmho
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Docker packaging as the default run path; explicit opt-in campaign sandboxing is tracked by `sandboxed-attempt-execution:0.0.17`

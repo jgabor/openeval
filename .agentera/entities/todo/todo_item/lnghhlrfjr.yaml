@@ -1,0 +1,6 @@
+id: lnghhlrfjr
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Consume ktx metrics per attempt rather than through one aggregate external map

@@ -1,0 +1,6 @@
+id: iljhlbkurf
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: CI can run a subset with `--agent mock`

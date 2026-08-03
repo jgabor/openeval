@@ -1,0 +1,13 @@
+id: hqneagzpng
+artifact: todo
+record:
+  kind: paired-variation-scheduler
+  target_version: 0.0.16
+  title: Run controlled variation pairs in one campaign
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

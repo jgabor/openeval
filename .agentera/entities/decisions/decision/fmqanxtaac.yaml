@@ -1,0 +1,20 @@
+id: fmqanxtaac
+artifact: decisions
+record:
+  date: 2026-06-08
+  question: How narrow should the first delivery be?
+  context: Many capabilities could ship together — multi-runtime adapters, Docker, external eval suites, install automation, and deep telemetry inventories. Privacy-by-default is a standing product constraint.
+  alternatives:
+    - name: "[Vertical slice], chosen"
+      status: chosen
+      description: Core CLI, scenarios, scoring, comparison, and one runtime path.
+    - name: "[Full platform parity], rejected"
+      status: rejected
+      description: All runtimes, packaging, and benchmark integrations in v1.
+    - name: "[Docs and design only], rejected"
+      status: rejected
+      description: Continue planning without runnable evidence.
+  choice: "Deliver a vertical slice: scenario-based evaluation with scoring and comparison on one runtime. Defer multi-runtime parity, external benchmark integrations, containerized environments, and broad install or generation automation until the loop is proven."
+  reasoning: A narrow first delivery validates the product thesis. Deferred breadth does not block answering whether a config change moved pass rate or cost.
+  confidence: firm
+  feeds_into: VISION.md, PLAN.md, README.md

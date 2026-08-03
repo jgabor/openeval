@@ -1,0 +1,6 @@
+id: eurpldgcxv
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Define the comparison unit as task plus repetition

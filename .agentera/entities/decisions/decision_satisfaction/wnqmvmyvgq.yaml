@@ -1,0 +1,9 @@
+id: wnqmvmyvgq
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: MVP scope completed and documented. Deferred items remain explicitly out of initial delivery. User confirmed satisfied 2026-06-09 after Cursor vertical-slice acceptance rerun (2/2 tasks, demo-skill variation).
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: fmqanxtaac

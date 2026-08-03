@@ -1,0 +1,14 @@
+id: drnuxjgncf
+artifact: plan
+record:
+  name: Example-fixtures vertical slice and state sync
+  depends_on:
+    - fuyqsvlxnu
+    - mogiklizjf
+    - xxhixjrpxv
+  status: complete
+  acceptance:
+    - GIVEN example-fixtures WHEN quick-start run completes THEN valid score.json under ./scenarios/example-fixtures/runs/1
+    - GIVEN MVP done WHEN README status reviewed THEN implemented vs deferred is accurate
+    - GIVEN all tasks done WHEN plan closes THEN statuses updated and plan archived
+  plan: jzwbpoalyy

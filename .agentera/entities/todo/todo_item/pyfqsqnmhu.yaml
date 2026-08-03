@@ -1,0 +1,6 @@
+id: pyfqsqnmhu
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Each failure prints remediation steps

@@ -1,0 +1,6 @@
+id: sjfpqmxacz
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Harness still completes when collector is unreachable (non-blocking export)

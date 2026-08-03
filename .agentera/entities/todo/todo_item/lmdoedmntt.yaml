@@ -1,0 +1,6 @@
+id: lmdoedmntt
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`"

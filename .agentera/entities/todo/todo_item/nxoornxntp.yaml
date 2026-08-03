@@ -1,0 +1,6 @@
+id: nxoornxntp
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"

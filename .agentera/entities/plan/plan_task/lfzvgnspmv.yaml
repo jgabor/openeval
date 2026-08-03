@@ -1,0 +1,11 @@
+id: lfzvgnspmv
+artifact: plan
+record:
+  name: Configuration and scenario loading
+  depends_on:
+    - bkbguugrxg
+  status: complete
+  acceptance:
+    - GIVEN config.minimal.yaml WHEN loaded THEN aliases and telemetry settings resolve
+    - GIVEN scenario YAML WHEN --scenario used THEN id, tasks, and variations load
+  plan: jzwbpoalyy

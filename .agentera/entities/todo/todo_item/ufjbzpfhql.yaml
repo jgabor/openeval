@@ -1,0 +1,6 @@
+id: ufjbzpfhql
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Install docs consistent with AGENTS.md versioning

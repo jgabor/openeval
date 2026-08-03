@@ -1,0 +1,27 @@
+id: unryurvthv
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-06-08
+    status: archived
+    reviewed: 2026-06-08
+    critic_issues: 3 found, 3 addressed, 0 dismissed
+    title: cursor-agent driver for real eval runs
+    previous_plan_archived: plan-2026-06-08-openeval-mvp.yaml
+  what: Replace the Cursor driver stub with a real cursor-agent subprocess integration so --agent cursor runs tasks against scenario workspaces.
+  why: MVP mock driver only writes prompt.txt; README promises cursor runs but pass/fail ignores agent edits. Real driver unlocks meaningful scenario evidence.
+  constraints: Keep mock for tests. Privacy-by-default. No vision changes. Fail clearly when cursor-agent missing or unauthenticated.
+  scope:
+    included:
+      - binary resolution, workspace seeding, subprocess driver, result parsing
+      - runner/verifier wiring, tests, README
+    excluded:
+      - skills injection into Cursor, OTLP hook wiring, Pi/OpenCode drivers
+    deferred:
+      - per-skill Cursor plugin loading, trace correlation from hooks
+  design: Seed scenario fixtures into per-round workspace; invoke cursor-agent headless; run verifiers in that workspace; parse JSON usage when present else estimate from config.
+  overall_acceptance:
+    - GIVEN authenticated cursor-agent WHEN engineer runs example-fixtures with --agent cursor THEN agent edits fixtures and score.json reflects verifier outcomes from real work
+  surprises:
+    []

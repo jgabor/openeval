@@ -1,0 +1,14 @@
+id: zjriqqtsyr
+artifact: plan
+record:
+  name: README dual-rhythm positioning
+  depends_on:
+    - mgdiiojmxw
+    - phlmcqvkbx
+    - yblenuqayn
+  status: complete
+  acceptance:
+    - GIVEN README intro WHEN read THEN openeval CLI is described as control plane with harness proof plus continuous instrumentation
+    - GIVEN supported telemetry section WHEN read THEN it is framed as observation explaining harness outcomes not a parallel product
+    - GIVEN quick start WHEN followed THEN instrument and run example-fixtures remain the primary path
+  plan: gtguqugvfh

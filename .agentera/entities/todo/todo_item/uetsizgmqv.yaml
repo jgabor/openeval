@@ -1,0 +1,6 @@
+id: uetsizgmqv
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Pin and retain the image digest used by each attempt

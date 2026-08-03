@@ -1,0 +1,6 @@
+id: ctrgqerych
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Distinguish verifier infrastructure errors from a valid failing grade

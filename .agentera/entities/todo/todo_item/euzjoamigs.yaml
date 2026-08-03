@@ -1,0 +1,6 @@
+id: euzjoamigs
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Check `~/.cursor/hooks.json` after `instrument`

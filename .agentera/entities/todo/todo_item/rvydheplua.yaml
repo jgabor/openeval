@@ -1,0 +1,6 @@
+id: rvydheplua
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "Document optional job: `cursor-agent` compare on release branches (`CURSOR_API_KEY`)"

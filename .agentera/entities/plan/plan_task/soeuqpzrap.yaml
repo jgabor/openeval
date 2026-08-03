@@ -1,0 +1,13 @@
+id: soeuqpzrap
+artifact: plan
+record:
+  name: opencode driver implementation
+  depends_on:
+    - wtvujimtam
+  status: complete
+  acceptance:
+    - GIVEN a task prompt WHEN the driver runs THEN opencode is invoked with the task prompt and the per-round workspace
+    - GIVEN variation env vars WHEN the driver runs THEN those vars are present in the opencode subprocess environment
+    - GIVEN opencode exits zero with JSON usage WHEN the driver parses THEN cost reflects parsed usage not a hardcoded placeholder
+    - GIVEN a successful opencode run WHEN the driver completes THEN the round returns a non-empty trace identifier for score.json
+  plan: umrscxqooo

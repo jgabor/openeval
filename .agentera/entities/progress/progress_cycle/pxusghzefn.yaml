@@ -1,0 +1,16 @@
+id: pxusghzefn
+artifact: progress
+record:
+  timestamp: 2026-06-14 17:10
+  type: feat
+  phase: build
+  what: Implement opencode Run() with subprocess invocation, event-stream JSON parse, and cost calculation
+  inspiration: /bin/opencode --help and `opencode run --help` on the local install; cursor driver's existing pattern
+  discovered: opencode emits a stream of JSON events (step_start, text, step_finish), not a single response object. The driver sums step_finish tokens across all events to handle multi-step runs.
+  verified: go test -count=1 ./... passes (23/23); TestOpenCodeRunInvokesStubAndParsesUsage asserts arg shape, env injection, sessionID, and non-zero cost; end-to-end smoke against the real /bin/opencode produced valid score.json for example-fixtures (2/2 tasks passed, $0.536535 total cost, real session IDs captured)
+  next: "Task 3: comprehensive driver shell-stub tests (invalid JSON, non-zero exit, multi-step, env propagation edge cases)"
+  context:
+    intent: Replace the cycle 1 Run() stub with real subprocess + parse + cost
+    constraints: Mock and cursor drivers must remain unchanged; tests must not require a live opencode install on CI
+    unknowns: "Resolved: opencode CLI flags and JSON schema verified against the local install"
+    scope: internal/agent/opencode.go, internal/agent/opencode_test.go

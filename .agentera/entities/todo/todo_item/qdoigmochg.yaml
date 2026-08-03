@@ -1,0 +1,6 @@
+id: qdoigmochg
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: "`openeval instrument --agent cursor --otel-up docker`, or"

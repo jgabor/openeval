@@ -1,0 +1,6 @@
+id: gohxckoruo
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Keep shell/script verifiers

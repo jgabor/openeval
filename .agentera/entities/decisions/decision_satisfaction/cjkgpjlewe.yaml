@@ -1,0 +1,9 @@
+id: cjkgpjlewe
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: "Plugin-harness synergy bridge plan complete. User confirmed satisfied 2026-06-09 after acceptance rerun: instrument wired hooks.json, harness run with-demo-skill seeded demo-skill, score.json and traces share trace_id and OTLP endpoint from config."
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: surrrmiqea

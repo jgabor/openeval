@@ -1,0 +1,9 @@
+id: jjbuqdmzkv
+artifact: decisions
+record:
+  state: user_confirmed_satisfied
+  evidence: MVP plan archived complete. End-to-end example scenario runs and compare workflow delivered. User confirmed satisfied 2026-06-09 after acceptance rerun (instrument → run → score.json → traces on one CLI).
+  user_confirmation:
+    confirmed_by: user
+    confirmed_at: 2026-06-09
+  decision: qliefjilkg

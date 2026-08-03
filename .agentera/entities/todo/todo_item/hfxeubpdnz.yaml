@@ -1,0 +1,6 @@
+id: hfxeubpdnz
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: Exit 0 prints a compare table when cursor setup is valid

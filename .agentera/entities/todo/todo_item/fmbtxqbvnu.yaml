@@ -1,0 +1,13 @@
+id: fmbtxqbvnu
+artifact: todo
+record:
+  kind: mini-production-scenario
+  target_version: 0.0.3
+  title: Expand `example-fixtures` beyond hello-world tasks
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open

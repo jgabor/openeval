@@ -1,0 +1,6 @@
+id: plbfncdaas
+artifact: todo
+record:
+  severity: normal
+  status: open
+  description: OTLP query rollups / `openeval trends`
