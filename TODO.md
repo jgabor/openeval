@@ -10,7 +10,10 @@ Product and engineering backlog. Items use **train** tags (`0.0.1`, `0.0.2`, …
 4. Verify setup with `openeval doctor` and install without cloning the repo.
 5. Run at least one integrated external benchmark with documented prerequisites.
 
-**Order:** trains `0.0.1`–`0.0.5` (first-run and README), then `0.0.6`–`0.0.8` (install and CI), then authoring and telemetry docs.
+**Order:** trains `0.0.1`–`0.0.5` establish compare-first onboarding;
+`0.0.6`–`0.0.8` cover install and CI; `0.0.9`–`0.0.12` cover authoring
+and honest documentation. Paired campaign work begins at `0.0.13` only after
+the release-worthy vertical slice is intact.
 
 ---
 
@@ -165,14 +168,144 @@ Product and engineering backlog. Items use **train** tags (`0.0.1`, `0.0.2`, …
 
 ---
 
+## Paired campaigns and retained evidence
+
+These trains extend the verifier-backed scenario harness from independent
+variation runs to controlled, retained campaigns. They are generic OpenEval
+capabilities. Integrations such as ktx consume the contracts without adding
+tool-specific behavior to the runner.
+
+- [ ] [attempt-evidence-contract:0.0.13] Retain one structured result per attempt
+
+  Agent drivers currently reduce runtime observations to cost and trace ID, and
+  an agent-process error aborts the run. Preserve the observations needed to
+  compare complete agent trajectories and distinguish task failure from invalid
+  evidence.
+
+  - [ ] Replace the driver tuple return with a structured attempt result
+  - [ ] Retain status, process exit, trace/session ID, start/end time, and duration
+  - [ ] Retain input, output, reasoning, cache-read, and cache-write tokens independently
+  - [ ] Preserve runtime-reported cost separately from any price-derived estimate
+  - [ ] Retain runtime, version, model, variant, and measurement provenance when available
+  - [ ] Preserve explicit numeric zero separately from unavailable or malformed fields
+  - [ ] Retain agent stdout and stderr as bounded artifacts with SHA-256 digests
+  - [ ] Record agent failures as attempts and continue the run
+  - [ ] Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass
+  - [ ] Add a versioned score schema and validate it when loading
+  - [ ] Keep existing score artifacts readable or document and test the intentional break
+
+- [ ] [immutable-attempt-artifacts:0.0.14] Make run evidence immutable and reproducible
+
+  Named variation runs currently replace prior directories. A retained campaign
+  must preserve the exact task, source, configuration, runtime, and result
+  artifacts used for every attempt.
+
+  - [ ] Give each run and attempt a unique immutable ID
+  - [ ] Never remove an existing run directory implicitly
+  - [ ] Retain a campaign manifest before agent execution
+  - [ ] Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and agent command
+  - [ ] Retain an artifact manifest with path, size, and SHA-256
+  - [ ] Record execution order, host/runtime identity, and OpenEval version
+  - [ ] Validate that score rows and artifacts belong to the declared campaign
+  - [ ] Add `openeval validate <run-dir>` with stable JSON output and documented exit codes
+
+- [ ] [historical-task-bundles:0.0.15] Support frozen source and structured grading per task
+
+  Scenario-level `fixtures/` gives every task the same tree. Historical coding
+  tasks need independent source snapshots, hidden verifier inputs, and patch
+  evidence.
+
+  - [ ] Allow each task to select its own frozen source bundle
+  - [ ] Retain source provenance and digest without fetching during execution
+  - [ ] Separate agent-visible source from verifier-only and reference artifacts
+  - [ ] Derive and retain a normalized patch against the frozen source
+  - [ ] Retain changed-file, added-line, and deleted-line footprint metrics
+  - [ ] Let verifier scripts emit a versioned structured result
+  - [ ] Support test, semantic-equivalence, code-review, and footprint dimensions
+  - [ ] Retain verifier stdout, stderr, exit status, and artifact hashes
+  - [ ] Distinguish verifier infrastructure errors from a valid failing grade
+  - [ ] Keep optional LLM grading separate from deterministic test evidence and agent cost
+
+- [ ] [paired-variation-scheduler:0.0.16] Run controlled variation pairs in one campaign
+
+  Separate variation commands execute whole arms sequentially and cannot
+  counterbalance temporal or cache effects. Campaign scheduling must pair the
+  same task and repetition before execution.
+
+  - [ ] Accept two or more named variations in one run
+  - [ ] Define the comparison unit as task plus repetition
+  - [ ] Use a retained deterministic seed for task ordering
+  - [ ] Counterbalance two-arm execution as AB/BA across pairs
+  - [ ] Run every scheduled attempt regardless of verifier reward
+  - [ ] Retry only infrastructure-invalid attempts under an explicit bounded policy
+  - [ ] Retain invalid and superseding retry records without replacing evidence
+  - [ ] Default to concurrency one; retain concurrency when explicitly changed
+  - [ ] Add a no-agent preflight that prints the complete schedule and estimated attempt count
+  - [ ] Require explicit execution approval for paid campaigns
+  - [ ] Preserve ordinary independent `openeval run` and pass@k behavior
+
+- [ ] [sandboxed-attempt-execution:0.0.17] Implement explicit pinned-container runs
+
+  This is an opt-in campaign execution path, not Docker as the default for all
+  OpenEval commands.
+
+  - [ ] Implement the existing `--image` run flag
+  - [ ] Pin and retain the image digest used by each attempt
+  - [ ] Mount only the attempt workspace, declared artifacts, and read-only credentials
+  - [ ] Allocate disposable `HOME` and XDG directories per attempt
+  - [ ] Make runtime and verifier network policies explicit and separately configurable
+  - [ ] Run deterministic grading without network access by default
+  - [ ] Bound CPU, memory, process count, and attempt duration
+  - [ ] Clean up containers after success, failure, timeout, or interruption
+  - [ ] Retain enough diagnostics to classify setup and execution failures
+  - [ ] Keep mock and host execution available for tests and local development
+
+- [ ] [paired-campaign-report:0.0.18] Add task-paired resource and quality reporting
+
+  Pass@k and aggregate cost do not answer whether a treatment reduced the
+  recorded workload or changed the typical task while preserving quality.
+
+  - [ ] Pair attempts by task, repetition, baseline, and candidate
+  - [ ] Report exact recorded-workload token and cost totals per repetition
+  - [ ] Report paired per-task percentage changes and their geometric mean
+  - [ ] Report deterministic paired bootstrap intervals with a retained seed
+  - [ ] Treat repeated runs of one task as one task cluster when pooling
+  - [ ] Report test, equivalence, review, and footprint win/loss/tie counts
+  - [ ] Report tool-call inflation, duration, patch size, and failure classes
+  - [ ] Keep runtime-reported cost separate from price-derived estimates
+  - [ ] Never replace missing measurements with zero
+  - [ ] Annotate unusual attempts without removing them automatically
+  - [ ] Emit stable JSON from `compare` as well as human-readable text
+  - [ ] Regenerate campaign summaries byte-identically from retained evidence
+  - [ ] Label descriptive intervals as uncertainty, not causal or significance claims
+
+- [ ] [ktx-paired-campaign-proof:0.0.19] Prove the generic campaign contract with ktx
+
+  Use ktx as an acceptance vehicle after the generic campaign capabilities
+  above ship. OpenEval owns execution and grading; ktx owns compression and its
+  native database evidence.
+
+  - [ ] Run passthrough and compression arms with the same OpenCode and ktx instrumentation
+  - [ ] Give each attempt a new disposable `KTX_DB`, `HOME`, and XDG root
+  - [ ] Retain ktx binary, configuration, pipeline, database, and artifact digests
+  - [ ] Consume ktx metrics per attempt rather than through one aggregate external map
+  - [ ] Keep OpenCode runtime usage and ktx delivery evidence as separate authorities
+  - [ ] Verify unchanged task quality before interpreting resource movement as useful
+  - [ ] Complete an unpaid or explicitly bounded three-task smoke campaign
+  - [ ] Validate every attempt and regenerate the campaign summary before any paid expansion
+  - [ ] Require separate approval before the ten-task, two-repetition, two-arm campaign
+  - [ ] Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim
+
+---
+
 ## Deferred (per decisions and README status)
 
 Do not schedule these until the 0.0.x bar in AGENTS.md is met:
 
 - [ ] `0.1.0` / semver release tagging
-- [ ] Pi and OpenCode harness drivers (observability-only today)
+- [ ] Pi harness driver
 - [ ] OTLP query rollups / `openeval trends`
 - [ ] DeepSWE and margin-eval both production-ready (one only in `0.0.10`)
-- [ ] Docker packaging as the default run path
+- [ ] Docker packaging as the default run path; explicit opt-in campaign sandboxing is tracked by `sandboxed-attempt-execution:0.0.17`
 - [ ] Full cursor-otel-hook parity beyond harness trace correlation
 - [milestone] 2026-06-14: opencode runtime driver plan (4 tasks) complete; see `.agentera/archive/plan-2026-06-14-opencode-runtime-driver.yaml`
