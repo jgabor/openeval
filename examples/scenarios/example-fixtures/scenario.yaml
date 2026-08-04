@@ -1,11 +1,17 @@
 id: example-fixtures
 tasks:
-  - id: hello-verify
-    prompt: Verify the hello-world script prints the expected greeting
-    verifier: { type: script, run: ./verifiers/hello-verify.sh }
-  - id: edit-file
-    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
-    verifier: { type: script, run: ./verifiers/edit-file.sh }
+  - id: parse-duration-units
+    prompt: Fix maintainer_tools/durations.py so parse_duration accepts integer millisecond values such as "250ms" while preserving second and minute support
+    verifier: { type: script, run: ./verifiers/parse-duration-units.sh }
+  - id: redact-url-credentials
+    prompt: Implement redact_credentials in maintainer_tools/urls.py so token, api_key, and password query values are replaced with REDACTED without changing other query parameters
+    verifier: { type: script, run: ./verifiers/redact-url-credentials.sh }
+  - id: normalize-account-names
+    prompt: Fix normalize_account_name in maintainer_tools/accounts.py so surrounding whitespace is removed and internal whitespace runs become a single hyphen before lowercasing
+    verifier: { type: script, run: ./verifiers/normalize-account-names.sh }
+  - id: summarize-log-levels
+    prompt: Fix count_log_levels in maintainer_tools/logs.py so bracketed log levels are counted case-insensitively and unknown lines are ignored
+    verifier: { type: script, run: ./verifiers/summarize-log-levels.sh }
 variations:
   default: {}
   baseline: {}

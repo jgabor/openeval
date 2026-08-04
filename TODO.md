@@ -46,10 +46,10 @@ the release-worthy vertical slice is intact.
 
   `hello-verify` and `edit-file` exercise the pipeline only. README references DeepSWE and margin-eval; the shipped quick-start scenario does not reflect that scope.
 
-  - [ ] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
+  - [x] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
   - [x] Keep shell/script verifiers
   - [x] Retain `default` vs `with-demo-skill` variations for compare
-  - [ ] `openeval report` output reflects realistic task names and verifiers
+  - [x] `openeval report` output reflects realistic task names and verifiers
   - [x] CI can run a subset with `--agent mock`
 
 - [ ] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup

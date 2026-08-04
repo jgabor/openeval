@@ -212,7 +212,7 @@ Variations cannot replace `OPENEVAL_SCENARIO_ID`, `OPENEVAL_VARIATION`, `OPENEVA
 
 ## Scenarios, variations, and evidence
 
-The shipped `example-fixtures` scenario contains two pipeline-scale tasks and three relevant arms:
+The shipped `example-fixtures` scenario contains four independent maintenance tasks in one small standard-library-only Python repository: duration parsing, URL credential redaction, account-name normalization, and log-level summaries. Each task has a focused script verifier and needs no package installation, network access, external service, or repository history. The scenario has three relevant arms:
 
 ```yaml
 variations:
@@ -220,6 +220,13 @@ variations:
   baseline: {}
   with-demo-skill:
     skills: [demo-skill]
+```
+
+For a fast credential-free automation check, use the one-task subset with the mock agent:
+
+```bash
+openeval run --scenario ./examples/scenarios/example-fixtures/edit-file-only.yaml \
+  --agent mock --rounds 1
 ```
 
 A scenario file contains task prompts, script verifiers, and named variations:
@@ -307,7 +314,7 @@ Harness execution does not require a collector. OpenEval writes trace IDs and sc
 Look up a round:
 
 ```bash
-openeval traces <run-dir> --task edit-file --round 1
+openeval traces <run-dir> --task parse-duration-units --round 1
 ```
 
 The direct `trace_id` and Jaeger URL target the OpenEval summary span. If native OpenCode OTEL is enabled, `traces` also prints:

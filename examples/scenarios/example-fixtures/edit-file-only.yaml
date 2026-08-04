@@ -1,7 +1,7 @@
-id: edit-file-only
+id: example-fixtures-fast
 tasks:
-  - id: edit-file
-    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
-    verifier: { type: script, run: ./verifiers/edit-file.sh }
+  - id: parse-duration-units
+    prompt: Fix maintainer_tools/durations.py so parse_duration accepts integer millisecond values such as "250ms" while preserving second and minute support
+    verifier: { type: script, run: ./verifiers/parse-duration-units.sh }
 variations:
   default: {}

@@ -4,7 +4,7 @@ record:
   name: Deliver a mini maintainer task corpus
   depends_on:
     - qnijueivja
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN the shipped example scenario WHEN task scope is reviewed THEN it contains four independent standard-library Python maintenance tasks with realistic names.
     - GIVEN each untouched fixture WHEN its task verifier runs THEN it fails for the intended missing or incorrect behavior.

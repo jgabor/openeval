@@ -28,7 +28,7 @@ func TestRunSkillVariationSeedsWorkspaceAndScore(t *testing.T) {
 	if len(result.Score.Telemetry.SkillsActive) != 1 || result.Score.Telemetry.SkillsActive[0] != "demo-skill" {
 		t.Fatalf("skills_active = %v", result.Score.Telemetry.SkillsActive)
 	}
-	seeded := filepath.Join(runDir, "tasks", "hello-verify", "round-1", ".agents", "skills", "demo-skill", "SKILL.md")
+	seeded := filepath.Join(runDir, "tasks", "parse-duration-units", "round-1", ".agents", "skills", "demo-skill", "SKILL.md")
 	if _, err := os.Stat(seeded); err != nil {
 		t.Fatalf("missing seeded skill: %v", err)
 	}

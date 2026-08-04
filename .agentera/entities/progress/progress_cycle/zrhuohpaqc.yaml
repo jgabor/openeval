@@ -1,0 +1,16 @@
+id: zrhuohpaqc
+artifact: progress
+record:
+  timestamp: 2026-08-04 21:06
+  type: feat
+  phase: build
+  what: Expanded examples/scenarios/example-fixtures/scenario.yaml into a four-task Python maintainer corpus with focused verifiers and a fast mock subset.
+  context:
+    intent: Deliver task pjgpucpayz as a realistic hermetic mini maintainer corpus.
+    constraints: Standard-library Python only; no network, package install, external service, repository history, live-agent CI, schema changes, or deferred verifier-matrix and skill work.
+    unknowns: The existing fast subset path was retained for compatibility and now selects parse-duration-units.
+    scope: example-fixtures corpus, focused regression coverage, user-facing scenario documentation, and required Agentera state.
+  discovered: The root scenarios ignore rule also hid new files under examples/scenarios, so it was anchored to /scenarios/.
+  verified: All four untouched verifier scripts reached unittest and exited 1 for their intended defects; go test ./internal/scenario ./internal/runner passed; the locally built bin/openeval ran edit-file-only.yaml with --agent mock and provider credentials removed.
+  next: Run mage check, commit the implementation and state together, then leave pjgpucpayz in_progress for independent Audit evaluation.
+  publication_order: 10
