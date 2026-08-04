@@ -17,3 +17,13 @@ record:
     - GIVEN an authenticated default-model smoke WHEN the primary flow runs THEN model identity, task outcomes, report output, comparison, cost, and runtime are observed.
     - GIVEN verified evidence WHEN current state is synchronized THEN the mini-production-scenario train closes only if every integrity and smoke criterion passes.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 1
+    last_verdict: fail
+    last_failure_evidence: Agents can replace workspace-owned grading tests and make broken implementations pass. Move grading tests outside seeded agent state, run them against workspace code, add a tamper regression, and refresh final evidence before TODO 0.0.3 remains closed. Also correct stale TODO 0.0.12 dependency wording.
+    provenance:
+      attempt_id: audit-ttdvuydxlr-1
+      source: independent Audit final delivery and verifier threat-model review
+      recorded_at: 2026-08-04 22:37
+      writer_command: agentera state plan record-evaluation

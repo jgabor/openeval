@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd fixtures
-python3 -m unittest tests/test_urls.py
+scenario_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+python3 -I "$scenario_dir/graders/grade.py" redact-url-credentials "$PWD/fixtures"

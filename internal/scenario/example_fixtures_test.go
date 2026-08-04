@@ -43,10 +43,46 @@ func TestExampleFixturesTasksFailBeforeMaintenance(t *testing.T) {
 			if err == nil {
 				t.Fatalf("untouched fixture passed verifier; output:\n%s", output)
 			}
-			if !bytes.Contains(output, []byte("FAILED (")) {
+			if !bytes.Contains(output, []byte("Traceback")) {
 				t.Fatalf("verifier did not reach its failing test; output:\n%s", output)
 			}
 		})
+	}
+}
+
+func TestExampleFixturesVerifierIgnoresTamperedWorkspaceTests(t *testing.T) {
+	chdirRepoRoot(t)
+	sc, err := scenario.Load("example-fixtures", config.Default())
+	if err != nil {
+		t.Fatal(err)
+	}
+	workDir := t.TempDir()
+	if err := workspace.Seed(sc, workDir); err != nil {
+		t.Fatal(err)
+	}
+	tamperedTest := filepath.Join(workDir, "fixtures", "tests", "test_durations.py")
+	if err := os.MkdirAll(filepath.Dir(tamperedTest), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(tamperedTest, []byte("raise SystemExit(0)\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if output, err := exec.Command("python3", tamperedTest).CombinedOutput(); err != nil {
+		t.Fatalf("tampered workspace test did not pass: %v\n%s", err, output)
+	}
+
+	got, err := verifier.Run(
+		context.Background(),
+		sc,
+		taskByID(t, sc, "parse-duration-units"),
+		workDir,
+		scenario.Variation{},
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "fail" {
+		t.Fatalf("verdict = %q, want fail for broken implementation with tampered workspace test", got)
 	}
 }
 

@@ -230,7 +230,7 @@ Variations cannot replace `OPENEVAL_SCENARIO_ID`, `OPENEVAL_VARIATION`, `OPENEVA
 
 ## Scenarios, variations, and evidence
 
-The shipped `example-fixtures` scenario contains four independent maintenance tasks in one small standard-library-only Python repository: duration parsing, URL credential redaction, account-name normalization, and log-level summaries. Each task has a focused script verifier and needs no package installation, network access, external service, or repository history. The scenario has three relevant arms:
+The shipped `example-fixtures` scenario contains four independent maintenance tasks in one small standard-library-only Python repository: duration parsing, URL credential redaction, account-name normalization, and log-level summaries. Each task has a focused, scenario-owned grader outside the copied agent workspace and needs no package installation, network access, external service, or repository history. The scenario has three relevant arms:
 
 ```yaml
 variations:
@@ -276,7 +276,7 @@ openeval run --scenario ./evals/my-scenario.yaml \
   --out ./scenarios/my-scenario/experiment-001/baseline
 ```
 
-Each task round gets an isolated workspace. OpenEval copies the scenario's `fixtures/` directory into `workspace/fixtures`, runs the agent in that workspace, then runs the verifier only after a successful agent event stream.
+Each task round gets an isolated workspace. OpenEval copies the scenario's `fixtures/` directory into `workspace/fixtures`, runs the agent in that workspace, then runs the source-controlled verifier against that workspace only after a successful agent event stream. Workspace files cannot replace the scenario-owned grading assertions.
 
 ### Output paths
 

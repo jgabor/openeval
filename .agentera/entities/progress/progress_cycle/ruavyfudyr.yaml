@@ -1,0 +1,16 @@
+id: ruavyfudyr
+artifact: progress
+record:
+  timestamp: 2026-08-04 22:42
+  type: fix
+  phase: build
+  what: Moved example-fixtures grading authority outside seeded agent state and revalidated final delivery after Audit failure.
+  context:
+    intent: Prevent agent-owned workspace tests from controlling verifier outcomes while preserving retained authenticated evidence.
+    constraints: Target the corpus correction with a fixup to 08e7d24; do not rerun paid inference; keep TODO 0.0.3 closed only if hardened grading passes; leave ttdvuydxlr in_progress.
+    unknowns: The retained smoke remains one sample and does not establish cost, runtime, or result variance.
+    scope: Scenario grader boundary, verifier scripts, tamper regression, affected documentation, retained workspace regrading, and final gates.
+  discovered: The scenario verifier scripts were source-controlled, but each executed grading tests copied under workspace/fixtures/tests. An agent could replace those tests and make a broken implementation pass.
+  verified: examples/scenarios/example-fixtures/graders/grade.py now holds the assertions outside fixtures; each verifier runs it with python3 -I and an explicit workspace fixtures path. TestExampleFixturesVerifierIgnoresTamperedWorkspaceTests first executes a trivial passing replacement workspace test, then confirms the unchanged broken durations.py still receives fail. Focused tests confirmed all four untouched implementations fail, all four reference corrections pass, and all four plausible negatives fail. The new grader passed all eight retained workspaces under /tmp/opencode/nwascnzhat-calibration-20260804/runs/20260804T195640.248478835Z-43bbb6c8 without model inference. Newly built bin/openeval recorded the untouched mock duration task as fail. mage build, isolated env -i go test -count=1 ./... with no live agents, credentials, or OTLP endpoint, mage check, gopls diagnostics, Prettier, and git diff --check passed.
+  next: Correct stale TODO 0.0.12 wording in its own fixup, then independent Audit should re-evaluate ttdvuydxlr; keep it in_progress.
+  publication_order: 19

@@ -12,7 +12,7 @@
 - `openeval doctor` defaults to OpenCode and checks config, runtime/version, `opencode auth list`, skill aliases, OTLP reachability, and native telemetry without a model call; `--agent cursor` adds secondary runtime and hook checks, while `--json` returns a versioned report with warning/fatal exit semantics and remediation.
 - `openeval demo` defaults to OpenCode and one round per arm, diagnoses setup, runs retained baseline and demo-skill arms, and compares the actual returned paths; each invocation uses a new evidence root, `--dry-run` has no filesystem side effects, and unavailable OTLP remains nonfatal.
 - `openeval run --agent opencode` now passes `--model opencode/big-pickle` by default; CLI, scenario, and config overrides follow explicit precedence, while malformed identifiers and unsupported Cursor or mock CLI overrides fail before execution.
-- The shipped `example-fixtures` scenario now provides four independent standard-library Python maintenance tasks with focused failing verifiers and a one-task credential-free mock subset.
+- The shipped `example-fixtures` scenario now provides four independent standard-library Python maintenance tasks with focused scenario-owned graders that cannot be replaced from the agent workspace, plus a one-task credential-free mock subset.
 - OpenCode scores retain the resolved provider/model; reports show known model identity, and comparisons warn about known model mismatches without blocking cross-model analysis or legacy scores.
 
 ### Documentation
