@@ -3,6 +3,7 @@ package workspace
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/jgabor/openeval/internal/config"
@@ -54,5 +55,42 @@ func TestSkillPluginDirsFindsClaudePlugin(t *testing.T) {
 	}
 	if len(dirs) != 1 || dirs[0] != skillSrc {
 		t.Fatalf("dirs = %v, want [%s]", dirs, skillSrc)
+	}
+}
+
+func TestShippedSkillsHaveOpenCodeFrontmatter(t *testing.T) {
+	root := repositoryRoot(t)
+	for _, name := range []string{"demo-skill", "plugin-skill"} {
+		t.Run(name, func(t *testing.T) {
+			path := filepath.Join(root, "examples", "skills", name, "SKILL.md")
+			data, err := os.ReadFile(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			body := string(data)
+			for _, want := range []string{"---\nname: " + name + "\n", "description:"} {
+				if !strings.Contains(body, want) {
+					t.Fatalf("%s missing %q", path, want)
+				}
+			}
+		})
+	}
+}
+
+func repositoryRoot(t *testing.T) string {
+	t.Helper()
+	dir, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for {
+		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
+			return dir
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			t.Fatal("go.mod not found")
+		}
+		dir = parent
 	}
 }
