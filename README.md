@@ -63,6 +63,8 @@ openeval demo
 
 `demo` runs `baseline` and `with-demo-skill`, passes the actual returned run directories to `compare`, prints the comparison table, and prints one unique evidence root. It never removes an earlier demo root. The one-round default keeps onboarding quick; use `--rounds 3` for stronger pass@k evidence.
 
+For planning, allow about five minutes and about $3 for the default one-round, two-arm demo. One measured full-corpus run with OpenCode 1.18.11 and `opencode/big-pickle` passed 4/4 tasks in each arm, took 248.852 seconds, and had an estimated combined cost of $2.822868 with no harness failures. This is one local sample, not a runtime, cost, or result variance guarantee.
+
 The table includes:
 
 - `pass@1`
@@ -137,15 +139,16 @@ Run `openeval <command> --help` for flags.
 
 ## Doctor contract
 
-`openeval doctor` makes no model request. For OpenCode it checks:
+`openeval doctor` makes no paid model request. For OpenCode it checks:
 
 1. The OpenEval config path and YAML.
 2. `opencode` on `PATH` or `agents.opencode.command`.
 3. The OpenCode version against the validated 1.18.11 contract.
 4. `opencode auth list`.
-5. Every `skills.aliases` path and OpenCode skill frontmatter.
-6. OTLP endpoint reachability.
-7. Native OpenCode OTEL opt-in state.
+5. The resolved model appears in the authenticated `opencode models` catalog.
+6. Every `skills.aliases` path and OpenCode skill frontmatter.
+7. OTLP endpoint reachability.
+8. Native OpenCode OTEL opt-in state.
 
 An unreachable collector is a warning and exits 0. Invalid config, runtime, authentication, or skill setup is fatal and exits 1. Every non-pass result includes remediation. Use stable structured output in automation:
 
@@ -188,6 +191,7 @@ skills:
 agents:
   opencode:
     # command: /usr/local/bin/opencode
+    # Select deliberately for your workload; this is also the built-in fallback.
     model: opencode/big-pickle
     native_otel: false
     cost:
@@ -201,6 +205,20 @@ agents:
 ```
 
 OpenCode and Cursor use the same configured input/output rates. OpenCode reasoning tokens use the output rate; cache-read and cache-write tokens use the input rate. OpenEval deliberately does not substitute OpenCode's runtime-reported cost, so cross-runtime estimates stay comparable.
+
+### OpenCode model policy
+
+OpenEval resolves the OpenCode model in this order:
+
+```text
+--model CLI flag > scenario model > agents.opencode.model > opencode/big-pickle
+```
+
+Use `openeval run --model provider/model` for one run or `openeval demo --model provider/model` for both demo arms. A scenario author can set top-level `model: provider/model`; a user-wide default belongs under `agents.opencode.model` in the config. `openeval doctor --agent opencode --model provider/model` validates the selection against the authenticated OpenCode catalog without making a paid model call.
+
+`opencode/big-pickle` is a convenience default, not a claim that it fits every evaluation. Scenario and benchmark authors should select explicitly based on workload fit, required edit and shell tools, provider authentication, expected cost, latency, and their data-handling policy. Configure provider credentials through OpenCode; do not put credentials in scenario or config files committed to the repository. The selected model must support the tools needed to inspect and edit files and run shell commands for the shipped maintainer scenario.
+
+Keep the model the same across configuration arms, such as baseline versus skill, so the intended configuration is the controlled difference. Use different models only when model comparison is the stated experiment. A fixed `provider/model` selector does not make outputs deterministic and does not freeze the provider's backend or deployment.
 
 Runtime environment precedence is deterministic:
 
@@ -222,7 +240,7 @@ variations:
     skills: [demo-skill]
 ```
 
-Differences between the baseline and skill arms describe the outcomes observed in those runs. They do not prove that the skill caused the difference; model variation and other uncontrolled runtime factors can also affect results.
+Differences between the baseline and skill arms describe the outcomes observed in those local runs. They do not prove that the skill caused the difference; sampling and other uncontrolled runtime factors can also affect results. The four small tasks are descriptive onboarding evidence, not a general ranking of providers or models.
 
 For a fast credential-free automation check, use the one-task subset with the mock agent:
 
@@ -285,7 +303,7 @@ Cursor uses the same workspace copy. If a source skill also contains `.claude-pl
 
 Each run writes `score.json` with schema `openeval.score.v1`. It includes:
 
-- scenario, agent, variation, rounds, and task count
+- scenario, agent, resolved model when known, variation, rounds, and task count
 - per-task and per-round verifier results
 - pass@k summaries
 - estimated USD cost per round and aggregate cost per passed task
@@ -299,7 +317,7 @@ openeval report <run-dir>
 openeval compare <baseline-run-dir> <candidate-run-dir>
 ```
 
-`compare` requires matching `scenario_id` values and warns if agents differ.
+`report` prints the retained model when known. `compare` requires matching `scenario_id` values and warns if agents or known models differ. A model warning does not block an intentional model comparison; a missing model in a legacy score remains unknown rather than being treated as a mismatch.
 
 ## Traces and telemetry
 

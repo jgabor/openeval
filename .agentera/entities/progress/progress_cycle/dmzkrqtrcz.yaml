@@ -1,0 +1,16 @@
+id: dmzkrqtrcz
+artifact: progress
+record:
+  timestamp: 2026-08-04 22:14
+  type: docs
+  phase: build
+  what: Documented the OpenCode model policy and bounded the shipped mini-scenario claims.
+  context:
+    intent: Complete task bizkkoldqp documentation while leaving lifecycle completion to independent Audit.
+    constraints: Documentation, current help, config examples, TODO, changelog, and Agentera state only; preserve runtime behavior and keep TODO 0.0.3 open.
+    unknowns: The single calibration sample does not establish cost, runtime, or result variance.
+    scope: README model policy and claim limits, minimal config guidance, TODO 0.0.3 evidence, changelog, and required Agentera state.
+  discovered: README score inventory omitted the retained model and compare mismatch warning; doctor guidance omitted the authenticated model catalog check; scenario guidance did not state the shared-model comparison contract or user-controlled selection factors.
+  verified: Prettier reported README.md, TODO.md, and CHANGELOG.md unchanged after formatting. The locally built bin/openeval help confirmed run, demo, and doctor model flags and the one-round demo default. mage check passed all tests, vet, lint, tidy, and vulnerability checks. Documentation records 248.852 seconds and $2.822868 estimated combined cost as one local sample.
+  next: Independent Audit should evaluate bizkkoldqp; keep it in_progress. Final plan verification, not this task, may close TODO 0.0.3.
+  publication_order: 17

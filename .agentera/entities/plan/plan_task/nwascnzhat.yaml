@@ -6,10 +6,20 @@ record:
     - jsgxvlxqxu
     - pjgpucpayz
     - yicugqvnid
-  status: in_progress
+  status: complete
   acceptance:
     - GIVEN the default model and complete four-task flow WHEN one round per arm runs THEN observed cost and elapsed time are recorded.
     - GIVEN measured evidence WHEN onboarding defaults are finalized THEN one round is the quick-start default and three rounds remain the recommended pass-at-k evidence run.
     - GIVEN the full one-round flow WHEN it exceeds fifteen minutes or five dollars THEN the default subset is reduced rather than verifier quality weakened.
     - GIVEN a reference live smoke WHEN credibility is assessed THEN at least one arm passes three of four tasks without harness failures.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-nwascnzhat-1
+      source: independent Audit retained calibration evidence review
+      recorded_at: 2026-08-04 22:10
+      writer_command: agentera state plan record-evaluation

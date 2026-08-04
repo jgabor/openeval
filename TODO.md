@@ -44,13 +44,16 @@ the release-worthy vertical slice is intact.
 
 - [ ] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
 
-  `hello-verify` and `edit-file` exercise the pipeline only. README references DeepSWE and margin-eval; the shipped quick-start scenario does not reflect that scope.
+  Four standard-library Python maintenance tasks now exercise focused script verifiers. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures. This local sample does not establish variance or a general provider/model ranking. Keep the train open until final plan verification confirms the complete evidence and documentation set.
 
   - [x] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
   - [x] Keep shell/script verifiers
   - [x] Retain `default` vs `with-demo-skill` variations for compare
   - [x] `openeval report` output reflects realistic task names and verifiers
   - [x] CI can run a subset with `--agent mock`
+  - [x] Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors
+  - [x] Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence
+  - [ ] Complete final plan verification before closing `0.0.3`
 
 - [ ] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup
 

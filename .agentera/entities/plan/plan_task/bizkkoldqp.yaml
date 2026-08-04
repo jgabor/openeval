@@ -6,7 +6,7 @@ record:
     - sobvkljsxq
     - jsgxvlxqxu
     - nwascnzhat
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN current onboarding WHEN a user follows it THEN the default model, override mechanisms, expected cost, and expected runtime are explicit.
     - GIVEN a scenario or benchmark author WHEN model guidance is read THEN workload fit, tools, authentication, cost, latency, and data policy are named selection criteria.
