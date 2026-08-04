@@ -1,0 +1,17 @@
+id: esyqxtoiur
+artifact: progress
+record:
+  timestamp: 2026-08-04 19:53
+  type: feat
+  phase: build
+  what: Prove portable OpenCode skill discovery and add explicit native OTEL correlation without conflating runtime traces with OpenEval summary spans.
+  context:
+    intent: Prevent paid runs with ambiguous skills and make optional native telemetry navigable and privacy-honest.
+    constraints: Keep Cursor plugin loading secondary, preserve inherited OTEL headers/resource attributes, do not emulate hooks or change score schema.
+    unknowns: Native span flush was not observed against a live collector; OpenCode 1.18.11 endpoint/env wiring and summary trace navigation were verified.
+    scope: Shipped skill frontmatter, OpenCode preflight discovery, native OTEL environment, instrument output, and traces help.
+  inspiration: Portable skills need exact runtime discovery, while unlike trace trees need explicit correlation rather than false parentage.
+  discovered: OpenCode scans global skills before project skills and overwrites duplicate names; its large debug output is reliable when captured to a file. Native OTLP uses a base endpoint and creates payloads outside OpenEval masking.
+  verified: mage check passed; hermetic tests cover exact workspace discovery, global collision rejection, encoded correlation, inherited OTEL settings, endpoint derivation, idempotent instrument output, and separate trace help. A no-paid OpenCode 1.18.11 smoke discovered the seeded demo skill, and CLI smoke persisted native_otel and printed the expected receiver/privacy/export guidance.
+  next: Add OpenCode-first setup diagnosis without a paid model call.
+  publication_order: 4
