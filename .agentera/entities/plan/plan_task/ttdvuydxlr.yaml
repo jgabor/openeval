@@ -10,7 +10,7 @@ record:
     - yicugqvnid
     - nwascnzhat
     - bizkkoldqp
-  status: blocked
+  status: superseded
   acceptance:
     - GIVEN the complete change WHEN project gates run THEN build, tests, static checks, lint, and vulnerability checks pass.
     - GIVEN hermetic CI WHEN the suite runs THEN no live agent, provider credential, or collector is required.
@@ -27,3 +27,6 @@ record:
       source: fresh independent Audit grader-authority boundary review
       recorded_at: 2026-08-04 22:59
       writer_command: agentera state plan record-evaluation
+  superseded_by:
+    - cxeomrcrxw
+  superseded_reason: Replacement isolates workspace execution from parent grader assertions and passes both tamper regressions.

@@ -3,7 +3,7 @@ artifact: plan
 record:
   plan: rizkwhwnsc
   name: Isolate grader execution and reverify closure
-  status: in_progress
+  status: complete
   depends_on:
     - qnijueivja
     - sobvkljsxq
@@ -19,3 +19,13 @@ record:
     - GIVEN the corrected authority boundary WHEN final gates and state synchronization run THEN hermetic checks pass and TODO 0.0.3 remains closed with truthful evidence.
   evidence:
     - Independent Audit reproduced mutation of the in-process grader through agent-owned import code after workspace-test isolation.
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-process-isolation-1
+      source: Independent Audit report ses_0315ee299ffedwwxDBoZGD3p52
+      recorded_at: 2026-08-04 23:23
+      writer_command: agentera state plan record-evaluation
