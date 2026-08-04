@@ -37,6 +37,10 @@ func newOpenCode(cfg config.Config) (OpenCode, error) {
 }
 
 func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
+	env := runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
+	if err := validateOpenCodeSkills(ctx, o.command, s.WorkDir, s.Variation.Skills, env); err != nil {
+		return 0, "", err
+	}
 	args := []string{
 		"run",
 		"--format", "json",
@@ -45,7 +49,7 @@ func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, o.command, args...)
-	cmd.Env = runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
+	cmd.Env = env
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
