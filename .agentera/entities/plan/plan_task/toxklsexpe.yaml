@@ -1,0 +1,13 @@
+id: toxklsexpe
+artifact: plan
+record:
+  name: Prove portable skills and native trace correlation
+  depends_on:
+    - foaztthtiq
+  status: pending
+  acceptance:
+    - GIVEN a requested workspace skill WHEN a paid task would begin THEN exact local discovery is verified first.
+    - GIVEN native telemetry is explicitly enabled WHEN OpenCode runs THEN existing exporter settings remain intact and run identity is attached.
+    - GIVEN a configured trace endpoint WHEN native spans export THEN the receiver path is valid and privacy boundaries are explicit.
+    - GIVEN summary and native traces WHEN a user requests trace help THEN both correlation paths are explained without false trace equivalence.
+  plan: noradwhfpb

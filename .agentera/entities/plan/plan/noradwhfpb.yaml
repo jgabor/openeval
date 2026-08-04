@@ -1,0 +1,38 @@
+id: noradwhfpb
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-08-04
+    status: open
+    reviewed: 2026-08-04
+    critic_issues: 4 found, 4 addressed, 0 dismissed
+    title: OpenCode-first delivery
+  what: Make OpenCode the primary production runtime while retaining Cursor as a supported secondary runtime, mock for hermetic automation, and Pi as planned. Close outcome gaps in real execution, comparable evidence, portable skills, trace navigation, setup diagnosis, and the first-run comparison flow.
+  why: OpenCode already runs scenarios, but current guidance and several integration contracts still lead with Cursor. Aligning declared intent with a complete OpenCode path makes the platform-agnostic comparison contract credible and gives new users one honest production workflow.
+  constraints: Preserve the shared score and comparison contract, privacy-by-default, Cursor support, hermetic tests, 0.0.x versioning, and historical records. Use native OpenCode telemetry rather than copying Cursor hook mechanisms. Do not renumber delivery trains or claim deferred capabilities as shipped.
+  overall_acceptance: GIVEN a new user has an authenticated supported OpenCode installation WHEN they follow current guidance THEN they can diagnose setup, run two real variation arms, and read a comparison table. GIVEN OpenCode produces harness and native telemetry WHEN a task round completes THEN score evidence and trace navigation share explicit correlation without claiming one native trace tree. GIVEN a Cursor user or hermetic automation WHEN the pivot ships THEN existing supported Cursor and mock workflows remain available. GIVEN current project guidance WHEN support status is reviewed THEN shipped, secondary, planned, and deferred capabilities are stated accurately.
+  scope:
+    included:
+      - OpenCode-first product and contributor guidance
+      - autonomous and diagnosable OpenCode harness execution
+      - portable workspace skill proof
+      - opt-in native telemetry correlation and trace navigation
+      - setup diagnosis and one-command comparison demonstration
+      - truthful support, telemetry, scenario, and packaging status
+    excluded:
+      - OpenCode emulation of Cursor hooks or runtime-specific plugin flags
+      - new Cursor telemetry features
+      - Pi execution or telemetry support
+      - external benchmark and Docker execution implementation
+      - score schema expansion, release tags, and 0.1.0 planning
+    deferred:
+      - full cross-runtime telemetry normalization and longitudinal queries
+      - provider authentication automation and model selection
+  design: First record the delivery-strategy change, then establish one deterministic runtime context contract. Harden real OpenCode work before proving portable skills and opt-in native trace correlation. Add setup and demonstration workflows only after those foundations pass. Update all current guidance after behavior ships, then verify hermetic and authenticated paths and sync project state.
+  unknowns:
+    - question: Does the supported OpenCode release flush native spans reliably when a non-interactive run exits?
+      affects_task: 4
+      resolve_by: Use a local collector smoke before declaring native trace navigation complete; preserve the honest summary-trace path if upstream native export is incomplete.
+  surprises:
+    []

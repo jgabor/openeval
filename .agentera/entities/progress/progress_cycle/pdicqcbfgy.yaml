@@ -1,0 +1,17 @@
+id: pdicqcbfgy
+artifact: progress
+record:
+  timestamp: 2026-08-04 18:00
+  type: docs
+  phase: build
+  what: Persist the approved OpenCode-first plan and record the superseding delivery decision.
+  context:
+    intent: Make current delivery intent explicit before runtime behavior changes.
+    constraints: Preserve historical decisions, archives, Cursor support, and 0.0.x train ordering.
+    unknowns: Native OpenCode span flushing remains for the telemetry task to verify.
+    scope: Agentera plan and decision entities, AGENTS.md, and TODO.md.
+  inspiration: Platform-agnostic comparison remains the contract while runtime priority follows the current production path.
+  discovered: Agentera entity mode requires plan and decision writes through the typed state writer; historical records remain immutable.
+  verified: The full plan and decision passed strict lint and writer validation; mage check and diff checks passed; train identifiers retained their order.
+  next: Establish the shared runtime environment contract.
+  publication_order: 1

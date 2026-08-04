@@ -1,0 +1,12 @@
+id: hkqfbubcjd
+artifact: plan
+record:
+  name: Record OpenCode-first delivery intent
+  depends_on:
+    []
+  status: complete
+  acceptance:
+    - GIVEN the historical Cursor-first decision WHEN current decisions are read THEN a new decision supersedes only its delivery strategy and preserves its evidence.
+    - GIVEN current contributor and backlog guidance WHEN a production runtime is selected THEN OpenCode is primary, Cursor secondary, and mock automation-only.
+    - GIVEN the existing train sequence WHEN guidance changes THEN all train identifiers retain their order.
+  plan: noradwhfpb

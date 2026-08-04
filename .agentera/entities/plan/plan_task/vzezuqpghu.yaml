@@ -1,0 +1,15 @@
+id: vzezuqpghu
+artifact: plan
+record:
+  name: Align all current documentation with shipped behavior
+  depends_on:
+    - toxklsexpe
+    - debercnyih
+    - zxbtpimcwj
+  status: pending
+  acceptance:
+    - GIVEN an authenticated OpenCode user WHEN current onboarding is followed verbatim THEN the documented comparison flow succeeds without inferred paths.
+    - GIVEN a support-status reader WHEN current guidance is reviewed THEN OpenCode, Cursor, mock, Pi, external scenarios, packaging, and telemetry have accurate statuses.
+    - GIVEN a privacy-conscious user WHEN native telemetry is described THEN OpenEval masking is not claimed for runtime-generated payloads.
+    - GIVEN historical records WHEN documentation changes THEN archives and prior changelog entries remain unchanged.
+  plan: noradwhfpb

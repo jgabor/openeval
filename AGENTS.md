@@ -17,7 +17,7 @@ product earns a public version people should install and trust.
 - **No 0.1.0 / v1.0 planning by default** — do not bump to `0.1.0`, draft
   release plans, or tag releases unless the user explicitly asks.
 - **Train tags in [TODO.md](./TODO.md)** (`0.0.1`, `0.0.2`, …) sequence
-  incremental product work *while* we remain on 0.0.x. They are a delivery
+  incremental product work _while_ we remain on 0.0.x. They are a delivery
   ordering aid, not published semver.
 - When work completes, check off TODO items; do not renumber trains
   retroactively.
@@ -31,8 +31,8 @@ current bar.
 
 - One CLI control plane: harness proof (`run`, `compare`, `report`, `traces`)
   plus continuous instrumentation (`instrument`, `hook`).
-- Cursor-first harness; other runtimes deferred until the comparison contract
-  is proven.
+- OpenCode-first harness; Cursor remains a supported secondary runtime and Pi
+  remains deferred until the comparison contract is proven further.
 - Privacy-by-default; OTLP is an external span store — do not embed a trace
   database inside the binary.
 - Do not edit `.agentera/vision.yaml` or objective state unless the user or
@@ -54,13 +54,15 @@ than rediscovering the underlying commands.
 Lefthook runs overlapping checks on commit/push (`.lefthook.yml`). After editing
 Go, expect `golangci-lint run --fix` and `go vet` to run via hooks.
 
-**Harness vs CI agents:** production paths use `--agent cursor` with real
-`cursor-agent`. Tests and CI use `--agent mock` (or stub scripts) so gates do
-not require a live agent or API key.
+**Harness vs CI agents:** primary production paths use `--agent opencode` with
+real OpenCode. Cursor remains supported for secondary harness and hook paths.
+Tests and CI use `--agent mock` (or stub scripts) so gates do not require a live
+agent or API key.
 
-**Manual smoke (not in CI):** authenticated `cursor-agent` plus
-`openeval run --scenario example-fixtures --agent cursor` when validating
-harness or hook integration end-to-end.
+**Manual smoke (not in CI):** authenticated OpenCode plus
+`openeval run --scenario example-fixtures --agent opencode` for the primary
+harness path. Use authenticated `cursor-agent` separately when validating
+Cursor hook integration end-to-end.
 
 ## When to commit
 
@@ -166,7 +168,7 @@ looks messy. The whole point of a fixup is that the iteration stays
 **visible and reviewable**; squashing it away yourself destroys exactly the
 artifact it exists to create. Collapsing fixups into their targets is the
 user's action, taken once they've reviewed the iterations. Every mention of
-`--autosquash` in this section describes what the *user* will eventually
+`--autosquash` in this section describes what the _user_ will eventually
 run, never a step for you to perform. If you think the history is ready to
 collapse, say so and leave it to them.
 
@@ -207,7 +209,7 @@ asserts the current (wrong) behavior so it passes on the broken code, with the
 correct expectation preserved inline as a comment. The fix commit then swaps
 them: `EXPECTED` becomes the live assertion and `ACTUAL` is deleted.
 
-This pattern works in table-driven unit tests and stub-`cursor-agent` tests.
+This pattern works in table-driven unit tests and stub-agent tests.
 Example shape:
 
 ```go
@@ -246,9 +248,9 @@ refactor to an earlier commit (but don't do it without asking first).
 
 ## Test conventions
 
-- **Mock agent in unit tests.** Use stub `cursor-agent` scripts or
-  `--agent mock` paths so `go test ./...` stays hermetic. Do not require live
-  `cursor-agent`, `CURSOR_API_KEY`, or OTLP collectors in CI.
+- **Mock agent in unit tests.** Use stub OpenCode or `cursor-agent` scripts, or
+  `--agent mock`, so `go test ./...` stays hermetic. Do not require live agents,
+  provider credentials, or OTLP collectors in CI.
 - **Table-driven tests** match the existing style in `internal/`. Prefer clear
   `t.Fatalf` / `t.Errorf` messages over opaque boolean checks.
 - **Scenario fixtures** live under `examples/scenarios/`; generated run output
@@ -256,7 +258,7 @@ refactor to an earlier commit (but don't do it without asking first).
 
 ## Code comments are for future readers, not development history
 
-Comments in source code explain *why this code is shaped the way it is*. They
+Comments in source code explain _why this code is shaped the way it is_. They
 are not the place to narrate the path we took during development — what was
 tried first, what didn't work, what's "more reliable" or "cleaner" than some
 alternative. That framing is interesting in the moment, but it's noise to
@@ -271,7 +273,7 @@ Avoid phrasings like:
 - "after trying X, we found Y"
 
 The iteration story is sometimes worth preserving — but it belongs in the
-commit message, which is the durable record of *why this change was made*. The
+commit message, which is the durable record of _why this change was made_. The
 code comment should make sense to someone who has never seen any prior version
 and is just trying to understand the file as it currently exists.
 

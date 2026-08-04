@@ -1,0 +1,12 @@
+id: foaztthtiq
+artifact: plan
+record:
+  name: Make OpenCode execution autonomous and diagnosable
+  depends_on:
+    - fdiyjemwlc
+  status: pending
+  acceptance:
+    - GIVEN a task requires workspace edits WHEN OpenCode runs non-interactively THEN permission handling does not wait for user input.
+    - GIVEN malformed output or a runtime error WHEN execution ends THEN verification does not run and the error identifies remediation.
+    - GIVEN a successful repeated-step run WHEN cost is calculated THEN all billable token classes use the documented comparable estimate.
+  plan: noradwhfpb

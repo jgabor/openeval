@@ -1,0 +1,13 @@
+id: zxbtpimcwj
+artifact: plan
+record:
+  name: Deliver one-command comparison proof
+  depends_on:
+    - debercnyih
+  status: pending
+  acceptance:
+    - GIVEN authenticated OpenCode WHEN the demonstration runs THEN baseline and skill arms produce a comparison table from retained run paths.
+    - GIVEN demonstration evidence already exists WHEN it runs again THEN previous evidence is not removed.
+    - GIVEN dry-run mode WHEN invoked THEN exact intended work is shown without execution or filesystem mutation.
+    - GIVEN telemetry is unavailable WHEN the comparison runs THEN harness proof can still complete.
+  plan: noradwhfpb

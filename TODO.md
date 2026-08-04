@@ -19,27 +19,27 @@ the release-worthy vertical slice is intact.
 
 ## First-run and README
 
-- [ ] [compare-first-quickstart:0.0.1] Compare-first quick start (`cursor-agent`, not mock)
+- [ ] [compare-first-quickstart:0.0.1] Compare-first quick start (OpenCode, not mock)
 
   README quick start currently runs `--agent mock`. The compare example in README uses DeepSWE, which is not runnable on the default path. Mock produces valid-looking `score.json` without invoking an agent.
 
   ```bash
-  openeval run --scenario example-fixtures --variation default --agent cursor --rounds 3
-  openeval run --scenario example-fixtures --variation with-demo-skill --agent cursor --rounds 3
-  openeval compare ./scenarios/example-fixtures/runs/default ./scenarios/example-fixtures/runs/with-demo-skill
+  openeval run --scenario example-fixtures --variation baseline --agent opencode --rounds 3
+  openeval run --scenario example-fixtures --variation with-demo-skill --agent opencode --rounds 3
+  openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-fixtures/runs/with-demo-skill
   ```
 
   - [ ] Replace README quick start with the three-command compare flow above
-  - [ ] Document that a new user with authenticated `cursor-agent` should see a compare table from README alone
+  - [ ] Document that a new user with authenticated OpenCode should see a compare table from README alone
   - [ ] Move mock to a secondary path (CI / no API key)
   - [ ] Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas
 
 - [ ] [demo-command:0.0.2] `openeval demo` for the compare-first flow
 
   - [ ] Command runs baseline + skill variation + `compare` (or prints commands with `--dry-run`)
-  - [ ] Missing `cursor-agent` reports install/login steps
+  - [ ] Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
   - [ ] Missing or invalid config reports copy/fix steps
-  - [ ] Exit 0 prints a compare table when cursor setup is valid
+  - [ ] Exit 0 prints a compare table when OpenCode setup is valid
   - [ ] Does not require OTLP/Jaeger (see `0.0.4`)
 
 - [ ] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
@@ -59,7 +59,7 @@ the release-worthy vertical slice is intact.
   Pick one primary path:
 
   - [ ] `docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or
-  - [ ] `openeval instrument --agent cursor --otel-up docker`, or
+  - [ ] OpenCode native OTEL plus a documented local collector, or
   - [ ] Documented one-liner in README
 
   - [ ] After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
@@ -80,14 +80,14 @@ the release-worthy vertical slice is intact.
 
 - [ ] [doctor-command:0.0.6] `openeval doctor`
 
-  - [ ] Check `cursor-agent` on PATH or `agents.cursor.command`
-  - [ ] Check `cursor-agent status` (authenticated)
+  - [ ] Check `opencode` on PATH or `agents.opencode.command`
+  - [ ] Check supported OpenCode version and `opencode auth list`
   - [ ] Check config at `$XDG_CONFIG_HOME/openeval/config.yaml`
   - [ ] Check `skills.aliases` paths resolve for skill variations
   - [ ] Warn if OTLP endpoint unreachable (non-fatal)
-  - [ ] Check `~/.cursor/hooks.json` after `instrument`
+  - [ ] Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
   - [ ] Each failure prints remediation steps
-  - [ ] README references doctor before first `run --agent cursor`
+  - [ ] README references doctor before first `run --agent opencode`
 
 - [ ] [frictionless-install:0.0.7] Single documented install path without cloning
 
@@ -102,7 +102,7 @@ the release-worthy vertical slice is intact.
 
   - [ ] Add `examples/ci/openeval.yml` (or similar) for consumers
   - [ ] Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets
-  - [ ] Document optional job: `cursor-agent` compare on release branches (`CURSOR_API_KEY`)
+  - [ ] Document optional job: OpenCode compare on release branches with provider credentials
   - [ ] Comment expected cost/runtime for real-agent jobs
   - [ ] README links the recipe under CI / release gates
   - [ ] Mock job runs on GitHub Actions without cursor credentials
@@ -156,13 +156,13 @@ the release-worthy vertical slice is intact.
   Variations `with-demo-skill` and `with-plugin-skill` work; the compare workflow is not documented as a single procedure.
 
   ```bash
-  openeval run --scenario example-fixtures --variation default --agent cursor --rounds 3
-  openeval run --scenario example-fixtures --variation with-demo-skill --agent cursor --rounds 3
-  openeval compare ./scenarios/example-fixtures/runs/default ./scenarios/example-fixtures/runs/with-demo-skill
+  openeval run --scenario example-fixtures --variation baseline --agent opencode --rounds 3
+  openeval run --scenario example-fixtures --variation with-demo-skill --agent opencode --rounds 3
+  openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-fixtures/runs/with-demo-skill
   ```
 
   - [ ] README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`
-  - [ ] Document `--plugin-dir` for `.claude-plugin` skills
+  - [ ] Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
   - [ ] Recommend `--rounds 3` for pass@k stability
   - [ ] Cross-link `0.0.1` and `0.0.3` when complete
 

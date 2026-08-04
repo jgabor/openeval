@@ -1,0 +1,17 @@
+id: pgqcqyfwrn
+artifact: decisions
+record:
+  date: 2026-08-04
+  question: Which runtime should lead OpenEval's production delivery path now that OpenCode harness execution exists?
+  context: Decision tpbyphwehw chose Cursor-first delivery to prove one credible path while preserving a platform-agnostic contract. That proof is complete and an OpenCode driver now exists, but onboarding, diagnostics, skills, and trace guidance still lead with Cursor or overstate OpenCode parity.
+  alternatives:
+    - name: "[OpenCode-first outcome parity], chosen"
+      status: chosen
+    - name: "[Keep Cursor-first], rejected"
+      status: rejected
+    - name: "[Literal mechanism parity], rejected"
+      status: rejected
+  choice: "Make OpenCode the primary production harness and onboarding runtime. Define parity by outcomes: real execution, comparable evidence, portable skills, trace correlation, setup diagnosis, and first-run comparison. Keep Cursor as a supported secondary runtime with its existing hooks, mock for hermetic automation, and Pi deferred."
+  reasoning: Platform-agnostic-by-contract remains the architecture. OpenCode-first now provides the clearest production path without forcing unlike runtimes into identical mechanisms. This decision supersedes tpbyphwehw only for delivery priority; its contract-first reasoning and historical evidence remain valid.
+  confidence: firm
+  feeds_into: AGENTS.md, TODO.md, README.md, OpenCode-first delivery plan
