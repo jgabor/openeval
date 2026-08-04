@@ -1,0 +1,17 @@
+id: svdowtphut
+artifact: progress
+record:
+  timestamp: 2026-08-04 20:19
+  type: chore
+  phase: build
+  what: Run final delivery gates, review authenticated evidence, and synchronize only fully satisfied backlog items.
+  context:
+    intent: Close the OpenCode-first plan with reproducible evidence and honest remaining gaps.
+    constraints: Do not renumber trains, close partial install/scenario/collector work, require live infrastructure in tests, or claim native span receipt without a collector.
+    unknowns: Native OpenCode span flush remains unverified; the public no-clone module install probe fails because the repository is not publicly resolvable.
+    scope: Full build/check suite, uncached hermetic tests, diagnostics/vulnerability checks, authenticated smoke evidence, README/TODO/Agentera state.
+  inspiration: Release readiness depends on verified behavior and explicit gaps, not a green test suite alone.
+  discovered: Authenticated OpenCode 1.18.11 completed both demo arms with 2/2 tasks passing in each, a real workspace edit, exact local demo-skill discovery, retained costs and distinct trace IDs. No collector was available for native span receipt.
+  verified: mage build passed; go test -count=1 ./... passed without live agents, credentials, or collector; mage check passed tidy, tests, vet, lint, and govulncheck; gopls reported no diagnostics or vulnerabilities; Prettier and diff checks passed. TODO closes only complete 0.0.1, 0.0.2, 0.0.6, and 0.0.11 work plus verified subtasks, with train numbers unchanged.
+  next: Record the final task evaluation, publish the limited artifact-freshness closure health record, and complete the plan lifecycle.
+  publication_order: 8

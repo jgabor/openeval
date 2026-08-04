@@ -19,9 +19,9 @@ the release-worthy vertical slice is intact.
 
 ## First-run and README
 
-- [ ] [compare-first-quickstart:0.0.1] Compare-first quick start (OpenCode, not mock)
+- [x] [compare-first-quickstart:0.0.1] Compare-first quick start (OpenCode, not mock)
 
-  README quick start currently runs `--agent mock`. The compare example in README uses DeepSWE, which is not runnable on the default path. Mock produces valid-looking `score.json` without invoking an agent.
+  Completed with an OpenCode-first manual flow and `openeval demo`; mock remains labeled for CI only.
 
   ```bash
   openeval run --scenario example-fixtures --variation baseline --agent opencode --rounds 3
@@ -29,32 +29,32 @@ the release-worthy vertical slice is intact.
   openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-fixtures/runs/with-demo-skill
   ```
 
-  - [ ] Replace README quick start with the three-command compare flow above
-  - [ ] Document that a new user with authenticated OpenCode should see a compare table from README alone
-  - [ ] Move mock to a secondary path (CI / no API key)
-  - [ ] Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas
+  - [x] Replace README quick start with the three-command compare flow above
+  - [x] Document that a new user with authenticated OpenCode should see a compare table from README alone
+  - [x] Move mock to a secondary path (CI / no API key)
+  - [x] Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas
 
-- [ ] [demo-command:0.0.2] `openeval demo` for the compare-first flow
+- [x] [demo-command:0.0.2] `openeval demo` for the compare-first flow
 
-  - [ ] Command runs baseline + skill variation + `compare` (or prints commands with `--dry-run`)
-  - [ ] Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
-  - [ ] Missing or invalid config reports copy/fix steps
-  - [ ] Exit 0 prints a compare table when OpenCode setup is valid
-  - [ ] Does not require OTLP/Jaeger (see `0.0.4`)
+  - [x] Command runs baseline + skill variation + `compare` (or prints commands with `--dry-run`)
+  - [x] Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
+  - [x] Missing or invalid config reports copy/fix steps
+  - [x] Exit 0 prints a compare table when OpenCode setup is valid
+  - [x] Does not require OTLP/Jaeger (see `0.0.4`)
 
 - [ ] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
 
   `hello-verify` and `edit-file` exercise the pipeline only. README references DeepSWE and margin-eval; the shipped quick-start scenario does not reflect that scope.
 
   - [ ] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
-  - [ ] Keep shell/script verifiers
-  - [ ] Retain `default` vs `with-demo-skill` variations for compare
+  - [x] Keep shell/script verifiers
+  - [x] Retain `default` vs `with-demo-skill` variations for compare
   - [ ] `openeval report` output reflects realistic task names and verifiers
-  - [ ] CI can run a subset with `--agent mock`
+  - [x] CI can run a subset with `--agent mock`
 
 - [ ] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup
 
-  README lists an OTLP backend as a prerequisite but does not ship a default collector. Harness writes `trace_id` to `score.json` without a running collector; live span export is not verified on the default path.
+  README no longer requires OTLP for harness proof, but OpenEval still does not ship a default collector. Harness writes `trace_id` to `score.json` without one; live span receipt is not verified on the default path.
 
   Pick one primary path:
 
@@ -64,39 +64,39 @@ the release-worthy vertical slice is intact.
 
   - [ ] After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
   - [ ] README trace lookup references the bundled setup
-  - [ ] Harness still completes when collector is unreachable (non-blocking export)
+  - [x] Harness still completes when collector is unreachable (non-blocking export)
 
 - [ ] [compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start
 
   - [ ] Opening sections show compare table example and trace lookup flow
-  - [ ] Mock labeled CI/hermetic only
-  - [ ] Quick start order: install → compare flow → optional instrument/traces
-  - [ ] Trim or relocate Supported telemetry content per `0.0.11`
-  - [ ] No README path presents mock scores as production eval evidence
+  - [x] Mock labeled CI/hermetic only
+  - [x] Quick start order: install → compare flow → optional instrument/traces
+  - [x] Trim or relocate Supported telemetry content per `0.0.11`
+  - [x] No README path presents mock scores as production eval evidence
 
 ---
 
 ## Install, doctor, and CI
 
-- [ ] [doctor-command:0.0.6] `openeval doctor`
+- [x] [doctor-command:0.0.6] `openeval doctor`
 
-  - [ ] Check `opencode` on PATH or `agents.opencode.command`
-  - [ ] Check supported OpenCode version and `opencode auth list`
-  - [ ] Check config at `$XDG_CONFIG_HOME/openeval/config.yaml`
-  - [ ] Check `skills.aliases` paths resolve for skill variations
-  - [ ] Warn if OTLP endpoint unreachable (non-fatal)
-  - [ ] Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
-  - [ ] Each failure prints remediation steps
-  - [ ] README references doctor before first `run --agent opencode`
+  - [x] Check `opencode` on PATH or `agents.opencode.command`
+  - [x] Check supported OpenCode version and `opencode auth list`
+  - [x] Check config at `$XDG_CONFIG_HOME/openeval/config.yaml`
+  - [x] Check `skills.aliases` paths resolve for skill variations
+  - [x] Warn if OTLP endpoint unreachable (non-fatal)
+  - [x] Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
+  - [x] Each failure prints remediation steps
+  - [x] README references doctor before first `run --agent opencode`
 
 - [ ] [frictionless-install:0.0.7] Single documented install path without cloning
 
-  README lists `mage install`, `go build`, and `go install openeval@latest`. Module publish status for the last path is unclear.
+  The canonical `github.com/jgabor/openeval/cmd/openeval@latest` probe is not publicly resolvable, and example assets are not embedded. The current verified path requires a repository checkout.
 
   - [ ] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
   - [ ] Optional: curl script or Homebrew tap
-  - [ ] README: one recommended install path; source build under a separate heading
-  - [ ] Install docs consistent with AGENTS.md versioning
+  - [x] README: one recommended install path; source build under a separate heading
+  - [x] Install docs consistent with AGENTS.md versioning
 
 - [ ] [github-action-recipe:0.0.8] Example GitHub Action workflow
 
@@ -135,25 +135,25 @@ the release-worthy vertical slice is intact.
 
 ## Documentation
 
-- [ ] [telemetry-shipped-slice:0.0.11] Align Supported telemetry with shipped behavior
+- [x] [telemetry-shipped-slice:0.0.11] Align Supported telemetry with shipped behavior
 
-  README Supported telemetry lists resources, events, and aggregates; most are planned or partial.
+  Completed through Option B: README separates shipped telemetry from planned or deferred inventory.
 
-  Option A:
+  Option A (not selected):
 
   - [ ] Ship hook export for session cost, skills active, and tool calls
   - [ ] Document with Jaeger screenshots in README
 
-  Option B:
+  Option B (chosen):
 
-  - [ ] Split README into **Shipped** vs **Planned** sections
+  - [x] Split README into **Shipped** vs **Planned** sections
 
-  - [ ] README does not imply full inventory is available today
-  - [ ] Consistent with AGENTS.md and earn-your-complexity decision
+  - [x] README does not imply full inventory is available today
+  - [x] Consistent with AGENTS.md and earn-your-complexity decision
 
 - [ ] [skill-compare-playbook:0.0.12] Document skill-variation compare workflow
 
-  Variations `with-demo-skill` and `with-plugin-skill` work; the compare workflow is not documented as a single procedure.
+  The compare workflow and runtime-specific discovery behavior are documented. The remaining cross-link waits for the `0.0.3` scenario expansion.
 
   ```bash
   openeval run --scenario example-fixtures --variation baseline --agent opencode --rounds 3
@@ -161,9 +161,9 @@ the release-worthy vertical slice is intact.
   openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-fixtures/runs/with-demo-skill
   ```
 
-  - [ ] README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`
-  - [ ] Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
-  - [ ] Recommend `--rounds 3` for pass@k stability
+  - [x] README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`
+  - [x] Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
+  - [x] Recommend `--rounds 3` for pass@k stability
   - [ ] Cross-link `0.0.1` and `0.0.3` when complete
 
 ---
