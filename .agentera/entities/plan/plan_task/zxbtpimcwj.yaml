@@ -4,10 +4,20 @@ record:
   name: Deliver one-command comparison proof
   depends_on:
     - debercnyih
-  status: pending
+  status: complete
   acceptance:
     - GIVEN authenticated OpenCode WHEN the demonstration runs THEN baseline and skill arms produce a comparison table from retained run paths.
     - GIVEN demonstration evidence already exists WHEN it runs again THEN previous evidence is not removed.
     - GIVEN dry-run mode WHEN invoked THEN exact intended work is shown without execution or filesystem mutation.
     - GIVEN telemetry is unavailable WHEN the comparison runs THEN harness proof can still complete.
   plan: noradwhfpb
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: zxbtpimcwj-a1
+      source: "Direct orchestration audit: mage check, hermetic retention/dry-run tests, and an authenticated OpenCode comparison smoke verify unique evidence, actual returned compare paths, workspace edits, skills, costs, trace IDs, and OTLP independence"
+      recorded_at: 2026-08-04 20:08
+      writer_command: agentera state plan record-evaluation

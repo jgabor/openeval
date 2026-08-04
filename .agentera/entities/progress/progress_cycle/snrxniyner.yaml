@@ -1,0 +1,17 @@
+id: snrxniyner
+artifact: progress
+record:
+  timestamp: 2026-08-04 20:07
+  type: feat
+  phase: build
+  what: Add a safe one-command OpenCode comparison demonstration with dry-run planning and retained unique evidence.
+  context:
+    intent: Turn the shipped comparison contract into one executable first-run proof.
+    constraints: Default to OpenCode, preserve prior evidence, use actual runner return paths, avoid an OTLP requirement, and keep mock tests hermetic.
+    unknowns: None for demonstration behavior; native span flush remains outside this task.
+    scope: demo package and CLI, baseline variation, tests, and changelog.
+  inspiration: First-run proof should make the exact paid work visible and never erase a prior result.
+  discovered: The authenticated OpenCode 1.18.11 smoke completed both arms with all four task attempts passing; the skill arm was discovered locally and retained its active skill evidence.
+  verified: mage check passed; tests prove dry-run leaves no files, reruns allocate different roots while retaining markers and prior scores, comparison consumes returned paths, and unreachable OTLP is nonfatal. A real rounds=1 OpenCode demo produced a comparison table, 2/2 passes per arm, $0.214554 baseline cost, $0.311922 skill-arm cost, distinct trace IDs, and the requested workspace edit.
+  next: Rewrite current user and contributor guidance to match the shipped OpenCode-first path.
+  publication_order: 6
