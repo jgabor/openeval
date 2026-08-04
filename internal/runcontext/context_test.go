@@ -55,3 +55,27 @@ func TestFromMapReturnsMergeableEnvironment(t *testing.T) {
 		t.Fatalf("got %v, want %v", got, want)
 	}
 }
+
+func TestEnvironmentKeepsReservedRunContextAuthoritative(t *testing.T) {
+	got := Environment(
+		[]string{"SHARED=inherited", "VARIATION_ONLY=inherited", "OPENEVAL_TASK_ID=inherited"},
+		map[string]string{
+			"SHARED":           "variation",
+			"VARIATION_ONLY":   "variation",
+			"OPENEVAL_TASK_ID": "variation",
+		},
+		Context{TaskID: "reserved", TraceID: "trace-1"},
+	)
+	want := []string{
+		"OPENEVAL_ROUND=0",
+		"OPENEVAL_SCENARIO_ID=",
+		"OPENEVAL_TASK_ID=reserved",
+		"OPENEVAL_TRACE_ID=trace-1",
+		"OPENEVAL_VARIATION=",
+		"SHARED=variation",
+		"VARIATION_ONLY=variation",
+	}
+	if !slices.Equal(got, want) {
+		t.Fatalf("got %v, want %v", got, want)
+	}
+}

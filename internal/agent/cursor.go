@@ -60,11 +60,7 @@ func (c Cursor) Run(ctx context.Context, s Session) (float64, string, error) {
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, c.command, args...)
-	cmd.Env = runcontext.MergeEnvironment(
-		os.Environ(),
-		s.Run.Env(),
-		runcontext.FromMap(s.Variation.Env),
-	)
+	cmd.Env = runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr

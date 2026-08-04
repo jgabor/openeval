@@ -233,6 +233,7 @@ func TestParseCursorJSONRoundTrip(t *testing.T) {
 }
 
 func TestCursorRunPropagatesOpenEvalContextEnv(t *testing.T) {
+	t.Setenv("DESIGN_TOKENS_ENABLED", "inherited")
 	dir := t.TempDir()
 	envPath := filepath.Join(dir, "env.log")
 	stub := filepath.Join(dir, "cursor-agent-stub.sh")
@@ -258,7 +259,10 @@ func TestCursorRunPropagatesOpenEvalContextEnv(t *testing.T) {
 		WorkDir: workDir,
 		Task:    scenario.Task{ID: "edit-file", Prompt: "go"},
 		Variation: scenario.Variation{
-			Env: map[string]string{"DESIGN_TOKENS_ENABLED": "false"},
+			Env: map[string]string{
+				"DESIGN_TOKENS_ENABLED": "false",
+				"OPENEVAL_TASK_ID":      "variation-must-not-win",
+			},
 		},
 		Round: 2,
 		Run: runcontext.Context{
@@ -293,5 +297,8 @@ func TestCursorRunPropagatesOpenEvalContextEnv(t *testing.T) {
 		if !strings.Contains(body, want) {
 			t.Fatalf("env missing %q:\n%s", want, body)
 		}
+	}
+	if strings.Contains(body, "OPENEVAL_TASK_ID=variation-must-not-win") {
+		t.Fatalf("variation replaced reserved task identity:\n%s", body)
 	}
 }

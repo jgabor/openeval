@@ -65,3 +65,9 @@ func FromMap(values map[string]string) []string {
 	}
 	return env
 }
+
+// Environment applies the runtime precedence contract: inherited values are
+// overridden by variation values, and reserved OpenEval run values are final.
+func Environment(inherited []string, variation map[string]string, run Context) []string {
+	return MergeEnvironment(inherited, FromMap(variation), run.Env())
+}

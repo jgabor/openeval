@@ -44,10 +44,7 @@ func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, o.command, args...)
-	cmd.Env = runcontext.MergeEnvironment(
-		os.Environ(),
-		runcontext.FromMap(s.Variation.Env),
-	)
+	cmd.Env = runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
