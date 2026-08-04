@@ -1,0 +1,19 @@
+id: ttdvuydxlr
+artifact: plan
+record:
+  name: Verify delivery and synchronize state
+  depends_on:
+    - qnijueivja
+    - sobvkljsxq
+    - jsgxvlxqxu
+    - pjgpucpayz
+    - yicugqvnid
+    - nwascnzhat
+    - bizkkoldqp
+  status: pending
+  acceptance:
+    - GIVEN the complete change WHEN project gates run THEN build, tests, static checks, lint, and vulnerability checks pass.
+    - GIVEN hermetic CI WHEN the suite runs THEN no live agent, provider credential, or collector is required.
+    - GIVEN an authenticated default-model smoke WHEN the primary flow runs THEN model identity, task outcomes, report output, comparison, cost, and runtime are observed.
+    - GIVEN verified evidence WHEN current state is synchronized THEN the mini-production-scenario train closes only if every integrity and smoke criterion passes.
+  plan: rizkwhwnsc

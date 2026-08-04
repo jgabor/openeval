@@ -1,0 +1,13 @@
+id: sobvkljsxq
+artifact: plan
+record:
+  name: Retain model identity with comparison evidence
+  depends_on:
+    - qnijueivja
+  status: pending
+  acceptance:
+    - GIVEN a new OpenCode run WHEN its score is written THEN the resolved provider/model is retained.
+    - GIVEN an existing score without model identity WHEN it is loaded THEN reporting and comparison remain backward compatible.
+    - GIVEN two runs with different known models WHEN they are compared THEN the mismatch is prominent without preventing an intentional model comparison.
+    - GIVEN model identity in output WHEN users interpret it THEN no output claims deterministic responses or frozen provider behavior.
+  plan: rizkwhwnsc

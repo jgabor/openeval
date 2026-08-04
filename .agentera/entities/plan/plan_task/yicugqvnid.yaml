@@ -1,0 +1,13 @@
+id: yicugqvnid
+artifact: plan
+record:
+  name: Prove verifier integrity and useful skill variation
+  depends_on:
+    - pjgpucpayz
+  status: pending
+  acceptance:
+    - GIVEN a reference correction for each task WHEN verification runs THEN all four tasks pass.
+    - GIVEN at least one plausible incorrect correction per task WHEN verification runs THEN it is rejected.
+    - GIVEN the demo skill WHEN an agent loads it THEN it provides general reproduce, inspect, fix, and recheck guidance without task answers.
+    - GIVEN baseline and skill arms WHEN results differ THEN documentation treats the difference as descriptive rather than proof of causation.
+  plan: rizkwhwnsc

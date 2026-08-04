@@ -1,0 +1,13 @@
+id: pjgpucpayz
+artifact: plan
+record:
+  name: Deliver a mini maintainer task corpus
+  depends_on:
+    - qnijueivja
+  status: pending
+  acceptance:
+    - GIVEN the shipped example scenario WHEN task scope is reviewed THEN it contains four independent standard-library Python maintenance tasks with realistic names.
+    - GIVEN each untouched fixture WHEN its task verifier runs THEN it fails for the intended missing or incorrect behavior.
+    - GIVEN task execution WHEN agents work in the fixture THEN no network, package installation, external service, or repository history is required.
+    - GIVEN hermetic automation WHEN the fast subset runs THEN no live agent or provider credential is required.
+  plan: rizkwhwnsc

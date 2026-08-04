@@ -1,0 +1,43 @@
+id: rizkwhwnsc
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-08-04
+    status: open
+    reviewed: 2026-08-04
+    critic_issues: 5 found, 5 addressed, 0 dismissed
+    title: Deterministic OpenCode model and mini maintainer scenario
+  what: Make OpenCode model selection explicit and reproducible, using opencode/big-pickle as the built-in default while allowing scenario authors and benchmark users to select another provider/model deliberately. Expand the shipped example into a bounded maintainer-shaped scenario with durable model evidence, trustworthy verifiers, and measured onboarding cost.
+  why: OpenEval currently lets OpenCode inherit its configured, last-used, or internal model selection, so comparable runs can silently use different models. The current example tasks also prove pipeline wiring rather than realistic maintenance work. One explicit model contract and one credible small scenario make comparison evidence easier to interpret and repeat.
+  constraints: Preserve OpenCode-first delivery, platform-agnostic comparison, Cursor and mock support, privacy-by-default, hermetic CI, the 0.0.x train sequence, and backward loading of existing score artifacts. A fixed model identifier must not be described as deterministic output or immutable provider behavior. Do not require network access or package installation inside scenario tasks.
+  overall_acceptance: GIVEN an OpenCode run without an explicit model WHEN it starts THEN it invokes opencode/big-pickle explicitly and records that resolved identifier. GIVEN a scenario or user-selected model WHEN precedence resolves THEN both variation arms use and retain the intended provider/model. GIVEN the shipped example scenario WHEN its integrity and live smoke checks run THEN four independent maintainer-shaped tasks produce trustworthy verifier, report, cost, and comparison evidence within the documented onboarding budget. GIVEN current guidance WHEN users design another scenario or benchmark THEN they are encouraged to choose a model suitable for that workload rather than treating the convenience default as universally representative.
+  scope:
+    included:
+      - Explicit OpenCode model selection with opencode/big-pickle as fallback
+      - User, scenario, and configuration model precedence
+      - Durable resolved-model evidence and mismatch visibility
+      - Model-aware setup diagnosis and comparison demonstration
+      - Four-task standard-library Python maintainer scenario
+      - Reference, negative, hermetic, and authenticated verification
+      - Measured onboarding cost and runtime documentation
+    excluded:
+      - Deterministic model outputs or frozen provider backend revisions
+      - New Cursor model-selection behavior
+      - Cross-provider causal claims
+      - Sandboxed execution and Windows-native verifier portability
+      - External benchmarks, Pi support, and token-class score expansion
+    deferred:
+      - Provider sampling controls not exposed by the selected runtime
+      - Durable provider backend revision and deployment identity
+      - Cross-provider normalization beyond visible model identifiers
+  design: First establish one explicit model-resolution contract and retain its result with evaluation evidence. Extend setup and demonstration workflows so users see and can override the resolved choice. Then replace pipeline-scale tasks with a small independent maintainer corpus, prove verifier integrity, and make the skill variation process-relevant without encoding answers. Calibrate the complete flow with the default model before publishing cost, runtime, scope, and claim limits.
+  unknowns:
+    - question: Will opencode/big-pickle remain discoverable and authenticated in the supported OpenCode catalog during implementation?
+      affects_task: 3
+      resolve_by: Validate the current catalog without a paid call and require an actionable override path if the default is unavailable.
+    - question: Will the four-task two-arm one-round flow meet the proposed ten-minute and three-dollar target?
+      affects_task: 6
+      resolve_by: Measure a real run before finalizing defaults; reduce the onboarding subset rather than weaken verifier integrity if the hard ceiling is exceeded.
+  surprises:
+    []

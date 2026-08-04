@@ -1,0 +1,13 @@
+id: qnijueivja
+artifact: plan
+record:
+  name: Establish explicit OpenCode model resolution
+  depends_on:
+    []
+  status: pending
+  acceptance:
+    - GIVEN no user, scenario, or configuration model WHEN an OpenCode run resolves THEN opencode/big-pickle is selected explicitly.
+    - GIVEN multiple model sources WHEN resolution occurs THEN user selection overrides scenario selection, which overrides configuration and the built-in default.
+    - GIVEN an invalid provider/model identifier WHEN a run is requested THEN it fails before run evidence or paid execution begins.
+    - GIVEN Cursor or mock execution WHEN model selection ships THEN their supported behavior remains unchanged and unsupported explicit selection is not silently ignored.
+  plan: rizkwhwnsc

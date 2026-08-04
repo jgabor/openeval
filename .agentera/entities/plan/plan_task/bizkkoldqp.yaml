@@ -1,0 +1,15 @@
+id: bizkkoldqp
+artifact: plan
+record:
+  name: Document model policy and scenario claim limits
+  depends_on:
+    - sobvkljsxq
+    - jsgxvlxqxu
+    - nwascnzhat
+  status: pending
+  acceptance:
+    - GIVEN current onboarding WHEN a user follows it THEN the default model, override mechanisms, expected cost, and expected runtime are explicit.
+    - GIVEN a scenario or benchmark author WHEN model guidance is read THEN workload fit, tools, authentication, cost, latency, and data policy are named selection criteria.
+    - GIVEN a configuration-arm comparison WHEN guidance is followed THEN both arms use the same model unless model comparison is intentional.
+    - GIVEN the mini scenario results WHEN claims are stated THEN they remain local descriptive evidence rather than a general provider or model ranking.
+  plan: rizkwhwnsc
