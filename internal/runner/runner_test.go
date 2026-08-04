@@ -4,8 +4,10 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
+	"github.com/jgabor/openeval/internal/config"
 	"github.com/jgabor/openeval/internal/paths"
 	"github.com/jgabor/openeval/internal/score"
 )
@@ -36,6 +38,62 @@ func TestRunSkillVariationSeedsWorkspaceAndScore(t *testing.T) {
 	}
 	if doc.Variation != "with-demo-skill" {
 		t.Fatalf("variation = %q", doc.Variation)
+	}
+}
+
+func TestRunDoesNotVerifyMalformedOpenCodeOutput(t *testing.T) {
+	root := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+
+	stub := filepath.Join(root, "opencode-stub.sh")
+	stubBody := `#!/bin/sh
+printf '%s\n' 'not-json'
+printf '%s\n' '{"type":"step_finish","sessionID":"ses-ignored","part":{"tokens":{}}}'
+`
+	if err := os.WriteFile(stub, []byte(stubBody), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	if err := config.Save(cfg); err != nil {
+		t.Fatal(err)
+	}
+
+	marker := filepath.Join(root, "verifier-ran")
+	verifierPath := filepath.Join(root, "verifier.sh")
+	verifierBody := "#!/bin/sh\n: > " + marker + "\n"
+	if err := os.WriteFile(verifierPath, []byte(verifierBody), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	scenarioPath := filepath.Join(root, "scenario.yaml")
+	scenarioBody := `id: malformed-opencode
+tasks:
+  - id: edit
+    prompt: edit the workspace
+    verifier:
+      type: script
+      run: verifier.sh
+variations:
+  default: {}
+`
+	if err := os.WriteFile(scenarioPath, []byte(scenarioBody), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	_, err := Run(context.Background(), Options{
+		Scenario: scenarioPath,
+		Agent:    "opencode",
+		Rounds:   1,
+		Out:      filepath.Join(root, "run"),
+	})
+	if err == nil {
+		t.Fatal("expected malformed OpenCode output to stop the run")
+	}
+	if !strings.Contains(err.Error(), "JSONL line 1 is invalid") {
+		t.Fatalf("error %q should identify malformed OpenCode output", err)
+	}
+	if _, statErr := os.Stat(marker); !os.IsNotExist(statErr) {
+		t.Fatalf("verifier ran after agent failure: %v", statErr)
 	}
 }
 

@@ -2,6 +2,7 @@ package agent
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -9,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/scenario"
 )
 
@@ -145,7 +147,7 @@ printf '{"type":"step_finish","sessionID":"ses-test-1","part":{"type":"step-fini
 		t.Fatal(err)
 	}
 	argv := strings.Split(strings.TrimSpace(string(argsRaw)), "\n")
-	wantFlags := []string{"run", "--format", "json", "--dir", workDir, "hello world"}
+	wantFlags := []string{"run", "--format", "json", "--dir", workDir, "--auto", "hello world"}
 	if len(argv) != len(wantFlags) {
 		t.Fatalf("argv = %v, want %v", argv, wantFlags)
 	}
@@ -196,11 +198,20 @@ exit 1
 		t.Fatal("expected error when opencode exits non-zero")
 	}
 	msg := err.Error()
-	if !strings.Contains(msg, "opencode failed") {
-		t.Fatalf("error %q should be wrapped with 'opencode failed'", msg)
+	var runErr *OpenCodeRunError
+	if !errors.As(err, &runErr) {
+		t.Fatalf("error %T should be an OpenCodeRunError", err)
+	}
+	if runErr.Kind != "execution" {
+		t.Fatalf("error kind = %q, want execution", runErr.Kind)
 	}
 	if !strings.Contains(msg, "auth: opencode session expired") {
 		t.Fatalf("error %q should include the captured stderr", msg)
+	}
+	for _, want := range []string{"opencode auth list", "opencode auth login"} {
+		if !strings.Contains(msg, want) {
+			t.Fatalf("error %q should include remediation %q", msg, want)
+		}
 	}
 }
 
@@ -235,8 +246,43 @@ exit 0
 		t.Fatal("expected error when opencode returns no events")
 	}
 	msg := err.Error()
-	if !strings.Contains(msg, "no sessionID") {
-		t.Fatalf("error %q should explain that no sessionID was returned", msg)
+	for _, want := range []string{"produced no JSON events", "OpenCode 1.18.11"} {
+		if !strings.Contains(msg, want) {
+			t.Fatalf("error %q should include %q", msg, want)
+		}
+	}
+}
+
+func TestParseOpenCodeJSONRejectsMalformedLines(t *testing.T) {
+	data := []byte("not-json\n" +
+		`{"type":"step_finish","sessionID":"ses-valid","part":{"tokens":{}}}` + "\n")
+	_, _, err := parseOpenCodeJSON(data)
+	if err == nil {
+		t.Fatal("expected malformed JSONL to fail")
+	}
+	var runErr *OpenCodeRunError
+	if !errors.As(err, &runErr) || runErr.Kind != "output" {
+		t.Fatalf("error = %#v, want structured output error", err)
+	}
+	if !strings.Contains(err.Error(), "JSONL line 1 is invalid") {
+		t.Fatalf("error %q should identify the malformed line", err)
+	}
+}
+
+func TestParseOpenCodeJSONReportsRuntimeErrorEvent(t *testing.T) {
+	data := []byte(`{"type":"error","sessionID":"ses-error","error":{"name":"ProviderAuthError","data":{"message":"login required"}}}` + "\n")
+	_, _, err := parseOpenCodeJSON(data)
+	if err == nil {
+		t.Fatal("expected runtime error event to fail")
+	}
+	var runErr *OpenCodeRunError
+	if !errors.As(err, &runErr) || runErr.Kind != "runtime" {
+		t.Fatalf("error = %#v, want structured runtime error", err)
+	}
+	for _, want := range []string{"login required", "opencode auth list", "opencode auth login"} {
+		if !strings.Contains(err.Error(), want) {
+			t.Fatalf("error %q should include %q", err, want)
+		}
 	}
 }
 
@@ -246,9 +292,9 @@ func TestOpenCodeRunSumsMultiStepTokens(t *testing.T) {
 	script := `#!/usr/bin/env bash
 set -euo pipefail
 printf '{"type":"step_start","sessionID":"ses-multi","part":{"type":"step-start"}}\n'
-printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":1000,"output":200,"cache":{"read":0,"write":0}},"cost":0}}\n'
-printf '{"type":"step_start","sessionID":"ses-multi","part":{"type":"step-start"}}\n'
-printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":3000,"output":800,"cache":{"read":0,"write":0}},"cost":0}}\n'
+	printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":1000,"output":200,"reasoning":300,"cache":{"read":400,"write":500}},"cost":999}}\n'
+	printf '{"type":"step_start","sessionID":"ses-multi","part":{"type":"step-start"}}\n'
+	printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finish","tokens":{"input":3000,"output":800,"reasoning":700,"cache":{"read":600,"write":700}},"cost":999}}\n'
 `
 	if err := os.WriteFile(stub, []byte(script), 0o755); err != nil {
 		t.Fatal(err)
@@ -270,15 +316,16 @@ printf '{"type":"step_finish","sessionID":"ses-multi","part":{"type":"step-finis
 	cost, traceID, err := driver.Run(context.Background(), Session{
 		WorkDir: workDir,
 		Task:    scenario.Task{ID: "t1", Prompt: "multi"},
+		Run:     runcontext.Context{TraceID: "run-correlation-id"},
 	})
 	if err != nil {
 		t.Fatalf("Run failed: %v", err)
 	}
-	if traceID != "ses-multi" {
-		t.Fatalf("traceID = %q, want %q", traceID, "ses-multi")
+	if traceID != "run-correlation-id" {
+		t.Fatalf("traceID = %q, want run correlation ID", traceID)
 	}
-	wantCost := (float64(1000+3000)/1e6)*2 + (float64(200+800)/1e6)*10
+	wantCost := (float64(1000+3000+400+500+600+700)/1e6)*2 + (float64(200+800+300+700)/1e6)*10
 	if cost != wantCost {
-		t.Fatalf("cost = %f, want %f (sum of step_finish tokens at configured rates)", cost, wantCost)
+		t.Fatalf("cost = %f, want %f (configured rates across all billable token classes)", cost, wantCost)
 	}
 }
