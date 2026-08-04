@@ -147,7 +147,7 @@ printf '{"type":"step_finish","sessionID":"ses-test-1","part":{"type":"step-fini
 		t.Fatal(err)
 	}
 	argv := strings.Split(strings.TrimSpace(string(argsRaw)), "\n")
-	wantFlags := []string{"run", "--format", "json", "--dir", workDir, "--auto", "hello world"}
+	wantFlags := []string{"run", "--format", "json", "--dir", workDir, "--auto", "--model", DefaultOpenCodeModel, "hello world"}
 	if len(argv) != len(wantFlags) {
 		t.Fatalf("argv = %v, want %v", argv, wantFlags)
 	}

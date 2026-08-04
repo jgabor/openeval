@@ -12,6 +12,7 @@ import (
 
 type Scenario struct {
 	ID         string               `yaml:"id"`
+	Model      string               `yaml:"model"`
 	Tasks      []Task               `yaml:"tasks"`
 	Variations map[string]Variation `yaml:"variations"`
 	sourcePath string

@@ -11,6 +11,7 @@ import (
 var (
 	runScenario  string
 	runAgent     string
+	runModel     string
 	runVariation string
 	runRounds    int
 	runOut       string
@@ -37,6 +38,7 @@ var runCmd = &cobra.Command{
 		res, err := runner.Run(context.Background(), runner.Options{
 			Scenario:  runScenario,
 			Agent:     runAgent,
+			Model:     runModel,
 			Variation: runVariation,
 			Rounds:    runRounds,
 			Out:       runOut,
@@ -52,6 +54,7 @@ var runCmd = &cobra.Command{
 func init() {
 	runCmd.Flags().StringVar(&runScenario, "scenario", "", "Scenario id or path")
 	runCmd.Flags().StringVar(&runAgent, "agent", "", "Agent runtime (opencode, cursor, mock for CI)")
+	runCmd.Flags().StringVar(&runModel, "model", "", "OpenCode model (provider/model)")
 	runCmd.Flags().StringVar(&runVariation, "variation", "", "Config variation label")
 	runCmd.Flags().IntVar(&runRounds, "rounds", 3, "Attempts per task")
 	runCmd.Flags().StringVar(&runOut, "out", "", "Override output directory")

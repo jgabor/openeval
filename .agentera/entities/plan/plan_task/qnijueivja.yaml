@@ -4,7 +4,7 @@ record:
   name: Establish explicit OpenCode model resolution
   depends_on:
     []
-  status: pending
+  status: complete
   acceptance:
     - GIVEN no user, scenario, or configuration model WHEN an OpenCode run resolves THEN opencode/big-pickle is selected explicitly.
     - GIVEN multiple model sources WHEN resolution occurs THEN user selection overrides scenario selection, which overrides configuration and the built-in default.

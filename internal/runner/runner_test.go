@@ -97,6 +97,38 @@ variations:
 	}
 }
 
+func TestRunRejectsInvalidModelBeforeRunSideEffects(t *testing.T) {
+	root := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+	marker := filepath.Join(root, "agent-ran")
+	stub := filepath.Join(root, "opencode-stub.sh")
+	if err := os.WriteFile(stub, []byte("#!/bin/sh\n: > "+marker+"\n"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	if err := config.Save(cfg); err != nil {
+		t.Fatal(err)
+	}
+
+	runDir := filepath.Join(root, "run")
+	_, err := Run(context.Background(), Options{
+		Scenario: "example-fixtures",
+		Agent:    "opencode",
+		Model:    "invalid",
+		Rounds:   1,
+		Out:      runDir,
+	})
+	if err == nil || !strings.Contains(err.Error(), "expected provider/model") {
+		t.Fatalf("Run() error = %v, want provider/model syntax error", err)
+	}
+	for _, path := range []string{runDir, marker} {
+		if _, statErr := os.Stat(path); !os.IsNotExist(statErr) {
+			t.Fatalf("%s exists after model validation failure: %v", path, statErr)
+		}
+	}
+}
+
 func chdirRepoRoot(t *testing.T) {
 	t.Helper()
 	dir, err := os.Getwd()

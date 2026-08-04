@@ -1,0 +1,23 @@
+id: xadcpnasaz
+artifact: progress
+record:
+  timestamp: 2026-08-04 20:52
+  type: feat
+  phase: build
+  what: Established explicit OpenCode model resolution with opencode/big-pickle as the built-in default and CLI, scenario, then config precedence.
+  context:
+    intent: Make every OpenCode run choose a visible provider/model while preserving Cursor and mock behavior.
+    constraints: No score schema change, runtime dependency, live provider call, or change to other plan tasks.
+    unknowns: The plan catalog-availability unknown affects a later diagnosis task, not syntax resolution.
+    scope: Run option, scenario/config fields, OpenCode invocation, hermetic tests, config examples, and changelog.
+  discovered: Model validation had to precede run-directory resolution so malformed identifiers cannot create evidence or reach an agent subprocess.
+  verified: go test ./internal/agent ./internal/runner and mage check passed. The rebuilt bin/openeval rejected malformed OpenCode and explicit Cursor models with exit 1 and created no output directories.
+  next: Durable resolved-model score identity remains deferred to the next plan task.
+  glossary_caveat:
+    event: current
+    reason: personal_input_unavailable
+    ownership_state: authority_unavailable
+    caveat_id: tbqgshpecy
+    capability: build
+    transition_id: null
+  publication_order: 9

@@ -44,6 +44,10 @@ func newOpenCode(cfg config.Config) (OpenCode, error) {
 }
 
 func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
+	model := s.Model
+	if model == "" {
+		model = DefaultOpenCodeModel
+	}
 	baseEnv := runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
 	env, err := withOpenCodeNativeOTEL(baseEnv, o.nativeOTEL, o.traceTarget, s.Run)
 	if err != nil {
@@ -57,6 +61,7 @@ func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
 		"--format", "json",
 		"--dir", s.WorkDir,
 		"--auto",
+		"--model", model,
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, o.command, args...)

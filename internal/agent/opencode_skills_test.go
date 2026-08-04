@@ -69,7 +69,7 @@ printf '%%s\n' '{"type":"step_finish","sessionID":"ses-skill","part":{"tokens":{
 	if !strings.Contains(lines[0], "|debug skill") || lines[1] != workDir+"|debug skill" {
 		t.Fatalf("skill checks = %v, want isolated then exact workspace discovery", lines[:2])
 	}
-	if !strings.Contains(lines[2], "|run --format json --dir "+workDir+" --auto edit") {
+	if !strings.Contains(lines[2], "|run --format json --dir "+workDir+" --auto --model "+DefaultOpenCodeModel+" edit") {
 		t.Fatalf("paid run invocation = %q", lines[2])
 	}
 }

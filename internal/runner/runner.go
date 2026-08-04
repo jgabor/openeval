@@ -18,6 +18,7 @@ import (
 type Options struct {
 	Scenario  string
 	Agent     string
+	Model     string
 	Variation string
 	Rounds    int
 	Out       string
@@ -46,6 +47,10 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 		variationName = "default"
 	}
 	variation, err := sc.Variation(variationName)
+	if err != nil {
+		return Result{}, err
+	}
+	model, err := agent.ResolveModel(opts.Agent, opts.Model, sc.Model, cfg)
 	if err != nil {
 		return Result{}, err
 	}
@@ -82,6 +87,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 			sess := agent.Session{
 				WorkDir:    workDir,
 				Agent:      opts.Agent,
+				Model:      model,
 				Variation:  variation,
 				Task:       task,
 				Round:      round,

@@ -188,6 +188,7 @@ skills:
 agents:
   opencode:
     # command: /usr/local/bin/opencode
+    model: opencode/big-pickle
     native_otel: false
     cost:
       input_per_million: 3.0

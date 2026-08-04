@@ -11,6 +11,7 @@
 - `openeval instrument --agent opencode` explicitly enables native OTEL, derives OpenCode's base endpoint without dropping inherited exporter headers or resource attributes, appends encoded run correlation, and states the native-payload privacy boundary; `traces` distinguishes direct summary trace IDs from attribute-correlated native traces.
 - `openeval doctor` defaults to OpenCode and checks config, runtime/version, `opencode auth list`, skill aliases, OTLP reachability, and native telemetry without a model call; `--agent cursor` adds secondary runtime and hook checks, while `--json` returns a versioned report with warning/fatal exit semantics and remediation.
 - `openeval demo` defaults to OpenCode, diagnoses setup, runs retained baseline and demo-skill arms, and compares the actual returned paths; each invocation uses a new evidence root, `--dry-run` has no filesystem side effects, and unavailable OTLP remains nonfatal.
+- `openeval run --agent opencode` now passes `--model opencode/big-pickle` by default; CLI, scenario, and config overrides follow explicit precedence, while malformed identifiers and unsupported Cursor or mock CLI overrides fail before execution.
 
 ### Documentation
 
