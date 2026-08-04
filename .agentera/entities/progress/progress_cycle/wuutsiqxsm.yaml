@@ -1,0 +1,17 @@
+id: wuutsiqxsm
+artifact: progress
+record:
+  timestamp: 2026-08-04 20:01
+  type: feat
+  phase: build
+  what: Add OpenCode-first setup diagnosis with stable JSON, remediation, and nonfatal telemetry warnings.
+  context:
+    intent: Let users and automation prove readiness before any paid model call.
+    constraints: Default to OpenCode, keep Cursor secondary, avoid live model or collector requirements, and preserve warning versus fatal exit semantics.
+    unknowns: None for the diagnostic contract; live collector reachability remains environment-dependent.
+    scope: doctor package, CLI command, hermetic runtime/auth/config/skill/telemetry tests, and changelog.
+  inspiration: A compare-first workflow needs a cheap readiness gate that reports the next corrective command.
+  discovered: The local OpenCode 1.18.11 runtime and auth pass, while doctor correctly exposes an existing alias/frontmatter mismatch and absent local collector as separate fatal and warning results.
+  verified: mage check passed; hermetic tests prove version/auth commands are the only OpenCode subprocesses, warning-only reports exit 0, fatal auth reports exit 1, every non-pass check has remediation, JSON uses openeval.doctor.v1, and Cursor runtime/hooks remain supported. CLI smokes observed both warning exit 0 and fatal exit 1 without a model call.
+  next: Deliver the safe one-command OpenCode comparison demonstration.
+  publication_order: 5

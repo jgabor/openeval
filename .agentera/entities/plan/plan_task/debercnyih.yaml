@@ -4,9 +4,19 @@ record:
   name: Diagnose OpenCode-first setup
   depends_on:
     - toxklsexpe
-  status: pending
+  status: complete
   acceptance:
     - GIVEN a user runs setup diagnosis WHEN configuration, runtime, authentication, skills, or telemetry are invalid THEN each result includes concrete remediation.
     - GIVEN only nonfatal telemetry reachability fails WHEN diagnosis finishes THEN the result is a warning rather than a fatal setup failure.
     - GIVEN automation consumes diagnosis WHEN structured output is requested THEN fields and exit status are stable and no paid model call occurs.
   plan: noradwhfpb
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: debercnyih-a1
+      source: "Direct orchestration audit: mage check, focused hermetic doctor tests, and real no-model CLI smokes verify actionable setup checks, warning exit 0, fatal exit 1, stable JSON, and Cursor secondary coverage"
+      recorded_at: 2026-08-04 20:01
+      writer_command: agentera state plan record-evaluation
