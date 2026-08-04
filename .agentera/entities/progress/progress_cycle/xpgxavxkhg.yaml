@@ -1,0 +1,17 @@
+id: xpgxavxkhg
+artifact: progress
+record:
+  timestamp: 2026-08-04 19:32
+  type: feat
+  phase: build
+  what: Establish one deterministic subprocess environment contract for Cursor and OpenCode with reserved OpenEval run identity applied last.
+  context:
+    intent: Make inherited, variation, and reserved run context precedence explicit and shared.
+    constraints: Preserve Cursor support and keep environment assembly deterministic without new dependencies.
+    unknowns: None for this task.
+    scope: internal/runcontext and Cursor/OpenCode driver environment setup.
+  inspiration: One contract prevents runtime-specific drift in correlation identity.
+  discovered: Cursor previously applied variation values after reserved run context, while OpenCode did not receive reserved run context at all.
+  verified: mage check passed; focused runcontext and agent tests passed; tests assert inherited < variation < reserved precedence and existing Cursor context propagation.
+  next: Harden autonomous OpenCode execution and diagnostics.
+  publication_order: 2
