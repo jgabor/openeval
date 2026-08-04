@@ -66,16 +66,25 @@ func validateOpenCodeSkills(ctx context.Context, command, workDir string, names,
 }
 
 func discoverOpenCodeSkills(ctx context.Context, command, dir string, env []string) ([]openCodeSkill, error) {
+	stdout, err := os.CreateTemp("", "openeval-opencode-debug-skill-*.json")
+	if err != nil {
+		return nil, newOpenCodeRunError("skill", fmt.Sprintf("create debug output file: %v", err), "check temporary directory permissions")
+	}
+	stdoutPath := stdout.Name()
+	defer func() { _ = os.Remove(stdoutPath) }()
+
 	cmd := exec.CommandContext(ctx, command, "debug", "skill")
 	cmd.Dir = dir
 	cmd.Env = env
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
+	var stderr bytes.Buffer
+	cmd.Stdout = stdout
 	cmd.Stderr = &stderr
-	if err := cmd.Run(); err != nil {
+	runErr := cmd.Run()
+	closeErr := stdout.Close()
+	if runErr != nil {
 		detail := stderr.String()
 		if detail == "" {
-			detail = err.Error()
+			detail = runErr.Error()
 		}
 		return nil, newOpenCodeRunError(
 			"skill",
@@ -83,8 +92,15 @@ func discoverOpenCodeSkills(ctx context.Context, command, dir string, env []stri
 			"verify OpenCode 1.18.11 is configured and rerun `opencode debug skill` in the workspace",
 		)
 	}
+	if closeErr != nil {
+		return nil, newOpenCodeRunError("skill", fmt.Sprintf("close `opencode debug skill` output: %v", closeErr), "check temporary directory permissions")
+	}
+	data, err := os.ReadFile(stdoutPath)
+	if err != nil {
+		return nil, newOpenCodeRunError("skill", fmt.Sprintf("read `opencode debug skill` output: %v", err), "check temporary directory permissions")
+	}
 	var skills []openCodeSkill
-	if err := json.Unmarshal(stdout.Bytes(), &skills); err != nil {
+	if err := json.Unmarshal(data, &skills); err != nil {
 		return nil, newOpenCodeRunError(
 			"skill",
 			fmt.Sprintf("parse `opencode debug skill` output in %s: %v", dir, err),
