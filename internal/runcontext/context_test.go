@@ -1,6 +1,7 @@
 package runcontext
 
 import (
+	"slices"
 	"strings"
 	"testing"
 )
@@ -30,5 +31,27 @@ func TestContextEnvIncludesOpenEvalKeys(t *testing.T) {
 		if !strings.Contains(body, want) {
 			t.Fatalf("missing %q in %q", want, body)
 		}
+	}
+}
+
+func TestMergeEnvironmentUsesLastValueAndSortsKeys(t *testing.T) {
+	got := MergeEnvironment(
+		[]string{"SECOND=inherited", "FIRST=inherited"},
+		[]string{"THIRD=variation", "SECOND=variation"},
+	)
+	want := []string{"FIRST=inherited", "SECOND=variation", "THIRD=variation"}
+	if !slices.Equal(got, want) {
+		t.Fatalf("got %v, want %v", got, want)
+	}
+}
+
+func TestFromMapReturnsMergeableEnvironment(t *testing.T) {
+	got := MergeEnvironment(FromMap(map[string]string{
+		"SECOND": "two",
+		"FIRST":  "one",
+	}))
+	want := []string{"FIRST=one", "SECOND=two"}
+	if !slices.Equal(got, want) {
+		t.Fatalf("got %v, want %v", got, want)
 	}
 }

@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 )
 
 type OpenCode struct {
@@ -43,10 +44,10 @@ func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, o.command, args...)
-	cmd.Env = os.Environ()
-	for k, v := range s.Variation.Env {
-		cmd.Env = append(cmd.Env, fmt.Sprintf("%s=%s", k, v))
-	}
+	cmd.Env = runcontext.MergeEnvironment(
+		os.Environ(),
+		runcontext.FromMap(s.Variation.Env),
+	)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr

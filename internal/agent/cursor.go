@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/jgabor/openeval/internal/config"
+	"github.com/jgabor/openeval/internal/runcontext"
 )
 
 const (
@@ -59,11 +60,11 @@ func (c Cursor) Run(ctx context.Context, s Session) (float64, string, error) {
 	}
 	args = append(args, s.Task.Prompt)
 	cmd := exec.CommandContext(ctx, c.command, args...)
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, s.Run.Env()...)
-	for k, v := range s.Variation.Env {
-		cmd.Env = append(cmd.Env, fmt.Sprintf("%s=%s", k, v))
-	}
+	cmd.Env = runcontext.MergeEnvironment(
+		os.Environ(),
+		s.Run.Env(),
+		runcontext.FromMap(s.Variation.Env),
+	)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr

@@ -1,6 +1,10 @@
 package runcontext
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
 
 type Context struct {
 	ScenarioID string
@@ -25,4 +29,39 @@ func (c Context) Env() []string {
 		fmt.Sprintf("OPENEVAL_ROUND=%d", c.Round),
 		fmt.Sprintf("OPENEVAL_TRACE_ID=%s", c.TraceID),
 	}
+}
+
+// MergeEnvironment returns one deterministic environment with later layers
+// taking precedence over earlier layers.
+func MergeEnvironment(layers ...[]string) []string {
+	values := make(map[string]string)
+	for _, layer := range layers {
+		for _, entry := range layer {
+			key, _, ok := strings.Cut(entry, "=")
+			if !ok || key == "" {
+				continue
+			}
+			values[key] = entry
+		}
+	}
+
+	keys := make([]string, 0, len(values))
+	for key := range values {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+
+	env := make([]string, 0, len(keys))
+	for _, key := range keys {
+		env = append(env, values[key])
+	}
+	return env
+}
+
+func FromMap(values map[string]string) []string {
+	env := make([]string, 0, len(values))
+	for key, value := range values {
+		env = append(env, fmt.Sprintf("%s=%s", key, value))
+	}
+	return env
 }
