@@ -12,6 +12,7 @@ type Document struct {
 	Schema     string           `json:"schema"`
 	ScenarioID string           `json:"scenario_id"`
 	Agent      string           `json:"agent"`
+	Model      string           `json:"model,omitempty"`
 	Variation  string           `json:"variation,omitempty"`
 	Rounds     int              `json:"rounds"`
 	Tasks      int              `json:"tasks"`

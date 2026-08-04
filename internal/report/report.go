@@ -16,6 +16,9 @@ func Format(doc score.Document) string {
 	var b strings.Builder
 	fmt.Fprintf(&b, "scenario: %s\n", doc.ScenarioID)
 	fmt.Fprintf(&b, "agent: %s\n", doc.Agent)
+	if doc.Model != "" {
+		fmt.Fprintf(&b, "model: %s\n", doc.Model)
+	}
 	if doc.Variation != "" && doc.Variation != "default" {
 		fmt.Fprintf(&b, "variation: %s\n", doc.Variation)
 	}

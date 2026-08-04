@@ -1,0 +1,16 @@
+id: qpprsmfdnw
+artifact: progress
+record:
+  timestamp: 2026-08-04 21:19
+  type: feat
+  phase: build
+  what: Retained the resolved OpenCode provider/model in additive score evidence and surfaced known identity in reports and comparisons.
+  context:
+    intent: Implement task sobvkljsxq while leaving lifecycle completion to independent Audit.
+    constraints: Keep openeval.score.v1, preserve legacy, Cursor, and mock scores, allow intentional cross-model comparisons, and make no deterministic-output or frozen-provider claims.
+    unknowns: Provider backend revision and deployment identity remain intentionally unavailable and outside this task.
+    scope: Optional score model metadata, report output, compare visibility, regression tests, changelog, and required Agentera state.
+  discovered: The resolved model already crossed the runner boundary into each OpenCode session, so score construction was the single missing persistence boundary.
+  verified: Focused score, runner, report, and compare tests passed; the rebuilt bin/openeval retained provider/model-a, reported it, warned while comparing provider/model-a to provider/model-b, and loaded/reported/compared a legacy score without model metadata; mage check passed.
+  next: Independent Audit should evaluate sobvkljsxq before task completion; doctor/demo validation and broader documentation remain assigned to later tasks.
+  publication_order: 11

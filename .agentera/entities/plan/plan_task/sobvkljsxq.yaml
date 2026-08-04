@@ -4,7 +4,7 @@ record:
   name: Retain model identity with comparison evidence
   depends_on:
     - qnijueivja
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN a new OpenCode run WHEN its score is written THEN the resolved provider/model is retained.
     - GIVEN an existing score without model identity WHEN it is loaded THEN reporting and comparison remain backward compatible.

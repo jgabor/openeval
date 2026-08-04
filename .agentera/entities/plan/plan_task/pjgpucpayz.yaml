@@ -4,10 +4,20 @@ record:
   name: Deliver a mini maintainer task corpus
   depends_on:
     - qnijueivja
-  status: in_progress
+  status: complete
   acceptance:
     - GIVEN the shipped example scenario WHEN task scope is reviewed THEN it contains four independent standard-library Python maintenance tasks with realistic names.
     - GIVEN each untouched fixture WHEN its task verifier runs THEN it fails for the intended missing or incorrect behavior.
     - GIVEN task execution WHEN agents work in the fixture THEN no network, package installation, external service, or repository history is required.
     - GIVEN hermetic automation WHEN the fast subset runs THEN no live agent or provider credential is required.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-pjgpucpayz-1
+      source: independent Audit corpus and evidence review
+      recorded_at: 2026-08-04 21:15
+      writer_command: agentera state plan record-evaluation

@@ -13,6 +13,7 @@
 - `openeval demo` defaults to OpenCode, diagnoses setup, runs retained baseline and demo-skill arms, and compares the actual returned paths; each invocation uses a new evidence root, `--dry-run` has no filesystem side effects, and unavailable OTLP remains nonfatal.
 - `openeval run --agent opencode` now passes `--model opencode/big-pickle` by default; CLI, scenario, and config overrides follow explicit precedence, while malformed identifiers and unsupported Cursor or mock CLI overrides fail before execution.
 - The shipped `example-fixtures` scenario now provides four independent standard-library Python maintenance tasks with focused failing verifiers and a one-task credential-free mock subset.
+- OpenCode scores retain the resolved provider/model; reports show known model identity, and comparisons warn about known model mismatches without blocking cross-model analysis or legacy scores.
 
 ### Documentation
 

@@ -39,6 +39,12 @@ func Run(dirA, dirB string) (string, error) {
 	if warnAgent {
 		fmt.Fprintf(&out, "warning:   agent mismatch (%s vs %s)\n", a.Agent, b.Agent)
 	}
+	if a.Model != "" || b.Model != "" {
+		fmt.Fprintf(&out, "model:     %s vs %s\n", knownModel(a.Model), knownModel(b.Model))
+	}
+	if a.Model != "" && b.Model != "" && a.Model != b.Model {
+		fmt.Fprintf(&out, "warning:   model mismatch (%s vs %s)\n", a.Model, b.Model)
+	}
 	fmt.Fprintln(&out)
 	fmt.Fprintf(&out, "%24s %24s %8s\n", labelA, labelB, "delta")
 	fmt.Fprintf(&out, "%-24s %24.2f %24.2f %8.2f\n", "pass@1", a.Summary.PassAt1, b.Summary.PassAt1, b.Summary.PassAt1-a.Summary.PassAt1)
@@ -47,4 +53,11 @@ func Run(dirA, dirB string) (string, error) {
 	fmt.Fprintf(&out, "%-24s %24.2f %24.2f %+8.2f\n", "cost_per_passed", a.Summary.CostUSDPerPassed, b.Summary.CostUSDPerPassed, b.Summary.CostUSDPerPassed-a.Summary.CostUSDPerPassed)
 	fmt.Fprintf(&out, "\nresults:\n  logs:\n    %s\n    %s\n", paths.ScorePath(dirA), paths.ScorePath(dirB))
 	return out.String(), nil
+}
+
+func knownModel(model string) string {
+	if model == "" {
+		return "unknown"
+	}
+	return model
 }

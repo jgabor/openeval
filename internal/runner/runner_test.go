@@ -97,6 +97,61 @@ variations:
 	}
 }
 
+func TestRunRetainsResolvedOpenCodeModelInScore(t *testing.T) {
+	root := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+
+	stub := filepath.Join(root, "opencode-stub.sh")
+	stubBody := `#!/bin/sh
+printf '%s\n' '{"type":"step_finish","sessionID":"ses-model","part":{"tokens":{}}}'
+`
+	if err := os.WriteFile(stub, []byte(stubBody), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	if err := config.Save(cfg); err != nil {
+		t.Fatal(err)
+	}
+
+	verifierPath := filepath.Join(root, "verifier.sh")
+	if err := os.WriteFile(verifierPath, []byte("#!/bin/sh\nexit 0\n"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	scenarioPath := filepath.Join(root, "scenario.yaml")
+	scenarioBody := `id: model-evidence
+model: provider/selected-model
+tasks:
+  - id: edit
+    prompt: edit the workspace
+    verifier:
+      type: script
+      run: verifier.sh
+variations:
+  default: {}
+`
+	if err := os.WriteFile(scenarioPath, []byte(scenarioBody), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	result, err := Run(context.Background(), Options{
+		Scenario: scenarioPath,
+		Agent:    "opencode",
+		Rounds:   1,
+		Out:      filepath.Join(root, "run"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := score.Load(paths.ScorePath(result.RunDir))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if doc.Model != "provider/selected-model" {
+		t.Fatalf("score model = %q, want resolved provider/model", doc.Model)
+	}
+}
+
 func TestRunRejectsInvalidModelBeforeRunSideEffects(t *testing.T) {
 	root := t.TempDir()
 	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))

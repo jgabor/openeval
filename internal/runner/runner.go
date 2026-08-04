@@ -138,6 +138,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 	doc := score.Document{
 		ScenarioID: sc.ID,
 		Agent:      opts.Agent,
+		Model:      model,
 		Variation:  omitDefaultVariation(variationName),
 		Rounds:     opts.Rounds,
 		Tasks:      len(sc.Tasks),
