@@ -1,0 +1,17 @@
+id: hmnkcojsso
+artifact: progress
+record:
+  timestamp: 2026-08-04 19:39
+  type: feat
+  phase: build
+  what: Make OpenCode 1.18.11 runs autonomous, strict about JSONL failures, and comparable in cost and trace evidence.
+  context:
+    intent: Ensure paid non-interactive runs either produce trustworthy evidence or stop with actionable diagnostics.
+    constraints: Use configured Cursor-comparable estimates, not OpenCode reported cost; preserve hermetic tests and score schema.
+    unknowns: None for this task.
+    scope: OpenCode driver, runner failure ordering, tests, and one additive changelog entry.
+  inspiration: Verifier output is meaningful only after the agent event stream has completed without runtime or protocol errors.
+  discovered: OpenCode 1.18.11 exposes --auto, JSONL error events, separate reasoning and cache tokens, and auth login/list diagnostics.
+  verified: mage check passed; shell-stub tests observed --auto, strict malformed and error-event handling, auth remediation, reserved run trace IDs, and configured estimates over input/output/reasoning/cache classes; runner test confirmed verifier suppression on malformed output.
+  next: Validate portable OpenCode skills and add opt-in native trace correlation.
+  publication_order: 3

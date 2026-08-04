@@ -4,9 +4,19 @@ record:
   name: Make OpenCode execution autonomous and diagnosable
   depends_on:
     - fdiyjemwlc
-  status: pending
+  status: complete
   acceptance:
     - GIVEN a task requires workspace edits WHEN OpenCode runs non-interactively THEN permission handling does not wait for user input.
     - GIVEN malformed output or a runtime error WHEN execution ends THEN verification does not run and the error identifies remediation.
     - GIVEN a successful repeated-step run WHEN cost is calculated THEN all billable token classes use the documented comparable estimate.
   plan: noradwhfpb
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: foaztthtiq-a1
+      source: "Direct orchestration audit: mage check and hermetic OpenCode/runner tests verify autonomous execution, failure diagnostics, verifier suppression, and comparable token estimates"
+      recorded_at: 2026-08-04 19:39
+      writer_command: agentera state plan record-evaluation
