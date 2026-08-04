@@ -173,7 +173,9 @@ the release-worthy vertical slice is intact.
 These trains extend the verifier-backed scenario harness from independent
 variation runs to controlled, retained campaigns. They are generic OpenEval
 capabilities. Integrations such as ktx consume the contracts without adding
-tool-specific behavior to the runner.
+tool-specific behavior to the runner. The contracts include argv-safe
+per-variation wrappers and versioned external measurements retained with each
+attempt; neither contract gives OpenEval producer-specific semantics.
 
 - [ ] [attempt-evidence-contract:0.0.13] Retain one structured result per attempt
 
@@ -188,26 +190,56 @@ tool-specific behavior to the runner.
   - [ ] Preserve runtime-reported cost separately from any price-derived estimate
   - [ ] Retain runtime, version, model, variant, and measurement provenance when available
   - [ ] Preserve explicit numeric zero separately from unavailable or malformed fields
+  - [ ] Store versioned external producer metadata and producer-defined measurements on the corresponding attempt result
+  - [ ] Require every external measurement to declare a state and unit; measured values must be finite numbers, while unavailable and malformed values omit the value
+  - [ ] Distinguish a missing external artifact, unavailable measurement, malformed measurement, and measured zero
+  - [ ] Keep runtime usage, runtime cost, and external producer measurements as separate authorities
+  - [ ] Do not add an aggregate external-measurement map to the variation-level telemetry summary
   - [ ] Retain agent stdout and stderr as bounded artifacts with SHA-256 digests
   - [ ] Record agent failures as attempts and continue the run
   - [ ] Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass
   - [ ] Add a versioned score schema and validate it when loading
   - [ ] Keep existing score artifacts readable or document and test the intentional break
 
-- [ ] [immutable-attempt-artifacts:0.0.14] Make run evidence immutable and reproducible
+- [ ] [immutable-attempt-artifacts:0.0.14] Make attempt execution immutable and reproducible
 
   Named variation runs currently replace prior directories. A retained campaign
-  must preserve the exact task, source, configuration, runtime, and result
-  artifacts used for every attempt.
+  must preserve the exact task, source, configuration, invocation, runtime, and
+  result artifacts used for every attempt. It must also give generic wrappers a
+  safe invocation contract and a bounded path for publishing attempt evidence.
+
+  **Immutable campaign state**
 
   - [ ] Give each run and attempt a unique immutable ID
   - [ ] Never remove an existing run directory implicitly
   - [ ] Retain a campaign manifest before agent execution
-  - [ ] Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and agent command
+  - [ ] Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv
   - [ ] Retain an artifact manifest with path, size, and SHA-256
   - [ ] Record execution order, host/runtime identity, and OpenEval version
   - [ ] Validate that score rows and artifacts belong to the declared campaign
   - [ ] Add `openeval validate <run-dir>` with stable JSON output and documented exit codes
+
+  **Per-attempt external measurements**
+
+  - [ ] Allocate `external-metrics.json` inside each attempt artifact directory and pass its path to the child as `OPENEVAL_EXTERNAL_METRICS_PATH`
+  - [ ] Remove any existing entry at the metrics path before starting the child process
+  - [ ] Read the artifact after the child exits; accept absence without synthesizing measurements or success
+  - [ ] Validate a bounded regular non-symlink file, UTF-8, one complete JSON document without trailing data, and the `openeval.external-metrics.v1` schema
+  - [ ] Validate required producer metadata, unique measurement names, states, units, required or forbidden values by state, and finite numeric values
+  - [ ] Retain malformed artifacts and validation errors as attempt evidence rather than zero-valued measurements
+  - [ ] Retain exact artifact bytes, relative path, size, and SHA-256 and attach parsed valid measurements to the exact attempt
+  - [ ] Keep the raw per-attempt artifact authoritative; summaries and reports are derived views
+
+  **Argv-safe variation wrappers**
+
+  - [ ] Add `Variation.Command` as a YAML sequence whose elements are literal argv entries
+  - [ ] Preserve the existing direct-agent invocation when `command` is absent or empty
+  - [ ] Reject an empty wrapper executable or empty argv entry before agent execution
+  - [ ] Prepend the wrapper without a shell, whitespace splitting, interpolation, or environment expansion
+  - [ ] Keep the selected runtime driver responsible for the resolved agent binary and its normal arguments
+  - [ ] Retain the resolved agent identity and effective argv for direct and wrapped attempts
+  - [ ] Test executable paths and arguments containing spaces
+  - [ ] Keep existing scenarios without `command` byte-compatible when loaded
 
 - [ ] [historical-task-bundles:0.0.15] Support frozen source and structured grading per task
 
@@ -274,6 +306,9 @@ tool-specific behavior to the runner.
   - [ ] Report tool-call inflation, duration, patch size, and failure classes
   - [ ] Keep runtime-reported cost separate from price-derived estimates
   - [ ] Never replace missing measurements with zero
+  - [ ] Align external measurements only when paired attempts have matching names and units
+  - [ ] Report unmatched, unavailable, malformed, and absent external evidence without inventing counterparts
+  - [ ] Do not sum ratios, average counts across unequal task sets, combine external values with runtime usage, or infer that a producer caused runtime movement
   - [ ] Annotate unusual attempts without removing them automatically
   - [ ] Emit stable JSON from `compare` as well as human-readable text
   - [ ] Regenerate campaign summaries byte-identically from retained evidence
@@ -285,10 +320,13 @@ tool-specific behavior to the runner.
   above ship. OpenEval owns execution and grading; ktx owns compression and its
   native database evidence.
 
-  - [ ] Run passthrough and compression arms with the same OpenCode and ktx instrumentation
+  - [ ] Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
   - [ ] Give each attempt a new disposable `KTX_DB`, `HOME`, and XDG root
   - [ ] Retain ktx binary, configuration, pipeline, database, and artifact digests
-  - [ ] Consume ktx metrics per attempt rather than through one aggregate external map
+  - [ ] Have both arms publish versioned per-attempt external measurement artifacts
+  - [ ] Consume ktx metrics through the generic per-attempt contract rather than one aggregate external map
+  - [ ] Verify that OpenEval validates, retains, and compares ktx evidence without interpreting ktx-specific measurement names
+  - [ ] Verify that missing or unavailable ktx evidence does not become passthrough, success, or zero
   - [ ] Keep OpenCode runtime usage and ktx delivery evidence as separate authorities
   - [ ] Verify unchanged task quality before interpreting resource movement as useful
   - [ ] Complete an unpaid or explicitly bounded three-task smoke campaign
