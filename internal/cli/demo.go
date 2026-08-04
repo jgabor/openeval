@@ -44,7 +44,7 @@ var demoCmd = &cobra.Command{
 func init() {
 	demoCmd.Flags().StringVar(&demoAgent, "agent", "opencode", "Agent runtime (opencode, cursor, mock)")
 	demoCmd.Flags().StringVar(&demoScenario, "scenario", "example-fixtures", "Scenario id or path")
-	demoCmd.Flags().IntVar(&demoRounds, "rounds", 3, "Attempts per task in each arm")
+	demoCmd.Flags().IntVar(&demoRounds, "rounds", 1, "Attempts per task in each arm")
 	demoCmd.Flags().StringVar(&demoOut, "out", "", "Parent directory for unique demo evidence")
 	demoCmd.Flags().StringVar(&demoModel, "model", "", "OpenCode model for both comparison arms (provider/model)")
 	demoCmd.Flags().BoolVar(&demoDryRun, "dry-run", false, "Print exact commands and paths without execution or filesystem mutation")

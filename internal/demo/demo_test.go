@@ -24,7 +24,6 @@ func TestDryRunPrintsExactWorkWithoutFilesystemMutation(t *testing.T) {
 	}
 	result, err := Run(context.Background(), Options{
 		Agent:  "opencode",
-		Rounds: 3,
 		Out:    base,
 		DryRun: true,
 	})
@@ -47,7 +46,7 @@ func TestDryRunPrintsExactWorkWithoutFilesystemMutation(t *testing.T) {
 		"--model " + agent.DefaultOpenCodeModel,
 		"--variation baseline",
 		"--variation with-demo-skill",
-		"--rounds 3",
+		"--rounds 1",
 		"openeval compare " + result.Plan.BaselineDir + " " + result.Plan.SkillDir,
 	} {
 		if !strings.Contains(body, want) {

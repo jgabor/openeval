@@ -1,0 +1,16 @@
+id: ksugouebyh
+artifact: progress
+record:
+  timestamp: 2026-08-04 22:05
+  type: fix
+  phase: build
+  what: Changed the openeval demo quick-start default from three rounds to one while preserving the run command default and retaining the full four-task corpus and all verifiers.
+  context:
+    intent: Finalize measured demo onboarding defaults without weakening credibility evidence.
+    constraints: Preserve the run --rounds default; retain the full corpus and verifiers; treat cost as an OpenEval estimate; do not run another paid model calibration.
+    unknowns: The single calibration sample does not establish variance bounds.
+    scope: Demo default, proportional tests and help, narrow current documentation, and durable progress evidence.
+  discovered: "Independent Analyze evidence from /tmp/opencode/nwascnzhat-calibration-20260804 measured OpenCode 1.18.11 with opencode/big-pickle: baseline 4/4 at $1.379985, skill 4/4 at $1.442883, combined 8/8 at $2.822868 OpenEval-estimated cost and 248.852 seconds, with zero harness failures. The result is below the 10-minute/$3 target and 15-minute/$5 hard ceiling. One sample does not guarantee cost, runtime, or result variance."
+  verified: go test ./internal/demo and ./internal/cli passed. The locally built ./bin/openeval help and dry-run showed a one-round demo default. mage check passed all tests, vet, lint, tidy, and vulnerability checks. No paid calibration was rerun.
+  next: Leave nwascnzhat in_progress for independent Audit. Three rounds remain recommended for pass@k evidence.
+  publication_order: 16

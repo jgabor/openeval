@@ -55,13 +55,13 @@ Preview the exact work and retained output paths:
 openeval demo --dry-run
 ```
 
-Run three attempts per task in each arm:
+Run the quick-start comparison with one attempt per task in each arm:
 
 ```bash
 openeval demo
 ```
 
-`demo` runs `baseline` and `with-demo-skill`, passes the actual returned run directories to `compare`, prints the comparison table, and prints one unique evidence root. It never removes an earlier demo root. Use `--rounds 1` for a lower-cost exploratory smoke.
+`demo` runs `baseline` and `with-demo-skill`, passes the actual returned run directories to `compare`, prints the comparison table, and prints one unique evidence root. It never removes an earlier demo root. The one-round default keeps onboarding quick; use `--rounds 3` for stronger pass@k evidence.
 
 The table includes:
 

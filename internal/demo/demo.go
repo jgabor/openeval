@@ -142,7 +142,7 @@ func normalizeOptions(opts Options) Options {
 		opts.Agent = "opencode"
 	}
 	if opts.Rounds <= 0 {
-		opts.Rounds = 3
+		opts.Rounds = 1
 	}
 	return opts
 }

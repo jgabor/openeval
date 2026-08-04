@@ -4,10 +4,20 @@ record:
   name: Prove verifier integrity and useful skill variation
   depends_on:
     - pjgpucpayz
-  status: in_progress
+  status: complete
   acceptance:
     - GIVEN a reference correction for each task WHEN verification runs THEN all four tasks pass.
     - GIVEN at least one plausible incorrect correction per task WHEN verification runs THEN it is rejected.
     - GIVEN the demo skill WHEN an agent loads it THEN it provides general reproduce, inspect, fix, and recheck guidance without task answers.
     - GIVEN baseline and skill arms WHEN results differ THEN documentation treats the difference as descriptive rather than proof of causation.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-yicugqvnid-1
+      source: independent Audit verifier-integrity and skill-isolation review
+      recorded_at: 2026-08-04 21:54
+      writer_command: agentera state plan record-evaluation
