@@ -1,0 +1,16 @@
+id: zbvipeckai
+artifact: progress
+record:
+  timestamp: 2026-08-04 21:40
+  type: fix
+  phase: build
+  what: Applied the shared model-selection invariant to doctor so non-OpenCode model overrides are rejected instead of ignored.
+  context:
+    intent: Correct the independent Audit failure for task jsgxvlxqxu while leaving it in_progress for re-audit.
+    constraints: Preserve normal Cursor doctor and mock demo behavior; no broader documentation, paid call, lifecycle completion, amend, or squash.
+    unknowns: None; agent.ResolveModel already defines the required rejection for every non-OpenCode agent.
+    scope: Doctor override validation, Cursor and unsupported-agent regression coverage, failed Audit state, and retry evidence.
+  discovered: Doctor passed its model override only to the OpenCode catalog check, bypassing the shared rejection contract for Cursor and other agents.
+  verified: Focused doctor, demo, and agent tests passed. The rebuilt local CLI returned exit code 1 with --model is not supported for agent cursor and remove --model or use --agent opencode remediation. Mage check passed.
+  next: Independent Audit should re-evaluate jsgxvlxqxu; keep the task in_progress until that verdict is recorded.
+  publication_order: 13

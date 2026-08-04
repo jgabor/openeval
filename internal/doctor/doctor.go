@@ -55,6 +55,7 @@ func Run(ctx context.Context, agentName, modelOverride string) Report {
 	}
 	report := Report{SchemaVersion: SchemaVersion, Agent: agentName}
 	cfg := checkConfig(&report, agentName)
+	checkModelOverride(&report, agentName, modelOverride, cfg)
 	command, ok := checkRuntime(ctx, &report, agentName, cfg)
 	if ok {
 		checkVersion(ctx, &report, agentName, command)
@@ -79,6 +80,20 @@ func Run(ctx context.Context, agentName, modelOverride string) Report {
 	}
 	report.finish()
 	return report
+}
+
+func checkModelOverride(report *Report, agentName, modelOverride string, cfg config.Config) {
+	if modelOverride == "" || agentName == "opencode" {
+		return
+	}
+	if _, err := agent.ResolveModel(agentName, modelOverride, "", cfg); err != nil {
+		report.add(Check{
+			ID:          "model",
+			Status:      StatusFail,
+			Summary:     err.Error(),
+			Remediation: "remove `--model` or use `--agent opencode`",
+		})
+	}
 }
 
 func (r *Report) add(check Check) {

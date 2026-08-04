@@ -190,6 +190,31 @@ func TestRunCursorChecksRuntimeAndHooks(t *testing.T) {
 	}
 }
 
+func TestRunRejectsModelOverrideForNonOpenCodeAgent(t *testing.T) {
+	for _, agentName := range []string{"cursor", "unsupported"} {
+		t.Run(agentName, func(t *testing.T) {
+			root := t.TempDir()
+			t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+			t.Setenv("HOME", filepath.Join(root, "home"))
+			cfg := config.Default()
+			cfg.Agents.Cursor.Command = writeStub(t, root, "#!/bin/sh\nprintf '%s\\n' 'cursor-agent 2026.1'\n")
+			cfg.Telemetry.Endpoint = ""
+			saveConfig(t, cfg)
+
+			report := Run(context.Background(), agentName, "provider/model")
+			check := findCheck(t, report, "model")
+			if report.Status != StatusFail || report.ExitCode != 1 {
+				t.Fatalf("report = %+v, want fatal unsupported model override", report)
+			}
+			for _, want := range []string{"--model is not supported", agentName, "remove `--model`", "--agent opencode"} {
+				if !strings.Contains(check.Summary+" "+check.Remediation, want) {
+					t.Fatalf("model check = %+v, want %q", check, want)
+				}
+			}
+		})
+	}
+}
+
 func TestWriteJSONUsesStableSchemaAndStatuses(t *testing.T) {
 	report := Report{
 		SchemaVersion: SchemaVersion,

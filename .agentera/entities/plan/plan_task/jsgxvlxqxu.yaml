@@ -12,3 +12,13 @@ record:
     - GIVEN comparison dry-run output WHEN it is reviewed THEN both arms show the same explicit resolved model.
     - GIVEN an explicit demonstration override WHEN execution begins THEN both arms use and retain that model.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 1
+    last_verdict: fail
+    last_failure_evidence: doctor --agent cursor --model provider/model exits successfully without rejecting or checking the unsupported model; internal/cli/doctor.go and internal/doctor/doctor.go need explicit non-OpenCode rejection plus regression coverage
+    provenance:
+      attempt_id: audit-jsgxvlxqxu-1
+      source: independent Audit model-diagnostics review
+      recorded_at: 2026-08-04 21:38
+      writer_command: agentera state plan record-evaluation
