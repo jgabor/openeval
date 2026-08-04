@@ -1,0 +1,21 @@
+id: cxeomrcrxw
+artifact: plan
+record:
+  plan: rizkwhwnsc
+  name: Isolate grader execution and reverify closure
+  status: in_progress
+  depends_on:
+    - qnijueivja
+    - sobvkljsxq
+    - jsgxvlxqxu
+    - pjgpucpayz
+    - yicugqvnid
+    - nwascnzhat
+    - bizkkoldqp
+  acceptance:
+    - GIVEN adversarial workspace import code WHEN grading runs THEN workspace side effects cannot alter parent grader assertions or verdict control flow.
+    - GIVEN workspace-test and import-side-effect tampering WHEN a broken implementation is graded THEN both attacks receive fail with regression coverage.
+    - GIVEN untouched, reference, plausible-negative, and retained authenticated workspaces WHEN the isolated grader runs THEN expected fail/pass outcomes remain intact without paid inference.
+    - GIVEN the corrected authority boundary WHEN final gates and state synchronization run THEN hermetic checks pass and TODO 0.0.3 remains closed with truthful evidence.
+  evidence:
+    - Independent Audit reproduced mutation of the in-process grader through agent-owned import code after workspace-test isolation.

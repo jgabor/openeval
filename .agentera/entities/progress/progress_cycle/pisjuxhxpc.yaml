@@ -1,0 +1,16 @@
+id: pisjuxhxpc
+artifact: progress
+record:
+  timestamp: 2026-08-04 23:12
+  type: fix
+  phase: build
+  what: Isolated example-fixtures workspace execution after the second Audit bypass and reverified closure evidence.
+  context:
+    intent: Close the grader authority gap for cxeomrcrxw while leaving lifecycle completion to independent Audit.
+    constraints: Use a separate corpus fixup, no paid inference, preserve blocked ttdvuydxlr, keep cxeomrcrxw in_progress, and do not claim host sandboxing.
+    unknowns: Process isolation does not prevent arbitrary host filesystem mutation; campaign sandboxing remains deferred. The retained authenticated smoke remains one sample and does not establish variance.
+    scope: Parent and child grader boundary, both tamper regressions, scenario documentation, retained workspace regrading, final gates, and local CLI evidence.
+  discovered: The prior scenario-owned grader protected test files but imported agent-owned Python into the same process as grade_durations and verdict control. Import side effects could mutate that trusted function before it ran. Verifier scripts already resolved the current checkout grader, so no stale installed artifact caused the bypass; task state was blocked and nonterminal before replacement work began.
+  verified: examples/scenarios/example-fixtures/graders/grade.py now retains assertions and invokes graders/worker.py with a strict JSON call request. The parent rejects malformed responses and compares normalized child results independently. TestExampleFixturesVerifierRejectsWorkspaceTampering confirms workspace-test replacement and the exact __main__.grade_durations.__code__ import mutation both receive fail. Focused tests produced four untouched failures, four reference passes, and four plausible-negative failures. All eight retained authenticated workspaces under /tmp/opencode/nwascnzhat-calibration-20260804 passed the checkout grader without inference. mage build, an uncached restricted-environment go test -count=1 ./..., mage check, gopls diagnostics, Prettier, and git diff --check passed. Newly built bin/openeval produced the expected untouched mock failure and retained report/compare output. Doctor passed config, OpenCode 1.18.11, authentication, and model checks but reported an invalid user-installed skill and unavailable optional OTLP.
+  next: Independent Audit should evaluate cxeomrcrxw. Keep cxeomrcrxw in_progress, ttdvuydxlr blocked, plan rizkwhwnsc nonterminal, and TODO 0.0.3 closed only while the recorded isolation evidence remains valid.
+  publication_order: 20

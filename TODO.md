@@ -44,7 +44,7 @@ the release-worthy vertical slice is intact.
 
 - [x] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
 
-  Completed with four standard-library Python maintenance tasks and focused scenario-owned graders outside the agent workspace. Final verification passed `mage build`, an uncached full suite without live agents, provider credentials, or a collector, and `mage check`. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures; all eight retained workspaces also passed the hardened graders. This local sample does not establish variance or a general provider/model ranking.
+  Completed with four standard-library Python maintenance tasks and process-isolated scenario-owned graders outside the agent workspace. Parent assertions reject workspace-test replacement and import-side-effect mutation while a child imports workspace code. Final verification passed `mage build`, an uncached full suite without live agents, provider credentials, or a collector, and `mage check`. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures; all eight retained workspaces also passed the isolated graders without new inference. This local sample does not establish variance or a general provider/model ranking, and grader isolation is not host sandboxing.
 
   - [x] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
   - [x] Keep shell/script verifiers

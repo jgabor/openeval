@@ -230,7 +230,7 @@ Variations cannot replace `OPENEVAL_SCENARIO_ID`, `OPENEVAL_VARIATION`, `OPENEVA
 
 ## Scenarios, variations, and evidence
 
-The shipped `example-fixtures` scenario contains four independent maintenance tasks in one small standard-library-only Python repository: duration parsing, URL credential redaction, account-name normalization, and log-level summaries. Each task has a focused, scenario-owned grader outside the copied agent workspace and needs no package installation, network access, external service, or repository history. The scenario has three relevant arms:
+The shipped `example-fixtures` scenario contains four independent maintenance tasks in one small standard-library-only Python repository: duration parsing, URL credential redaction, account-name normalization, and log-level summaries. Each task has a focused, scenario-owned grader outside the copied agent workspace and needs no package installation, network access, external service, or repository history. Grader assertions and verdict control stay in the parent process; a child process imports workspace code and returns normalized call results. This process boundary is not a campaign sandbox and does not prevent arbitrary host filesystem mutation. The scenario has three relevant arms:
 
 ```yaml
 variations:

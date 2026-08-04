@@ -10,7 +10,7 @@ record:
     - yicugqvnid
     - nwascnzhat
     - bizkkoldqp
-  status: in_progress
+  status: blocked
   acceptance:
     - GIVEN the complete change WHEN project gates run THEN build, tests, static checks, lint, and vulnerability checks pass.
     - GIVEN hermetic CI WHEN the suite runs THEN no live agent, provider credential, or collector is required.
@@ -18,12 +18,12 @@ record:
     - GIVEN verified evidence WHEN current state is synchronized THEN the mini-production-scenario train closes only if every integrity and smoke criterion passes.
   plan: rizkwhwnsc
   evaluation:
-    attempt_count: 1
-    failure_count: 1
+    attempt_count: 2
+    failure_count: 2
     last_verdict: fail
-    last_failure_evidence: Agents can replace workspace-owned grading tests and make broken implementations pass. Move grading tests outside seeded agent state, run them against workspace code, add a tamper regression, and refresh final evidence before TODO 0.0.3 remains closed. Also correct stale TODO 0.0.12 dependency wording.
+    last_failure_evidence: Workspace implementation code is imported into the trusted grader process and can mutate __main__.grade_durations.__code__ to force a false pass. Isolate workspace execution in a child process, keep assertions in the parent, add import-side-effect tamper regression, regrade references/negatives/retained workspaces, and rerun final gates.
     provenance:
-      attempt_id: audit-ttdvuydxlr-1
-      source: independent Audit final delivery and verifier threat-model review
-      recorded_at: 2026-08-04 22:37
+      attempt_id: audit-ttdvuydxlr-2
+      source: fresh independent Audit grader-authority boundary review
+      recorded_at: 2026-08-04 22:59
       writer_command: agentera state plan record-evaluation
