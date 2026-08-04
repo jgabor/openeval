@@ -1,0 +1,16 @@
+id: zhtdfhgpum
+artifact: progress
+record:
+  timestamp: 2026-08-04 22:25
+  type: test
+  phase: build
+  what: Verified final OpenEval delivery, reconciled retained authenticated evidence, and closed TODO 0.0.3 without rerunning paid inference.
+  context:
+    intent: Satisfy ttdvuydxlr acceptance while leaving lifecycle completion to independent Audit.
+    constraints: Use direct Agentera v3, the newly built binary, retained paid evidence, and no terminal plan closure.
+    unknowns: The single authenticated sample does not establish cost, runtime, or result variance.
+    scope: Authoritative gates, hermetic proof, non-paid CLI behavior, retained evidence reconciliation, TODO closure, and state consistency.
+  discovered: All seven prerequisite tasks have independent passing Audit evaluations. The first restricted-PATH test attempt lacked the test fixture utility sort; after adding only that local utility, the suite passed with opencode and cursor-agent absent and no provider or OTLP environment. CHANGELOG already covers every shipped user-facing change and needs no verification-only entry.
+  verified: mage build passed. An uncached go test -count=1 ./... passed under env -i with isolated HOME/XDG/cache, CGO disabled, no opencode or cursor-agent on PATH, and no provider credential or OTLP endpoint variables. mage check passed tidy, full tests, vet, golangci-lint, and govulncheck; gopls reported no diagnostics; git diff --check passed. Newly built bin/openeval (sha256 256ce387f10063e410b1cbf71dbad546f005be5697c75c97a04c33641853d804) passed help, authenticated non-inference doctor/catalog, side-effect-free demo --dry-run, report, and compare checks. Retained /tmp/opencode/nwascnzhat-calibration-20260804/parsed-summary.json, flow.measurement, flow.stdout, runs/20260804T195640.248478835Z-43bbb6c8/baseline/score.json, and runs/20260804T195640.248478835Z-43bbb6c8/with-demo-skill/score.json agree on OpenCode 1.18.11, opencode/big-pickle, four tasks and one round in both arms, baseline 4/4 at $1.379985, skill 4/4 at $1.442883, combined 8/8 at $2.822868, zero harness failures, retained report/comparison output, and 248.851996455 seconds.
+  next: Independent Audit must evaluate ttdvuydxlr and complete the task and plan lifecycle. Keep ttdvuydxlr in_progress and do not publish terminal closure health.
+  publication_order: 18

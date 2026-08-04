@@ -42,9 +42,9 @@ the release-worthy vertical slice is intact.
   - [x] Exit 0 prints a compare table when OpenCode setup is valid
   - [x] Does not require OTLP/Jaeger (see `0.0.4`)
 
-- [ ] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
+- [x] [mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks
 
-  Four standard-library Python maintenance tasks now exercise focused script verifiers. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures. This local sample does not establish variance or a general provider/model ranking. Keep the train open until final plan verification confirms the complete evidence and documentation set.
+  Completed with four standard-library Python maintenance tasks and focused script verifiers. Final verification passed `mage build`, an uncached full suite without live agents, provider credentials, or a collector, and `mage check`. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures. This local sample does not establish variance or a general provider/model ranking.
 
   - [x] Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
   - [x] Keep shell/script verifiers
@@ -53,7 +53,7 @@ the release-worthy vertical slice is intact.
   - [x] CI can run a subset with `--agent mock`
   - [x] Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors
   - [x] Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence
-  - [ ] Complete final plan verification before closing `0.0.3`
+  - [x] Complete final plan verification before closing `0.0.3`
 
 - [ ] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup
 

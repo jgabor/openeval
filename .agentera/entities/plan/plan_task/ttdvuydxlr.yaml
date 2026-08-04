@@ -10,7 +10,7 @@ record:
     - yicugqvnid
     - nwascnzhat
     - bizkkoldqp
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN the complete change WHEN project gates run THEN build, tests, static checks, lint, and vulnerability checks pass.
     - GIVEN hermetic CI WHEN the suite runs THEN no live agent, provider credential, or collector is required.

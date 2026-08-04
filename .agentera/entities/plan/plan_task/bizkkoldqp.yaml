@@ -6,10 +6,20 @@ record:
     - sobvkljsxq
     - jsgxvlxqxu
     - nwascnzhat
-  status: in_progress
+  status: complete
   acceptance:
     - GIVEN current onboarding WHEN a user follows it THEN the default model, override mechanisms, expected cost, and expected runtime are explicit.
     - GIVEN a scenario or benchmark author WHEN model guidance is read THEN workload fit, tools, authentication, cost, latency, and data policy are named selection criteria.
     - GIVEN a configuration-arm comparison WHEN guidance is followed THEN both arms use the same model unless model comparison is intentional.
     - GIVEN the mini scenario results WHEN claims are stated THEN they remain local descriptive evidence rather than a general provider or model ranking.
   plan: rizkwhwnsc
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-bizkkoldqp-1
+      source: independent Audit model-policy documentation review
+      recorded_at: 2026-08-04 22:20
+      writer_command: agentera state plan record-evaluation
