@@ -156,7 +156,7 @@ the release-worthy vertical slice is intact.
 
 - [ ] [skill-compare-playbook:0.0.12] Document skill-variation compare workflow
 
-  The compare workflow and runtime-specific discovery behavior are documented. The remaining cross-link waits for the `0.0.3` scenario expansion.
+  The compare workflow and runtime-specific discovery behavior are documented. The remaining cross-link is now unblocked because `0.0.3` is complete.
 
   ```bash
   openeval run --scenario example-fixtures --variation baseline --agent opencode --rounds 3
