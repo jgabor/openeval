@@ -5,9 +5,9 @@ import (
 	"fmt"
 
 	"github.com/jgabor/openeval/internal/agent"
-	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/config"
 	"github.com/jgabor/openeval/internal/paths"
+	"github.com/jgabor/openeval/internal/runcontext"
 	"github.com/jgabor/openeval/internal/scenario"
 	"github.com/jgabor/openeval/internal/score"
 	"github.com/jgabor/openeval/internal/telemetry"
