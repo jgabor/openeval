@@ -55,6 +55,6 @@ var instrumentCmd = &cobra.Command{
 }
 
 func init() {
-	instrumentCmd.Flags().BoolVar(&instrumentAll, "all", false, "Instrument all detected agents")
-	instrumentCmd.Flags().StringVar(&instrumentAgent, "agent", "", "Instrument one agent")
+	instrumentCmd.Flags().BoolVar(&instrumentAll, "all", false, "Configure OpenCode and Cursor")
+	instrumentCmd.Flags().StringVar(&instrumentAgent, "agent", "", "Configure one agent (opencode, cursor)")
 }

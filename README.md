@@ -1,66 +1,106 @@
 # OpenEval
 
-One CLI control plane for measuring CLI coding agent quality: **harness proof** on pinned scenarios and **continuous observability** on real sessions.
+OpenEval is one CLI control plane for two related workflows:
 
-| Rhythm | Commands | Question it answers |
-| ------ | -------- | ------------------- |
-| **Harness proof** (primary) | `run`, `compare`, `report`, `traces` | Did pass@k or cost per passed task move on release or on schedule? |
-| **Continuous observability** | `instrument`, `hook` (agent callback) | Did real-session cost, tokens, or tool usage drift after a skill change? |
+- **Harness proof:** run pinned tasks, verify outcomes, compare pass@k and cost.
+- **Continuous instrumentation:** export selected runtime events to an external OTLP backend.
 
-Both rhythms share one config file, one `score.json` contract, and correlated OTLP traces — not two separate products.
+OpenCode is the primary production runtime. Cursor is a supported secondary runtime. The mock driver exists for hermetic tests and CI; it does not produce production evaluation evidence.
 
-- **Run:** execute pinned scenario tasks with verifiers; aggregate pass@k and cost
-- **Compare:** diff two variation arms on the same scenario
-- **Instrument:** install hooks that export masked spans to your OTLP backend
-- **Traces:** link a harness round to the configured collector and Jaeger UI
+> **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the local CLI, the `example-fixtures` scenario, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, and opt-in native OpenCode OTEL. A public no-clone install, Pi, external benchmark integrations, Docker execution, a bundled collector, and full cross-runtime telemetry normalization are not shipped.
 
-Run the same scenarios on Cursor, OpenCode, Pi, and other supported agents. Better numbers upstream mean cheaper, more reliable agents for the teams and end users downstream.
+## Support status
 
-> **Status:** `0.0.0-dev` — Core CLI ships in this repo (`mage install` or `go build -o bin/openeval ./cmd/openeval`). Cursor harness + hook instrumentation are implemented; DeepSWE, margin-eval, Docker images, and full cross-runtime telemetry inventory are deferred.
+| Surface                    | Status                 | Notes                                                                                                            |
+| -------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| OpenCode harness           | **Primary, shipped**   | Validated with OpenCode 1.18.11; autonomous JSONL runs, comparable cost estimates, portable skill checks         |
+| Cursor harness             | **Secondary, shipped** | `cursor-agent` subprocess driver and Cursor-specific `.claude-plugin` loading                                    |
+| Mock harness               | **CI only, shipped**   | Hermetic synthetic driver; never treat mock scores as agent-quality evidence                                     |
+| OpenCode native OTEL       | **Opt-in, shipped**    | Separate runtime traces correlated to OpenEval summary traces by resource attributes                             |
+| Cursor hook telemetry      | **Secondary, shipped** | Merged into `~/.cursor/hooks.json` without replacing existing hooks                                              |
+| Pi                         | **Planned**            | No harness or telemetry driver                                                                                   |
+| DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                        |
+| Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                          |
+| Install                    | **Checkout only**      | `go install ./cmd/openeval`; the repository is not currently available through a public `@latest` module install |
+| OTLP storage/collector     | **External**           | OpenEval does not embed a trace database or currently bundle a collector                                         |
 
-### Terminology
+## Quick start: compare on OpenCode
 
-| Term          | Meaning                                                                                            |
-| ------------- | -------------------------------------------------------------------------------------------------- |
-| **Eval**      | The overall activity: instrument an agent, run a scenario, score and compare results               |
-| **Scenario**  | A pinned task set and verifiers (what problems run). Selected with `--scenario`                    |
-| **Variation** | A labeled config arm under test (baseline, a version, a feature flag). Selected with `--variation` |
-| **Run**       | One execution of a scenario, stored under `./scenarios/<scenario>/runs/…`                          |
+Prerequisites:
 
-Shipped examples live under `examples/`. Your scenarios live under `evals/` (or any path you pass to `--scenario`).
+- Go 1.26 or later.
+- OpenCode 1.18.11 on `PATH`.
+- Provider credentials configured in OpenCode.
+- No OTLP collector is required for the comparison flow.
 
-## Quick start
-
-**Primary path:** install the CLI, run the shipped `example-fixtures` scenario, then optionally instrument Cursor for continuous OTLP export.
-
-```bash
-mage install   # or: go build -o bin/openeval ./cmd/openeval
-
-# 1. Harness proof — pinned tasks, verifiers, score.json
-openeval run --scenario example-fixtures --agent mock --rounds 1
-openeval report ./scenarios/example-fixtures/runs/1
-
-# 2. Continuous observability — optional, same config + OTLP endpoint
-cp examples/config.minimal.yaml "$XDG_CONFIG_HOME/openeval/config.yaml"
-openeval instrument --agent cursor
-```
-
-Use `--agent cursor` instead of `mock` when `cursor-agent` is installed and authenticated. See [Cursor](#cursor---agent-cursor) below.
-
-### Prerequisites
-
-- Linux, macOS, or Windows
-- Docker (optional, for packaged eval runs)
-- An OTLP backend (Jaeger, Grafana Cloud, or any OTLP collector) — for instrumentation and trace lookup
-- A supported CLI agent installed locally (Cursor, OpenCode, or Pi) — for production harness runs
-
-### Install
+The current example scenario and skills are file-backed development assets. Repository access is currently required. Clone it so the quick-start commands can resolve those assets, then install the CLI:
 
 ```bash
-go install openeval@latest
+git clone https://github.com/jgabor/openeval.git
+cd openeval
+go install ./cmd/openeval
 ```
 
-From source:
+Authenticate and diagnose setup. These commands do not make a paid model call:
+
+```bash
+opencode auth login
+opencode auth list
+openeval doctor --agent opencode
+```
+
+Preview the exact work and retained output paths:
+
+```bash
+openeval demo --dry-run
+```
+
+Run three attempts per task in each arm:
+
+```bash
+openeval demo
+```
+
+`demo` runs `baseline` and `with-demo-skill`, passes the actual returned run directories to `compare`, prints the comparison table, and prints one unique evidence root. It never removes an earlier demo root. Use `--rounds 1` for a lower-cost exploratory smoke.
+
+The table includes:
+
+- `pass@1`
+- `pass@<rounds>`
+- `cost_usd_total`
+- `cost_per_passed`
+- candidate-minus-baseline deltas
+- exact `score.json` paths
+
+### Manual three-command comparison
+
+Use a fresh root for each experiment. The explicit `--out` paths avoid inferred or variation-default directories.
+
+```bash
+ROOT=./scenarios/example-fixtures/manual-compare-001
+
+openeval run --scenario example-fixtures --variation baseline \
+  --agent opencode --rounds 3 --out "$ROOT/baseline"
+
+openeval run --scenario example-fixtures --variation with-demo-skill \
+  --agent opencode --rounds 3 --out "$ROOT/with-demo-skill"
+
+openeval compare "$ROOT/baseline" "$ROOT/with-demo-skill"
+```
+
+Increment the root suffix for later experiments. `openeval demo` allocates this unique root automatically.
+
+## Install path
+
+The verified install path is from a repository checkout:
+
+```bash
+go install ./cmd/openeval
+```
+
+`go install github.com/jgabor/openeval/cmd/openeval@latest` is the intended future public path, but it is not currently a working unauthenticated install: the module is not publicly resolvable. The example scenario and skills are also file-backed rather than embedded. Do not present the future command as a shipped installation method.
+
+For contributor work, the repository also provides Mage:
 
 ```bash
 git clone https://github.com/jgabor/openeval.git
@@ -69,30 +109,66 @@ go install github.com/magefile/mage@v1.17.2
 mage install
 ```
 
-### Instrument (continuous observability)
-
-Install hooks that read the shared OpenEval config and export masked spans to OTLP:
+Useful checks:
 
 ```bash
-openeval instrument --agent cursor
+mage build
+mage test
+mage lint
+mage check
 ```
 
-`openeval instrument` merges hook entries into `~/.cursor/hooks.json` and creates the config file if missing (see [Configuration](#configuration)). Harness runs work without instrumentation; add it when you want real-session cost and behavior traces alongside periodic proof runs.
+`mage check` runs the tidy check, tests, vet, lint, and `govulncheck`.
 
-### Configuration
+## Commands
 
-Config paths:
+| Command               | Purpose                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| `openeval doctor`     | Read-only setup checks; OpenCode is the default; `--json` emits `openeval.doctor.v1` |
+| `openeval demo`       | Diagnose, run baseline and skill arms, compare, and retain unique output             |
+| `openeval run`        | Execute one scenario variation against `opencode`, `cursor`, or `mock`               |
+| `openeval compare`    | Compare two run directories with the same scenario ID                                |
+| `openeval report`     | Print one run's task, pass@k, cost, and session summary                              |
+| `openeval traces`     | Print the direct summary trace target and optional native-correlation help           |
+| `openeval instrument` | Opt into OpenCode native OTEL or merge Cursor hooks                                  |
+| `openeval hook`       | Receive Cursor hook callbacks and emit configured summary events                     |
 
-- Linux and macOS: `$XDG_CONFIG_HOME/openeval/config.yaml`
+Run `openeval <command> --help` for flags.
+
+## Doctor contract
+
+`openeval doctor` makes no model request. For OpenCode it checks:
+
+1. The OpenEval config path and YAML.
+2. `opencode` on `PATH` or `agents.opencode.command`.
+3. The OpenCode version against the validated 1.18.11 contract.
+4. `opencode auth list`.
+5. Every `skills.aliases` path and OpenCode skill frontmatter.
+6. OTLP endpoint reachability.
+7. Native OpenCode OTEL opt-in state.
+
+An unreachable collector is a warning and exits 0. Invalid config, runtime, authentication, or skill setup is fatal and exits 1. Every non-pass result includes remediation. Use stable structured output in automation:
+
+```bash
+openeval doctor --agent opencode --json
+```
+
+Cursor remains available as a secondary check:
+
+```bash
+openeval doctor --agent cursor
+```
+
+It checks `cursor-agent`, its version output, shared config/skills/telemetry, and OpenEval entries in `~/.cursor/hooks.json`.
+
+## Configuration
+
+OpenEval reads:
+
+- Linux and macOS: `${XDG_CONFIG_HOME:-$HOME/.config}/openeval/config.yaml`
 - Windows: `%LOCALAPPDATA%\openeval\config.yaml`
 
-Copy the example or edit the file `openeval instrument` creates:
-
-```bash
-cp examples/config.minimal.yaml "$XDG_CONFIG_HOME/openeval/config.yaml"
-```
-
-Minimal example (`examples/config.minimal.yaml`):
+`openeval instrument --agent opencode` or `--agent cursor` creates the config if it is absent. The shipped example is `examples/config.minimal.yaml`:
 
 ```yaml
 version: 1
@@ -103,398 +179,211 @@ telemetry:
 privacy:
   mask_prompts: true
   mask_secrets: true
+scenarios:
+  aliases: {}
+skills:
+  aliases:
+    demo-skill: ./examples/skills/demo-skill
+    plugin-skill: ./examples/skills/plugin-skill
+agents:
+  opencode:
+    # command: /usr/local/bin/opencode
+    native_otel: false
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
+  cursor:
+    # command: /usr/local/bin/cursor-agent
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
 ```
 
-Telemetry settings follow standard OTLP environment variable names. Hook-instrumented agents read this file, so you do not need export variables in the agent process.
+OpenCode and Cursor use the same configured input/output rates. OpenCode reasoning tokens use the output rate; cache-read and cache-write tokens use the input rate. OpenEval deliberately does not substitute OpenCode's runtime-reported cost, so cross-runtime estimates stay comparable.
 
-Export options (set in config or via OTLP env vars):
+Runtime environment precedence is deterministic:
 
-- Protocols: gRPC, HTTP/Protobuf, HTTP/JSON
-- Generation-based batching for HTTP/JSON (spans grouped by `generation_id`, sent on stop event)
-- Automated install scripts for Windows and macOS/Linux
+```text
+inherited process environment < variation env < reserved OpenEval run context
+```
 
-### Scenarios and variations
+Variations cannot replace `OPENEVAL_SCENARIO_ID`, `OPENEVAL_VARIATION`, `OPENEVAL_TASK_ID`, `OPENEVAL_ROUND`, or `OPENEVAL_TRACE_ID`.
 
-- **`--scenario`** selects which tasks to run: a built-in id (`example-fixtures`), a path to your YAML (`./evals/my-scenario.yaml`), a registered alias, or an integrated external scenario (`deepswe`, `margin-eval`).
-- **`--variation`** selects a named config arm defined in the scenario file (or `default` when omitted). Compare two runs that share the same scenario.
-- **`--rounds`** sets attempts per task (default: `3`). Use multiple rounds for pass@k; treat a single round as exploratory only.
-- **`--out`** is optional. Default layout:
-  - no `--variation` (or `default`) → `./scenarios/<scenario>/runs/<n>` with auto-incrementing `n` per scenario; prior runs are kept
-  - named `--variation` → `./scenarios/<scenario>/runs/<variation>`; re-running overwrites that directory unless you pass `--out`
+## Scenarios, variations, and evidence
 
-`<scenario>` is the resolved scenario id (`example-fixtures`, `deepswe`, …), not the agent name. Agent, rounds, and timestamps live in `score.json` and traces.
-
-**How variations apply:** each scenario YAML lists `variations` with the agent config for that arm — skills to enable, env vars, prompt pins, and similar. `openeval run --variation <name>` loads that block before starting tasks. The variation label is stored in `score.json`; skill names and telemetry reflect what actually ran.
-
-**Compare rules:** `openeval compare` requires the same `scenario_id` in both `score.json` files. It warns when `agent` differs. Pass two run directories; labels come from each run's `variation` field.
-
-Drop instrumentation that never changes scenario scores or cost (see [Supported telemetry](#supported-telemetry) — capture only what informs comparisons).
-
-### Scenario format
-
-Minimal shape (see `examples/scenarios/example-fixtures/scenario.yaml`):
+The shipped `example-fixtures` scenario contains two pipeline-scale tasks and three relevant arms:
 
 ```yaml
-id: example-fixtures
-tasks:
-  - id: hello-verify
-    prompt: Verify the hello-world script prints the expected greeting
-    verifier: { type: script, run: ./verifiers/hello-verify.sh }
-  - id: edit-file
-    prompt: Add a one-line comment to fixtures/src/main.py without changing behavior
-    verifier: { type: script, run: ./verifiers/edit-file.sh }
 variations:
   default: {}
-```
-
-### Run
-
-```bash
-# Example scenario shipped with the repo → ./scenarios/example-fixtures/runs/1
-openeval run \
-  --scenario example-fixtures \
-  --agent cursor \
-  --rounds 3
-
-# Custom scenario you author → ./scenarios/my-scenario/runs/1
-openeval run \
-  --scenario ./evals/my-scenario.yaml \
-  --agent cursor
-
-# Integrated external scenarios
-openeval run --scenario deepswe --agent cursor --rounds 5
-# → ./scenarios/deepswe/runs/1
-
-openeval run --scenario margin-eval --agent cursor --rounds 3
-# → ./scenarios/margin-eval/runs/1
-
-# Fixed package in Docker → ./scenarios/example-fixtures/runs/2
-openeval run \
-  --scenario example-fixtures \
-  --image ./examples/docker/agent-eval \
-  --rounds 5
-```
-
-### Compare variations
-
-Same scenario, two config arms — then diff pass@k and cost:
-
-```bash
-# External scenario: current release vs release candidate
-openeval run --scenario deepswe --agent cursor \
-  --variation v1.2.3 --rounds 5
-# → ./scenarios/deepswe/runs/v1.2.3
-
-openeval run --scenario deepswe --agent cursor \
-  --variation v1.3.0-rc1 --rounds 5
-# → ./scenarios/deepswe/runs/v1.3.0-rc1
-
-openeval compare \
-  ./scenarios/deepswe/runs/v1.2.3 \
-  ./scenarios/deepswe/runs/v1.3.0-rc1
-```
-
-External scenarios delegate to the upstream runner and normalize scores into the same `score.json` contract.
-
-### Commands
-
-| Command                                             | Purpose                                                                    |
-| --------------------------------------------------- | -------------------------------------------------------------------------- |
-| `openeval run`                                      | Execute a scenario; writes `score.json` and traces under the run directory |
-| `openeval compare <dir-a> <dir-b>`                  | Diff two runs (same `scenario_id` required)                                |
-| `openeval report <run-dir>`                         | Human-readable summary of one run                                          |
-| `openeval traces <run-dir> --task <id> --round <n>` | Open or print trace links for a task attempt                               |
-
-### Results (example)
-
-From `./scenarios/example-fixtures/runs/1/score.json`:
-
-```json
-{
-  "schema": "openeval.score.v1",
-  "scenario_id": "example-fixtures",
-  "agent": "cursor",
-  "variation": "",
-  "rounds": 1,
-  "tasks": 2,
-  "summary": {
-    "pass_at_1": 1.0,
-    "pass_at_3": 1.0,
-    "tasks_passed": 2,
-    "tasks_total": 2,
-    "cost_usd_total": 0.53,
-    "cost_usd_per_passed_task": 0.27,
-    "tokens_input_total": 0,
-    "tokens_output_total": 0
-  },
-  "by_task": [
-    {
-      "task_id": "hello-verify",
-      "verifier": "pass",
-      "rounds": [
-        {
-          "round": 1,
-          "verifier": "pass",
-          "cost_usd": 0.21,
-          "trace_id": "a1b2c3..."
-        }
-      ],
-      "pass_at_k": { "1": 1.0 }
-    },
-    {
-      "task_id": "edit-file",
-      "verifier": "pass",
-      "rounds": [
-        {
-          "round": 1,
-          "verifier": "pass",
-          "cost_usd": 0.32,
-          "trace_id": "d4e5f6..."
-        }
-      ],
-      "pass_at_k": { "1": 1.0 }
-    }
-  ],
-  "telemetry": {
-    "skills_active": [],
-    "cost_by_skill_usd": {},
-    "sessions": 2
-  }
-}
-```
-
-### `openeval report` output (example)
-
-```text
-scenario: example-fixtures
-agent: cursor
-variation: default
-rounds: 1
-
-pass@1: 1.00  (2/2 tasks passed on first attempt)
-pass@3: 1.00  (2/2 tasks passed within 1 attempt)
-cost:   $0.53 total  ($0.27 per passed task)
-
-tasks:
-  hello-verify  PASS  pass@1=1.00  cost=$0.21
-  edit-file     PASS  pass@1=1.00  cost=$0.32
-
-traces: 2 sessions, OTLP service openeval-agent
-        open Jaeger with trace_id from score.json or run:
-        openeval traces ./scenarios/example-fixtures/runs/1 --task edit-file --round 1
-```
-
-### Trace lookup
-
-`openeval traces` prints the harness round `trace_id`, your configured OTLP endpoint, and a Jaeger UI link (default all-in-one install on port 16686):
-
-```bash
-openeval traces ./scenarios/example-fixtures/runs/1 --task edit-file --round 1
-```
-
-```text
-trace_id: a1b2c3...
-otlp_service: openeval-agent
-otlp_endpoint: http://localhost:4318/v1/traces
-jaeger_ui: http://localhost:16686/trace/<normalized-trace-id>
-```
-
-### Skill-backed variations
-
-`example-fixtures` ships skill variations for harness proof. Shipped skills live under `examples/skills/` and resolve from `skills.aliases` in config or from the built-in `examples/skills/<name>` path:
-
-```yaml
-variations:
+  baseline: {}
   with-demo-skill:
     skills: [demo-skill]
-  with-plugin-skill:
-    skills: [plugin-skill]  # passes --plugin-dir when .claude-plugin is present
 ```
+
+A scenario file contains task prompts, script verifiers, and named variations:
+
+```yaml
+id: my-scenario
+tasks:
+  - id: edit-file
+    prompt: Add a one-line comment without changing behavior
+    verifier:
+      type: script
+      run: ./verifiers/edit-file.sh
+variations:
+  baseline: {}
+  candidate:
+    env:
+      FEATURE_ENABLED: "true"
+    skills:
+      - my-skill
+```
+
+From a repository checkout, pass the shipped ID. You can also pass an alias from `scenarios.aliases` or any YAML path:
 
 ```bash
-openeval run --scenario example-fixtures --variation with-demo-skill --agent mock --rounds 1
+openeval run --scenario ./evals/my-scenario.yaml \
+  --variation baseline --agent opencode --rounds 3 \
+  --out ./scenarios/my-scenario/experiment-001/baseline
 ```
 
-### `openeval compare` output (example)
+Each task round gets an isolated workspace. OpenEval copies the scenario's `fixtures/` directory into `workspace/fixtures`, runs the agent in that workspace, then runs the verifier only after a successful agent event stream.
+
+### Output paths
+
+- Default or omitted variation without `--out`: `scenarios/<id>/runs/<n>`; numeric runs increment.
+- Named variation without `--out`: `scenarios/<id>/runs/<variation>`; the legacy path is replaced on rerun.
+- Explicit `--out`: exactly that directory; use a fresh path for retained manual evidence.
+- `demo`: a unique timestamp-plus-random root with `baseline/` and `with-demo-skill/` children.
+
+Generated `scenarios/**/runs/` and demo evidence are local artifacts. Do not commit them unless you deliberately want fixtures.
+
+## Portable skills
+
+OpenEval resolves each variation skill from `skills.aliases` or `examples/skills/<name>` and copies it to:
 
 ```text
-comparing: v1.2.3 to v1.3.0-rc1
-scenario:  deepswe
-agent:     cursor
-
-                    v1.2.3    v1.3.0-rc1    delta
-pass@1                 0.40          0.55     +0.15
-pass@3                 0.60          0.70     +0.10
-cost_usd_total         4.20          3.85     -0.35
-cost_per_passed        7.00          5.50     -1.50
-
-results:
-  summary: pass@3 improved, cost per passed task down
-  logs:
-    ./scenarios/deepswe/runs/v1.2.3/score.json
-    ./scenarios/deepswe/runs/v1.3.0-rc1/score.json
+<round-workspace>/.agents/skills/<name>/SKILL.md
 ```
 
-## Supported telemetry
+Before an OpenCode model call, OpenEval runs `opencode debug skill` in an isolated directory to reject a same-named global skill, then runs it in the seeded workspace. The requested name must resolve to the exact local `SKILL.md`. Invalid frontmatter, hidden skills, global collisions, and unexpected locations stop before paid execution.
 
-Instrumentation explains **why** harness scores moved and flags when to re-run a scenario — it is not a parallel analytics product. Capture only what informs pass@k, cost per passed task, or justified rollups (see Decision: earn your complexity).
+Cursor uses the same workspace copy. If a source skill also contains `.claude-plugin`, only the Cursor driver adds its runtime-specific `--plugin-dir` argument. OpenCode does not emulate Cursor plugins or hooks.
 
-When hooks or native OTEL export are enabled, OpenEval normalizes session metadata into OTLP spans that share the same config and trace correlation as harness runs. Planned and partial capture across runtimes:
+## Score, report, and compare
 
-- Inventory: enabled resources in the session (listed per domain below)
-- Metadata: descriptors (names, descriptions, hooks)
-- Content: full captured text or payload (privacy-masked by default)
-- Size: bytes and tokens
+Each run writes `score.json` with schema `openeval.score.v1`. It includes:
 
-### Resources
+- scenario, agent, variation, rounds, and task count
+- per-task and per-round verifier results
+- pass@k summaries
+- estimated USD cost per round and aggregate cost per passed task
+- one OpenEval trace ID per round
+- active skill names and cost attribution by active skill
 
-- System prompt
-  - Content (full prompt text)
-  - Size (bytes and tokens)
-- Plugins
-  - Inventory (enabled plugins)
-  - Metadata (names, hooks, events)
-- Skills
-  - Inventory (enabled skills)
-  - Metadata (names, snippets, descriptions)
-  - Content (full skill text)
-  - Size (bytes and tokens, total and per skill)
-- Tools
-  - Inventory (enabled tools)
-  - Metadata (names, snippets, descriptions)
-  - Content (full tool definitions)
-  - Size (bytes and tokens, total and per tool)
-- Context
-  - Messages (including token counts by type: input, output, reasoning, cache)
-  - Reasoning traces
-  - Referenced files
+The current score schema does not retain OpenCode's input/output/reasoning/cache token classes separately. That richer attempt evidence remains planned.
 
-### Events
+```bash
+openeval report <run-dir>
+openeval compare <baseline-run-dir> <candidate-run-dir>
+```
 
-- Session lifecycle (start and end)
-- Tool calls (before, after, failure)
-- Shell commands
-- MCP calls
-- File read and edit
-- Prompt submission
-- Context compaction
-- Subagent activity
+`compare` requires matching `scenario_id` values and warns if agents differ.
 
-### Aggregates
+## Traces and telemetry
 
-Totals are exported per dimension. Averages are computed when filtering or comparing runs.
+Harness execution does not require a collector. OpenEval writes trace IDs and scores even when the configured OTLP endpoint is unreachable. Span export is best effort and nonblocking.
 
-- Cache
-  - Hits and misses (input and output)
-  - Cost (hits compared to misses)
-- Cost
-  - Messages (totals and averages)
-  - Skills (totals and averages)
-  - Tools (totals and averages)
-  - Sessions (totals and averages)
+### Shipped now
 
-Spans nest as session, generation, and hook events. Fields follow [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) where applicable (`gen_ai.tool.definitions`, `gen_ai.usage.*`).
+- One direct OpenEval summary span per successful harness round, sent as OTLP HTTP/JSON to `telemetry.endpoint`.
+- Summary attributes for estimated cost, active skills, the prompt-masking flag, scenario, variation, task, and round.
+- Cursor lifecycle/tool hook events through merged `~/.cursor/hooks.json` entries.
+- Explicit opt-in native OpenCode OTEL using standard inherited exporter headers/resource attributes.
+- Trace help that distinguishes direct summary trace IDs from separately generated native traces.
 
-Use this inventory to interpret harness deltas (for example, cost per skill on a variation arm) and to spot drift in real sessions that warrants another `openeval run`. Full cross-runtime capture and longitudinal CLI rollups are deferred.
+Look up a round:
 
-## Privacy
+```bash
+openeval traces <run-dir> --task edit-file --round 1
+```
 
-- Data masking before export (prompts and secrets)
-- Rules configurable per deployment
+The direct `trace_id` and Jaeger URL target the OpenEval summary span. If native OpenCode OTEL is enabled, `traces` also prints:
 
-## Scenarios
+- the native OTLP receiver path
+- `openeval.trace_id=<summary-trace-id>` as the resource-attribute search key
+- an explicit statement that native and summary traces are separate trace trees
 
-A scenario pins tasks, verifiers, and runtime versions so runs stay comparable. **`--variation`** is separate: it tags which agent config produced a given run. Compare only runs that share the same `--scenario`.
+### Opt into native OpenCode OTEL
 
-| Scenario                                           | `--scenario` value                               | Source                                                              |
-| -------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------- |
-| Example fixtures                                   | `example-fixtures`                               | `examples/scenarios/example-fixtures/`                              |
-| Custom                                             | `./evals/my-scenario.yaml` or a registered alias | Your `evals/` directory; not shipped by OpenEval                    |
-| [DeepSWE](https://deepswe.datacurve.ai/)           | `deepswe`                                        | Integrated; long-horizon SWE tasks, behavior-based verification     |
-| [Margin Eval](https://github.com/Margin-Lab/evals) | `margin-eval`                                    | Integrated; run bundles, resume on failure, side-by-side comparison |
+```bash
+openeval instrument --agent opencode
+```
 
-Host instrumentation is the default: hooks and plugins capture telemetry from the agent setup engineers actually use. For reproducible and repeatable measurement, OpenEval also supports optional Docker packaging that bundles the agent runtime, skill configuration, and scenario into one image. The same image runs across many rounds to sample pass@k, cost, and outcome variance under fixed pins. Docker is optional infrastructure: use it when isolation and repeatability matter, use host instrumentation when fidelity to a real desktop or local setup matters.
+This sets `agents.opencode.native_otel: true`. For harness runs, OpenEval:
 
-## Agents
+1. Converts the configured summary endpoint such as `http://localhost:4318/v1/traces` to the base endpoint `http://localhost:4318` because OpenCode appends `/v1/traces`.
+2. Preserves inherited `OTEL_EXPORTER_OTLP_HEADERS` and non-OpenEval `OTEL_RESOURCE_ATTRIBUTES`.
+3. Appends URL-encoded scenario, variation, task, round, and OpenEval trace ID attributes.
 
-| Agent    | Status                                   |
-| -------- | ---------------------------------------- |
-| Cursor   | `cursor-agent` subprocess driver + hooks |
-| OpenCode | Native OTEL plus plugin adapters         |
-| Pi       | OTEL export via adapters                 |
+`instrument` prints the `OTEL_EXPORTER_OTLP_ENDPOINT` export needed for OpenCode sessions started outside `openeval run`.
 
-### Cursor (`--agent cursor`)
+### Native telemetry privacy boundary
 
-OpenEval runs tasks with the headless **`cursor-agent`** CLI (not the `cursor` GUI binary). Each task round gets an isolated workspace under the run directory, seeded from the scenario `fixtures/` tree. Verifiers run in that same workspace after the agent finishes.
+OpenCode creates native span payloads inside its own runtime. Those payloads can include runtime-generated prompt, tool, or model data. **OpenEval cannot apply `privacy.mask_prompts` or `privacy.mask_secrets` to native OpenCode payloads.** Review OpenCode's telemetry and your collector policy before opting in.
 
-**Prerequisites:**
+OpenEval's direct summary spans remain the stable trace targets recorded in `score.json`; native traces are separate and correlated only by resource attributes. Do not assume one shared parent/child trace tree.
 
-1. Install the Cursor CLI so `cursor-agent` is on your `PATH` (or set `agents.cursor.command` in config).
-2. Authenticate once: `cursor-agent login` (or set `CURSOR_API_KEY`).
-3. Optional: `openeval instrument --agent cursor` for hook-based OTLP export alongside runs.
+Native span flushing on non-interactive OpenCode process exit is not verified by OpenEval's default no-collector path. Verify receipt against your collector before depending on native traces. The summary trace ID and score path remain available regardless.
+
+### Planned or deferred telemetry
+
+- Separate retained input, output, reasoning, cache-read, and cache-write counts in attempt evidence.
+- Full cross-runtime tool, prompt, context, and reasoning normalization.
+- Longitudinal queries and dashboards in an external span store.
+- A bundled local collector/Jaeger setup.
+- Pi telemetry.
+
+OpenEval will not embed a trace database in the CLI binary.
+
+## Cursor secondary path
+
+Install and authenticate the headless `cursor-agent` binary, then diagnose it:
 
 ```bash
 cursor-agent login
-cursor-agent status    # should show an authenticated account
-
-openeval run --scenario example-fixtures --agent cursor --rounds 1
+openeval doctor --agent cursor
+openeval run --scenario example-fixtures --variation baseline \
+  --agent cursor --rounds 3 --out ./scenarios/example-fixtures/cursor-001/baseline
 ```
 
-Override the binary path or token pricing estimates in config:
-
-```yaml
-agents:
-  cursor:
-    command: /usr/local/bin/cursor-agent
-    cost:
-      input_per_million: 3.0
-      output_per_million: 15.0
-```
-
-When `cursor-agent` is missing or not authenticated, `openeval run --agent cursor` fails with an actionable error. Tests use `--agent mock` (or the default mock driver) so CI does not require a live agent.
-
-### OpenCode (`--agent opencode`)
-
-OpenEval runs tasks with the headless **`opencode run`** subcommand. The driver resolves the `opencode` binary from `PATH` (or `agents.opencode.command`), invokes it with `--format json --dir <workspace> <prompt>`, and parses the line-delimited event stream for the session ID and per-step token usage. Each task round gets an isolated workspace under the run directory, seeded from the scenario `fixtures/` tree. Verifiers run in that same workspace after the agent finishes.
-
-**Prerequisites:**
-
-1. Install the [opencode CLI](https://github.com/sst/opencode) so `opencode` is on your `PATH` (or set `agents.opencode.command` in config).
-2. Authenticate your provider: `opencode auth` (or set the provider's standard env vars).
-3. Optional: `opencode stats` to confirm the authenticated account and recent usage.
+Optional continuous instrumentation:
 
 ```bash
-opencode auth
-opencode run "say hi"    # should succeed and print a session id
-
-openeval run --scenario example-fixtures --agent opencode --rounds 1
+openeval instrument --agent cursor
 ```
 
-Override the binary path or token pricing estimates in config:
+This merges OpenEval callbacks into existing Cursor hooks and writes Cursor's legacy OpenEval hook config. It does not replace unrelated hook entries.
 
-```yaml
-agents:
-  opencode:
-    command: /usr/local/bin/opencode
-    cost:
-      input_per_million: 3.0
-      output_per_million: 15.0
-```
+## Mock for CI
 
-When `opencode` is missing or not authenticated, `openeval run --agent opencode` fails with an actionable error that names the `agents.opencode.command` config key. Tests use shell stubs (no live `opencode` install) so CI does not require a live agent.
-
-**Hook-instrumented agents** (Cursor, and others without native export) send spans via the OpenEval config file — no OTLP env vars in the agent shell.
-
-**Agents with built-in OpenTelemetry** (OpenCode, Pi) can also export directly when not using hooks:
+Use mock only to test scenario plumbing, verifiers, score serialization, and comparison automation without credentials:
 
 ```bash
-export OTEL_EXPORTER_OTLP_HEADERS="..."
-export OTEL_EXPORTER_OTLP_ENDPOINT="..."
-export OTEL_RESOURCE_ATTRIBUTES="user.name=$(whoami)"
+openeval demo --agent mock --rounds 1
 ```
 
-OpenEval adapters normalize that output into the shared contract so runs compare cleanly across agents.
+The mock driver writes synthetic artifacts and cost. A green mock comparison proves the harness wiring, not coding-agent quality.
 
----
+Repository tests use mock, shell stubs, helper processes, and local test servers. They never require a live agent, provider credential, or collector.
 
-**License:** [Apache-2.0](./LICENSE) · **Version:** 0.0.0-dev · **Author:** Jonathan Gabor [jgabor.se](https://jgabor.se)
+## Deferred scenarios and packaging
+
+DeepSWE and margin-eval are not integrated. Current invocations fail with a direct deferred-integration error rather than producing plausible mock evidence.
+
+Docker execution is also not implemented. `examples/docker/README.md` records the planned interface only; `openeval run --image ...` exits before execution.
+
+## License
+
+[Apache-2.0](./LICENSE) · Version `0.0.0-dev` · Jonathan Gabor ([jgabor.se](https://jgabor.se))

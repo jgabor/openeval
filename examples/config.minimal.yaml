@@ -6,13 +6,21 @@ telemetry:
 privacy:
   mask_prompts: true
   mask_secrets: true
+scenarios:
+  aliases: {}
 skills:
   aliases:
     demo-skill: ./examples/skills/demo-skill
     plugin-skill: ./examples/skills/plugin-skill
 agents:
+  opencode:
+    # command: /usr/local/bin/opencode  # default: opencode on PATH
+    native_otel: false
+    cost:
+      input_per_million: 3.0
+      output_per_million: 15.0
   cursor:
-    # command: /usr/local/bin/cursor-agent  # default: cursor-agent on PATH
+    # command: /usr/local/bin/cursor-agent  # secondary runtime
     cost:
       input_per_million: 3.0
       output_per_million: 15.0

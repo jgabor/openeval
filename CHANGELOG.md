@@ -16,3 +16,4 @@
 
 - `OpenCode` subsection in `README.md` Agents section (prerequisites, install + auth + run, config override example) so `--agent opencode` is discoverable from the user-facing docs.
 - `openeval run --help` `--agent` help text now lists `mock, cursor, opencode`.
+- Current README, help, minimal config, and Docker example now lead with the executable OpenCode comparison path and state Cursor, mock, Pi, external scenarios, packaging, telemetry, native trace correlation, and privacy boundaries according to shipped behavior.
