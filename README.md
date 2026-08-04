@@ -222,6 +222,8 @@ variations:
     skills: [demo-skill]
 ```
 
+Differences between the baseline and skill arms describe the outcomes observed in those runs. They do not prove that the skill caused the difference; model variation and other uncontrolled runtime factors can also affect results.
+
 For a fast credential-free automation check, use the one-task subset with the mock agent:
 
 ```bash

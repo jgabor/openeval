@@ -1,0 +1,16 @@
+id: bjawnhxuyh
+artifact: progress
+record:
+  timestamp: 2026-08-04 21:47
+  type: test
+  phase: build
+  what: Proved the four example-fixtures verifiers with isolated reference and plausible-negative corrections, expanded the demo skill with general maintenance guidance, and limited comparison interpretation to descriptive evidence.
+  context:
+    intent: Prove verifier integrity and useful skill variation without exposing task answers to agents.
+    constraints: Keep references test-only in isolated fixtures; preserve task independence, standard-library/no-network scope, hermetic CI, model evidence, score schema, and TODO 0.0.3 state.
+    unknowns: No implementation unknowns remain; causal skill effect remains deliberately unclaimed.
+    scope: Verifier reference/negative tests, demo-skill guidance, narrow README claim wording, and required Audit/plan state.
+  discovered: The existing verifiers rejected untouched fixtures but had no positive reference proof or targeted negative evidence.
+  verified: go test ./internal/scenario -run TestExampleFixtures-or-TestDemoSkill -count=1 passed; mage check passed all tests, vet, lint, tidy, and vulnerability checks.
+  next: Independent Audit must record evaluation before yicugqvnid can complete; it remains in_progress.
+  publication_order: 14
