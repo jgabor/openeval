@@ -23,6 +23,7 @@ func init() {
 	rootCmd.AddCommand(reportCmd)
 	rootCmd.AddCommand(compareCmd)
 	rootCmd.AddCommand(tracesCmd)
+	rootCmd.AddCommand(doctorCmd)
 }
 
 func exitErr(err error) {

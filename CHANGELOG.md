@@ -9,6 +9,7 @@
 - OpenCode harness runs auto-approve non-interactively, rejects malformed or runtime-error JSONL before verification, reports authentication remediation, keeps OpenEval run correlation authoritative, and includes reasoning tokens in configured cost estimates.
 - OpenCode skill variations run `opencode debug skill` before paid execution, require the exact seeded `.agents/skills` path, and reject same-named global skills; shipped example skills now include valid portable frontmatter.
 - `openeval instrument --agent opencode` explicitly enables native OTEL, derives OpenCode's base endpoint without dropping inherited exporter headers or resource attributes, appends encoded run correlation, and states the native-payload privacy boundary; `traces` distinguishes direct summary trace IDs from attribute-correlated native traces.
+- `openeval doctor` defaults to OpenCode and checks config, runtime/version, `opencode auth list`, skill aliases, OTLP reachability, and native telemetry without a model call; `--agent cursor` adds secondary runtime and hook checks, while `--json` returns a versioned report with warning/fatal exit semantics and remediation.
 
 ### Documentation
 
