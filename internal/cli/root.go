@@ -24,6 +24,7 @@ func init() {
 	rootCmd.AddCommand(compareCmd)
 	rootCmd.AddCommand(tracesCmd)
 	rootCmd.AddCommand(doctorCmd)
+	rootCmd.AddCommand(demoCmd)
 }
 
 func exitErr(err error) {

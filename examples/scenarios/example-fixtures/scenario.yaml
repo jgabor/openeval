@@ -8,6 +8,7 @@ tasks:
     verifier: { type: script, run: ./verifiers/edit-file.sh }
 variations:
   default: {}
+  baseline: {}
   with-demo-skill:
     skills:
       - demo-skill
