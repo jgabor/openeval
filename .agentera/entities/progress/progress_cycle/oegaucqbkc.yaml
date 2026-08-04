@@ -1,0 +1,17 @@
+id: oegaucqbkc
+artifact: progress
+record:
+  timestamp: 2026-08-04 20:15
+  type: docs
+  phase: build
+  what: Replace stale Cursor-first and aspirational guidance with the executable OpenCode-first comparison path and explicit shipped/deferred boundaries.
+  context:
+    intent: Ensure current onboarding works verbatim for an authenticated OpenCode user with repository access.
+    constraints: Preserve archives, decisions, prior changelog entries, Cursor support, mock hermetic use, Pi planning, and honest privacy/install limits.
+    unknowns: Public no-clone installation and native span flush remain unshipped and are stated as such.
+    scope: README, minimal config, Docker example, CLI help, and additive changelog documentation entry.
+  inspiration: Documentation is the product contract; unavailable scenarios, packaging, install, and telemetry must not appear shipped.
+  discovered: The canonical github.com/jgabor/openeval/cmd/openeval@latest command is not publicly resolvable today, while go install ./cmd/openeval from a checkout succeeds. The example assets are also file-backed, so the README now requires repository access for the shipped quick start.
+  verified: mage check and Prettier checks passed; go install ./cmd/openeval produced a working CLI; the documented minimal config passed OpenCode doctor with only expected nonfatal collector/native warnings; demo dry-run matched README flags and made no directory; the authenticated demo flow had already completed; archive, decision, and vision diffs are empty.
+  next: Run final gates and smoke review, close only fully satisfied TODO items, and synchronize plan state.
+  publication_order: 7

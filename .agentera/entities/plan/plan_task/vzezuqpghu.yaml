@@ -6,10 +6,20 @@ record:
     - toxklsexpe
     - debercnyih
     - zxbtpimcwj
-  status: pending
+  status: complete
   acceptance:
     - GIVEN an authenticated OpenCode user WHEN current onboarding is followed verbatim THEN the documented comparison flow succeeds without inferred paths.
     - GIVEN a support-status reader WHEN current guidance is reviewed THEN OpenCode, Cursor, mock, Pi, external scenarios, packaging, and telemetry have accurate statuses.
     - GIVEN a privacy-conscious user WHEN native telemetry is described THEN OpenEval masking is not claimed for runtime-generated payloads.
     - GIVEN historical records WHEN documentation changes THEN archives and prior changelog entries remain unchanged.
   plan: noradwhfpb
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: vzezuqpghu-a1
+      source: "Direct orchestration audit: executable install/config/demo checks, Prettier and mage gates, status/privacy claim grep, and empty archive/decision/vision diffs verify current guidance while public install and native flush remain explicitly unshipped"
+      recorded_at: 2026-08-04 20:15
+      writer_command: agentera state plan record-evaluation
