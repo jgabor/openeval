@@ -25,6 +25,7 @@ printf '%s\n' "$*" >> "`+logPath+`"
 case "$*" in
   --version) printf '%s\n' '1.18.11' ;;
   'auth list') printf '%s\n' 'Credentials: test-provider' ;;
+  models) printf '%s\n' 'opencode/big-pickle' ;;
   *) exit 99 ;;
 esac
 `)
@@ -42,7 +43,7 @@ esac
 	cfg.Skills.Aliases = map[string]string{"local-skill": skillDir}
 	saveConfig(t, cfg)
 
-	report := Run(context.Background(), "opencode")
+	report := Run(context.Background(), "opencode", "")
 	if report.Status != StatusPass || report.ExitCode != 0 {
 		t.Fatalf("report = %+v, want pass with exit 0", report)
 	}
@@ -55,8 +56,8 @@ esac
 	if err != nil {
 		t.Fatal(err)
 	}
-	if got := strings.Split(strings.TrimSpace(string(data)), "\n"); len(got) != 2 || got[0] != "--version" || got[1] != "auth list" {
-		t.Fatalf("runtime calls = %v, want only version and auth list", got)
+	if got := strings.Split(strings.TrimSpace(string(data)), "\n"); len(got) != 3 || got[0] != "--version" || got[1] != "auth list" || got[2] != "models" {
+		t.Fatalf("runtime calls = %v, want only version, auth list, and non-paid models listing", got)
 	}
 }
 
@@ -70,7 +71,7 @@ func TestRunTreatsUnreachableTelemetryAsWarning(t *testing.T) {
 	cfg.Telemetry.Endpoint = "http://127.0.0.1:1/v1/traces"
 	saveConfig(t, cfg)
 
-	report := Run(context.Background(), "opencode")
+	report := Run(context.Background(), "opencode", "")
 	if report.Status != StatusWarning || report.ExitCode != 0 {
 		t.Fatalf("status = %s exit = %d, want warning exit 0", report.Status, report.ExitCode)
 	}
@@ -92,7 +93,7 @@ func TestRunReportsAuthenticationFailureWithRemediation(t *testing.T) {
 	cfg.Telemetry.Endpoint = collector.URL + "/v1/traces"
 	saveConfig(t, cfg)
 
-	report := Run(context.Background(), "opencode")
+	report := Run(context.Background(), "opencode", "provider/intended")
 	if report.Status != StatusFail || report.ExitCode != 1 {
 		t.Fatalf("status = %s exit = %d, want fail exit 1", report.Status, report.ExitCode)
 	}
@@ -100,6 +101,58 @@ func TestRunReportsAuthenticationFailureWithRemediation(t *testing.T) {
 	for _, want := range []string{"opencode auth login", "opencode auth list"} {
 		if !strings.Contains(check.Remediation, want) {
 			t.Fatalf("authentication remediation %q missing %q", check.Remediation, want)
+		}
+	}
+	for _, check := range report.Checks {
+		if check.ID == "model" {
+			t.Fatalf("model catalog ran after authentication failed: %+v", check)
+		}
+	}
+}
+
+func TestRunReportsUnavailableResolvedModelWithSelectionAndAuthenticationRemediation(t *testing.T) {
+	root := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+	stub := writeOpenCodeStub(t, root, true)
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	saveConfig(t, cfg)
+
+	report := Run(context.Background(), "opencode", "missing-provider/missing-model")
+	check := findCheck(t, report, "model")
+	if check.Status != StatusFail || report.ExitCode != 1 {
+		t.Fatalf("model check = %+v report=%+v, want fatal unavailable model", check, report)
+	}
+	for _, want := range []string{"missing-provider/missing-model", "--model", "agents.opencode.model", "opencode auth login", "opencode models"} {
+		if !strings.Contains(check.Summary+" "+check.Remediation, want) {
+			t.Fatalf("model diagnosis %+v missing %q", check, want)
+		}
+	}
+}
+
+func TestRunReportsModelCatalogCommandFailure(t *testing.T) {
+	root := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
+	stub := writeStub(t, root, `#!/bin/sh
+case "$*" in
+  --version) printf '%s\n' '1.18.11' ;;
+  'auth list') printf '%s\n' 'Credentials: test-provider' ;;
+  models) echo 'catalog unavailable' >&2; exit 2 ;;
+  *) exit 99 ;;
+esac
+`)
+	cfg := config.Default()
+	cfg.Agents.OpenCode.Command = stub
+	saveConfig(t, cfg)
+
+	report := Run(context.Background(), "opencode", "provider/model")
+	check := findCheck(t, report, "model")
+	if check.Status != StatusFail || !strings.Contains(check.Summary, "catalog unavailable") {
+		t.Fatalf("model check = %+v, want catalog command failure", check)
+	}
+	for _, want := range []string{"opencode models", "opencode auth login"} {
+		if !strings.Contains(check.Remediation, want) {
+			t.Fatalf("model remediation %q missing %q", check.Remediation, want)
 		}
 	}
 }
@@ -123,7 +176,7 @@ func TestRunCursorChecksRuntimeAndHooks(t *testing.T) {
 	cfg.Telemetry.Endpoint = collector.URL + "/v1/traces"
 	saveConfig(t, cfg)
 
-	report := Run(context.Background(), "cursor")
+	report := Run(context.Background(), "cursor", "")
 	if report.Status != StatusPass || report.ExitCode != 0 {
 		t.Fatalf("report = %+v, want Cursor pass", report)
 	}
@@ -185,7 +238,7 @@ func TestEveryNonPassCheckHasRemediation(t *testing.T) {
 	cfg.Telemetry.Endpoint = ""
 	saveConfig(t, cfg)
 
-	report := Run(context.Background(), "opencode")
+	report := Run(context.Background(), "opencode", "")
 	if report.Status != StatusFail {
 		t.Fatalf("status = %s, want fail", report.Status)
 	}
@@ -206,6 +259,7 @@ func writeOpenCodeStub(t *testing.T, root string, authOK bool) string {
 case "$*" in
   --version) printf '%s\n' '1.18.11' ;;
   'auth list') `+auth+` ;;
+  models) printf '%s\n' 'opencode/big-pickle' ;;
   *) exit 99 ;;
 esac
 `)

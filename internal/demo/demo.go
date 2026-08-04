@@ -10,9 +10,12 @@ import (
 	"strings"
 	"time"
 
+	"github.com/jgabor/openeval/internal/agent"
 	"github.com/jgabor/openeval/internal/compare"
+	"github.com/jgabor/openeval/internal/config"
 	"github.com/jgabor/openeval/internal/doctor"
 	"github.com/jgabor/openeval/internal/runner"
+	"github.com/jgabor/openeval/internal/scenario"
 )
 
 type Options struct {
@@ -21,12 +24,14 @@ type Options struct {
 	Rounds   int
 	Out      string
 	DryRun   bool
+	Model    string
 }
 
 type Plan struct {
 	Scenario    string
 	Agent       string
 	Rounds      int
+	Model       string
 	Root        string
 	BaselineDir string
 	SkillDir    string
@@ -42,6 +47,11 @@ type Result struct {
 
 func Run(ctx context.Context, opts Options) (Result, error) {
 	opts = normalizeOptions(opts)
+	model, err := resolveModel(opts)
+	if err != nil {
+		return Result{}, err
+	}
+	opts.Model = model
 	plan, err := buildPlan(opts)
 	if err != nil {
 		return Result{}, err
@@ -51,7 +61,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 	}
 
 	if opts.Agent != "mock" {
-		diagnosis := doctor.Run(ctx, opts.Agent)
+		diagnosis := doctor.Run(ctx, opts.Agent, plan.Model)
 		if diagnosis.ExitCode != 0 {
 			return Result{}, diagnosisError(diagnosis)
 		}
@@ -66,6 +76,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 		Variation: "baseline",
 		Rounds:    plan.Rounds,
 		Out:       plan.BaselineDir,
+		Model:     plan.Model,
 	})
 	if err != nil {
 		return Result{}, fmt.Errorf("baseline run failed; retained evidence root %s: %w", plan.Root, err)
@@ -76,6 +87,7 @@ func Run(ctx context.Context, opts Options) (Result, error) {
 		Variation: "with-demo-skill",
 		Rounds:    plan.Rounds,
 		Out:       plan.SkillDir,
+		Model:     plan.Model,
 	})
 	if err != nil {
 		return Result{}, fmt.Errorf("skill run failed; retained baseline %s: %w", baseline.RunDir, err)
@@ -94,6 +106,11 @@ func (p Plan) Format() string {
 		{"openeval", "run", "--scenario", p.Scenario, "--variation", "with-demo-skill", "--agent", p.Agent, "--rounds", fmt.Sprintf("%d", p.Rounds), "--out", p.SkillDir},
 		{"openeval", "compare", p.BaselineDir, p.SkillDir},
 	}
+	if p.Model != "" {
+		commands[0] = append(commands[0], "--model", p.Model)
+		commands[1] = append(commands[1], "--model", p.Model)
+		commands[2] = append(commands[2], "--model", p.Model)
+	}
 	if p.Agent == "mock" {
 		commands = commands[1:]
 	}
@@ -103,6 +120,18 @@ func (p Plan) Format() string {
 		fmt.Fprintf(&out, "%d. %s\n", i+1, formatCommand(command))
 	}
 	return out.String()
+}
+
+func resolveModel(opts Options) (string, error) {
+	cfg, err := config.Load()
+	if err != nil {
+		return "", err
+	}
+	sc, err := scenario.Load(opts.Scenario, cfg)
+	if err != nil {
+		return "", err
+	}
+	return agent.ResolveModel(opts.Agent, opts.Model, sc.Model, cfg)
 }
 
 func normalizeOptions(opts Options) Options {
@@ -136,6 +165,7 @@ func buildPlan(opts Options) (Plan, error) {
 		Scenario:    opts.Scenario,
 		Agent:       opts.Agent,
 		Rounds:      opts.Rounds,
+		Model:       opts.Model,
 		Root:        root,
 		BaselineDir: filepath.Join(root, "baseline"),
 		SkillDir:    filepath.Join(root, "with-demo-skill"),

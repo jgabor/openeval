@@ -1,0 +1,16 @@
+id: lrdzxmhfis
+artifact: progress
+record:
+  timestamp: 2026-08-04 21:30
+  type: feat
+  phase: build
+  what: Diagnosed the resolved OpenCode model through the non-inference catalog and propagated one explicit model through doctor and both demo arms.
+  context:
+    intent: Implement task jsgxvlxqxu while leaving lifecycle completion to independent Audit.
+    constraints: Only doctor and demo model validation and propagation; no paid model call, runtime dependency, broader docs, OTLP requirement, or Cursor and mock behavior change.
+    unknowns: Catalog absence can mean an unavailable or disabled model or missing provider credentials, so remediation covers both selecting a listed model and authenticating the intended provider.
+    scope: Doctor model catalog check, doctor and demo model flags, one resolved model for both arms, retained score regression evidence, and required Agentera state.
+  discovered: OpenCode models lists selectable provider/model identifiers without inference and filters them by provider availability, credentials, and enabled state.
+  verified: Hermetic doctor and demo tests covered available, unavailable, authentication and catalog failures, dry-run, override, both arms, no OTLP, and retained scores; mage check passed. The local dry-run printed opencode/big-pickle for doctor and both arms, and the override smoke printed anthropic/claude-sonnet-4-5 in all three positions. Real doctor confirmed opencode/big-pickle in the catalog without inference, then reported an unrelated existing skill-frontmatter failure.
+  next: Independent Audit should evaluate jsgxvlxqxu; keep it in_progress until that review records a verdict.
+  publication_order: 12

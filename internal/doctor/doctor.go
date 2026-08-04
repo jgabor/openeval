@@ -16,6 +16,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/jgabor/openeval/internal/agent"
 	"github.com/jgabor/openeval/internal/config"
 	"gopkg.in/yaml.v3"
 )
@@ -48,22 +49,22 @@ type Report struct {
 	Checks        []Check `json:"checks"`
 }
 
-func Run(ctx context.Context, agent string) Report {
-	if agent == "" {
-		agent = "opencode"
+func Run(ctx context.Context, agentName, modelOverride string) Report {
+	if agentName == "" {
+		agentName = "opencode"
 	}
-	report := Report{SchemaVersion: SchemaVersion, Agent: agent}
-	cfg := checkConfig(&report, agent)
-	command, ok := checkRuntime(ctx, &report, agent, cfg)
+	report := Report{SchemaVersion: SchemaVersion, Agent: agentName}
+	cfg := checkConfig(&report, agentName)
+	command, ok := checkRuntime(ctx, &report, agentName, cfg)
 	if ok {
-		checkVersion(ctx, &report, agent, command)
-		if agent == "opencode" {
-			checkOpenCodeAuth(ctx, &report, command)
+		checkVersion(ctx, &report, agentName, command)
+		if agentName == "opencode" && checkOpenCodeAuth(ctx, &report, command) {
+			checkOpenCodeModel(ctx, &report, command, modelOverride, cfg)
 		}
 	}
-	checkSkills(&report, agent, cfg)
+	checkSkills(&report, agentName, cfg)
 	checkTelemetry(ctx, &report, cfg)
-	switch agent {
+	switch agentName {
 	case "opencode":
 		checkOpenCodeNativeOTEL(&report, cfg)
 	case "cursor":
@@ -72,7 +73,7 @@ func Run(ctx context.Context, agent string) Report {
 		report.add(Check{
 			ID:          "agent",
 			Status:      StatusFail,
-			Summary:     fmt.Sprintf("unsupported agent %q", agent),
+			Summary:     fmt.Sprintf("unsupported agent %q", agentName),
 			Remediation: "use --agent opencode or --agent cursor",
 		})
 	}
@@ -209,19 +210,53 @@ func checkVersion(ctx context.Context, report *Report, agent, command string) {
 	}
 }
 
-func checkOpenCodeAuth(ctx context.Context, report *Report, command string) {
+func checkOpenCodeAuth(ctx context.Context, report *Report, command string) bool {
 	stdout, stderr, err := runCommand(ctx, command, "auth", "list")
 	if err != nil {
 		report.add(Check{ID: "authentication", Status: StatusFail, Summary: commandFailure(err, stdout, stderr), Remediation: "run `opencode auth login`, verify with `opencode auth list`, then retry"})
-		return
+		return false
 	}
 	clean := strings.TrimSpace(stripANSI(stdout))
 	lower := strings.ToLower(clean)
 	if clean == "" || strings.Contains(lower, "no credentials") || strings.Contains(lower, "0 credentials") {
 		report.add(Check{ID: "authentication", Status: StatusFail, Summary: "`opencode auth list` found no usable credentials", Remediation: "run `opencode auth login`, verify with `opencode auth list`, then retry"})
-		return
+		return false
 	}
 	report.add(Check{ID: "authentication", Status: StatusPass, Summary: "`opencode auth list` completed with configured credentials"})
+	return true
+}
+
+func checkOpenCodeModel(ctx context.Context, report *Report, command, modelOverride string, cfg config.Config) {
+	model, err := agent.ResolveModel("opencode", modelOverride, "", cfg)
+	if err != nil {
+		report.add(Check{ID: "model", Status: StatusFail, Summary: err.Error(), Remediation: "select a provider/model shown by `opencode models`"})
+		return
+	}
+	stdout, stderr, err := runCommand(ctx, command, "models")
+	if err != nil {
+		report.add(Check{
+			ID:          "model",
+			Status:      StatusFail,
+			Summary:     fmt.Sprintf("could not list OpenCode models while checking %s: %s", model, commandFailure(err, stdout, stderr)),
+			Remediation: "verify `opencode models` succeeds; if provider credentials are missing, run `opencode auth login` and retry",
+		})
+		return
+	}
+	for _, available := range strings.Split(stripANSI(stdout), "\n") {
+		if strings.TrimSpace(available) == model {
+			report.add(Check{ID: "model", Status: StatusPass, Summary: fmt.Sprintf("resolved OpenCode model %s is available", model)})
+			return
+		}
+	}
+	report.add(Check{
+		ID:      "model",
+		Status:  StatusFail,
+		Summary: fmt.Sprintf("resolved OpenCode model %s is not available in `opencode models`", model),
+		Remediation: fmt.Sprintf(
+			"select a listed provider/model with `--model` or agents.opencode.model; to use provider %s, run `opencode auth login` and verify the model appears in `opencode models`",
+			strings.SplitN(model, "/", 2)[0],
+		),
+	})
 }
 
 func checkSkills(report *Report, agent string, cfg config.Config) {

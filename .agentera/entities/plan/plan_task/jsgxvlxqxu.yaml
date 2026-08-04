@@ -5,7 +5,7 @@ record:
   depends_on:
     - qnijueivja
     - sobvkljsxq
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN a resolved OpenCode model WHEN setup diagnosis runs THEN catalog availability is checked without a paid model call.
     - GIVEN an unavailable or unauthenticated model WHEN diagnosis completes THEN it explains how to select or authenticate an alternative.

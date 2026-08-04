@@ -12,6 +12,7 @@ var (
 	demoScenario string
 	demoRounds   int
 	demoOut      string
+	demoModel    string
 	demoDryRun   bool
 )
 
@@ -25,6 +26,7 @@ var demoCmd = &cobra.Command{
 			Scenario: demoScenario,
 			Rounds:   demoRounds,
 			Out:      demoOut,
+			Model:    demoModel,
 			DryRun:   demoDryRun,
 		})
 		if err != nil {
@@ -44,5 +46,6 @@ func init() {
 	demoCmd.Flags().StringVar(&demoScenario, "scenario", "example-fixtures", "Scenario id or path")
 	demoCmd.Flags().IntVar(&demoRounds, "rounds", 3, "Attempts per task in each arm")
 	demoCmd.Flags().StringVar(&demoOut, "out", "", "Parent directory for unique demo evidence")
+	demoCmd.Flags().StringVar(&demoModel, "model", "", "OpenCode model for both comparison arms (provider/model)")
 	demoCmd.Flags().BoolVar(&demoDryRun, "dry-run", false, "Print exact commands and paths without execution or filesystem mutation")
 }
