@@ -79,3 +79,10 @@ func TestEnvironmentKeepsReservedRunContextAuthoritative(t *testing.T) {
 		t.Fatalf("got %v, want %v", got, want)
 	}
 }
+
+func TestLookupEnvironment(t *testing.T) {
+	got, ok := LookupEnvironment([]string{"FIRST=one", "SECOND=two=three"}, "SECOND")
+	if !ok || got != "two=three" {
+		t.Fatalf("got %q, %t; want two=three, true", got, ok)
+	}
+}

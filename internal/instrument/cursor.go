@@ -10,15 +10,6 @@ import (
 	"github.com/jgabor/openeval/internal/config"
 )
 
-func Install(agent string, cfg config.Config) error {
-	switch agent {
-	case "cursor":
-		return installCursor(cfg)
-	default:
-		return fmt.Errorf("instrument not implemented for agent %q", agent)
-	}
-}
-
 func installCursor(cfg config.Config) error {
 	home, err := os.UserHomeDir()
 	if err != nil {

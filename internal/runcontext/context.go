@@ -71,3 +71,13 @@ func FromMap(values map[string]string) []string {
 func Environment(inherited []string, variation map[string]string, run Context) []string {
 	return MergeEnvironment(inherited, FromMap(variation), run.Env())
 }
+
+func LookupEnvironment(env []string, key string) (string, bool) {
+	for _, entry := range env {
+		entryKey, value, ok := strings.Cut(entry, "=")
+		if ok && entryKey == key {
+			return value, true
+		}
+	}
+	return "", false
+}

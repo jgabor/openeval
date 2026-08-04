@@ -15,11 +15,11 @@ var (
 
 var instrumentCmd = &cobra.Command{
 	Use:   "instrument",
-	Short: "Install hooks and default config for supported agents",
+	Short: "Configure telemetry for supported agents",
 	Run: func(cmd *cobra.Command, args []string) {
 		var agents []string
 		if instrumentAll {
-			agents = []string{"cursor"}
+			agents = []string{"opencode", "cursor"}
 		} else if instrumentAgent != "" {
 			agents = []string{instrumentAgent}
 		} else {
@@ -32,11 +32,22 @@ var instrumentCmd = &cobra.Command{
 		if err := config.Save(cfg); err != nil {
 			exitErr(err)
 		}
+		results := make([]instrument.Result, 0, len(agents))
 		for _, a := range agents {
-			if err := instrument.Install(a, cfg); err != nil {
+			result, err := instrument.Install(a, &cfg)
+			if err != nil {
 				exitErr(err)
 			}
-			fmt.Printf("instrumented %s\n", a)
+			results = append(results, result)
+		}
+		if err := config.Save(cfg); err != nil {
+			exitErr(err)
+		}
+		for _, result := range results {
+			fmt.Printf("instrumented %s\n", result.Agent)
+			for _, message := range result.Messages {
+				fmt.Println(message)
+			}
 		}
 		path, _ := config.Path()
 		fmt.Printf("config: %s\n", path)

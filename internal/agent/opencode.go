@@ -15,8 +15,10 @@ import (
 )
 
 type OpenCode struct {
-	command string
-	cost    config.OpenCodeCostConfig
+	command     string
+	cost        config.OpenCodeCostConfig
+	nativeOTEL  bool
+	traceTarget string
 }
 
 func newOpenCode(cfg config.Config) (OpenCode, error) {
@@ -33,12 +35,21 @@ func newOpenCode(cfg config.Config) (OpenCode, error) {
 	} else if _, err := os.Stat(cmd); err != nil {
 		return OpenCode{}, fmt.Errorf("agents.opencode.command %q: %w", cmd, err)
 	}
-	return OpenCode{command: cmd, cost: cfg.Agents.OpenCode.Cost}, nil
+	return OpenCode{
+		command:     cmd,
+		cost:        cfg.Agents.OpenCode.Cost,
+		nativeOTEL:  cfg.Agents.OpenCode.NativeOTEL,
+		traceTarget: cfg.Telemetry.Endpoint,
+	}, nil
 }
 
 func (o OpenCode) Run(ctx context.Context, s Session) (float64, string, error) {
-	env := runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
-	if err := validateOpenCodeSkills(ctx, o.command, s.WorkDir, s.Variation.Skills, env); err != nil {
+	baseEnv := runcontext.Environment(os.Environ(), s.Variation.Env, s.Run)
+	env, err := withOpenCodeNativeOTEL(baseEnv, o.nativeOTEL, o.traceTarget, s.Run)
+	if err != nil {
+		return 0, "", err
+	}
+	if err := validateOpenCodeSkills(ctx, o.command, s.WorkDir, s.Variation.Skills, baseEnv); err != nil {
 		return 0, "", err
 	}
 	args := []string{

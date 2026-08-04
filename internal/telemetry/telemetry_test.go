@@ -45,3 +45,37 @@ func TestEmitSessionIncludesRunContextAndNormalizedTraceID(t *testing.T) {
 		}
 	}
 }
+
+func TestOpenCodeOTLPBaseEndpoint(t *testing.T) {
+	tests := []struct {
+		name string
+		in   string
+		want string
+	}{
+		{name: "root traces", in: "http://localhost:4318/v1/traces", want: "http://localhost:4318"},
+		{name: "prefixed traces", in: "https://otel.example/collector/v1/traces", want: "https://otel.example/collector"},
+		{name: "base already", in: "https://otel.example/collector", want: "https://otel.example/collector"},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			got, err := OpenCodeOTLPBaseEndpoint(test.in)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got != test.want {
+				t.Fatalf("got %q, want %q", got, test.want)
+			}
+			if gotTrace := OpenCodeOTLPTraceEndpoint(got); gotTrace != test.want+"/v1/traces" {
+				t.Fatalf("trace endpoint = %q", gotTrace)
+			}
+		})
+	}
+}
+
+func TestOpenCodeOTLPBaseEndpointRejectsInvalidEndpoint(t *testing.T) {
+	for _, endpoint := range []string{"", "localhost:4318/v1/traces", "grpc://localhost:4317", "http://localhost:4318?token=x"} {
+		if _, err := OpenCodeOTLPBaseEndpoint(endpoint); err == nil {
+			t.Fatalf("expected endpoint %q to fail", endpoint)
+		}
+	}
+}

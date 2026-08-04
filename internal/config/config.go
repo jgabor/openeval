@@ -36,8 +36,9 @@ type CursorCostConfig struct {
 }
 
 type OpenCodeAgentConfig struct {
-	Command string             `yaml:"command"`
-	Cost    OpenCodeCostConfig `yaml:"cost"`
+	Command    string             `yaml:"command"`
+	NativeOTEL bool               `yaml:"native_otel"`
+	Cost       OpenCodeCostConfig `yaml:"cost"`
 }
 
 type OpenCodeCostConfig struct {

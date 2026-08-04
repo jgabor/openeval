@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -120,6 +121,32 @@ func NormalizeTraceID(id string) string {
 func RandomTraceID() string {
 	sum := sha256.Sum256([]byte(fmt.Sprintf("%d", time.Now().UnixNano())))
 	return hex.EncodeToString(sum[:16])
+}
+
+func OpenCodeOTLPBaseEndpoint(traceEndpoint string) (string, error) {
+	raw := strings.TrimSpace(traceEndpoint)
+	if raw == "" {
+		return "", fmt.Errorf("telemetry endpoint is empty")
+	}
+	parsed, err := url.Parse(raw)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return "", fmt.Errorf("telemetry endpoint %q must be an absolute HTTP(S) URL", traceEndpoint)
+	}
+	if parsed.Scheme != "http" && parsed.Scheme != "https" {
+		return "", fmt.Errorf("telemetry endpoint %q must use http or https", traceEndpoint)
+	}
+	if parsed.RawQuery != "" || parsed.Fragment != "" {
+		return "", fmt.Errorf("telemetry endpoint %q must not contain a query or fragment", traceEndpoint)
+	}
+	path := strings.TrimRight(parsed.Path, "/")
+	path = strings.TrimSuffix(path, "/v1/traces")
+	parsed.Path = path
+	parsed.RawPath = ""
+	return strings.TrimRight(parsed.String(), "/"), nil
+}
+
+func OpenCodeOTLPTraceEndpoint(baseEndpoint string) string {
+	return strings.TrimRight(baseEndpoint, "/") + "/v1/traces"
 }
 
 func MaskSecrets(value string) string {

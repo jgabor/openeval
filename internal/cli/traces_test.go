@@ -28,9 +28,19 @@ func TestWriteTracesOutput(t *testing.T) {
 	var out bytes.Buffer
 	cfg := config.Default()
 	cfg.Telemetry.Endpoint = "http://localhost:4318/v1/traces"
-	writeTracesOutput(&out, "trace-abc", cfg)
+	cfg.Agents.OpenCode.NativeOTEL = true
+	writeTracesOutput(&out, "trace-abc", "opencode", cfg)
 	body := out.String()
-	for _, want := range []string{"trace_id: trace-abc", "otlp_endpoint: http://localhost:4318/v1/traces", "jaeger_ui:"} {
+	for _, want := range []string{
+		"trace_id: trace-abc",
+		"summary_trace: OpenEval direct summary span",
+		"otlp_endpoint: http://localhost:4318/v1/traces",
+		"jaeger_ui:",
+		"native_opencode_trace: separate runtime-generated trace",
+		"native_correlation: search resource attribute openeval.trace_id=trace-abc",
+		"native_otlp_endpoint: http://localhost:4318/v1/traces",
+		"native_privacy: OpenCode generates this payload; OpenEval masking does not apply",
+	} {
 		if !bytes.Contains([]byte(body), []byte(want)) {
 			t.Fatalf("missing %q in %q", want, body)
 		}

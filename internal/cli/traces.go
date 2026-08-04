@@ -33,13 +33,14 @@ var tracesCmd = &cobra.Command{
 		if err != nil {
 			exitErr(err)
 		}
-		writeTracesOutput(cmd.OutOrStdout(), traceID, cfg)
+		writeTracesOutput(cmd.OutOrStdout(), traceID, doc.Agent, cfg)
 	},
 }
 
-func writeTracesOutput(w io.Writer, traceID string, cfg config.Config) {
+func writeTracesOutput(w io.Writer, traceID, agent string, cfg config.Config) {
 	lines := []string{
 		fmt.Sprintf("trace_id: %s", traceID),
+		"summary_trace: OpenEval direct summary span",
 		"otlp_service: openeval-agent",
 	}
 	if cfg.Telemetry.Endpoint != "" {
@@ -47,8 +48,21 @@ func writeTracesOutput(w io.Writer, traceID string, cfg config.Config) {
 	}
 	lines = append(lines,
 		fmt.Sprintf("jaeger_ui: http://localhost:16686/trace/%s", telemetry.NormalizeTraceID(traceID)),
-		"hint: open Jaeger UI and paste trace_id if your collector uses a different UI host",
+		"summary_hint: open the direct trace ID above in your collector UI",
 	)
+	if agent == "opencode" && cfg.Agents.OpenCode.NativeOTEL {
+		baseEndpoint, err := telemetry.OpenCodeOTLPBaseEndpoint(cfg.Telemetry.Endpoint)
+		if err != nil {
+			lines = append(lines, "native_opencode_setup_error: "+err.Error())
+		} else {
+			lines = append(lines,
+				"native_opencode_trace: separate runtime-generated trace, not the OpenEval summary trace",
+				"native_correlation: search resource attribute openeval.trace_id="+traceID,
+				"native_otlp_endpoint: "+telemetry.OpenCodeOTLPTraceEndpoint(baseEndpoint),
+				"native_privacy: OpenCode generates this payload; OpenEval masking does not apply",
+			)
+		}
+	}
 	for _, line := range lines {
 		_, _ = fmt.Fprintln(w, line)
 	}
