@@ -5,9 +5,16 @@ record:
   target_version: 0.0.5
   title: "Reorder README: compare and traces before mock quick start"
   requirements:
-    []
+    - Make the README opening present the shipped OpenCode comparison result and local trace lookup as the primary product story before CI-only mock guidance.
+    - Keep installation and setup prerequisites ahead of commands while preserving the explicit checkout-only install limitation.
+    - Keep Docker and Jaeger optional for trace viewing; do not imply that a collector is required for harness proof.
+    - Link the compare example, `openeval traces`, and the shipped `examples/otel/compose.yaml` workflow without duplicating the detailed telemetry reference.
   acceptance:
-    []
+    - A new authenticated OpenCode user can follow the README opening from checkout installation through a comparison table without encountering mock as production evidence.
+    - The opening shows a concrete comparison result and a direct path from a recorded round to its Jaeger trace lookup.
+    - Mock remains labeled CI/hermetic only, and no opening path requires Docker or an OTLP collector to complete the comparison.
+    - The opening links to the detailed tracing workflow and preserves native OpenCode separate-trace and privacy caveats in their owning section.
+    - README structure checks fail if compare, trace lookup, mock labeling, or collector optionality regress.
   release_blocker: false
   severity: normal
   status: open
@@ -19,3 +26,12 @@ record:
       severity: normal
       status: open
       order: 28
+  readiness:
+    capability: document
+    reason: Train 0.0.4 shipped and verified local trace lookup, so the next README train can promote the complete compare-and-trace product story.
+    dependencies:
+      []
+    blocked: null
+    gate: null
+    queue_rank: 1
+    order_reason: Train 0.0.5 is the earliest open product train after completed 0.0.4.

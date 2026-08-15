@@ -63,9 +63,9 @@ openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-
 
 Completed with four standard-library Python maintenance tasks and process-isolated scenario-owned graders outside the agent workspace. Parent assertions reject workspace-test replacement and import-side-effect mutation while a child imports workspace code. Final verification passed `mage build`, an uncached full suite without live agents, provider credentials, or a collector, and `mage check`. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures; all eight retained workspaces also passed the isolated graders without new inference. This local sample does not establish variance or a general provider/model ranking, and grader isolation is not host sandboxing.
 
-README no longer requires OTLP for harness proof, but OpenEval still does not ship a default collector. Harness writes `trace_id` to `score.json` without one; live span receipt is not verified on the default path.
+Train `0.0.4` shipped a pinned, optional Jaeger Compose collector at `examples/otel/compose.yaml`. Docker remains tracing-only: harness, compare, report, doctor, and normal instrumentation stay collector-optional. The retained manual smoke proved that Jaeger received the normalized OpenEval summary trace and that `openeval traces` printed the matching UI URL; native OpenCode OTEL remains optional separate-trace enrichment.
 
-Pick one primary path:
+The next README train can now promote the shipped compare and trace workflows without implying that Docker is required for harness proof.
 
 - [ ] [id:chrlpdaedf] [compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start
 
