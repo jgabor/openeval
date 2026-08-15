@@ -1,0 +1,14 @@
+id: tbbboxffhv
+artifact: plan
+record:
+  name: Publish one public install story
+  description: Replace checkout-only onboarding only after anonymous installation and no-checkout demo proof are retained.
+  depends_on:
+    - zaynwzhpoj
+  status: pending
+  acceptance:
+    - GIVEN anonymous proof passed WHEN a new user reads the README opening THEN one canonical public Go install command appears before the compare-first workflow without clone instructions.
+    - GIVEN Go installs outside an existing PATH WHEN setup guidance is followed THEN the user receives concrete PATH diagnosis and remediation.
+    - GIVEN a contributor needs source workflows WHEN contributor guidance is read THEN checkout-based build and test commands remain available without competing with the user install path.
+    - GIVEN support boundaries are reviewed WHEN documentation is complete THEN OpenCode remains primary, mock remains CI-only, and Docker and collectors remain optional tracing concerns.
+  plan: asxngpusie

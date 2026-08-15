@@ -1,0 +1,16 @@
+id: rmhshogfqb
+artifact: plan
+record:
+  name: Synchronize train state from public proof
+  description: Close 0.0.8 only after the public repository, anonymous install, first-run evidence, documentation, and canonical project state agree.
+  depends_on:
+    - twyepivsrq
+    - zaynwzhpoj
+    - tbbboxffhv
+  status: pending
+  acceptance:
+    - GIVEN all prior tasks pass WHEN project state is synchronized THEN the 0.0.8 parent and canonical Go-install child resolve with durable public-proof evidence.
+    - GIVEN the canonical Go path ships WHEN optional packaging backlog is reconciled THEN curl and Homebrew are explicitly superseded rather than presented as current work.
+    - GIVEN final verification runs WHEN the successor plan closes THEN formatting, full repository gates, secret scans, remote visibility and commit checks, documentation claims, and Agentera validation pass.
+    - GIVEN any acceptance criterion remains unmet WHEN closeout is evaluated THEN the train and plan remain visibly incomplete.
+  plan: asxngpusie

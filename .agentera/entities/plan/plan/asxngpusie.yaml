@@ -1,0 +1,38 @@
+id: asxngpusie
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-08-15
+    status: open
+    reviewed: 2026-08-15
+    critic_issues: 4 found, 4 addressed, 0 dismissed
+    title: "Plan: Publish and prove the public Go install"
+  what: Finish train 0.0.8 by restoring the declared license, integrating the exact verified candidate into main, publishing only that branch, changing the authorized repository visibility to public, proving anonymous Go installation and no-checkout comparison, and documenting the path only after proof.
+  why: The shipped demo is now checkout-independent, but public installation remains blocked by a missing license, stale local and remote main refs, and the irreversible disclosure boundary of public visibility.
+  constraints: The user authorized pushing the prepared main branch and changing jgabor/openeval from private to public. Push no other branches or tags. Restore the README-declared Apache-2.0 license before publication. Rebase only if main has advanced; fast-forward when history remains linear, and stop on divergence. Verify the exact main candidate before push, push while private, verify the remote commit, then change visibility. Public disclosure exposes reachable history and Actions logs and is not reversed by later privacy changes. Keep version 0.0.0-dev, create no release tag, and add no curl, Homebrew, or release-binary path. Keep install documentation checkout-based until anonymous proof passes.
+  overall_acceptance: GIVEN the authorized candidate has passed local publication gates WHEN only main is pushed, the remote commit is verified, repository visibility becomes public, and a credential-free clean environment installs the canonical latest module and runs the shipped comparison demo THEN README may present one public no-clone install path without a release tag or version bump.
+  scope:
+    included:
+      - Canonical Apache-2.0 license file
+      - Linear integration of the prepared worktree branch into local main
+      - Exact-main tests, vulnerability checks, secret scans, and artifact review
+      - Authorized main push while private and authorized private-to-public visibility change
+      - Credential-free public module install and no-checkout demo proof
+      - README, changelog, TODO, progress, and plan closeout
+    excluded:
+      - Pushing feature branches or tags
+      - Release tags, release binaries, curl installers, and Homebrew
+      - History rewriting or force pushing
+      - Changing runtime, scoring, telemetry, or comparison behavior
+      - Treating a return to private visibility as a confidentiality rollback
+    deferred:
+      []
+  design: First restore and verify all local publication prerequisites. Integrate only linear history into the canonical branch and qualify its exact content before any external effect. Publish that branch while private, verify its remote identity, then apply the authorized visibility change and test the public distribution path without credentials. Publish user guidance only from successful external evidence, then synchronize project state.
+  unknowns:
+    - question: Will the public module proxy and checksum service resolve the newly public untagged main branch through the canonical latest selector without propagation or policy failure?
+      affects_task: 2
+      resolve_by: After visibility changes, run bounded credential-free module and direct-resolution probes from fresh caches; distinguish propagation delay from a persistent distribution failure, and keep user docs checkout-based unless the proof succeeds.
+  surprises:
+    []
+  previous_plan_archived: oviqkurhum
