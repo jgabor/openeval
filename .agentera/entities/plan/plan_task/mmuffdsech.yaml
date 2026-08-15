@@ -1,0 +1,17 @@
+id: mmuffdsech
+artifact: plan
+record:
+  name: Synchronize train state from final evidence
+  description: Close the plan and 0.0.8 backlog only after code, tests, public install proof, and documentation agree.
+  depends_on:
+    - lvtqhigufb
+    - wkkyvqcpkt
+    - vexpmnamcd
+    - ebxilrhnjd
+  status: pending
+  acceptance:
+    - GIVEN all prior tasks pass WHEN project state is synchronized THEN the 0.0.8 parent and canonical Go-install child are resolved with durable verification evidence.
+    - GIVEN one canonical Go install path ships WHEN optional packaging backlog is reconciled THEN curl and Homebrew are explicitly superseded rather than presented as additional current work.
+    - GIVEN final verification runs WHEN the plan closes THEN formatting, focused tests, full repository gates, and Agentera state validation pass.
+    - GIVEN any acceptance criterion remains unmet WHEN closeout is evaluated THEN the train and plan remain visibly incomplete.
+  plan: oviqkurhum

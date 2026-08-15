@@ -1,0 +1,14 @@
+id: vexpmnamcd
+artifact: plan
+record:
+  name: Prove public installation and first run
+  description: Verify the canonical module path installs and executes without a checkout or private GitHub credentials after separately approved publication.
+  depends_on:
+    - wkkyvqcpkt
+  status: pending
+  acceptance:
+    - GIVEN a clean Go environment without OpenEval source or GitHub credentials WHEN the canonical latest-module install command runs THEN it installs the CLI successfully from public source.
+    - GIVEN the installed CLI is invoked from an unrelated clean directory WHEN the hermetic demo runs THEN it produces two retained arms and a comparison without resolving repository-relative assets.
+    - GIVEN the install proof completes WHEN version and repository state are inspected THEN the binary remains 0.0.0-dev and no release tag was required.
+    - GIVEN public resolution or first-run proof fails WHEN evidence is recorded THEN documentation remains checkout-based and the train stays open.
+  plan: oviqkurhum

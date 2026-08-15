@@ -1,0 +1,13 @@
+id: lvtqhigufb
+artifact: plan
+record:
+  name: Qualify public source publication
+  description: Establish whether the private repository and relevant history are safe to expose, and define the exact external action requiring separate approval.
+  depends_on:
+    []
+  status: pending
+  acceptance:
+    - GIVEN the repository is private WHEN tracked content, relevant history, secrets, credentials, and generated artifacts are reviewed THEN every material exposure risk has a clear pass or blocking finding.
+    - GIVEN the review passes WHEN public visibility and default-branch publication are ready THEN the exact external effects are presented for separate user approval before mutation.
+    - GIVEN approval is absent or a blocking finding remains WHEN the task ends THEN the repository stays private and downstream public-install work does not claim completion.
+  plan: oviqkurhum

@@ -1,0 +1,35 @@
+id: oviqkurhum
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-08-15
+    status: open
+    reviewed: 2026-08-15
+    critic_issues: 3 found, 3 addressed, 0 dismissed
+    title: "Plan: Ship one public no-clone install path"
+  what: Provide one public Go installation path that installs OpenEval without a repository checkout and preserves the compare-first demo as a usable first-run workflow from an unrelated clean directory.
+  why: Train 0.0.8 removes the checkout barrier after the compare-first onboarding story is proven, while keeping one distribution surface and avoiding an unearned release track.
+  constraints: Do not change repository visibility, push, publish, or expose private history without a separate explicit approval after a public-readiness review. Keep the code version at 0.0.0-dev and do not create a release tag. Preserve custom scenario paths and aliases, skills.aliases, OpenCode-first production evidence, Cursor secondary support, and mock as CI-only synthetic evidence. Keep one canonical source for shipped demo assets. Do not add curl, Homebrew, or release-binary distribution.
+  overall_acceptance: GIVEN a user has Go and OpenCode prerequisites but no OpenEval checkout WHEN they install from the public module path and follow the compare-first workflow from a clean directory THEN the CLI resolves its shipped demo assets, runs two variation arms, and produces comparison evidence without private GitHub credentials, a release tag, Docker, or a collector.
+  scope:
+    included:
+      - Public-readiness review and separately approved source publication boundary
+      - Checkout-independent shipped comparison scenario and demo skill
+      - Credential-free public Go module installation proof from a clean environment
+      - README and setup guidance for one canonical no-clone install path
+      - TODO, changelog, progress, and plan closeout
+    excluded:
+      - Release tags or a code-version bump
+      - Release binaries, curl installers, and Homebrew
+      - Embedding arbitrary user scenarios or skills
+      - Changing runtime, telemetry, scoring, or comparison contracts
+    deferred:
+      []
+  design: Qualify the public-source trust boundary before external mutation. After approval, make the shipped comparison assets available from one canonical runtime source independent of the working directory. Prove module installation and first-run comparison in a clean environment before replacing checkout guidance, then synchronize project state from that evidence.
+  unknowns:
+    - question: Will the repository pass public-readiness review, and will the user separately authorize public visibility plus publication of the current default branch?
+      affects_task: 2
+      resolve_by: Task 1 records the review result and obtains explicit approval before any external mutation; if approval is withheld or review fails, stop and replan the distribution contract.
+  surprises:
+    []

@@ -1,0 +1,14 @@
+id: ebxilrhnjd
+artifact: plan
+record:
+  name: Publish one install and onboarding story
+  description: Replace checkout-only user guidance only after public installation and first-run evidence exists.
+  depends_on:
+    - vexpmnamcd
+  status: pending
+  acceptance:
+    - GIVEN a new user reads the README opening WHEN they prepare OpenEval THEN one canonical public Go install command appears before the compare-first workflow without clone instructions.
+    - GIVEN Go installs the binary outside an existing PATH WHEN setup guidance is followed THEN the user receives concrete PATH diagnosis and remediation.
+    - GIVEN a contributor needs source workflows WHEN they read contributor guidance THEN checkout-based build and test commands remain available without competing with the user install path.
+    - GIVEN support boundaries are reviewed WHEN documentation is complete THEN OpenCode remains primary, mock remains CI-only, and Docker and collectors remain optional tracing concerns.
+  plan: oviqkurhum
