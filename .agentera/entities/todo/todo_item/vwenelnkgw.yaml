@@ -5,10 +5,16 @@ record:
   target_version: 0.0.8
   title: Single documented install path without cloning
   requirements:
-    []
+    - Ship one canonical public Go install path without a repository checkout or private GitHub credentials.
+    - Keep the compare-first demo usable from an unrelated clean directory after installation.
+    - Restore the README-declared Apache-2.0 LICENSE before public visibility.
+    - Require separate approval for the exact default-branch push and private-to-public visibility change.
   acceptance:
-    []
-  release_blocker: false
+    - A clean Go environment installs the CLI from the public module path without cloning or GitHub credentials.
+    - The installed CLI runs the shipped hermetic demo from outside a checkout.
+    - The README license link resolves to the canonical Apache-2.0 text and GitHub detects the license.
+    - No visibility change, push, release tag, or version bump occurs without its required approval and proof.
+  release_blocker: true
   severity: normal
   status: open
   reconciliation:

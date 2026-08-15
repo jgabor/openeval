@@ -1,0 +1,17 @@
+id: ubhbomzirm
+artifact: progress
+record:
+  timestamp: 2026-08-15 18:13
+  type: chore
+  phase: build
+  what: Qualified the repository history and hosted CI evidence for eventual public-source publication without changing visibility or pushing.
+  context:
+    intent: Qualify public source publication without external mutation.
+    constraints: Keep the repository private; do not push, publish, tag, or change visibility. Preserve version 0.0.0-dev.
+    unknowns: The later exact main commit and user approval for push plus visibility change remain unresolved.
+    scope: Tracked files, reachable Git history, current tree, GitHub repository metadata, and seven Actions logs.
+  inspiration: GitHub documents that private-to-public visibility exposes code and Actions logs, permits forks, detaches private forks, disables push rulesets, publishes activity, and resets stars and watchers.
+  discovered: No secret exposure was found. Nine Python bytecode files remain in reachable history but not the current tree. README.md declares Apache-2.0 while the linked LICENSE file is missing, so 0.0.8 remains release-blocked until that mismatch is fixed.
+  verified: Gitleaks reported zero findings across 77 reachable commits, seven historical Actions logs, and the current 402-path tree. Repository metadata has no Actions secrets, variables, environments, forks, tags, LFS, submodules, non-noreply author emails, stars, or watchers. Agentera validation, strict TODO lint, git diff checks, and mage check passed.
+  next: Proceed with checkout-independent demo assets locally. Before public installation proof, restore the canonical Apache-2.0 LICENSE. When a specific main commit is ready, request separate approval to push main to the private origin and change jgabor/openeval visibility from PRIVATE to PUBLIC; that will expose reachable history and seven Actions logs and allow public forks. No tags are included.
+  publication_order: 23

@@ -5,7 +5,7 @@ record:
   description: Establish whether the private repository and relevant history are safe to expose, and define the exact external action requiring separate approval.
   depends_on:
     []
-  status: pending
+  status: complete
   acceptance:
     - GIVEN the repository is private WHEN tracked content, relevant history, secrets, credentials, and generated artifacts are reviewed THEN every material exposure risk has a clear pass or blocking finding.
     - GIVEN the review passes WHEN public visibility and default-branch publication are ready THEN the exact external effects are presented for separate user approval before mutation.

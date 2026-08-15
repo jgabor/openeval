@@ -17,6 +17,7 @@
 
 ### Documentation
 
+- Run `gitleaks` across 77 commits and seven CI logs before public-source publication; no secrets were found, but the README-linked Apache-2.0 license file is missing.
 - Document `openeval demo`, `openeval compare`, and `openeval traces` as one checkout-based OpenCode workflow with retained score evidence and optional Jaeger lookup.
 - `OpenCode` subsection in `README.md` Agents section (prerequisites, install + auth + run, config override example) so `--agent opencode` is discoverable from the user-facing docs.
 - `openeval run --help` `--agent` help text now lists `mock, cursor, opencode`.
