@@ -1,0 +1,24 @@
+id: znninkvotf
+artifact: plan
+record:
+  header:
+    level: light
+    created: 2026-08-15
+    status: open
+    title: "Plan: Make compare and trace lookup the README hero"
+  what: Reframe the README opening around the shipped OpenCode comparison workflow, its pass and cost evidence, and optional local trace lookup before CI-only mock guidance.
+  why: Train 0.0.7 consolidates the shipped 0.0.1 through 0.0.6 capabilities into one honest onboarding story so users can judge variation results and inspect retained evidence without mistaking mock, Docker, or a collector for comparison requirements.
+  constraints: Keep checkout installation prerequisites and the no-clone limitation explicit. Keep OpenCode primary, Cursor secondary, mock CI-only, comparison collector-optional, and Docker optional and tracing-only. Describe only shipped behavior. Do not change CLI behavior or the 0.0.0-dev code version.
+  overall_acceptance: GIVEN a new authenticated OpenCode user reads the opening workflow WHEN they follow it from checkout through comparison and optional tracing THEN they can compare portable-skill variations, interpret pass and cost evidence, and locate a retained round trace without being told that mock, Docker, or a collector is required for comparison.
+  scope:
+    included:
+      - README opening and quick-start sequence from checkout setup through comparison and optional trace lookup
+      - Connection among portable skill discovery, skills.aliases, variation arms, compare output, and per-skill cost evidence
+      - Clear boundaries for OpenCode, mock, collector, and Docker use
+    excluded:
+      - Public no-clone installation, which belongs to train 0.0.8
+      - CLI behavior, telemetry behavior, or new product capabilities
+      - Code version changes
+  surprises:
+    []
+  previous_plan_archived: acgkfkknys

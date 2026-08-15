@@ -1,0 +1,15 @@
+id: dvdrlxspuk
+artifact: plan
+record:
+  name: Lead README onboarding with comparison evidence
+  description: Make the opening workflow take an authenticated OpenCode user from honest setup constraints to a variation comparison, result interpretation, and optional retained-round trace lookup while preserving support boundaries.
+  depends_on:
+    []
+  status: pending
+  acceptance:
+    - GIVEN a new user starts at the README opening WHEN they prepare OpenEval THEN checkout installation prerequisites and the no-clone limitation are explicit before the comparison commands.
+    - GIVEN the user follows the primary workflow WHEN the variation arms finish THEN the README shows how to reach the comparison table and identify pass, cost, and retained score evidence.
+    - GIVEN the user evaluates a skill change WHEN the workflow explains its two arms THEN portable skill discovery and skills.aliases are connected to the variation, compare, and per-skill cost evidence.
+    - GIVEN no collector is running WHEN the user follows the comparison workflow THEN the README states that comparison still works and presents trace lookup as optional.
+    - GIVEN the user continues to local trace lookup WHEN they follow the tracing guidance THEN Docker and Jaeger are identified as tracing-only prerequisites, while mock guidance remains later and CI-only.
+  plan: znninkvotf
