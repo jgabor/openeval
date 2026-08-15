@@ -5,9 +5,15 @@ record:
   target_version: 0.0.4
   title: Bundled local OTLP for trace lookup
   requirements:
-    []
+    - Ship a pinned Jaeger Docker Compose setup at `examples/otel/compose.yaml` exposing OTLP HTTP on port 4318 and the Jaeger UI on port 16686.
+    - Keep Docker optional and tracing-only; `openeval run`, `compare`, `report`, `doctor`, and normal instrumentation must remain Docker-free and collector-optional.
+    - Use the OpenEval summary span as the required receipt proof; native OpenCode OTEL remains optional enrichment with separate-trace correlation and privacy caveats.
+    - Document startup, readiness, trace lookup, shutdown, port conflicts, and image architecture support without embedding a trace database in OpenEval.
   acceptance:
-    []
+    - Starting `examples/otel/compose.yaml` makes the pinned Jaeger OTLP HTTP receiver reachable on localhost:4318 and its UI reachable on localhost:16686.
+    - After one hermetic or explicitly bounded harness round, the recorded summary trace ID is received and the URL printed by `openeval traces <run-dir> --task <id> --round 1` resolves in Jaeger.
+    - The harness still succeeds when the collector is stopped, and no non-tracing workflow requires Docker.
+    - README documents Compose as the supported local collector, native OpenCode OTEL as optional separate-trace enrichment, and the native payload privacy boundary.
   release_blocker: false
   severity: normal
   status: open
@@ -20,11 +26,11 @@ record:
       status: open
       order: 28
   readiness:
-    capability: discuss
-    reason: This is the earliest open product train, and its primary local collector path remains undecided.
+    capability: plan
+    reason: Decision jjyopxgccc selected a pinned Jaeger Compose setup and fixed the tracing-only Docker boundary; implementation now needs a scoped plan.
     dependencies:
       []
     blocked: null
     gate: null
     queue_rank: 1
-    order_reason: Train 0.0.4 is the earliest open product train after completed 0.0.3.
+    order_reason: Train 0.0.4 remains the earliest open product train after the collector-path decision.

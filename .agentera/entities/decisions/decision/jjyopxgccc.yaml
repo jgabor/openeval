@@ -1,0 +1,17 @@
+id: jjyopxgccc
+artifact: decisions
+record:
+  date: 2026-08-15
+  question: Which local collector path should v0.0.4 support?
+  context: OpenEval needs a reproducible OTLP receiver and Jaeger UI while `openeval run`, `compare`, `report`, and `doctor` stay collector-optional and Docker-free.
+  alternatives:
+    - name: Pinned Jaeger Compose setup
+      status: chosen
+    - name: Native OpenCode OTEL as the primary path
+      status: rejected
+    - name: Documented one-line container command
+      status: rejected
+  choice: Ship a pinned Jaeger setup at `examples/otel/compose.yaml` as the supported local collector and UI on OTLP HTTP port 4318 and UI port 16686. Keep native OpenCode OTEL optional as an additional emitter, not a collector replacement. Docker remains optional and tracing-only.
+  reasoning: Compose gives `openeval traces <run-dir> --task <id> --round 1` a repeatable receiver and UI target. Native OpenCode OTEL still needs a receiver, emits a separate trace tree correlated by `openeval.trace_id`, has a wider privacy boundary, and has unverified process-exit flushing. A one-line container command is smaller but less reproducible and testable.
+  confidence: firm
+  feeds_into: TODO rxpmzvrxjd, v0.0.4 plan, README trace setup
