@@ -136,8 +136,8 @@ variations:
 }
 
 func TestRunMockRetainsUniqueEvidenceAndComparesReturnedPaths(t *testing.T) {
-	chdirRepositoryRoot(t)
 	root := t.TempDir()
+	t.Chdir(root)
 	t.Setenv("XDG_CONFIG_HOME", filepath.Join(root, "config"))
 	cfg := config.Default()
 	cfg.Telemetry.Endpoint = "http://127.0.0.1:1/v1/traces"
@@ -180,6 +180,12 @@ func TestRunMockRetainsUniqueEvidenceAndComparesReturnedPaths(t *testing.T) {
 			if !strings.Contains(result.Comparison, want) {
 				t.Fatalf("comparison missing %q:\n%s", want, result.Comparison)
 			}
+		}
+		if result.Baseline.Score.Tasks != 4 || result.Skill.Score.Tasks != 4 {
+			t.Fatalf("task counts: baseline=%d skill=%d, want 4", result.Baseline.Score.Tasks, result.Skill.Score.Tasks)
+		}
+		if got := result.Skill.Score.Telemetry.SkillsActive; len(got) != 1 || got[0] != "demo-skill" {
+			t.Fatalf("active skills = %v, want [demo-skill]", got)
 		}
 	}
 }

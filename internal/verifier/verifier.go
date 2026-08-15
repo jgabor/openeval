@@ -16,7 +16,12 @@ func Run(ctx context.Context, sc scenario.Scenario, task scenario.Task, workDir 
 	}
 	script := task.Verifier.Run
 	if !filepath.IsAbs(script) {
-		script = filepath.Join(sc.SourceDir(), script)
+		sourceDir, cleanup, err := sc.MaterializeSource()
+		if err != nil {
+			return "fail", fmt.Errorf("prepare verifier: %w", err)
+		}
+		defer cleanup()
+		script = filepath.Join(sourceDir, script)
 	}
 	cmd := exec.CommandContext(ctx, script)
 	cmd.Dir = workDir

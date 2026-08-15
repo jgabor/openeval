@@ -14,12 +14,12 @@ func SeedSkills(workDir string, skillNames []string, cfg config.Config) error {
 		return nil
 	}
 	for _, name := range skillNames {
-		src, err := cfg.ResolveSkillPath(name)
+		src, _, err := cfg.ResolveSkill(name)
 		if err != nil {
 			return err
 		}
 		dest := filepath.Join(workDir, ".agents", "skills", name)
-		if err := copyTree(src, dest); err != nil {
+		if err := copyFSTree(src, dest); err != nil {
 			return fmt.Errorf("seed skill %q: %w", name, err)
 		}
 	}
@@ -30,9 +30,12 @@ func SeedSkills(workDir string, skillNames []string, cfg config.Config) error {
 func SkillPluginDirs(skillNames []string, cfg config.Config) ([]string, error) {
 	var dirs []string
 	for _, name := range skillNames {
-		src, err := cfg.ResolveSkillPath(name)
+		_, src, err := cfg.ResolveSkill(name)
 		if err != nil {
 			return nil, err
+		}
+		if src == "" {
+			continue
 		}
 		pluginDir := filepath.Join(src, ".claude-plugin")
 		if info, err := os.Stat(pluginDir); err == nil && info.IsDir() {

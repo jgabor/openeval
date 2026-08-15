@@ -1,6 +1,7 @@
 package config
 
 import (
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -40,35 +41,55 @@ func TestResolveSkillPathExpandsHome(t *testing.T) {
 	}
 }
 
-func TestResolveSkillPathUsesShippedExample(t *testing.T) {
-	chdirRepoRoot(t)
+func TestResolveSkillUsesShippedExampleOutsideCheckout(t *testing.T) {
+	t.Chdir(t.TempDir())
 	cfg := Default()
-	got, err := cfg.ResolveSkillPath("demo-skill")
+	source, path, err := cfg.ResolveSkill("demo-skill")
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.HasSuffix(got, filepath.Join("examples", "skills", "demo-skill")) {
-		t.Fatalf("ResolveSkillPath = %q", got)
+	if path != "" {
+		t.Fatalf("shipped skill path = %q, want embedded source", path)
+	}
+	data, err := fs.ReadFile(source, "SKILL.md")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(data), "name: demo-skill") {
+		t.Fatalf("embedded SKILL.md missing demo-skill frontmatter")
 	}
 }
 
-func chdirRepoRoot(t *testing.T) {
-	t.Helper()
-	dir, err := os.Getwd()
+func TestResolveSkillAliasPrecedesShippedFallback(t *testing.T) {
+	root := t.TempDir()
+	alias := filepath.Join(root, "alias")
+	if err := os.Mkdir(alias, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(alias, "SKILL.md"), []byte("alias bytes"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	cfg := Default()
+	cfg.Skills.Aliases["demo-skill"] = alias
+
+	source, path, err := cfg.ResolveSkill("demo-skill")
 	if err != nil {
 		t.Fatal(err)
 	}
-	for {
-		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
-			if err := os.Chdir(dir); err != nil {
-				t.Fatal(err)
-			}
-			return
-		}
-		parent := filepath.Dir(dir)
-		if parent == dir {
-			t.Fatal("go.mod not found")
-		}
-		dir = parent
+	data, err := fs.ReadFile(source, "SKILL.md")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != alias || string(data) != "alias bytes" {
+		t.Fatalf("resolved path=%q data=%q, want alias %q", path, data, alias)
+	}
+}
+
+func TestResolveSkillInvalidAliasDoesNotUseShippedFallback(t *testing.T) {
+	cfg := Default()
+	cfg.Skills.Aliases["demo-skill"] = filepath.Join(t.TempDir(), "missing")
+	_, _, err := cfg.ResolveSkill("demo-skill")
+	if err == nil || !strings.Contains(err.Error(), `skill "demo-skill" path`) {
+		t.Fatalf("ResolveSkill error = %v, want invalid alias path", err)
 	}
 }

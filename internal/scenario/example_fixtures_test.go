@@ -16,10 +16,18 @@ import (
 )
 
 func TestExampleFixturesTasksFailBeforeMaintenance(t *testing.T) {
-	chdirRepoRoot(t)
+	t.Chdir(t.TempDir())
 	sc, err := scenario.Load("example-fixtures", config.Default())
 	if err != nil {
 		t.Fatal(err)
+	}
+	sourceDir, cleanup, err := sc.MaterializeSource()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(cleanup)
+	if _, err := os.Stat(filepath.Join(sourceDir, "fixtures", "maintainer_tools", "__init__.py")); err != nil {
+		t.Fatalf("embedded package fixture missing: %v", err)
 	}
 
 	wantIDs := []string{
@@ -36,9 +44,9 @@ func TestExampleFixturesTasksFailBeforeMaintenance(t *testing.T) {
 			t.Errorf("task %d id = %q, want %q", i, task.ID, wantIDs[i])
 		}
 		t.Run(task.ID, func(t *testing.T) {
-			script := filepath.Join(sc.SourceDir(), task.Verifier.Run)
+			script := filepath.Join(sourceDir, task.Verifier.Run)
 			cmd := exec.Command(script)
-			cmd.Dir = sc.SourceDir()
+			cmd.Dir = sourceDir
 			output, err := cmd.CombinedOutput()
 			if err == nil {
 				t.Fatalf("untouched fixture passed verifier; output:\n%s", output)

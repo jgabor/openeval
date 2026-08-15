@@ -5,7 +5,7 @@ record:
   description: Keep the compare-first scenario, verifier assets, and demo skill available to the CLI outside a repository checkout without creating a second source of truth.
   depends_on:
     - lvtqhigufb
-  status: pending
+  status: complete
   acceptance:
     - GIVEN no OpenEval checkout exists in the working directory WHEN the shipped demo runs with the hermetic agent THEN both variation arms and comparison complete using the shipped scenario, verifier, fixtures, and demo skill.
     - GIVEN a user supplies an explicit scenario path, scenario alias, or skill alias WHEN it resolves successfully THEN that user-owned selection retains its current precedence over shipped assets.

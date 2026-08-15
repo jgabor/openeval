@@ -1,0 +1,17 @@
+id: csouduezum
+artifact: progress
+record:
+  timestamp: 2026-08-15 19:17
+  type: feat
+  phase: build
+  what: Made the shipped comparison scenario and demo skill available from one embedded asset source outside a repository checkout.
+  context:
+    intent: Make shipped demo assets checkout-independent while preserving one canonical source.
+    constraints: Keep explicit scenario paths and aliases and skill aliases authoritative; keep verifier assets outside agent workspaces; do not publish, push, tag, change visibility, update install docs, or bump 0.0.0-dev.
+    unknowns: The later exact main commit and approval for public publication remain unresolved and do not affect this local implementation.
+    scope: Embedded shipped scenario, fixtures, verifiers, graders, demo skill, resolution precedence, focused tests, and clean-directory smoke.
+  inspiration: Used Go embed.FS and io/fs so canonical example files compile into the CLI without a dependency or duplicate asset tree.
+  discovered: Bare mage build cannot obtain VCS status in this Orca worktree because Go discovers an unrelated ancestor repository marker; building with -buildvcs=false succeeds, and public module builds will not use this local worktree boundary.
+  verified: Focused scenario, workspace, config, verifier, and demo tests passed; uncached go test ./... passed; mage check and gopls diagnostics passed. An independently built local binary ran demo --agent mock --rounds 1 from an unrelated temporary directory, produced baseline and with-demo-skill score.json files with four tasks each, retained active demo-skill telemetry, printed comparison evidence, and left no verifier materialization directories. Independent audit found one descriptor-lifecycle regression, which was corrected and reverified.
+  next: Restore the declared Apache-2.0 LICENSE, integrate the exact intended main commit, obtain separate push and visibility approval, then prove anonymous public module installation and the same no-checkout demo.
+  publication_order: 24

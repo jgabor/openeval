@@ -2,13 +2,36 @@ package config
 
 import (
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/jgabor/openeval/examples"
 )
 
 type SkillsConfig struct {
 	Aliases map[string]string `yaml:"aliases"`
+}
+
+func (cfg Config) ResolveSkill(name string) (fs.FS, string, error) {
+	if cfg.Skills.Aliases != nil {
+		if raw, ok := cfg.Skills.Aliases[name]; ok {
+			path, err := resolveSkillDir(name, expandHome(raw))
+			if err != nil {
+				return nil, "", err
+			}
+			return os.DirFS(path), path, nil
+		}
+	}
+	if name == "demo-skill" {
+		source, err := fs.Sub(examples.Files, "skills/demo-skill")
+		return source, "", err
+	}
+	if path, ok := shippedSkillPath(name); ok {
+		return os.DirFS(path), path, nil
+	}
+	return nil, "", fmt.Errorf("skill %q: not found in skills.aliases or shipped skills", name)
 }
 
 func (cfg Config) ResolveSkillPath(name string) (string, error) {

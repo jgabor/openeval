@@ -3,6 +3,7 @@ package workspace
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"path/filepath"
 
@@ -17,46 +18,42 @@ func Seed(sc scenario.Scenario, dest string) error {
 	if err := os.MkdirAll(dest, 0o755); err != nil {
 		return err
 	}
-	src := filepath.Join(sc.SourceDir(), "fixtures")
-	info, err := os.Stat(src)
+	src, err := fs.Sub(sc.SourceFS(), "fixtures")
 	if err != nil {
+		return fmt.Errorf("fixtures: %w", err)
+	}
+	if _, err := fs.Stat(src, "."); err != nil {
 		if os.IsNotExist(err) {
 			return nil
 		}
-		return fmt.Errorf("fixtures %s: %w", src, err)
+		return fmt.Errorf("fixtures: %w", err)
 	}
-	if !info.IsDir() {
-		return fmt.Errorf("fixtures %s is not a directory", src)
-	}
-	return copyTree(src, filepath.Join(dest, "fixtures"))
+	return copyFSTree(src, filepath.Join(dest, "fixtures"))
 }
 
-func copyTree(src, dst string) error {
-	return filepath.WalkDir(src, func(path string, d os.DirEntry, err error) error {
+func copyFSTree(src fs.FS, dst string) error {
+	return fs.WalkDir(src, ".", func(path string, entry fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		rel, err := filepath.Rel(src, path)
-		if err != nil {
-			return err
-		}
-		target := filepath.Join(dst, rel)
-		if d.IsDir() {
+		target := filepath.Join(dst, filepath.FromSlash(path))
+		if entry.IsDir() {
 			return os.MkdirAll(target, 0o755)
 		}
-		return copyFile(path, target)
+		in, err := src.Open(path)
+		if err != nil {
+			return err
+		}
+		copyErr := copyReader(in, target)
+		_ = in.Close()
+		return copyErr
 	})
 }
 
-func copyFile(src, dst string) error {
+func copyReader(in io.Reader, dst string) error {
 	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 		return err
 	}
-	in, err := os.Open(src)
-	if err != nil {
-		return err
-	}
-	defer func() { _ = in.Close() }()
 	out, err := os.OpenFile(dst, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)
 	if err != nil {
 		return err
