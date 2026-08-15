@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"
+      severity: normal
+      status: open
+      order: 29

@@ -1,0 +1,25 @@
+id: aksosbmnzi
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.3
+  title: Complete final plan verification before closing `0.0.3`
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: resolved
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.3] Complete final plan verification before closing `0.0.3`"
+      status: resolved
+      order: 43
+      severity: normal
+  lifecycle:
+    operation: resolve
+    reason: Completed before typed TODO cutover
+    date: 2026-08-15

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Run every scheduled attempt regardless of verifier reward
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Run every scheduled attempt regardless of verifier reward
+      severity: normal
+      status: open
+      order: 99

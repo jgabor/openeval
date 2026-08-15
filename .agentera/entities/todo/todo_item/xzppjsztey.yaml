@@ -2,5 +2,13 @@ id: xzppjsztey
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Missing `cursor-agent` reports install/login steps
+  status: resolved
+  description: Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
+      status: resolved
+      order: 36
+      severity: normal

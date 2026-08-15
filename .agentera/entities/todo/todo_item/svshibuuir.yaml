@@ -1,0 +1,25 @@
+id: svshibuuir
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.3
+  title: Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: resolved
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.3] Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors"
+      status: resolved
+      order: 41
+      severity: normal
+  lifecycle:
+    operation: resolve
+    reason: Completed before typed TODO cutover
+    date: 2026-08-15

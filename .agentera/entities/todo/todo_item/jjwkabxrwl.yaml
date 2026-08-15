@@ -1,0 +1,21 @@
+id: jjwkabxrwl
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.18
+  title: Align external measurements only when paired attempts have matching names and units
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.18] Align external measurements only when paired attempts have matching names and units"
+      severity: normal
+      status: open
+      order: 22

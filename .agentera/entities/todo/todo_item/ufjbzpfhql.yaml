@@ -2,5 +2,13 @@ id: ufjbzpfhql
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Install docs consistent with AGENTS.md versioning
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Install docs consistent with AGENTS.md versioning
+      status: resolved
+      order: 33
+      severity: normal

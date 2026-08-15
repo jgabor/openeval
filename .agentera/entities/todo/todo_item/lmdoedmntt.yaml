@@ -2,5 +2,13 @@ id: lmdoedmntt
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: "README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`"
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "README section: `skills.aliases` → variation → two runs → compare → `cost_by_skill` in `score.json`"
+      status: resolved
+      order: 17
+      severity: normal

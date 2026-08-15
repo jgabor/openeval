@@ -2,5 +2,13 @@ id: hfxeubpdnz
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Exit 0 prints a compare table when cursor setup is valid
+  status: resolved
+  description: Exit 0 prints a compare table when OpenCode setup is valid
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Exit 0 prints a compare table when OpenCode setup is valid
+      status: resolved
+      order: 14
+      severity: normal

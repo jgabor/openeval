@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Validate that score rows and artifacts belong to the declared campaign
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Validate that score rows and artifacts belong to the declared campaign
+      severity: normal
+      status: open
+      order: 81

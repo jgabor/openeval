@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Pin and retain the image digest used by each attempt
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Pin and retain the image digest used by each attempt
+      severity: normal
+      status: open
+      order: 108

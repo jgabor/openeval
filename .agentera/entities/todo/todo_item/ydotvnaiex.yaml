@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Implement the existing `--image` run flag
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Implement the existing `--image` run flag
+      severity: normal
+      status: open
+      order: 107

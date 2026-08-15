@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Bound CPU, memory, process count, and attempt duration
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Bound CPU, memory, process count, and attempt duration
+      severity: normal
+      status: open
+      order: 113

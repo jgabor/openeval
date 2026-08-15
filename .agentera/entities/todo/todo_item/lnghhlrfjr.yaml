@@ -3,4 +3,12 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Consume ktx metrics per attempt rather than through one aggregate external map
+  description: Consume ktx metrics through the generic per-attempt contract rather than one aggregate external map
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Consume ktx metrics through the generic per-attempt contract rather than one aggregate external map
+      severity: normal
+      status: open
+      order: 135

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Preserve runtime-reported cost separately from any price-derived estimate
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Preserve runtime-reported cost separately from any price-derived estimate
+      severity: normal
+      status: open
+      order: 66

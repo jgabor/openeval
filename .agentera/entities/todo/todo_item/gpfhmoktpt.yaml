@@ -1,0 +1,21 @@
+id: gpfhmoktpt
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.14
+  title: Reject an empty wrapper executable or empty argv entry before agent execution
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.14] Reject an empty wrapper executable or empty argv entry before agent execution"
+      severity: normal
+      status: open
+      order: 16

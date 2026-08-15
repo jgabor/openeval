@@ -2,5 +2,13 @@ id: sjfpqmxacz
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Harness still completes when collector is unreachable (non-blocking export)
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Harness still completes when collector is unreachable (non-blocking export)
+      status: resolved
+      order: 28
+      severity: normal

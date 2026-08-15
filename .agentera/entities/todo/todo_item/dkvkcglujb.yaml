@@ -2,5 +2,13 @@ id: dkvkcglujb
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: No README path presents mock scores as production eval evidence
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: No README path presents mock scores as production eval evidence
+      status: resolved
+      order: 4
+      severity: normal

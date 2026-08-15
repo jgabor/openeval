@@ -1,0 +1,21 @@
+id: lcnujtldrb
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.19
+  title: Have both arms publish versioned per-attempt external measurement artifacts
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.19] Have both arms publish versioned per-attempt external measurement artifacts"
+      severity: normal
+      status: open
+      order: 25

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Emit stable JSON from `compare` as well as human-readable text
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Emit stable JSON from `compare` as well as human-readable text
+      severity: normal
+      status: open
+      order: 128

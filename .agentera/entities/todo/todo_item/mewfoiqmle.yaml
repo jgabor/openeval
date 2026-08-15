@@ -2,5 +2,13 @@ id: mewfoiqmle
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Retain `default` vs `with-demo-skill` variations for compare
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Retain `default` vs `with-demo-skill` variations for compare
+      status: resolved
+      order: 18
+      severity: normal

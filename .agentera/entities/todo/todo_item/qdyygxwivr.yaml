@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Label descriptive intervals as uncertainty, not causal or significance claims
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Label descriptive intervals as uncertainty, not causal or significance claims
+      severity: normal
+      status: open
+      order: 130

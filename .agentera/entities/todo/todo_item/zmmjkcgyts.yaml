@@ -2,5 +2,13 @@ id: zmmjkcgyts
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Split README into **Shipped** vs **Planned** sections
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Split README into **Shipped** vs **Planned** sections
+      status: resolved
+      order: 40
+      severity: normal

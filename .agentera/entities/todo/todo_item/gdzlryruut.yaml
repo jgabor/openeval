@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Require explicit execution approval for paid campaigns
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Require explicit execution approval for paid campaigns
+      severity: normal
+      status: open
+      order: 104

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: "Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets"
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets"
+      severity: normal
+      status: open
+      order: 41

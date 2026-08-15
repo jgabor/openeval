@@ -10,4 +10,12 @@ record:
     []
   release_blocker: false
   severity: normal
-  status: open
+  status: resolved
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[telemetry-shipped-slice:0.0.11] Align Supported telemetry with shipped behavior"
+      status: resolved
+      order: 20
+      severity: normal

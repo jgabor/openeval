@@ -2,5 +2,13 @@ id: paiwwqkfdg
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Does not require OTLP/Jaeger (see `0.0.4`)
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Does not require OTLP/Jaeger (see `0.0.4`)
+      status: resolved
+      order: 23
+      severity: normal

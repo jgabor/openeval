@@ -2,5 +2,13 @@ id: poezrkzicu
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Mock labeled CI/hermetic only
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Mock labeled CI/hermetic only
+      status: resolved
+      order: 24
+      severity: normal

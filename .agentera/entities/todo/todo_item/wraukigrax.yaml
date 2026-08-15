@@ -1,0 +1,25 @@
+id: wraukigrax
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.3
+  title: Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: resolved
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.3] Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence"
+      status: resolved
+      order: 42
+      severity: normal
+  lifecycle:
+    operation: resolve
+    reason: Completed before typed TODO cutover
+    date: 2026-08-15

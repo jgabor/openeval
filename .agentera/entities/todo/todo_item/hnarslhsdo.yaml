@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Document with Jaeger screenshots in README
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Document with Jaeger screenshots in README
+      severity: normal
+      status: open
+      order: 59

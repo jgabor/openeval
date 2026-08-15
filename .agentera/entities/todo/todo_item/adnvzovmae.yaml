@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Comment expected cost/runtime for real-agent jobs
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Comment expected cost/runtime for real-agent jobs
+      severity: normal
+      status: open
+      order: 43

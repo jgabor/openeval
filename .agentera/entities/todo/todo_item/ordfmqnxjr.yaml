@@ -2,5 +2,13 @@ id: ordfmqnxjr
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Consistent with AGENTS.md and earn-your-complexity decision
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Consistent with AGENTS.md and earn-your-complexity decision
+      status: resolved
+      order: 22
+      severity: normal

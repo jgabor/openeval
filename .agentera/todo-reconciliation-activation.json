@@ -1,0 +1,7 @@
+{
+  "schema_version": "agentera.todoReconciliationActivation.v1",
+  "retained_legacy_rows": [],
+  "effect_sha256": "e81191f7a49f8fe7f4c44b7004c3d1d945a7d15303c9df8724c9c36b2b89a9f4",
+  "effect_operation": "correct-owners",
+  "owner_mapping_sha256": "9f2e87ffc14757493871fd417231cc85a9301e855f01aa62b5e54a3a9bd30f31"
+}

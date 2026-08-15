@@ -2,5 +2,13 @@ id: emxrzhhykp
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Warn if OTLP endpoint unreachable (non-fatal)
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Warn if OTLP endpoint unreachable (non-fatal)
+      status: resolved
+      order: 9
+      severity: normal

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Ship hook export for session cost, skills active, and tool calls
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Ship hook export for session cost, skills active, and tool calls
+      severity: normal
+      status: open
+      order: 58

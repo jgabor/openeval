@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Let verifier scripts emit a versioned structured result
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Let verifier scripts emit a versioned structured result
+      severity: normal
+      status: open
+      order: 89

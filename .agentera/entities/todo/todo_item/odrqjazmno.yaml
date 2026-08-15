@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Treat repeated runs of one task as one task cluster when pooling
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Treat repeated runs of one task as one task cluster when pooling
+      severity: normal
+      status: open
+      order: 122

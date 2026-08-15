@@ -2,5 +2,13 @@ id: pqsfojcblt
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: README does not imply full inventory is available today
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: README does not imply full inventory is available today
+      status: resolved
+      order: 25
+      severity: normal

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Validate every attempt and regenerate the campaign summary before any paid expansion
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Validate every attempt and regenerate the campaign summary before any paid expansion
+      severity: normal
+      status: open
+      order: 139

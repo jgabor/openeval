@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Distinguish verifier infrastructure errors from a valid failing grade
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Distinguish verifier infrastructure errors from a valid failing grade
+      severity: normal
+      status: open
+      order: 92

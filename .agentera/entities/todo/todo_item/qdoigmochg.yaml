@@ -3,4 +3,12 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: "`openeval instrument --agent cursor --otel-up docker`, or"
+  description: OpenCode native OTEL plus a documented local collector, or
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: OpenCode native OTEL plus a documented local collector, or
+      severity: normal
+      status: open
+      order: 30

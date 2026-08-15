@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: README custom-scenario section links to init
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: README custom-scenario section links to init
+      severity: normal
+      status: open
+      order: 51

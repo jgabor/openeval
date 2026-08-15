@@ -11,3 +11,11 @@ record:
   release_blocker: false
   severity: normal
   status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start"
+      severity: normal
+      status: open
+      order: 34

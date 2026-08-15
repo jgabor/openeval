@@ -3,4 +3,12 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Run passthrough and compression arms with the same OpenCode and ktx instrumentation
+  description: Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
+      severity: normal
+      status: open
+      order: 132

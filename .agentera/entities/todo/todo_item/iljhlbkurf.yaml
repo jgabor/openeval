@@ -2,5 +2,13 @@ id: iljhlbkurf
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: CI can run a subset with `--agent mock`
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: CI can run a subset with `--agent mock`
+      status: resolved
+      order: 16
+      severity: normal

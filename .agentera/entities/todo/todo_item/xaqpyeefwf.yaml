@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Add `openeval validate <run-dir>` with stable JSON output and documented exit codes
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Add `openeval validate <run-dir>` with stable JSON output and documented exit codes
+      severity: normal
+      status: open
+      order: 82

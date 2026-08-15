@@ -11,3 +11,20 @@ record:
   release_blocker: false
   severity: normal
   status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup"
+      severity: normal
+      status: open
+      order: 28
+  readiness:
+    capability: discuss
+    reason: This is the earliest open product train, and its primary local collector path remains undecided.
+    dependencies:
+      []
+    blocked: null
+    gate: null
+    queue_rank: 1
+    order_reason: Train 0.0.4 is the earliest open product train after completed 0.0.3.

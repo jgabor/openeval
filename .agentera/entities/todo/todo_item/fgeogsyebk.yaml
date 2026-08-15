@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
+      severity: normal
+      status: open
+      order: 32

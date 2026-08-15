@@ -2,5 +2,13 @@ id: dzuuyxkxec
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: README references doctor before first `run --agent cursor`
+  status: resolved
+  description: README references doctor before first `run --agent opencode`
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: README references doctor before first `run --agent opencode`
+      status: resolved
+      order: 7
+      severity: normal

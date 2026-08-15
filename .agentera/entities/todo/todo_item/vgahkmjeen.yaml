@@ -2,5 +2,13 @@ id: vgahkmjeen
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Document `--plugin-dir` for `.claude-plugin` skills
+  status: resolved
+  description: Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
+      status: resolved
+      order: 35
+      severity: normal

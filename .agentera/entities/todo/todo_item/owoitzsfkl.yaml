@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Retain input, output, reasoning, cache-read, and cache-write tokens independently
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Retain input, output, reasoning, cache-read, and cache-write tokens independently
+      severity: normal
+      status: open
+      order: 65

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Complete an unpaid or explicitly bounded three-task smoke campaign
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Complete an unpaid or explicitly bounded three-task smoke campaign
+      severity: normal
+      status: open
+      order: 138

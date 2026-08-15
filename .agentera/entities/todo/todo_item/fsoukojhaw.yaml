@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: "Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim"
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim"
+      severity: normal
+      status: open
+      order: 141

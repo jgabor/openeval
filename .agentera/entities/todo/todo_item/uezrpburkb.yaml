@@ -2,5 +2,13 @@ id: uezrpburkb
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Missing or invalid config reports copy/fix steps
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Missing or invalid config reports copy/fix steps
+      status: resolved
+      order: 32
+      severity: normal

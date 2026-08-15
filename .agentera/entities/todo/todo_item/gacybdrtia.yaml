@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Retain changed-file, added-line, and deleted-line footprint metrics
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Retain changed-file, added-line, and deleted-line footprint metrics
+      severity: normal
+      status: open
+      order: 88

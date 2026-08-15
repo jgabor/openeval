@@ -3,11 +3,19 @@ artifact: todo
 record:
   kind: compare-first-quickstart
   target_version: 0.0.1
-  title: Compare-first quick start (`cursor-agent`, not mock)
+  title: Compare-first quick start (OpenCode, not mock)
   requirements:
     []
   acceptance:
     []
   release_blocker: false
   severity: normal
-  status: open
+  status: resolved
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[compare-first-quickstart:0.0.1] Compare-first quick start (OpenCode, not mock)"
+      status: resolved
+      order: 34
+      severity: normal

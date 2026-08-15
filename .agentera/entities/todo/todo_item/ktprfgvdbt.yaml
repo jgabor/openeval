@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Report deterministic paired bootstrap intervals with a retained seed
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Report deterministic paired bootstrap intervals with a retained seed
+      severity: normal
+      status: open
+      order: 121

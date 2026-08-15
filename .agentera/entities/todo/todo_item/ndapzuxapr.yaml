@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Documented one-liner in README
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Documented one-liner in README
+      severity: normal
+      status: open
+      order: 31

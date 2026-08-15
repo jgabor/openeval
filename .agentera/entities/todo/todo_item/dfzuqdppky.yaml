@@ -2,5 +2,13 @@ id: dfzuqdppky
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Document that a new user with authenticated `cursor-agent` should see a compare table from README alone
+  status: resolved
+  description: Document that a new user with authenticated OpenCode should see a compare table from README alone
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Document that a new user with authenticated OpenCode should see a compare table from README alone
+      status: resolved
+      order: 3
+      severity: normal

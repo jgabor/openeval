@@ -2,5 +2,13 @@ id: ehocruylbs
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: "Quick start order: install → compare flow → optional instrument/traces"
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "Quick start order: install → compare flow → optional instrument/traces"
+      status: resolved
+      order: 8
+      severity: normal

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Record execution order, host/runtime identity, and OpenEval version
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Record execution order, host/runtime identity, and OpenEval version
+      severity: normal
+      status: open
+      order: 80

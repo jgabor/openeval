@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Never remove an existing run directory implicitly
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Never remove an existing run directory implicitly
+      severity: normal
+      status: open
+      order: 76

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Cross-link `0.0.1` and `0.0.3` when complete
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Cross-link `0.0.1` and `0.0.3` when complete
+      severity: normal
+      status: open
+      order: 61

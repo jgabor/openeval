@@ -2,5 +2,13 @@ id: cyjamdzmqk
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Recommend `--rounds 3` for pass@k stability
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Recommend `--rounds 3` for pass@k stability
+      status: resolved
+      order: 2
+      severity: normal

@@ -4,3 +4,11 @@ record:
   severity: normal
   status: open
   description: Report exact recorded-workload token and cost totals per repetition
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Report exact recorded-workload token and cost totals per repetition
+      severity: normal
+      status: open
+      order: 119

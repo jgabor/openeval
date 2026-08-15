@@ -1,0 +1,21 @@
+id: onlagrkdlq
+artifact: todo
+record:
+  kind: task
+  target_version: 0.0.14
+  title: Test executable paths and arguments containing spaces
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  severity: normal
+  status: open
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: "[task:0.0.14] Test executable paths and arguments containing spaces"
+      severity: normal
+      status: open
+      order: 20

@@ -2,5 +2,13 @@ id: dqnpbigikz
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Check `cursor-agent status` (authenticated)
+  status: resolved
+  description: Check supported OpenCode version and `opencode auth list`
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Check supported OpenCode version and `opencode auth list`
+      status: resolved
+      order: 5
+      severity: normal

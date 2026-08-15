@@ -2,5 +2,13 @@ id: zcqhswvoqq
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Check `cursor-agent` on PATH or `agents.cursor.command`
+  status: resolved
+  description: Check `opencode` on PATH or `agents.opencode.command`
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Check `opencode` on PATH or `agents.opencode.command`
+      status: resolved
+      order: 39
+      severity: normal

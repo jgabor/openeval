@@ -2,5 +2,13 @@ id: euzjoamigs
 artifact: todo
 record:
   severity: normal
-  status: open
-  description: Check `~/.cursor/hooks.json` after `instrument`
+  status: resolved
+  description: Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
+      status: resolved
+      order: 11
+      severity: normal

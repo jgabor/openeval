@@ -2,5 +2,13 @@ id: dyohkidynw
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Move mock to a secondary path (CI / no API key)
+  reconciliation:
+    schema_version: agentera.todoReconciliation.v1
+    public:
+      present: true
+      description: Move mock to a secondary path (CI / no API key)
+      status: resolved
+      order: 6
+      severity: normal
