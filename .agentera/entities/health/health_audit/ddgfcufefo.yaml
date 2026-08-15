@@ -1,0 +1,15 @@
+id: ddgfcufefo
+artifact: health
+record:
+  date: 2026-08-15
+  dimensions:
+    - artifact_freshness
+  findings_summary:
+    critical: 0
+    warning: 0
+    info: 0
+    filtered_by_confidence: 0
+  trajectory: "stable: limited terminal-plan closure audit PASS for plan asxngpusie. All four tasks have persisted PASS evaluations; LICENSE, embedded assets, README, CHANGELOG, TODO, progress, and plan state were refreshed on the plan date; public main anonymously resolves the verified train 0.0.8 candidate. Deferred decision, vision, and profile detail, incomplete docs mapping, stale profile-derived state, retired user tooling, and historical Actions-log retention are nonblocking. This is not a codebase-wide audit."
+  grades:
+    artifact_freshness: A
+  appended_at: 2026-08-15T18:38:21.625Z
