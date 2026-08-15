@@ -5,7 +5,7 @@ record:
   description: Restore the declared license and qualify the current worktree branch as the only candidate permitted to reach main and the remote.
   depends_on:
     []
-  status: pending
+  status: complete
   acceptance:
     - GIVEN README declares Apache-2.0 WHEN the candidate is prepared THEN the linked license file contains the canonical Apache-2.0 terms and repository license detection can identify it.
     - GIVEN the shipped demo asset change and license are present WHEN focused and full verification run THEN no-checkout demo behavior, explicit-selection precedence, formatting, tests, vulnerability checks, Agentera validation, and current-tree secret scans pass.

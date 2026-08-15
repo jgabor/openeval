@@ -1,0 +1,17 @@
+id: yuunpjwkjj
+artifact: progress
+record:
+  timestamp: 2026-08-15 19:40
+  type: chore
+  phase: build
+  what: Prepared the exact local publication candidate by adding the canonical Apache-2.0 license and qualifying the checkout-independent demo.
+  context:
+    intent: Resolve the declared license blocker and qualify only the current branch for later publication.
+    constraints: Keep 0.0.0-dev; do not push, publish, tag, change visibility, modify vision, objective, or profile, or begin later plan tasks.
+    unknowns: Remote publication and anonymous installation proof remain owned by the later plan task.
+    scope: ./LICENSE, CHANGELOG.md, typed Agentera task and progress state, current-tree qualification, and a clean-directory mock demo.
+  inspiration: Used the official Apache License 2.0 text from https://www.apache.org/licenses/LICENSE-2.0.txt without a custom notice.
+  discovered: Local main is an ancestor of the candidate with zero unique commits on main and four candidate commits beyond main. The Orca ancestor-repository VCS-stamping issue remains, so the disposable clean-directory binary was compiled with -buildvcs=false.
+  verified: ./LICENSE matches the official Apache text byte-for-byte at SHA-256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30. Focused demo and scenario-precedence tests passed. mage check passed tidy, all Go tests, vet, golangci-lint, and govulncheck with no vulnerabilities. gofmt and git diff checks passed. Agentera state validation passed with 307 entities and no issues. Gitleaks scanned the current 608617-byte tree and found no leaks. A -buildvcs=false binary ran demo --agent mock --rounds 1 from an empty directory outside the checkout and produced both retained score.json files.
+  next: Keep this candidate local. The later plan task owns main integration, private push, visibility change, and anonymous installation proof.
+  publication_order: 25
