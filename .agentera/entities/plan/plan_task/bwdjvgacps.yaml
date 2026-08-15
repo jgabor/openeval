@@ -1,0 +1,16 @@
+id: bwdjvgacps
+artifact: plan
+record:
+  name: Verify and synchronize v0.0.4 state
+  depends_on:
+    - scelozsjsk
+    - psukpzahtc
+    - yzlawyyjan
+  status: pending
+  acceptance:
+    - GIVEN all prior tasks complete WHEN repository gates run THEN mage check, Compose static validation, and documentation consistency checks pass without credentials or a live agent.
+    - GIVEN an available Docker host WHEN the manual receipt smoke runs THEN exact startup, readiness, normalized receipt, lookup, and shutdown evidence is retained in progress state; if unavailable, v0.0.4 remains open rather than claiming receipt.
+    - GIVEN decision jjyopxgccc and final evidence WHEN TODO state is synchronized THEN nxoornxntp, fgeogsyebk, and ubofpickiu are completed, qdoigmochg and ndapzuxapr are closed as rejected alternatives, and rxpmzvrxjd closes only after receipt evidence.
+    - GIVEN final evidence WHEN state and README are reviewed THEN the plan, progress, TODO records, and shipped/planned wording agree.
+    - GIVEN unresolved image architecture or readiness evidence WHEN closeout is attempted THEN the plan stays nonterminal with the blocker named.
+  plan: acgkfkknys

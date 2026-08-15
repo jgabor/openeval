@@ -1,0 +1,14 @@
+id: scelozsjsk
+artifact: plan
+record:
+  name: Establish the optional collector contract
+  depends_on:
+    []
+  status: pending
+  acceptance:
+    - GIVEN a supported Docker Compose installation WHEN the shipped collector definition is statically validated THEN it resolves a pinned Jaeger image and declares OTLP HTTP on localhost:4318 plus the UI on localhost:16686.
+    - GIVEN the service starts WHEN maintainers run the documented readiness check THEN they receive a bounded success or actionable failure before beginning a receipt smoke.
+    - GIVEN ports are occupied or the image architecture is unsupported WHEN startup is attempted THEN the guide provides a concrete diagnosis without changing OpenEval configuration.
+    - GIVEN Docker is unavailable WHEN non-tracing OpenEval checks run THEN no test or command requires the collector.
+    - GIVEN static verification runs WHEN paths, ports, image references, or readiness commands drift between the fixture and README THEN the mismatch fails without starting Docker.
+  plan: acgkfkknys

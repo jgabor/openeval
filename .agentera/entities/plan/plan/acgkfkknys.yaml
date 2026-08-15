@@ -1,0 +1,39 @@
+id: acgkfkknys
+artifact: plan
+record:
+  header:
+    level: full
+    created: 2026-08-15
+    status: open
+    reviewed: 2026-08-15
+    critic_issues: 4 found, 4 addressed, 0 dismissed
+    title: Ship optional local Jaeger trace collection
+  what: Provide one pinned, repository-owned Docker Compose workflow that receives OpenEval summary spans through OTLP HTTP and opens them in Jaeger, while preserving optional native OpenCode telemetry as separately correlated enrichment.
+  why: Train 0.0.4 must make the existing openeval traces URL resolve against a reproducible local collector without making collectors or Docker prerequisites for harness proof.
+  constraints: Docker is optional and tracing-only. Run, compare, report, doctor, and normal instrumentation remain collector-optional and Docker-free. The OpenEval summary span is required proof. Native OpenCode telemetry is optional, separate, and governed by its current privacy caveat. Do not add OpenEval lifecycle commands, a Docker-backed CI requirement, embedded trace storage, trace-tree merging, native payload masking, campaign sandboxing, or a version bump.
+  overall_acceptance: GIVEN a developer wants local trace receipt WHEN they start the shipped Compose setup and run one bounded successful harness round THEN Jaeger stores the normalized OpenEval summary trace and openeval traces prints its matching UI URL. GIVEN the collector is absent WHEN normal OpenEval workflows run THEN behavior remains successful or diagnostically equivalent to today.
+  scope:
+    included:
+      - Pinned Jaeger Compose fixture under examples/otel
+      - OTLP HTTP receiver on port 4318 and Jaeger UI on port 16686
+      - Readiness, architecture, and port-conflict guidance
+      - Static CI verification without Docker
+      - Manual Docker-backed summary-span receipt smoke
+      - README startup, lookup, shutdown, native correlation, and privacy guidance
+      - Agentera plan, progress, decision, and TODO closeout
+    excluded:
+      - New OpenEval collector lifecycle commands
+      - Docker-backed CI or Docker as the default execution path
+      - Embedded trace storage or trace-tree merging
+      - Native OpenCode payload masking or flush guarantees
+      - Longitudinal dashboards, Pi telemetry, and campaign sandboxing
+      - Code or documentation version bump
+    deferred:
+      []
+  design: Establish the bounded collector contract first. Prove receipt through the existing summary-span and trace-reference behavior without making Docker a test prerequisite. Publish the user workflow only after receipt evidence exists, then synchronize project state from final evidence.
+  unknowns:
+    - question: Does the pinned Jaeger image provide the required multi-architecture support and a reliable readiness signal without another service?
+      affects_task: 1
+      resolve_by: Inspect the pinned image manifest and exercise the declared readiness check before starting the receipt proof.
+  surprises:
+    []

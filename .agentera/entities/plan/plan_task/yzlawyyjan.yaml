@@ -1,0 +1,15 @@
+id: yzlawyyjan
+artifact: plan
+record:
+  name: Publish the tracing-only user workflow
+  depends_on:
+    - scelozsjsk
+    - psukpzahtc
+  status: pending
+  acceptance:
+    - GIVEN a user follows README instructions WHEN they start, check, use, and stop the collector THEN every command is copyable from the repository checkout and names expected ports and retained-data behavior.
+    - GIVEN Docker is missing, ports conflict, or the image cannot run on the host architecture WHEN setup fails THEN the guide provides bounded remediation.
+    - GIVEN native OpenCode OTEL is optional WHEN it is documented THEN the guide states that it still needs the collector, creates a separate trace tree, uses attribute correlation, and is outside OpenEval masking.
+    - GIVEN a user does not want traces WHEN they follow normal onboarding THEN Docker and the collector remain optional.
+    - GIVEN static documentation checks run WHEN Compose paths, ports, image references, or lifecycle commands become stale THEN the mismatch fails without a live collector.
+  plan: acgkfkknys
