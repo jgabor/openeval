@@ -12,3 +12,13 @@ record:
     - GIVEN publication history is inspected WHEN this task completes THEN the worktree branch is linear with local main or the task stops before integration with a clear divergence report.
     - GIVEN any generated run output or credential-bearing material exists WHEN the candidate is reviewed THEN it is excluded from the candidate and publication remains blocked.
   plan: asxngpusie
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-twyepivsrq-1
+      source: independent acceptance audit 2026-08-15
+      recorded_at: 2026-08-15 19:45
+      writer_command: agentera state plan record-evaluation
