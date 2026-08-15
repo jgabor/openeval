@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.14] Record execution order, host/runtime identity, and OpenEval version"
       severity: normal
       status: open
-      order: 42
+      order: 41
   kind: task
   target_version: 0.0.14
   requirements:

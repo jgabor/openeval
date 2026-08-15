@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.21] Retain invalid and superseding retry records without replacing evidence"
       severity: normal
       status: open
-      order: 86
+      order: 85
   kind: task
   target_version: 0.0.21
   requirements:

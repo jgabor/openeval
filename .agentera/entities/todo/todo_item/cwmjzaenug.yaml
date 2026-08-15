@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.17] Retain the resolved agent identity and effective argv for direct and wrapped attempts"
       severity: normal
       status: open
-      order: 63
+      order: 62

@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.25] Emit stable JSON from `compare` as well as human-readable text"
       severity: normal
       status: open
-      order: 111
+      order: 110
   kind: task
   target_version: 0.0.25
   requirements:

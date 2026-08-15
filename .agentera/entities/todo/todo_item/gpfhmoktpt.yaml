@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.17] Reject an empty wrapper executable or empty argv entry before agent execution"
       severity: normal
       status: open
-      order: 60
+      order: 59

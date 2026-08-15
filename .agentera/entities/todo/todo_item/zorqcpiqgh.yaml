@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.10] README custom-scenario section links to init"
       severity: normal
       status: open
-      order: 17
+      order: 16
   kind: task
   target_version: 0.0.10
   requirements:

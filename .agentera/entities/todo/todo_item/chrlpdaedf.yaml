@@ -14,15 +14,15 @@ record:
     - Mock stays CI-only and comparison remains collector-optional.
   release_blocker: false
   severity: normal
-  status: open
+  status: resolved
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: "[compare-hero-readme:0.0.7] Make compare and trace lookup the README hero"
+      status: resolved
+      order: 56
       severity: normal
-      status: open
-      order: 1
   readiness:
     capability: document
     reason: Completed trains 0.0.1 through 0.0.6 provide the product foundations; this train consolidates their onboarding story.
@@ -32,3 +32,7 @@ record:
     gate: null
     queue_rank: 1
     order_reason: Train 0.0.7 is the first incomplete train.
+  lifecycle:
+    operation: resolve
+    reason: README now leads with the checkout-based OpenCode comparison, retained score evidence, portable skill variation, and optional trace lookup.
+    date: 2026-08-15

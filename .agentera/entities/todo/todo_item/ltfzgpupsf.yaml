@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.22] Mount only the attempt workspace, declared artifacts, and read-only credentials"
       severity: normal
       status: open
-      order: 92
+      order: 91
   kind: task
   target_version: 0.0.22
   requirements:

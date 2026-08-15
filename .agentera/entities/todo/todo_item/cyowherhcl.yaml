@@ -10,7 +10,7 @@ record:
       description: "[sandbox-limits:0.0.23] Enforce deterministic sandbox limits and cleanup"
       severity: normal
       status: open
-      order: 95
+      order: 94
   kind: sandbox-limits
   target_version: 0.0.23
   requirements:

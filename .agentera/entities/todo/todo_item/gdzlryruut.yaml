@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.21] Require explicit execution approval for paid campaigns"
       severity: normal
       status: open
-      order: 88
+      order: 87
   kind: task
   target_version: 0.0.21
   requirements:

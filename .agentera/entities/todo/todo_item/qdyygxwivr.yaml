@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.25] Label descriptive intervals as uncertainty, not causal or significance claims"
       severity: normal
       status: open
-      order: 113
+      order: 112
   kind: task
   target_version: 0.0.25
   requirements:

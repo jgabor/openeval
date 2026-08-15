@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.20] Run every scheduled attempt regardless of verifier reward"
       severity: normal
       status: open
-      order: 82
+      order: 81
   kind: task
   target_version: 0.0.20
   requirements:

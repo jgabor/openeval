@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.17] Test executable paths and arguments containing spaces"
       severity: normal
       status: open
-      order: 64
+      order: 63

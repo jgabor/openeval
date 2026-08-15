@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.10] Generated layout matches `examples/scenarios/example-fixtures/`"
       severity: normal
       status: open
-      order: 15
+      order: 14
   kind: task
   target_version: 0.0.10
   requirements:

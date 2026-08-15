@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.27] Retain ktx binary, configuration, pipeline, database, and artifact digests"
       severity: normal
       status: open
-      order: 119
+      order: 118
   kind: task
   target_version: 0.0.27
   requirements:

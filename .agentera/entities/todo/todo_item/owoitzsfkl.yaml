@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.12] Retain input, output, reasoning, cache-read, and cache-write tokens independently"
       severity: normal
       status: open
-      order: 27
+      order: 26
   kind: task
   target_version: 0.0.12
   requirements:

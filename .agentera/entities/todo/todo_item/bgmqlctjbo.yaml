@@ -22,4 +22,4 @@ record:
       description: "[external-measurement-contract:0.0.15] Model producer-defined measurements per attempt"
       severity: normal
       status: open
-      order: 45
+      order: 44

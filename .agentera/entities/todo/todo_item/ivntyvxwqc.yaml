@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.8] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)"
       severity: normal
       status: open
-      order: 3
+      order: 2
   kind: task
   target_version: 0.0.8
   requirements:

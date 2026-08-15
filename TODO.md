@@ -24,8 +24,6 @@ follow in `0.0.20`–`0.0.28`.
 
 ## Open trains
 
-- [ ] [id:chrlpdaedf] [compare-hero-readme:0.0.7] Make compare and trace lookup the README hero
-
 - [ ] [id:vwenelnkgw] [frictionless-install:0.0.8] Single documented install path without cloning
 - [ ] [id:ivntyvxwqc] [task:0.0.8] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
 - [ ] [id:uemgcurert] [task:0.0.8] Optional: curl script or Homebrew tap
@@ -248,3 +246,4 @@ Do not schedule these until the 0.0.x bar in AGENTS.md is met:
 - [x] [id:yzmnsefxvi] Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas
 - [x] [id:zcqhswvoqq] Check `opencode` on PATH or `agents.opencode.command`
 - [x] [id:zmmjkcgyts] Split README into **Shipped** vs **Planned** sections
+- [x] [id:chrlpdaedf] [compare-hero-readme:0.0.7] Make compare and trace lookup the README hero

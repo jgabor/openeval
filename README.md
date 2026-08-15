@@ -9,31 +9,18 @@ OpenCode is the primary production runtime. Cursor is a supported secondary runt
 
 > **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the local CLI, the `example-fixtures` scenario, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, opt-in native OpenCode OTEL, and an optional local Jaeger Compose fixture. A public no-clone install, Pi, external benchmark integrations, Docker execution, and full cross-runtime telemetry normalization are not shipped.
 
-## Support status
-
-| Surface                    | Status                 | Notes                                                                                                            |
-| -------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| OpenCode harness           | **Primary, shipped**   | Validated with OpenCode 1.18.11; autonomous JSONL runs, comparable cost estimates, portable skill checks         |
-| Cursor harness             | **Secondary, shipped** | `cursor-agent` subprocess driver and Cursor-specific `.claude-plugin` loading                                    |
-| Mock harness               | **CI only, shipped**   | Hermetic synthetic driver; never treat mock scores as agent-quality evidence                                     |
-| OpenCode native OTEL       | **Opt-in, shipped**    | Separate runtime traces correlated to OpenEval summary traces by resource attributes                             |
-| Cursor hook telemetry      | **Secondary, shipped** | Merged into `~/.cursor/hooks.json` without replacing existing hooks                                              |
-| Pi                         | **Planned**            | No harness or telemetry driver                                                                                   |
-| DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                        |
-| Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                          |
-| Install                    | **Checkout only**      | `go install ./cmd/openeval`; the repository is not currently available through a public `@latest` module install |
-| Local OTLP collector       | **Opt-in, shipped**    | Repository-owned Jaeger Compose fixture for local tracing; no collector lifecycle in the CLI or embedded store   |
-
-## Quick start: compare on OpenCode
+## Compare first on OpenCode
 
 Prerequisites:
 
 - Go 1.26 or later.
 - OpenCode 1.18.11 on `PATH`.
 - Provider credentials configured in OpenCode.
-- No OTLP collector is required for the comparison flow.
+- A repository checkout. The scenario and skill assets are file-backed, and no public no-clone install is shipped yet.
 
-The current example scenario and skills are file-backed development assets. Repository access is currently required. Clone it so the quick-start commands can resolve those assets, then install the CLI:
+Docker, Jaeger, and an OTLP collector are not comparison prerequisites. They are only needed if you choose the local tracing workflow later.
+
+Start from a checkout and install the CLI from it:
 
 ```bash
 git clone https://github.com/jgabor/openeval.git
@@ -49,30 +36,50 @@ opencode auth list
 openeval doctor --agent opencode
 ```
 
-Preview the exact work and retained output paths:
+Preview the exact work and retained output paths, then run one attempt per task in each arm:
 
 ```bash
 openeval demo --dry-run
-```
-
-Run the quick-start comparison with one attempt per task in each arm:
-
-```bash
 openeval demo
 ```
 
-`demo` runs `baseline` and `with-demo-skill`, passes the actual returned run directories to `compare`, prints the comparison table, and prints one unique evidence root. It never removes an earlier demo root. The one-round default keeps onboarding quick; use `--rounds 3` for stronger pass@k evidence.
+`demo` diagnoses OpenCode, runs `baseline` and `with-demo-skill` on the same model, and passes the retained run directories to `compare`. It ends with this two-arm table layout and one unique evidence root; the measured values and root vary by run:
+
+```text
+                                         baseline          with-demo-skill    delta
+pass@1                           <measured pass rate>     <measured pass rate>  <rate>
+pass@1                           <measured pass rate>     <measured pass rate>  <rate>
+cost_usd_total                      <estimated cost>         <estimated cost>  <cost>
+cost_per_passed                     <estimated cost>         <estimated cost>  <cost>
+
+results:
+  logs:
+    <evidence-root>/baseline/score.json
+    <evidence-root>/with-demo-skill/score.json
+demo evidence root: <evidence-root>
+```
+
+With the one-round default, both pass rows are labeled `pass@1`. Use `--rounds 3` to compare `pass@1` with `pass@3`. Each retained `score.json` contains the task and round verifier results behind those pass rates, aggregate cost, and cost per passed task.
 
 For planning, allow about five minutes and about $3 for the default one-round, two-arm demo. One measured full-corpus run with OpenCode 1.18.11 and `opencode/big-pickle` passed 4/4 tasks in each arm, took 248.852 seconds, and had an estimated combined cost of $2.822868 with no harness failures. This is one local sample, not a runtime, cost, or result variance guarantee.
 
-The table includes:
+### What changes between the arms
 
-- `pass@1`
-- `pass@<rounds>`
-- `cost_usd_total`
-- `cost_per_passed`
-- candidate-minus-baseline deltas
-- exact `score.json` paths
+The shipped scenario defines `baseline` with no skills and `with-demo-skill` with `skills: [demo-skill]`. OpenEval resolves that name through `skills.aliases` when configured, otherwise from the shipped `examples/skills/demo-skill`, and copies it into the isolated arm workspace for OpenCode discovery. The comparison table shows pass and aggregate cost differences between the arms. The candidate `score.json` records `telemetry.skills_active` and `telemetry.cost_by_skill_usd`, which retains the cost attributed to `demo-skill`.
+
+This is configuration comparison evidence, not proof that the skill caused a difference. Sampling and other uncontrolled runtime factors can also affect results.
+
+### Optional trace lookup
+
+Comparison is collector-optional. Every completed round retains a trace ID in `score.json` even when no collector receives spans. To print the direct summary trace reference for one retained round, use the root printed by `demo`:
+
+```bash
+EVIDENCE_ROOT="<printed-demo-evidence-root>"
+openeval traces "$EVIDENCE_ROOT/with-demo-skill" \
+  --task parse-duration-units --round 1
+```
+
+Trace lookup is optional. The printed Jaeger URL is useful only if an OTLP collector received that summary span. Docker and Jaeger are prerequisites only for the optional local tracing setup below.
 
 ### Manual three-command comparison
 
@@ -92,17 +99,24 @@ openeval compare "$ROOT/baseline" "$ROOT/with-demo-skill"
 
 Increment the root suffix for later experiments. `openeval demo` allocates this unique root automatically.
 
-## Install path
+## Support status
 
-The verified install path is from a repository checkout:
+| Surface                    | Status                 | Notes                                                                                                            |
+| -------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| OpenCode harness           | **Primary, shipped**   | Validated with OpenCode 1.18.11; autonomous JSONL runs, comparable cost estimates, portable skill checks         |
+| Cursor harness             | **Secondary, shipped** | `cursor-agent` subprocess driver and Cursor-specific `.claude-plugin` loading                                    |
+| Mock harness               | **CI only, shipped**   | Hermetic synthetic driver; never treat mock scores as agent-quality evidence                                     |
+| OpenCode native OTEL       | **Opt-in, shipped**    | Separate runtime traces correlated to OpenEval summary traces by resource attributes                             |
+| Cursor hook telemetry      | **Secondary, shipped** | Merged into `~/.cursor/hooks.json` without replacing existing hooks                                              |
+| Pi                         | **Planned**            | No harness or telemetry driver                                                                                   |
+| DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                        |
+| Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                          |
+| Install                    | **Checkout only**      | `go install ./cmd/openeval`; the repository is not currently available through a public `@latest` module install |
+| Local OTLP collector       | **Opt-in, shipped**    | Repository-owned Jaeger Compose fixture for local tracing; no collector lifecycle in the CLI or embedded store   |
 
-```bash
-go install ./cmd/openeval
-```
+## Contributor checks
 
-`go install github.com/jgabor/openeval/cmd/openeval@latest` is the intended future public path, but it is not currently a working unauthenticated install: the module is not publicly resolvable. The example scenario and skills are also file-backed rather than embedded. Do not present the future command as a shipped installation method.
-
-For contributor work, the repository also provides Mage:
+The repository provides Mage for contributor work:
 
 ```bash
 git clone https://github.com/jgabor/openeval.git
@@ -242,12 +256,14 @@ variations:
 
 Differences between the baseline and skill arms describe the outcomes observed in those local runs. They do not prove that the skill caused the difference; sampling and other uncontrolled runtime factors can also affect results. The four small tasks are descriptive onboarding evidence, not a general ranking of providers or models.
 
-For a fast credential-free automation check, use the one-task subset with the mock agent:
+For a fast, credential-free, hermetic CI check, run the one-task subset with the mock agent:
 
 ```bash
 openeval run --scenario ./examples/scenarios/example-fixtures/edit-file-only.yaml \
   --agent mock --rounds 1
 ```
+
+The mock agent's synthetic score is not agent-quality or production evaluation evidence.
 
 A scenario file contains task prompts, script verifiers, and named variations:
 
@@ -334,7 +350,7 @@ Harness execution does not require a collector. OpenEval writes trace IDs and sc
 
 ### Optional local Jaeger
 
-Docker is only needed for this local tracing workflow. The quick start, harness, compare, report, doctor, and instrument workflows remain Docker-free and collector-optional.
+Docker is only needed for this local tracing workflow. The compare-first workflow, harness, compare, report, doctor, and instrument remain Docker-free and collector-optional.
 
 The fixture uses `cr.jaegertracing.io/jaegertracing/jaeger:2.20.0@sha256:46a886260e04002d8f45e213fc39063fa11a50446048fdaa64786fc0840cb9f8`. The manifest publishes Linux images for amd64, arm64, s390x, and ppc64le. It exposes OTLP HTTP only at `localhost:4318` and the Jaeger UI only at `localhost:16686`.
 
@@ -350,7 +366,7 @@ The default OpenEval configuration already exports summary spans to `http://loca
 ```bash
 ROOT=./scenarios/example-fixtures/local-trace-001
 openeval run --scenario ./examples/scenarios/example-fixtures/edit-file-only.yaml \
-  --agent mock --rounds 1 --out "$ROOT"
+  --agent opencode --rounds 1 --out "$ROOT"
 openeval traces "$ROOT" --task parse-duration-units --round 1
 ```
 
@@ -374,13 +390,7 @@ Maintainers can run the full receipt proof manually. It is not part of CI:
 
 `examples/otel/smoke.sh` builds the local CLI, starts Compose with a fixed readiness timeout, runs one mock round, reads the source ID from `score.json`, polls Jaeger's query API for the normalized ID and exact summary span/service, checks `openeval traces`, and stops Compose. It retains the score, Jaeger response, trace output, and container log under the printed `scenarios/example-fixtures/otel-smoke-*` path for diagnosis.
 
-Look up a round:
-
-```bash
-openeval traces <run-dir> --task parse-duration-units --round 1
-```
-
-The direct `trace_id` and Jaeger URL target the OpenEval summary span. If native OpenCode OTEL is enabled, `traces` also prints:
+The direct `trace_id` and Jaeger URL printed by `openeval traces` target the OpenEval summary span. If native OpenCode OTEL is enabled, `traces` also prints:
 
 - the native OTLP receiver path
 - `openeval.trace_id=<summary-trace-id>` as the resource-attribute search key

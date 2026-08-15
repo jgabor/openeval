@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.12] Replace the driver tuple return with a structured attempt result"
       severity: normal
       status: open
-      order: 25
+      order: 24
   kind: task
   target_version: 0.0.12
   requirements:

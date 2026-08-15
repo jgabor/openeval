@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.14] Add `openeval validate <run-dir>` with stable JSON output and documented exit codes"
       severity: normal
       status: open
-      order: 44
+      order: 43
   kind: task
   target_version: 0.0.14
   requirements:

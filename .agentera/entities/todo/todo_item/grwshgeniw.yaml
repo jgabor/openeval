@@ -10,7 +10,7 @@ record:
       description: "[structured-grading:0.0.19] Retain structured verifier evidence per task"
       severity: normal
       status: open
-      order: 72
+      order: 71
   kind: structured-grading
   target_version: 0.0.19
   requirements:

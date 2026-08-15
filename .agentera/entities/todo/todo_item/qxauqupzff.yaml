@@ -11,4 +11,4 @@ record:
       description: "`0.1.0` / semver release tagging"
       severity: normal
       status: open
-      order: 131
+      order: 130

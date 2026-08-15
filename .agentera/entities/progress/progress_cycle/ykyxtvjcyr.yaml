@@ -1,0 +1,17 @@
+id: ykyxtvjcyr
+artifact: progress
+record:
+  timestamp: 2026-08-15 17:45
+  type: docs
+  phase: build
+  what: Completed train 0.0.7 by making openeval demo lead into comparison evidence and optional trace lookup.
+  context:
+    intent: Make compare and trace lookup the README hero.
+    constraints: Keep checkout-only install, OpenCode primary, mock CI-only, comparison collector-optional, Docker tracing-only, and version 0.0.0-dev.
+    unknowns: None.
+    scope: README onboarding, changelog, TODO, plan, and completion evidence only.
+  inspiration: Used the shipped CLI behavior and firm OpenCode-first and collector-optional decisions; external research was not applicable.
+  discovered: The README needed later CI-only mock guidance after the compare-first rewrite.
+  verified: Verified CLI help and demo dry-run, compare output and score fields, Prettier, git diff checks, independent audit, and mage check.
+  next: Train 0.0.8 owns public no-clone installation.
+  publication_order: 22

@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Remove any existing entry at the metrics path before starting the child process"
       severity: normal
       status: open
-      order: 51
+      order: 50

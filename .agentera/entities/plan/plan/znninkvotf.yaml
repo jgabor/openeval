@@ -4,7 +4,7 @@ record:
   header:
     level: light
     created: 2026-08-15
-    status: open
+    status: archived
     title: "Plan: Make compare and trace lookup the README hero"
   what: Reframe the README opening around the shipped OpenCode comparison workflow, its pass and cost evidence, and optional local trace lookup before CI-only mock guidance.
   why: Train 0.0.7 consolidates the shipped 0.0.1 through 0.0.6 capabilities into one honest onboarding story so users can judge variation results and inspect retained evidence without mistaking mock, Docker, or a collector for comparison requirements.

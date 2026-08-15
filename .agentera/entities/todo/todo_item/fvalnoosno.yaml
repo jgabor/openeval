@@ -18,4 +18,4 @@ record:
       description: "[attempt-evidence-contract:0.0.12] Retain one structured result per attempt"
       severity: normal
       status: open
-      order: 24
+      order: 23

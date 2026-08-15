@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.21] Add a no-agent preflight that prints the complete schedule and estimated attempt count"
       severity: normal
       status: open
-      order: 87
+      order: 86
   kind: task
   target_version: 0.0.21
   requirements:

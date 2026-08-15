@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Retain exact artifact bytes, relative path, size, and SHA-256 and attach parsed valid measurements to the exact attempt"
       severity: normal
       status: open
-      order: 56
+      order: 55

@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.24] Pair attempts by task, repetition, baseline, and candidate"
       severity: normal
       status: open
-      order: 101
+      order: 100
   kind: task
   target_version: 0.0.24
   requirements:

@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Read the artifact after the child exits; accept absence without synthesizing measurements or success"
       severity: normal
       status: open
-      order: 52
+      order: 51

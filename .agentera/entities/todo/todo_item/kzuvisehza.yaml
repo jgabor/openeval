@@ -10,7 +10,7 @@ record:
       description: "[campaign-outcome-report:0.0.25] Report paired quality, footprint, and failure outcomes"
       severity: normal
       status: open
-      order: 106
+      order: 105
   kind: campaign-outcome-report
   target_version: 0.0.25
   requirements:

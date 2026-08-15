@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.28] Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim"
       severity: normal
       status: open
-      order: 128
+      order: 127
   kind: task
   target_version: 0.0.28
   requirements:

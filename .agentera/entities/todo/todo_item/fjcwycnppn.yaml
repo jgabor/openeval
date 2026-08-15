@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.15] Require every external measurement to declare a state and unit; measured values must be finite numbers, while unavailable and malformed values omit the value"
       severity: normal
       status: open
-      order: 46
+      order: 45

@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.28] Verify that OpenEval validates, retains, and compares ktx evidence without interpreting ktx-specific measurement names"
       severity: normal
       status: open
-      order: 129
+      order: 128
