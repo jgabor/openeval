@@ -5,7 +5,7 @@ record:
   description: Replace checkout-only onboarding only after anonymous installation and no-checkout demo proof are retained.
   depends_on:
     - zaynwzhpoj
-  status: pending
+  status: complete
   acceptance:
     - GIVEN anonymous proof passed WHEN a new user reads the README opening THEN one canonical public Go install command appears before the compare-first workflow without clone instructions.
     - GIVEN Go installs outside an existing PATH WHEN setup guidance is followed THEN the user receives concrete PATH diagnosis and remediation.

@@ -7,7 +7,29 @@ OpenEval is one CLI control plane for two related workflows:
 
 OpenCode is the primary production runtime. Cursor is a supported secondary runtime. The mock driver exists for hermetic tests and CI; it does not produce production evaluation evidence.
 
-> **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the local CLI, the `example-fixtures` scenario, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, opt-in native OpenCode OTEL, and an optional local Jaeger Compose fixture. A public no-clone install, Pi, external benchmark integrations, Docker execution, and full cross-runtime telemetry normalization are not shipped.
+> **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the publicly installable CLI, the embedded `example-fixtures` scenario and `demo-skill`, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, opt-in native OpenCode OTEL, and an optional local Jaeger Compose fixture. Pi, external benchmark integrations, Docker execution, and full cross-runtime telemetry normalization are not shipped.
+
+## Install
+
+Install OpenEval from the public Go module. No repository clone is required:
+
+```bash
+go install github.com/jgabor/openeval/cmd/openeval@latest
+```
+
+Go installs the binary in `go env GOBIN` when that value is non-empty. Otherwise, it installs in `$(go env GOPATH)/bin`. If your shell reports `openeval: command not found`, diagnose and update `PATH`:
+
+```bash
+go env GOBIN
+go env GOPATH
+
+OPENEVAL_BIN="$(go env GOBIN)"
+[ -n "$OPENEVAL_BIN" ] || OPENEVAL_BIN="$(go env GOPATH)/bin"
+export PATH="$PATH:$OPENEVAL_BIN"
+command -v openeval
+```
+
+Add the same `export PATH=...` entry, using the printed directory, to your shell startup file (for example, `~/.profile`) to keep it across sessions.
 
 ## Compare first on OpenCode
 
@@ -16,17 +38,8 @@ Prerequisites:
 - Go 1.26 or later.
 - OpenCode 1.18.11 on `PATH`.
 - Provider credentials configured in OpenCode.
-- A repository checkout. The scenario and skill assets are file-backed, and no public no-clone install is shipped yet.
 
 Docker, Jaeger, and an OTLP collector are not comparison prerequisites. They are only needed if you choose the local tracing workflow later.
-
-Start from a checkout and install the CLI from it:
-
-```bash
-git clone https://github.com/jgabor/openeval.git
-cd openeval
-go install ./cmd/openeval
-```
 
 Authenticate and diagnose setup. These commands do not make a paid model call:
 
@@ -101,18 +114,18 @@ Increment the root suffix for later experiments. `openeval demo` allocates this 
 
 ## Support status
 
-| Surface                    | Status                 | Notes                                                                                                            |
-| -------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| OpenCode harness           | **Primary, shipped**   | Validated with OpenCode 1.18.11; autonomous JSONL runs, comparable cost estimates, portable skill checks         |
-| Cursor harness             | **Secondary, shipped** | `cursor-agent` subprocess driver and Cursor-specific `.claude-plugin` loading                                    |
-| Mock harness               | **CI only, shipped**   | Hermetic synthetic driver; never treat mock scores as agent-quality evidence                                     |
-| OpenCode native OTEL       | **Opt-in, shipped**    | Separate runtime traces correlated to OpenEval summary traces by resource attributes                             |
-| Cursor hook telemetry      | **Secondary, shipped** | Merged into `~/.cursor/hooks.json` without replacing existing hooks                                              |
-| Pi                         | **Planned**            | No harness or telemetry driver                                                                                   |
-| DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                        |
-| Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                          |
-| Install                    | **Checkout only**      | `go install ./cmd/openeval`; the repository is not currently available through a public `@latest` module install |
-| Local OTLP collector       | **Opt-in, shipped**    | Repository-owned Jaeger Compose fixture for local tracing; no collector lifecycle in the CLI or embedded store   |
+| Surface                    | Status                 | Notes                                                                                                          |
+| -------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------- |
+| OpenCode harness           | **Primary, shipped**   | Validated with OpenCode 1.18.11; autonomous JSONL runs, comparable cost estimates, portable skill checks       |
+| Cursor harness             | **Secondary, shipped** | `cursor-agent` subprocess driver and Cursor-specific `.claude-plugin` loading                                  |
+| Mock harness               | **CI only, shipped**   | Hermetic synthetic driver; never treat mock scores as agent-quality evidence                                   |
+| OpenCode native OTEL       | **Opt-in, shipped**    | Separate runtime traces correlated to OpenEval summary traces by resource attributes                           |
+| Cursor hook telemetry      | **Secondary, shipped** | Merged into `~/.cursor/hooks.json` without replacing existing hooks                                            |
+| Pi                         | **Planned**            | No harness or telemetry driver                                                                                 |
+| DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                      |
+| Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                        |
+| Install                    | **Public Go module**   | `go install github.com/jgabor/openeval/cmd/openeval@latest`; no checkout required                              |
+| Local OTLP collector       | **Opt-in, shipped**    | Repository-owned Jaeger Compose fixture for local tracing; no collector lifecycle in the CLI or embedded store |
 
 ## Contributor checks
 
@@ -121,6 +134,7 @@ The repository provides Mage for contributor work:
 ```bash
 git clone https://github.com/jgabor/openeval.git
 cd openeval
+go install ./cmd/openeval
 go install github.com/magefile/mage@v1.17.2
 mage install
 ```
@@ -256,11 +270,10 @@ variations:
 
 Differences between the baseline and skill arms describe the outcomes observed in those local runs. They do not prove that the skill caused the difference; sampling and other uncontrolled runtime factors can also affect results. The four small tasks are descriptive onboarding evidence, not a general ranking of providers or models.
 
-For a fast, credential-free, hermetic CI check, run the one-task subset with the mock agent:
+For a fast, credential-free, hermetic CI check, run the embedded scenario with the mock agent:
 
 ```bash
-openeval run --scenario ./examples/scenarios/example-fixtures/edit-file-only.yaml \
-  --agent mock --rounds 1
+openeval run --scenario example-fixtures --agent mock --rounds 1
 ```
 
 The mock agent's synthetic score is not agent-quality or production evaluation evidence.
@@ -284,7 +297,7 @@ variations:
       - my-skill
 ```
 
-From a repository checkout, pass the shipped ID. You can also pass an alias from `scenarios.aliases` or any YAML path:
+Pass the shipped `example-fixtures` ID from any directory. For custom scenarios, pass an alias from `scenarios.aliases` or a YAML path that exists on the local filesystem:
 
 ```bash
 openeval run --scenario ./evals/my-scenario.yaml \

@@ -1,0 +1,16 @@
+id: smroaylcjf
+artifact: progress
+record:
+  timestamp: 2026-08-15 20:08
+  type: docs
+  phase: build
+  what: Published one canonical public Go installation story before the compare-first workflow and removed stale checkout-only claims.
+  context:
+    intent: Document the proven public no-clone install path and retain contributor source workflows without changing product support boundaries.
+    constraints: Preserve version 0.0.0-dev, OpenCode primary, Cursor secondary, mock CI-only, and Docker and collectors as optional tracing concerns; do not close TODO items or begin final synchronization.
+    unknowns: The public proxy currently resolves @latest to the reachable untagged main pseudo-version, which still contains the embedded scenario and skill needed by the no-checkout demo.
+    scope: README installation, PATH diagnosis and remediation, scenario path guidance, contributor commands, support status, and one Unreleased changelog entry.
+  discovered: A fresh proxy lookup resolved @latest to v0.0.0-20260815174624-5f58714111bb rather than the newer local documentation commit; the resolved public version still passed the installed-binary demo outside a checkout.
+  verified: Read task tbbboxffhv through its canonical plan reader and exact public proof zoskabyunf through the progress reader. README now places go install github.com/jgabor/openeval/cmd/openeval@latest before Compare first on OpenCode, explains GOBIN and GOPATH/bin selection with PATH diagnosis and remediation, confines clone and source install commands to Contributor checks, and contains no stale checkout-only or no-public-install claim. A fresh temporary HOME, GOPATH, module cache, build cache, and GOBIN installed @latest through proxy.golang.org with sum.golang.org verification, then the installed binary ran demo --agent mock --rounds 1 from /tmp and produced the embedded two-arm comparison. Prettier completed, the strict Agentera changelog lint passed, git diff --check passed, and mage check passed all tests, vet, lint, tidy, and vulnerability gates.
+  next: Leave the final synchronization task and TODO closeout pending for their owner.
+  publication_order: 27

@@ -18,9 +18,10 @@
 
 ### Documentation
 
+- Replace checkout-only onboarding with the public `go install github.com/jgabor/openeval/cmd/openeval@latest` path and binary `PATH` remediation.
 - Add `./LICENSE` with the canonical Apache-2.0 terms so the README link resolves and GitHub can detect the license.
 - Run `gitleaks` across 77 commits and seven CI logs before public-source publication; no secrets were found.
-- Document `openeval demo`, `openeval compare`, and `openeval traces` as one checkout-based OpenCode workflow with retained score evidence and optional Jaeger lookup.
+- Document `openeval demo`, `openeval compare`, and `openeval traces` as one OpenCode workflow with retained score evidence and optional Jaeger lookup.
 - `OpenCode` subsection in `README.md` Agents section (prerequisites, install + auth + run, config override example) so `--agent opencode` is discoverable from the user-facing docs.
 - `openeval run --help` `--agent` help text now lists `mock, cursor, opencode`.
 - Current README, help, minimal config, and Docker example now lead with the executable OpenCode comparison path and state Cursor, mock, Pi, external scenarios, packaging, telemetry, native trace correlation, and privacy boundaries according to shipped behavior.
