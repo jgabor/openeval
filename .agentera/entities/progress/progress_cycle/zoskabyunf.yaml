@@ -1,0 +1,17 @@
+id: zoskabyunf
+artifact: progress
+record:
+  timestamp: 2026-08-15 20:01
+  type: chore
+  phase: build
+  what: Published the verified main branch and proved the public no-clone Go installation path under explicit authorization.
+  context:
+    intent: Publish exact verified main and prove anonymous installation without a release tag.
+    constraints: Push only main; preserve 0.0.0-dev; no force push, history rewrite, tag, release binary, curl installer, or Homebrew; do not document public install until proof passes.
+    unknowns: The public proxy and checksum unknown resolved successfully on the first install probe. The first smoke command used an unsupported version flag, but the required demo proof passed on rerun.
+    scope: Main integration, private push, remote identity check, public visibility, anonymous Git and module resolution, installed no-checkout demo, and proof state.
+  inspiration: Used a private-first push, exact remote identity check, then public visibility and credential-free proxy, checksum, Git, and installed-binary probes so each external boundary had direct evidence.
+  discovered: The CLI has no --version flag, so the initial chained smoke stopped after successful installation; the no-checkout demo was rerun separately and source version 0.0.0-dev was verified directly. Public module resolution required no release tag and returned the untagged main pseudo-version.
+  verified: Local main fast-forwarded without divergence and passed mage build, mage check, Agentera validation, license hash, artifact review, and current-tree plus 82-commit gitleaks scans. Only main was pushed while private, and remote main matched local main before visibility changed. GitHub and its unauthenticated API then reported public visibility and Apache-2.0; anonymous HTTPS Git resolved main. Fresh credential-free GOPATH, module, build, and home caches installed github.com/jgabor/openeval/cmd/openeval@latest through proxy.golang.org and sum.golang.org. The installed binary ran demo --agent mock --rounds 1 outside a checkout, producing baseline and with-demo-skill score.json files with four tasks each, active demo-skill telemetry, and comparison output.
+  next: Replace checkout-only onboarding with the proven public Go install command and PATH remediation, then synchronize 0.0.8 state.
+  publication_order: 26

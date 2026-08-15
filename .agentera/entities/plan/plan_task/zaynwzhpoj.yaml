@@ -5,7 +5,7 @@ record:
   description: Integrate and publish the exact candidate under the granted authorization, then prove the public module and first-run path without credentials.
   depends_on:
     - twyepivsrq
-  status: pending
+  status: complete
   acceptance:
     - GIVEN local main has no unique commits and the candidate is verified WHEN integration occurs THEN main fast-forwards to the exact candidate without rebase, merge commit, history rewrite, or loss of work.
     - GIVEN exact main passes full repository and exposure gates WHEN publication starts THEN only main is pushed while the repository is private and the remote commit matches the verified local commit before visibility changes.
@@ -13,3 +13,13 @@ record:
     - GIVEN fresh caches and no GitHub credentials WHEN the canonical latest-module install and installed mock demo run THEN installation succeeds, both retained arms compare from outside a checkout, and the binary remains 0.0.0-dev.
     - GIVEN proof state is committed after the external checks WHEN the task closes THEN public main is updated to that final non-behavioral state and its remote commit is verified; any failed proof leaves install docs checkout-based and the failure visible.
   plan: asxngpusie
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: prime-publication-zayn-1
+      source: Prime direct publication verification 2026-08-15
+      recorded_at: 2026-08-15 20:01
+      writer_command: agentera state plan record-evaluation
