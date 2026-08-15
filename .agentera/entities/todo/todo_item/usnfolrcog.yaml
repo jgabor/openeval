@@ -11,4 +11,4 @@ record:
       description: Validate that score rows and artifacts belong to the declared campaign
       severity: normal
       status: open
-      order: 81
+      order: 75

@@ -11,4 +11,4 @@ record:
       description: "Optional: curl script or Homebrew tap"
       severity: normal
       status: open
-      order: 38
+      order: 32

@@ -11,4 +11,4 @@ record:
       description: Bound CPU, memory, process count, and attempt duration
       severity: normal
       status: open
-      order: 113
+      order: 107

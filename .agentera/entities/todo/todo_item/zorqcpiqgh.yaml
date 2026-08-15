@@ -11,4 +11,4 @@ record:
       description: README custom-scenario section links to init
       severity: normal
       status: open
-      order: 51
+      order: 45

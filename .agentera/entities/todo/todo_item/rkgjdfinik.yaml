@@ -11,4 +11,4 @@ record:
       description: Retain verifier stdout, stderr, exit status, and artifact hashes
       severity: normal
       status: open
-      order: 91
+      order: 85

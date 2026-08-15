@@ -11,4 +11,4 @@ record:
       description: "Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets"
       severity: normal
       status: open
-      order: 41
+      order: 35

@@ -11,4 +11,4 @@ record:
       description: Retain input, output, reasoning, cache-read, and cache-write tokens independently
       severity: normal
       status: open
-      order: 65
+      order: 59

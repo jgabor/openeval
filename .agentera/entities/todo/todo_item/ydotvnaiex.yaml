@@ -11,4 +11,4 @@ record:
       description: Implement the existing `--image` run flag
       severity: normal
       status: open
-      order: 107
+      order: 101

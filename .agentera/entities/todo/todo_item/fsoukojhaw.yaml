@@ -11,4 +11,4 @@ record:
       description: "Document claim limits: local task set, descriptive evidence, no provider-cache or causal claim"
       severity: normal
       status: open
-      order: 141
+      order: 135

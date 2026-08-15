@@ -11,4 +11,4 @@ record:
       description: Preserve ordinary independent `openeval run` and pass@k behavior
       severity: normal
       status: open
-      order: 105
+      order: 99

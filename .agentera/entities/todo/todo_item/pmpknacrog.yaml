@@ -11,4 +11,4 @@ record:
       description: Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
       severity: normal
       status: open
-      order: 132
+      order: 126

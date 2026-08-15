@@ -18,4 +18,4 @@ record:
       description: "[init-scenario:0.0.9] `openeval init scenario`"
       severity: normal
       status: open
-      order: 46
+      order: 40

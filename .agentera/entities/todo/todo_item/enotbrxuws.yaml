@@ -11,4 +11,4 @@ record:
       description: Keep OpenCode runtime usage and ktx delivery evidence as separate authorities
       severity: normal
       status: open
-      order: 136
+      order: 130

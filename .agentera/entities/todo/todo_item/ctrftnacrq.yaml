@@ -11,4 +11,4 @@ record:
       description: Full cursor-otel-hook parity beyond harness trace correlation
       severity: normal
       status: open
-      order: 147
+      order: 141

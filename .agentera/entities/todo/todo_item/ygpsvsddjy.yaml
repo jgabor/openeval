@@ -11,4 +11,4 @@ record:
       description: Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`
       severity: normal
       status: open
-      order: 47
+      order: 41

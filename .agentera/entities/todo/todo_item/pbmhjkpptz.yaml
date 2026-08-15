@@ -11,4 +11,4 @@ record:
       description: Ship hook export for session cost, skills active, and tool calls
       severity: normal
       status: open
-      order: 58
+      order: 52

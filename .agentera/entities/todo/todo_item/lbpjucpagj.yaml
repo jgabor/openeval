@@ -11,4 +11,4 @@ record:
       description: Use a retained deterministic seed for task ordering
       severity: normal
       status: open
-      order: 97
+      order: 91

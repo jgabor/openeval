@@ -11,4 +11,4 @@ record:
       description: Retain invalid and superseding retry records without replacing evidence
       severity: normal
       status: open
-      order: 101
+      order: 95

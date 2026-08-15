@@ -11,4 +11,4 @@ record:
       description: Annotate unusual attempts without removing them automatically
       severity: normal
       status: open
-      order: 127
+      order: 121

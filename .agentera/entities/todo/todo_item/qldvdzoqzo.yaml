@@ -11,4 +11,4 @@ record:
       description: Opening sections show compare table example and trace lookup flow
       severity: normal
       status: open
-      order: 35
+      order: 29

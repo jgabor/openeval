@@ -11,4 +11,4 @@ record:
       description: OTLP query rollups / `openeval trends`
       severity: normal
       status: open
-      order: 144
+      order: 138

@@ -11,4 +11,4 @@ record:
       description: Verify unchanged task quality before interpreting resource movement as useful
       severity: normal
       status: open
-      order: 137
+      order: 131

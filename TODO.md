@@ -63,18 +63,9 @@ openeval compare ./scenarios/example-fixtures/runs/baseline ./scenarios/example-
 
 Completed with four standard-library Python maintenance tasks and process-isolated scenario-owned graders outside the agent workspace. Parent assertions reject workspace-test replacement and import-side-effect mutation while a child imports workspace code. Final verification passed `mage build`, an uncached full suite without live agents, provider credentials, or a collector, and `mage check`. One audited one-round, two-arm full-corpus sample on OpenCode 1.18.11 with `opencode/big-pickle` passed 4/4 tasks in each arm in 248.852 seconds at $2.822868 estimated combined cost, with no harness failures; all eight retained workspaces also passed the isolated graders without new inference. This local sample does not establish variance or a general provider/model ranking, and grader isolation is not host sandboxing.
 
-- [ ] [id:rxpmzvrxjd] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup
+README no longer requires OTLP for harness proof, but OpenEval still does not ship a default collector. Harness writes `trace_id` to `score.json` without one; live span receipt is not verified on the default path.
 
-  README no longer requires OTLP for harness proof, but OpenEval still does not ship a default collector. Harness writes `trace_id` to `score.json` without one; live span receipt is not verified on the default path.
-
-  Pick one primary path:
-
-- [ ] [id:nxoornxntp] `docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or
-- [ ] [id:qdoigmochg] OpenCode native OTEL plus a documented local collector, or
-- [ ] [id:ndapzuxapr] Documented one-liner in README
-
-- [ ] [id:fgeogsyebk] After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
-- [ ] [id:ubofpickiu] README trace lookup references the bundled setup
+Pick one primary path:
 
 - [ ] [id:chrlpdaedf] [compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start
 
@@ -349,3 +340,9 @@ Do not schedule these until the 0.0.x bar in AGENTS.md is met:
 - [x] [id:svshibuuir] [task:0.0.3] Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors
 - [x] [id:wraukigrax] [task:0.0.3] Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence
 - [x] [id:aksosbmnzi] [task:0.0.3] Complete final plan verification before closing `0.0.3`
+- [x] [id:nxoornxntp] `docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or
+- [x] [id:fgeogsyebk] After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
+- [x] [id:ubofpickiu] README trace lookup references the bundled setup
+- [x] [id:qdoigmochg] OpenCode native OTEL plus a documented local collector, or
+- [x] [id:ndapzuxapr] Documented one-liner in README
+- [x] [id:rxpmzvrxjd] [otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup

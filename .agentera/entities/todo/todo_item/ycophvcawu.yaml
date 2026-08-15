@@ -11,4 +11,4 @@ record:
       description: Pair attempts by task, repetition, baseline, and candidate
       severity: normal
       status: open
-      order: 118
+      order: 112

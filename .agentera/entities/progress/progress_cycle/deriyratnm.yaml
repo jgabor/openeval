@@ -1,0 +1,16 @@
+id: deriyratnm
+artifact: progress
+record:
+  timestamp: 2026-08-15 15:47
+  type: feat
+  phase: build
+  what: Completed the implementation slice for plan acgkfkknys tasks scelozsjsk, psukpzahtc, and yzlawyyjan.
+  context:
+    intent: Ship optional tracing-only repository-owned Jaeger Compose receipt proof for OpenEval summary spans.
+    constraints: Keep Docker and collectors optional outside tracing; leave generated smoke artifacts uncommitted; do not change plan lifecycle in this record.
+    unknowns: Resolved image architecture and readiness unknowns with manifest inspection and a real healthy Docker smoke.
+    scope: Plan acgkfkknys implementation tasks scelozsjsk, psukpzahtc, and yzlawyyjan; bwdjvgacps remains pending evaluator closeout.
+  discovered: The pinned Jaeger 2.20.0 image supports linux/amd64, linux/arm64, linux/s390x, and linux/ppc64le, and its included wget can check the internal health endpoint without a helper service.
+  verified: Targeted Go tests and docker compose config --quiet passed; mage check passed; Compose reached healthy readiness; score.json retained source trace ID mock-parse-duration-units-r1; normalization produced 267f391a4b125894e735ddf9eb7ba918; Jaeger API returned that exact trace with span openeval.session and service openeval-agent; openeval traces printed http://localhost:16686/trace/267f391a4b125894e735ddf9eb7ba918; Compose shut down cleanly. Evidence remains at scenarios/example-fixtures/otel-smoke-20260815T134431Z.
+  next: Evaluator audits closeout task bwdjvgacps; the coordinator owns task and plan lifecycle updates.
+  publication_order: 21

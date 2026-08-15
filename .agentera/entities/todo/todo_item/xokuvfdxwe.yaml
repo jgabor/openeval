@@ -11,4 +11,4 @@ record:
       description: "Optional: `--from <repo-path>` with language detection and verifier template"
       severity: normal
       status: open
-      order: 48
+      order: 42

@@ -11,4 +11,4 @@ record:
       description: Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
       severity: normal
       status: open
-      order: 37
+      order: 31

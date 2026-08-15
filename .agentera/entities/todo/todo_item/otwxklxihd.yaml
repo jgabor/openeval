@@ -18,4 +18,4 @@ record:
       description: "[paired-campaign-report:0.0.18] Add task-paired resource and quality reporting"
       severity: normal
       status: open
-      order: 117
+      order: 111

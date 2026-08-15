@@ -11,4 +11,4 @@ record:
       description: Accept two or more named variations in one run
       severity: normal
       status: open
-      order: 95
+      order: 89

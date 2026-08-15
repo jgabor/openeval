@@ -11,4 +11,4 @@ record:
       description: Support test, semantic-equivalence, code-review, and footprint dimensions
       severity: normal
       status: open
-      order: 90
+      order: 84

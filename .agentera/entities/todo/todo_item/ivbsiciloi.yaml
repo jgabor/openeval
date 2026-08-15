@@ -11,4 +11,4 @@ record:
       description: Mock job runs on GitHub Actions without cursor credentials
       severity: normal
       status: open
-      order: 45
+      order: 39

@@ -11,4 +11,4 @@ record:
       description: Counterbalance two-arm execution as AB/BA across pairs
       severity: normal
       status: open
-      order: 98
+      order: 92

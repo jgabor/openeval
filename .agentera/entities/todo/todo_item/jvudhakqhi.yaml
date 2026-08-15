@@ -11,4 +11,4 @@ record:
       description: Clean up containers after success, failure, timeout, or interruption
       severity: normal
       status: open
-      order: 114
+      order: 108

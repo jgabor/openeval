@@ -11,4 +11,4 @@ record:
       description: Label descriptive intervals as uncertainty, not causal or significance claims
       severity: normal
       status: open
-      order: 130
+      order: 124

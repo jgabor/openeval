@@ -11,4 +11,4 @@ record:
       description: Require explicit execution approval for paid campaigns
       severity: normal
       status: open
-      order: 104
+      order: 98

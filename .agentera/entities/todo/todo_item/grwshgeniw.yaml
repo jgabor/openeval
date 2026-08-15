@@ -11,4 +11,4 @@ record:
       description: Let verifier scripts emit a versioned structured result
       severity: normal
       status: open
-      order: 89
+      order: 83

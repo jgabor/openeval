@@ -11,4 +11,4 @@ record:
       description: Scaffold runs with `--agent mock` after minimal edits
       severity: normal
       status: open
-      order: 50
+      order: 44

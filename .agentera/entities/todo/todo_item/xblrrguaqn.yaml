@@ -11,4 +11,4 @@ record:
       description: Separate agent-visible source from verifier-only and reference artifacts
       severity: normal
       status: open
-      order: 86
+      order: 80

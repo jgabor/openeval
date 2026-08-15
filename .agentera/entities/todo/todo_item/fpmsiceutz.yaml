@@ -18,4 +18,4 @@ record:
       description: "[milestone] 2026-06-14: opencode runtime driver plan (4 tasks) complete; see `.agentera/archive/plan-2026-06-14-opencode-runtime-driver.yaml`"
       severity: normal
       status: open
-      order: 148
+      order: 142

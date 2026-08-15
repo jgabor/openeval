@@ -11,4 +11,4 @@ record:
       description: Report tool-call inflation, duration, patch size, and failure classes
       severity: normal
       status: open
-      order: 124
+      order: 118

@@ -11,4 +11,4 @@ record:
       description: Retain enough diagnostics to classify setup and execution failures
       severity: normal
       status: open
-      order: 115
+      order: 109

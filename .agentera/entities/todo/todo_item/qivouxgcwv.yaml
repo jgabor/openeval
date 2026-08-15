@@ -11,4 +11,4 @@ record:
       description: Retain a campaign manifest before agent execution
       severity: normal
       status: open
-      order: 77
+      order: 71

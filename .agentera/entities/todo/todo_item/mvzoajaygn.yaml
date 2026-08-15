@@ -11,4 +11,4 @@ record:
       description: Make runtime and verifier network policies explicit and separately configurable
       severity: normal
       status: open
-      order: 111
+      order: 105

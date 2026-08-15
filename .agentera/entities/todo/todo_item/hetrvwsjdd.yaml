@@ -11,4 +11,4 @@ record:
       description: Record agent failures as attempts and continue the run
       severity: normal
       status: open
-      order: 70
+      order: 64

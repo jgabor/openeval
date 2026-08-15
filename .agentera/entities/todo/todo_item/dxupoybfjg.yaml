@@ -11,4 +11,4 @@ record:
       description: Complete an unpaid or explicitly bounded three-task smoke campaign
       severity: normal
       status: open
-      order: 138
+      order: 132

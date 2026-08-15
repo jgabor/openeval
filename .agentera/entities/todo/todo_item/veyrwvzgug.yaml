@@ -18,4 +18,4 @@ record:
       description: "[ktx-paired-campaign-proof:0.0.19] Prove the generic campaign contract with ktx"
       severity: normal
       status: open
-      order: 131
+      order: 125

@@ -11,4 +11,4 @@ record:
       description: Distinguish verifier infrastructure errors from a valid failing grade
       severity: normal
       status: open
-      order: 92
+      order: 86

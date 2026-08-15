@@ -18,4 +18,4 @@ record:
       description: "[compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start"
       severity: normal
       status: open
-      order: 34
+      order: 28

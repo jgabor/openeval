@@ -11,4 +11,4 @@ record:
       description: Non-chosen scenario remains marked deferred in README
       severity: normal
       status: open
-      order: 57
+      order: 51

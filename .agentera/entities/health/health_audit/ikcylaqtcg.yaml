@@ -1,0 +1,15 @@
+id: ikcylaqtcg
+artifact: health
+record:
+  date: 2026-08-15
+  dimensions:
+    - artifact_freshness
+  findings_summary:
+    critical: 0
+    warning: 0
+    info: 0
+    filtered_by_confidence: 0
+  trajectory: "stable: limited terminal-plan closure audit PASS for plan acgkfkknys. examples/otel/compose.yaml, README, TODO, progress deriyratnm, and four task evaluations agree; mage check passed and Jaeger received normalized trace 267f391a4b125894e735ddf9eb7ba918. Decision detail was deferred at startup but jjyopxgccc was verified; docs state remains incomplete; profile is stale; retry state was not recorded before audit. This is not a codebase-wide audit."
+  grades:
+    artifact_freshness: A
+  appended_at: 2026-08-15T13:54:46.915Z

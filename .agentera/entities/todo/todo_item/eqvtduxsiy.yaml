@@ -11,4 +11,4 @@ record:
       description: Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass
       severity: normal
       status: open
-      order: 71
+      order: 65

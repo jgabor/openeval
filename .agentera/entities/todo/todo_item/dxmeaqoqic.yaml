@@ -11,4 +11,4 @@ record:
       description: Emit stable JSON from `compare` as well as human-readable text
       severity: normal
       status: open
-      order: 128
+      order: 122

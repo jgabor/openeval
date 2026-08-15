@@ -11,4 +11,4 @@ record:
       description: Run deterministic grading without network access by default
       severity: normal
       status: open
-      order: 112
+      order: 106

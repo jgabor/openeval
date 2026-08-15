@@ -11,4 +11,4 @@ record:
       description: Report test, equivalence, review, and footprint win/loss/tie counts
       severity: normal
       status: open
-      order: 123
+      order: 117

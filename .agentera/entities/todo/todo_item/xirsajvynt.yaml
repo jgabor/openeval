@@ -11,4 +11,4 @@ record:
       description: Smoke path completes at least one task/round on a real agent
       severity: normal
       status: open
-      order: 55
+      order: 49

@@ -2,13 +2,17 @@ id: qdoigmochg
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: OpenCode native OTEL plus a documented local collector, or
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: OpenCode native OTEL plus a documented local collector, or
+      status: resolved
+      order: 47
       severity: normal
-      status: open
-      order: 30
+  lifecycle:
+    operation: resolve
+    reason: "Rejected by decision jjyopxgccc: native OpenCode OTEL remains optional separate-trace enrichment with privacy and flush caveats, not the primary local collector receipt path."
+    date: 2026-08-15

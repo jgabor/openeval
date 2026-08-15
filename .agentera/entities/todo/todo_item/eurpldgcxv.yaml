@@ -11,4 +11,4 @@ record:
       description: Define the comparison unit as task plus repetition
       severity: normal
       status: open
-      order: 96
+      order: 90

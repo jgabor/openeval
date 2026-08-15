@@ -11,4 +11,4 @@ record:
       description: Retain an artifact manifest with path, size, and SHA-256
       severity: normal
       status: open
-      order: 79
+      order: 73

@@ -2,13 +2,17 @@ id: nxoornxntp
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"
+      status: resolved
+      order: 44
       severity: normal
-      status: open
-      order: 29
+  lifecycle:
+    operation: resolve
+    reason: Decision jjyopxgccc selected Compose; the pinned repository-owned Jaeger fixture now ships at examples/otel/compose.yaml on localhost ports 4318 and 16686.
+    date: 2026-08-15

@@ -2,13 +2,17 @@ id: fgeogsyebk
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
+      status: resolved
+      order: 45
       severity: normal
-      status: open
-      order: 32
+  lifecycle:
+    operation: resolve
+    reason: The bounded Docker smoke proved Jaeger stored normalized trace 267f391a4b125894e735ddf9eb7ba918 with openeval.session from openeval-agent, and openeval traces printed the matching localhost URL.
+    date: 2026-08-15

@@ -7,7 +7,7 @@ OpenEval is one CLI control plane for two related workflows:
 
 OpenCode is the primary production runtime. Cursor is a supported secondary runtime. The mock driver exists for hermetic tests and CI; it does not produce production evaluation evidence.
 
-> **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the local CLI, the `example-fixtures` scenario, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, and opt-in native OpenCode OTEL. A public no-clone install, Pi, external benchmark integrations, Docker execution, a bundled collector, and full cross-runtime telemetry normalization are not shipped.
+> **Status: `0.0.0-dev`.** OpenEval is not on a stable release track. The shipped vertical slice is the local CLI, the `example-fixtures` scenario, OpenCode and Cursor harness drivers, comparison/reporting, Cursor hooks, opt-in native OpenCode OTEL, and an optional local Jaeger Compose fixture. A public no-clone install, Pi, external benchmark integrations, Docker execution, and full cross-runtime telemetry normalization are not shipped.
 
 ## Support status
 
@@ -22,7 +22,7 @@ OpenCode is the primary production runtime. Cursor is a supported secondary runt
 | DeepSWE and margin-eval    | **Deferred**           | Names are reserved, but `run` reports that integration is not implemented                                        |
 | Docker `--image` execution | **Deferred**           | The flag reports that packaged runs are not implemented                                                          |
 | Install                    | **Checkout only**      | `go install ./cmd/openeval`; the repository is not currently available through a public `@latest` module install |
-| OTLP storage/collector     | **External**           | OpenEval does not embed a trace database or currently bundle a collector                                         |
+| Local OTLP collector       | **Opt-in, shipped**    | Repository-owned Jaeger Compose fixture for local tracing; no collector lifecycle in the CLI or embedded store   |
 
 ## Quick start: compare on OpenCode
 
@@ -330,6 +330,49 @@ Harness execution does not require a collector. OpenEval writes trace IDs and sc
 - Cursor lifecycle/tool hook events through merged `~/.cursor/hooks.json` entries.
 - Explicit opt-in native OpenCode OTEL using standard inherited exporter headers/resource attributes.
 - Trace help that distinguishes direct summary trace IDs from separately generated native traces.
+- An optional local Jaeger all-in-one fixture at `examples/otel/compose.yaml`.
+
+### Optional local Jaeger
+
+Docker is only needed for this local tracing workflow. The quick start, harness, compare, report, doctor, and instrument workflows remain Docker-free and collector-optional.
+
+The fixture uses `cr.jaegertracing.io/jaegertracing/jaeger:2.20.0@sha256:46a886260e04002d8f45e213fc39063fa11a50446048fdaa64786fc0840cb9f8`. The manifest publishes Linux images for amd64, arm64, s390x, and ppc64le. It exposes OTLP HTTP only at `localhost:4318` and the Jaeger UI only at `localhost:16686`.
+
+Validate the Compose file, then start Jaeger and wait at most 60 seconds for its internal `http://localhost:13133/status` health check. The check uses `wget` included in the Jaeger image, so it needs no helper service or host health port:
+
+```bash
+docker compose -f examples/otel/compose.yaml config --quiet
+docker compose -f examples/otel/compose.yaml up -d --wait --wait-timeout 60
+```
+
+The default OpenEval configuration already exports summary spans to `http://localhost:4318/v1/traces`. If you have a config file, set `telemetry.endpoint` to that exact URL. Run normally, then resolve a retained round:
+
+```bash
+ROOT=./scenarios/example-fixtures/local-trace-001
+openeval run --scenario ./examples/scenarios/example-fixtures/edit-file-only.yaml \
+  --agent mock --rounds 1 --out "$ROOT"
+openeval traces "$ROOT" --task parse-duration-units --round 1
+```
+
+Use the printed `http://localhost:16686/trace/<normalized-trace-id>` URL after receipt. Merely opening that UI route does not prove that Jaeger received the span.
+
+Stop the local collector when finished:
+
+```bash
+docker compose -f examples/otel/compose.yaml down
+```
+
+Jaeger all-in-one keeps traces only in memory. A stop, restart, or `down` loses stored traces. OpenEval `score.json` files remain on disk.
+
+If startup reports that port 4318 or 16686 is allocated, use `docker ps --format '{{.Names}} {{.Ports}}'` and your operating system's port tools to identify the owner. Stop or reconfigure that process, then rerun the bounded start command. Do not change OpenEval's endpoint unless you deliberately change the OTLP host port too. If Docker reports no matching manifest, confirm the host with `docker info --format '{{.OSType}}/{{.Architecture}}'`; the pinned image supports the four Linux architectures listed above. Use a supported Docker host or configured amd64 emulation for another architecture.
+
+Maintainers can run the full receipt proof manually. It is not part of CI:
+
+```bash
+./examples/otel/smoke.sh
+```
+
+`examples/otel/smoke.sh` builds the local CLI, starts Compose with a fixed readiness timeout, runs one mock round, reads the source ID from `score.json`, polls Jaeger's query API for the normalized ID and exact summary span/service, checks `openeval traces`, and stops Compose. It retains the score, Jaeger response, trace output, and container log under the printed `scenarios/example-fixtures/otel-smoke-*` path for diagnosis.
 
 Look up a round:
 
@@ -370,7 +413,6 @@ Native span flushing on non-interactive OpenCode process exit is not verified by
 - Separate retained input, output, reasoning, cache-read, and cache-write counts in attempt evidence.
 - Full cross-runtime tool, prompt, context, and reasoning normalization.
 - Longitudinal queries and dashboards in an external span store.
-- A bundled local collector/Jaeger setup.
 - Pi telemetry.
 
 OpenEval will not embed a trace database in the CLI binary.

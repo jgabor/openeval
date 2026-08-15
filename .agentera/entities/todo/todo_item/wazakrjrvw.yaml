@@ -11,4 +11,4 @@ record:
       description: README links the recipe under CI / release gates
       severity: normal
       status: open
-      order: 44
+      order: 38

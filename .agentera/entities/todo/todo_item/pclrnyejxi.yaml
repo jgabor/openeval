@@ -11,4 +11,4 @@ record:
       description: Report exact recorded-workload token and cost totals per repetition
       severity: normal
       status: open
-      order: 119
+      order: 113

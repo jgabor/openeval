@@ -11,4 +11,4 @@ record:
       description: Retry only infrastructure-invalid attempts under an explicit bounded policy
       severity: normal
       status: open
-      order: 100
+      order: 94

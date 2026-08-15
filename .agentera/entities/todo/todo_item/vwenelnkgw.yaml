@@ -18,4 +18,4 @@ record:
       description: "[frictionless-install:0.0.7] Single documented install path without cloning"
       severity: normal
       status: open
-      order: 36
+      order: 30

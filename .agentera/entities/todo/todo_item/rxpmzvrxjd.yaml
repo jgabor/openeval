@@ -16,15 +16,15 @@ record:
     - README documents Compose as the supported local collector, native OpenCode OTEL as optional separate-trace enrichment, and the native payload privacy boundary.
   release_blocker: false
   severity: normal
-  status: open
+  status: resolved
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: "[otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup"
+      status: resolved
+      order: 49
       severity: normal
-      status: open
-      order: 28
   readiness:
     capability: plan
     reason: Decision jjyopxgccc selected a pinned Jaeger Compose setup and fixed the tracing-only Docker boundary; implementation now needs a scoped plan.
@@ -34,3 +34,7 @@ record:
     gate: null
     queue_rank: 1
     order_reason: Train 0.0.4 remains the earliest open product train after the collector-path decision.
+  lifecycle:
+    operation: resolve
+    reason: "Delivered typed acceptance: pinned Jaeger Compose exposed localhost 4318/16686 and became healthy; the retained real smoke proved exact normalized summary-trace receipt and matching traces URL; mage check preserved collector-unreachable completion; README keeps Docker tracing-only and documents lifecycle, retention, ports, architectures, and optional native separate-trace privacy boundaries."
+    date: 2026-08-15

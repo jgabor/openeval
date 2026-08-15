@@ -11,4 +11,4 @@ record:
       description: Report deterministic paired bootstrap intervals with a retained seed
       severity: normal
       status: open
-      order: 121
+      order: 115

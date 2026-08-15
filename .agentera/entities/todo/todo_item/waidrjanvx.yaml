@@ -11,4 +11,4 @@ record:
       description: Keep optional LLM grading separate from deterministic test evidence and agent cost
       severity: normal
       status: open
-      order: 93
+      order: 87

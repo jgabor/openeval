@@ -11,4 +11,4 @@ record:
       description: Validate every attempt and regenerate the campaign summary before any paid expansion
       severity: normal
       status: open
-      order: 139
+      order: 133

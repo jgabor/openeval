@@ -11,4 +11,4 @@ record:
       description: Add a versioned score schema and validate it when loading
       severity: normal
       status: open
-      order: 72
+      order: 66

@@ -11,4 +11,4 @@ record:
       description: Require separate approval before the ten-task, two-repetition, two-arm campaign
       severity: normal
       status: open
-      order: 140
+      order: 134

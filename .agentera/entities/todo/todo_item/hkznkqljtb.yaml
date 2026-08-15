@@ -11,4 +11,4 @@ record:
       description: Retain source provenance and digest without fetching during execution
       severity: normal
       status: open
-      order: 85
+      order: 79

@@ -11,4 +11,4 @@ record:
       description: Regenerate campaign summaries byte-identically from retained evidence
       severity: normal
       status: open
-      order: 129
+      order: 123

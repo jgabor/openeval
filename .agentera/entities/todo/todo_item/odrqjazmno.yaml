@@ -11,4 +11,4 @@ record:
       description: Treat repeated runs of one task as one task cluster when pooling
       severity: normal
       status: open
-      order: 122
+      order: 116

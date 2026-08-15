@@ -11,4 +11,4 @@ record:
       description: Retain changed-file, added-line, and deleted-line footprint metrics
       severity: normal
       status: open
-      order: 88
+      order: 82

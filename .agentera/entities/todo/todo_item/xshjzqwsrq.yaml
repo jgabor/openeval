@@ -11,4 +11,4 @@ record:
       description: Allow each task to select its own frozen source bundle
       severity: normal
       status: open
-      order: 84
+      order: 78

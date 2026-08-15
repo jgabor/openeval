@@ -11,4 +11,4 @@ record:
       description: Mount only the attempt workspace, declared artifacts, and read-only credentials
       severity: normal
       status: open
-      order: 109
+      order: 103

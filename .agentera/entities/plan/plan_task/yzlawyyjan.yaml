@@ -5,7 +5,7 @@ record:
   depends_on:
     - scelozsjsk
     - psukpzahtc
-  status: pending
+  status: complete
   acceptance:
     - GIVEN a user follows README instructions WHEN they start, check, use, and stop the collector THEN every command is copyable from the repository checkout and names expected ports and retained-data behavior.
     - GIVEN Docker is missing, ports conflict, or the image cannot run on the host architecture WHEN setup fails THEN the guide provides bounded remediation.
@@ -13,3 +13,13 @@ record:
     - GIVEN a user does not want traces WHEN they follow normal onboarding THEN Docker and the collector remain optional.
     - GIVEN static documentation checks run WHEN Compose paths, ports, image references, or lifecycle commands become stale THEN the mismatch fails without a live collector.
   plan: acgkfkknys
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-jaeger-v004-1
+      source: independent audit ses_ffa5116f9ffe5Z1WKVcmhkUHna
+      recorded_at: 2026-08-15 15:53
+      writer_command: agentera state plan record-evaluation

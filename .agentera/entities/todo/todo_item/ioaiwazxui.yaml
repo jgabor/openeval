@@ -11,4 +11,4 @@ record:
       description: "README subsection: dependencies, cost/runtime, default task subset"
       severity: normal
       status: open
-      order: 54
+      order: 48

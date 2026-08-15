@@ -11,4 +11,4 @@ record:
       description: Report paired per-task percentage changes and their geometric mean
       severity: normal
       status: open
-      order: 120
+      order: 114

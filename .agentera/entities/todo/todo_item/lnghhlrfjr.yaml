@@ -11,4 +11,4 @@ record:
       description: Consume ktx metrics through the generic per-attempt contract rather than one aggregate external map
       severity: normal
       status: open
-      order: 135
+      order: 129

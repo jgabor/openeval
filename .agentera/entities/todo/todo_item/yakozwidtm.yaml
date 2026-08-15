@@ -11,4 +11,4 @@ record:
       description: Missing deps or auth produce actionable errors
       severity: normal
       status: open
-      order: 56
+      order: 50

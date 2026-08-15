@@ -11,4 +11,4 @@ record:
       description: Allocate disposable `HOME` and XDG directories per attempt
       severity: normal
       status: open
-      order: 110
+      order: 104

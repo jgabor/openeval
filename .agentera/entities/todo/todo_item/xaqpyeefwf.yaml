@@ -11,4 +11,4 @@ record:
       description: Add `openeval validate <run-dir>` with stable JSON output and documented exit codes
       severity: normal
       status: open
-      order: 82
+      order: 76

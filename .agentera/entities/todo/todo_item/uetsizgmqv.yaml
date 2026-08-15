@@ -11,4 +11,4 @@ record:
       description: Pin and retain the image digest used by each attempt
       severity: normal
       status: open
-      order: 108
+      order: 102

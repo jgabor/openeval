@@ -11,4 +11,4 @@ record:
       description: "`openeval run --scenario <chosen>` works with documented prerequisites"
       severity: normal
       status: open
-      order: 53
+      order: 47

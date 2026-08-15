@@ -11,4 +11,4 @@ record:
       description: Generated layout matches `examples/scenarios/example-fixtures/`
       severity: normal
       status: open
-      order: 49
+      order: 43

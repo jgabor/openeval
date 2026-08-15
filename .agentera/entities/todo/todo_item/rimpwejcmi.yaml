@@ -11,4 +11,4 @@ record:
       description: Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv
       severity: normal
       status: open
-      order: 78
+      order: 72

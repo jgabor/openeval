@@ -11,4 +11,4 @@ record:
       description: Comment expected cost/runtime for real-agent jobs
       severity: normal
       status: open
-      order: 43
+      order: 37

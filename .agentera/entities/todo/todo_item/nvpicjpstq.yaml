@@ -11,4 +11,4 @@ record:
       description: Retain agent stdout and stderr as bounded artifacts with SHA-256 digests
       severity: normal
       status: open
-      order: 69
+      order: 63

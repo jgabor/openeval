@@ -11,4 +11,4 @@ record:
       description: "Document optional job: OpenCode compare on release branches with provider credentials"
       severity: normal
       status: open
-      order: 42
+      order: 36

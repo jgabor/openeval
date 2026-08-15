@@ -11,4 +11,4 @@ record:
       description: Retain ktx binary, configuration, pipeline, database, and artifact digests
       severity: normal
       status: open
-      order: 134
+      order: 128

@@ -4,7 +4,7 @@ record:
   name: Prove summary-span receipt and trace lookup
   depends_on:
     - scelozsjsk
-  status: pending
+  status: complete
   acceptance:
     - GIVEN the collector is ready and one bounded successful mock harness round runs WHEN score.json is inspected THEN it retains the source summary trace ID emitted to the configured OTLP endpoint.
     - GIVEN the recorded source trace ID WHEN receipt is checked THEN Jaeger's query API returns the telemetry-normalized trace ID with span name openeval.session and service openeval-agent within a fixed timeout.
@@ -12,3 +12,13 @@ record:
     - GIVEN native OpenCode OTEL is enabled WHEN traces are inspected THEN native and summary traces remain separate and correlation uses openeval.trace_id.
     - GIVEN the collector is stopped WHEN the same harness path runs THEN the run still completes and retains trace and score evidence.
   plan: acgkfkknys
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: audit-jaeger-v004-1
+      source: independent audit ses_ffa5116f9ffe5Z1WKVcmhkUHna
+      recorded_at: 2026-08-15 15:53
+      writer_command: agentera state plan record-evaluation

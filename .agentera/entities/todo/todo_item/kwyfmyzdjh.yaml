@@ -11,4 +11,4 @@ record:
       description: Add `examples/ci/openeval.yml` (or similar) for consumers
       severity: normal
       status: open
-      order: 40
+      order: 34

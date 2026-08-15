@@ -18,4 +18,4 @@ record:
       description: "[skill-compare-playbook:0.0.12] Document skill-variation compare workflow"
       severity: normal
       status: open
-      order: 60
+      order: 54

@@ -11,4 +11,4 @@ record:
       description: Keep existing score artifacts readable or document and test the intentional break
       severity: normal
       status: open
-      order: 73
+      order: 67

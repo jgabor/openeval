@@ -2,13 +2,17 @@ id: ubofpickiu
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: README trace lookup references the bundled setup
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: README trace lookup references the bundled setup
+      status: resolved
+      order: 46
       severity: normal
-      status: open
-      order: 33
+  lifecycle:
+    operation: resolve
+    reason: README now documents the shipped Compose path, bounded readiness, OTLP endpoint, trace lookup command and normalized Jaeger URL, shutdown, retention, ports, and architecture troubleshooting.
+    date: 2026-08-15

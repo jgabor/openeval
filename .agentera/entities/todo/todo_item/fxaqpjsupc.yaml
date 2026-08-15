@@ -11,4 +11,4 @@ record:
       description: Derive and retain a normalized patch against the frozen source
       severity: normal
       status: open
-      order: 87
+      order: 81

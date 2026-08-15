@@ -11,4 +11,4 @@ record:
       description: Default to concurrency one; retain concurrency when explicitly changed
       severity: normal
       status: open
-      order: 102
+      order: 96
