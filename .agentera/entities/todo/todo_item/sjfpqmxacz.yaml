@@ -10,5 +10,5 @@ record:
       present: true
       description: Harness still completes when collector is unreachable (non-blocking export)
       status: resolved
-      order: 28
+      order: 40
       severity: normal

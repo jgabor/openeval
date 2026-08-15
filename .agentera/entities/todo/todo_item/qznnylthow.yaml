@@ -10,5 +10,5 @@ record:
       present: true
       description: Check `skills.aliases` paths resolve for skill variations
       status: resolved
-      order: 27
+      order: 38
       severity: normal

@@ -2,8 +2,8 @@ id: otwxklxihd
 artifact: todo
 record:
   kind: paired-campaign-report
-  target_version: 0.0.18
-  title: Add task-paired resource and quality reporting
+  target_version: 0.0.24
+  title: Report paired task metrics and uncertainty
   requirements:
     []
   acceptance:
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[paired-campaign-report:0.0.18] Add task-paired resource and quality reporting"
+      description: "[paired-campaign-report:0.0.24] Report paired task metrics and uncertainty"
       severity: normal
       status: open
-      order: 111
+      order: 100

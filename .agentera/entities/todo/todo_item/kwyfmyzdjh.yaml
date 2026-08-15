@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Add `examples/ci/openeval.yml` (or similar) for consumers
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Add `examples/ci/openeval.yml` (or similar) for consumers
+      description: "[task:0.0.9] Add `examples/ci/openeval.yml` (or similar) for consumers"
       severity: normal
       status: open
-      order: 34
+      order: 6
+  kind: task
+  target_version: 0.0.9
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Add `examples/ci/openeval.yml` (or similar) for consumers

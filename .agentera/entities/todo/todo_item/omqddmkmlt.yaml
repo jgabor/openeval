@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain invalid and superseding retry records without replacing evidence
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain invalid and superseding retry records without replacing evidence
+      description: "[task:0.0.21] Retain invalid and superseding retry records without replacing evidence"
       severity: normal
       status: open
-      order: 95
+      order: 86
+  kind: task
+  target_version: 0.0.21
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain invalid and superseding retry records without replacing evidence

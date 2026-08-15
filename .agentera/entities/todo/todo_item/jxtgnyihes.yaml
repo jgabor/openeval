@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Keep mock and host execution available for tests and local development
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Keep mock and host execution available for tests and local development
+      description: "[task:0.0.23] Keep mock and host execution available for tests and local development"
       severity: normal
       status: open
-      order: 110
+      order: 99
+  kind: task
+  target_version: 0.0.23
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Keep mock and host execution available for tests and local development

@@ -2,13 +2,18 @@ id: hnarslhsdo
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Document with Jaeger screenshots in README
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: Document with Jaeger screenshots in README
+      status: resolved
+      order: 19
       severity: normal
-      status: open
-      order: 53
+  lifecycle:
+    operation: supersede
+    reason: Rejected screenshot option is replaced by the completed 0.0.6 honest telemetry slice
+    date: 2026-08-15
+    replacement: ofdciouory

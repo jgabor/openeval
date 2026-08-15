@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain agent stdout and stderr as bounded artifacts with SHA-256 digests
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain agent stdout and stderr as bounded artifacts with SHA-256 digests
+      description: "[task:0.0.13] Retain agent stdout and stderr as bounded artifacts with SHA-256 digests"
       severity: normal
       status: open
-      order: 63
+      order: 32
+  kind: task
+  target_version: 0.0.13
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain agent stdout and stderr as bounded artifacts with SHA-256 digests

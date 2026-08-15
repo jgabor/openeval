@@ -10,5 +10,5 @@ record:
       present: true
       description: Check native OpenCode OTEL setup; check `~/.cursor/hooks.json` when Cursor is selected
       status: resolved
-      order: 11
+      order: 12
       severity: normal

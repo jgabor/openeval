@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Pair attempts by task, repetition, baseline, and candidate
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Pair attempts by task, repetition, baseline, and candidate
+      description: "[task:0.0.24] Pair attempts by task, repetition, baseline, and candidate"
       severity: normal
       status: open
-      order: 112
+      order: 101
+  kind: task
+  target_version: 0.0.24
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Pair attempts by task, repetition, baseline, and candidate

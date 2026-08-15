@@ -2,7 +2,7 @@ id: snssylenxo
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.17
   title: Prepend the wrapper without a shell, whitespace splitting, interpolation, or environment expansion
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Prepend the wrapper without a shell, whitespace splitting, interpolation, or environment expansion"
+      description: "[task:0.0.17] Prepend the wrapper without a shell, whitespace splitting, interpolation, or environment expansion"
       severity: normal
       status: open
-      order: 17
+      order: 61

@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Bound CPU, memory, process count, and attempt duration
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Bound CPU, memory, process count, and attempt duration
+      description: "[task:0.0.23] Bound CPU, memory, process count, and attempt duration"
       severity: normal
       status: open
-      order: 107
+      order: 96
+  kind: task
+  target_version: 0.0.23
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Bound CPU, memory, process count, and attempt duration

@@ -10,5 +10,5 @@ record:
       present: true
       description: Missing OpenCode or provider authentication reports `opencode auth login` / `opencode auth list` steps
       status: resolved
-      order: 36
+      order: 51
       severity: normal

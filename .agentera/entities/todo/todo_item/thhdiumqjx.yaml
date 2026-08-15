@@ -10,5 +10,5 @@ record:
       present: true
       description: Replace README quick start with the three-command compare flow above
       status: resolved
-      order: 30
+      order: 43
       severity: normal

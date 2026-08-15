@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Give each run and attempt a unique immutable ID
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Give each run and attempt a unique immutable ID
+      description: "[task:0.0.14] Give each run and attempt a unique immutable ID"
       severity: normal
       status: open
-      order: 69
+      order: 37
+  kind: task
+  target_version: 0.0.14
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Give each run and attempt a unique immutable ID

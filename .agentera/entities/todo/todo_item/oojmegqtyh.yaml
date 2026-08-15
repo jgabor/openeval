@@ -2,7 +2,7 @@ id: oojmegqtyh
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.17
   title: Keep existing scenarios without `command` byte-compatible when loaded
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Keep existing scenarios without `command` byte-compatible when loaded"
+      description: "[task:0.0.17] Keep existing scenarios without `command` byte-compatible when loaded"
       severity: normal
       status: open
-      order: 21
+      order: 65

@@ -2,7 +2,7 @@ id: kuaykibjzv
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.13
+  target_version: 0.0.15
   title: Distinguish a missing external artifact, unavailable measurement, malformed measurement, and measured zero
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.13] Distinguish a missing external artifact, unavailable measurement, malformed measurement, and measured zero"
+      description: "[task:0.0.15] Distinguish a missing external artifact, unavailable measurement, malformed measurement, and measured zero"
       severity: normal
       status: open
-      order: 3
+      order: 47

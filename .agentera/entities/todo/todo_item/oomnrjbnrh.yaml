@@ -10,5 +10,5 @@ record:
       present: true
       description: "README: one recommended install path; source build under a separate heading"
       status: resolved
-      order: 21
+      order: 29
       severity: normal

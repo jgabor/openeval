@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Regenerate campaign summaries byte-identically from retained evidence
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Regenerate campaign summaries byte-identically from retained evidence
+      description: "[task:0.0.25] Regenerate campaign summaries byte-identically from retained evidence"
       severity: normal
       status: open
-      order: 123
+      order: 112
+  kind: task
+  target_version: 0.0.25
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Regenerate campaign summaries byte-identically from retained evidence

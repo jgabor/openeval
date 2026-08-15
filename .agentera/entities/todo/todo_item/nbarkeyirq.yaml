@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Generated layout matches `examples/scenarios/example-fixtures/`
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Generated layout matches `examples/scenarios/example-fixtures/`
+      description: "[task:0.0.10] Generated layout matches `examples/scenarios/example-fixtures/`"
       severity: normal
       status: open
-      order: 43
+      order: 15
+  kind: task
+  target_version: 0.0.10
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Generated layout matches `examples/scenarios/example-fixtures/`

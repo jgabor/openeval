@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Support test, semantic-equivalence, code-review, and footprint dimensions
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Support test, semantic-equivalence, code-review, and footprint dimensions
+      description: "[task:0.0.19] Support test, semantic-equivalence, code-review, and footprint dimensions"
       severity: normal
       status: open
-      order: 84
+      order: 73
+  kind: task
+  target_version: 0.0.19
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Support test, semantic-equivalence, code-review, and footprint dimensions

@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Report tool-call inflation, duration, patch size, and failure classes
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Report tool-call inflation, duration, patch size, and failure classes
+      description: "[task:0.0.25] Report tool-call inflation, duration, patch size, and failure classes"
       severity: normal
       status: open
-      order: 118
+      order: 107
+  kind: task
+  target_version: 0.0.25
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Report tool-call inflation, duration, patch size, and failure classes

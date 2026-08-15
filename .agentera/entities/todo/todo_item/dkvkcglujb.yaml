@@ -10,5 +10,5 @@ record:
       present: true
       description: No README path presents mock scores as production eval evidence
       status: resolved
-      order: 4
+      order: 5
       severity: normal

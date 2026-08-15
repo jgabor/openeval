@@ -2,8 +2,8 @@ id: jmfuavefdq
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.13
-  title: Keep runtime usage, runtime cost, and external producer measurements as separate authorities
+  target_version: 0.0.15
+  title: Keep runtime usage, runtime cost, and producer measurements as separate authorities
   requirements:
     []
   acceptance:
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.13] Keep runtime usage, runtime cost, and external producer measurements as separate authorities"
+      description: "[task:0.0.15] Keep runtime usage, runtime cost, and producer measurements as separate authorities"
       severity: normal
       status: open
-      order: 4
+      order: 48

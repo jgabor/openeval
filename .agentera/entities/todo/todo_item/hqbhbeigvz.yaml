@@ -1,13 +1,17 @@
 id: hqbhbeigvz
 artifact: todo
 record:
-  kind: task
-  target_version: 0.0.14
-  title: Add `Variation.Command` as a YAML sequence whose elements are literal argv entries
+  kind: variation-command
+  target_version: 0.0.17
+  title: Support argv-safe per-variation wrappers
   requirements:
-    []
+    - Add optional `Variation.Command` as a YAML sequence whose elements are literal argv entries.
+    - Prepend the wrapper without a shell, interpolation, whitespace splitting, or environment expansion.
+    - Retain the resolved agent identity and effective argv.
   acceptance:
-    []
+    - Arguments and executable paths containing spaces reach the child unchanged.
+    - An empty executable or argv entry fails before execution.
+    - Scenarios without a wrapper preserve direct-agent behavior.
   release_blocker: false
   severity: normal
   status: open
@@ -15,7 +19,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Add `Variation.Command` as a YAML sequence whose elements are literal argv entries"
+      description: "[variation-command:0.0.17] Support argv-safe per-variation wrappers"
       severity: normal
       status: open
-      order: 14
+      order: 58

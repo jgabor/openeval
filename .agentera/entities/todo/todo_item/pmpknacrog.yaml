@@ -3,12 +3,23 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Configure passthrough and compression arms through the generic variation-command contract with the same OpenCode and ktx instrumentation
+      description: "[ktx-campaign-integration:0.0.27] Integrate ktx through generic campaign contracts"
       severity: normal
       status: open
-      order: 126
+      order: 117
+  kind: ktx-campaign-integration
+  target_version: 0.0.27
+  requirements:
+    - Configure passthrough and compression arms through generic variation commands.
+    - Give each attempt disposable ktx state and retain binary, configuration, pipeline, database, and measurement digests.
+    - Consume ktx measurements through the generic per-attempt contract.
+  acceptance:
+    - Both arms use the same OpenCode and ktx instrumentation contract.
+    - Each attempt has isolated ktx state and retained provenance.
+    - OpenEval consumes no ktx-specific measurement semantics.
+  release_blocker: false
+  title: Integrate ktx through generic campaign contracts

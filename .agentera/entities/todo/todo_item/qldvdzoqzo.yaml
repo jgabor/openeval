@@ -2,13 +2,18 @@ id: qldvdzoqzo
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Opening sections show compare table example and trace lookup flow
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: Opening sections show compare table example and trace lookup flow
+      status: resolved
+      order: 37
       severity: normal
-      status: open
-      order: 29
+  lifecycle:
+    operation: supersede
+    reason: The README-opening child outcome is acceptance within 0.0.7
+    date: 2026-08-15
+    replacement: chrlpdaedf

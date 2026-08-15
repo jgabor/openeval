@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Require separate approval before the ten-task, two-repetition, two-arm campaign
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Require separate approval before the ten-task, two-repetition, two-arm campaign
+      description: "[task:0.0.28] Require separate approval before the ten-task, two-repetition, two-arm campaign"
       severity: normal
       status: open
-      order: 134
+      order: 127
+  kind: task
+  target_version: 0.0.28
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Require separate approval before the ten-task, two-repetition, two-arm campaign

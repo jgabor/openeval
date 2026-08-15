@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Label descriptive intervals as uncertainty, not causal or significance claims
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Label descriptive intervals as uncertainty, not causal or significance claims
+      description: "[task:0.0.25] Label descriptive intervals as uncertainty, not causal or significance claims"
       severity: normal
       status: open
-      order: 124
+      order: 113
+  kind: task
+  target_version: 0.0.25
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Label descriptive intervals as uncertainty, not causal or significance claims

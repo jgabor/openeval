@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Preserve ordinary independent `openeval run` and pass@k behavior
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Preserve ordinary independent `openeval run` and pass@k behavior
+      description: "[task:0.0.20] Preserve ordinary independent `openeval run` and pass@k behavior"
       severity: normal
       status: open
-      order: 99
+      order: 84
+  kind: task
+  target_version: 0.0.20
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Preserve ordinary independent `openeval run` and pass@k behavior

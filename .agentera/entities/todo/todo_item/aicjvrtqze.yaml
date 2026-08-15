@@ -2,8 +2,8 @@ id: aicjvrtqze
 artifact: todo
 record:
   kind: historical-task-bundles
-  target_version: 0.0.15
-  title: Support frozen source and structured grading per task
+  target_version: 0.0.18
+  title: Support frozen source bundles per task
   requirements:
     []
   acceptance:
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[historical-task-bundles:0.0.15] Support frozen source and structured grading per task"
+      description: "[historical-task-bundles:0.0.18] Support frozen source bundles per task"
       severity: normal
       status: open
-      order: 77
+      order: 66

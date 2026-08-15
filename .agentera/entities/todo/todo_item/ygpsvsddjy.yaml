@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`
+      description: "[task:0.0.10] Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`"
       severity: normal
       status: open
-      order: 41
+      order: 13
+  kind: task
+  target_version: 0.0.10
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`

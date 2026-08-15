@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
+      description: "[task:0.0.8] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)"
       severity: normal
       status: open
-      order: 31
+      order: 3
+  kind: task
+  target_version: 0.0.8
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)

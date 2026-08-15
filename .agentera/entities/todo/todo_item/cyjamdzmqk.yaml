@@ -10,5 +10,5 @@ record:
       present: true
       description: Recommend `--rounds 3` for pass@k stability
       status: resolved
-      order: 2
+      order: 3
       severity: normal

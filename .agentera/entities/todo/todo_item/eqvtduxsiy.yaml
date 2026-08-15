@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass
+      description: "[task:0.0.13] Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass"
       severity: normal
       status: open
-      order: 65
+      order: 33
+  kind: task
+  target_version: 0.0.13
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Distinguish infrastructure-invalid, completed-quality-fail, and completed-quality-pass

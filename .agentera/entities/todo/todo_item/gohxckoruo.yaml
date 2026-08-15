@@ -10,5 +10,5 @@ record:
       present: true
       description: Keep shell/script verifiers
       status: resolved
-      order: 13
+      order: 16
       severity: normal

@@ -2,7 +2,7 @@ id: ytmuvxwgld
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.17
   title: Keep the selected runtime driver responsible for the resolved agent binary and its normal arguments
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Keep the selected runtime driver responsible for the resolved agent binary and its normal arguments"
+      description: "[task:0.0.17] Keep the selected runtime driver responsible for the resolved agent binary and its normal arguments"
       severity: normal
       status: open
-      order: 18
+      order: 62

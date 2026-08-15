@@ -10,5 +10,5 @@ record:
       present: true
       description: Retain `default` vs `with-demo-skill` variations for compare
       status: resolved
-      order: 18
+      order: 23
       severity: normal

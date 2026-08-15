@@ -10,5 +10,5 @@ record:
       present: true
       description: Each failure prints remediation steps
       status: resolved
-      order: 26
+      order: 35
       severity: normal

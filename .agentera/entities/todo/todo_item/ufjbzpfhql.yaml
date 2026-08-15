@@ -10,5 +10,5 @@ record:
       present: true
       description: Install docs consistent with AGENTS.md versioning
       status: resolved
-      order: 33
+      order: 47
       severity: normal

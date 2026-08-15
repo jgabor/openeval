@@ -3,12 +3,23 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Record agent failures as attempts and continue the run
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Record agent failures as attempts and continue the run
+      description: "[attempt-failure-evidence:0.0.13] Retain failed attempts as classifiable evidence"
       severity: normal
       status: open
-      order: 64
+      order: 31
+  kind: attempt-failure-evidence
+  target_version: 0.0.13
+  requirements:
+    - Record agent-process failures as attempt results instead of aborting the whole run.
+    - Retain bounded stdout and stderr and classify infrastructure-invalid, completed-quality-fail, and completed-quality-pass outcomes.
+    - Version the score schema and preserve or explicitly reject supported legacy score artifacts.
+  acceptance:
+    - An agent-process failure produces retained evidence and does not discard later scheduled work.
+    - Reports distinguish infrastructure invalidity from a completed failing grade without treating missing evidence as zero.
+    - Supported current and legacy score artifacts load under a documented version contract.
+  release_blocker: false
+  title: Retain failed attempts as classifiable evidence

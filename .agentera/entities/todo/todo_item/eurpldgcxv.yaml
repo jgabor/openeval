@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Define the comparison unit as task plus repetition
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Define the comparison unit as task plus repetition
+      description: "[task:0.0.20] Define the comparison unit as task plus repetition"
       severity: normal
       status: open
-      order: 90
+      order: 79
+  kind: task
+  target_version: 0.0.20
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Define the comparison unit as task plus repetition

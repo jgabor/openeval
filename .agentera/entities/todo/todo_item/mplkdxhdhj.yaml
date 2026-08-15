@@ -2,7 +2,7 @@ id: mplkdxhdhj
 artifact: todo
 record:
   kind: skill-compare-playbook
-  target_version: 0.0.12
+  target_version: 0.0.7
   title: Document skill-variation compare workflow
   requirements:
     []
@@ -10,12 +10,17 @@ record:
     []
   release_blocker: false
   severity: normal
-  status: open
+  status: resolved
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[skill-compare-playbook:0.0.12] Document skill-variation compare workflow"
+      description: "[skill-compare-playbook:0.0.7] Document skill-variation compare workflow"
+      status: resolved
+      order: 24
       severity: normal
-      status: open
-      order: 54
+  lifecycle:
+    operation: supersede
+    reason: Folded the thin skill-playbook remainder into the meaningful 0.0.7 onboarding train
+    date: 2026-08-15
+    replacement: chrlpdaedf

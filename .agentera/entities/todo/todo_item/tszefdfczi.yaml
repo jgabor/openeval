@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain ktx binary, configuration, pipeline, database, and artifact digests
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain ktx binary, configuration, pipeline, database, and artifact digests
+      description: "[task:0.0.27] Retain ktx binary, configuration, pipeline, database, and artifact digests"
       severity: normal
       status: open
-      order: 128
+      order: 119
+  kind: task
+  target_version: 0.0.27
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain ktx binary, configuration, pipeline, database, and artifact digests

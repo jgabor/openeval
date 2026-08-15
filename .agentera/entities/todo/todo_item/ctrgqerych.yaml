@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Distinguish verifier infrastructure errors from a valid failing grade
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Distinguish verifier infrastructure errors from a valid failing grade
+      description: "[task:0.0.19] Distinguish verifier infrastructure errors from a valid failing grade"
       severity: normal
       status: open
-      order: 86
+      order: 75
+  kind: task
+  target_version: 0.0.19
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Distinguish verifier infrastructure errors from a valid failing grade

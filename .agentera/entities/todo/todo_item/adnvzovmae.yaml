@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Comment expected cost/runtime for real-agent jobs
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Comment expected cost/runtime for real-agent jobs
+      description: "[task:0.0.9] Comment expected cost/runtime for real-agent jobs"
       severity: normal
       status: open
-      order: 37
+      order: 9
+  kind: task
+  target_version: 0.0.9
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Comment expected cost/runtime for real-agent jobs

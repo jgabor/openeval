@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Replace the driver tuple return with a structured attempt result
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Replace the driver tuple return with a structured attempt result
+      description: "[task:0.0.12] Replace the driver tuple return with a structured attempt result"
       severity: normal
       status: open
-      order: 57
+      order: 25
+  kind: task
+  target_version: 0.0.12
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Replace the driver tuple return with a structured attempt result

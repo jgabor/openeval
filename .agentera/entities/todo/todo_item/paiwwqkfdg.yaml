@@ -10,5 +10,5 @@ record:
       present: true
       description: Does not require OTLP/Jaeger (see `0.0.4`)
       status: resolved
-      order: 23
+      order: 31
       severity: normal

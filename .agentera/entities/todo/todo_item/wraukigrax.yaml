@@ -17,7 +17,7 @@ record:
       present: true
       description: "[task:0.0.3] Record measured one-round onboarding cost/runtime and limit the result to local descriptive evidence"
       status: resolved
-      order: 42
+      order: 50
       severity: normal
   lifecycle:
     operation: resolve

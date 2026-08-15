@@ -2,7 +2,7 @@ id: whlwclqsqg
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.13
+  target_version: 0.0.15
   title: Do not add an aggregate external-measurement map to the variation-level telemetry summary
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.13] Do not add an aggregate external-measurement map to the variation-level telemetry summary"
+      description: "[task:0.0.15] Do not add an aggregate external-measurement map to the variation-level telemetry summary"
       severity: normal
       status: open
-      order: 5
+      order: 49

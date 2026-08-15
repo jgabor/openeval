@@ -1,13 +1,17 @@
 id: pflsygwbgp
 artifact: todo
 record:
-  kind: task
-  target_version: 0.0.14
-  title: Allocate `external-metrics.json` inside each attempt artifact directory and pass its path to the child as `OPENEVAL_EXTERNAL_METRICS_PATH`
+  kind: external-measurement-ingestion
+  target_version: 0.0.16
+  title: Ingest one bounded external measurement artifact per attempt
   requirements:
-    []
+    - Allocate a fresh per-attempt `external-metrics.json` path, remove any pre-existing entry, and pass it to the child as `OPENEVAL_EXTERNAL_METRICS_PATH`.
+    - Read at most one bounded regular non-symlink UTF-8 JSON document after the child exits.
+    - Retain exact bytes, path, size, digest, parsed measurements, or malformed validation evidence on the exact attempt.
   acceptance:
-    []
+    - An absent artifact remains absent without synthesizing measurements or success.
+    - A valid artifact is retained byte-for-byte and attaches only to its producing attempt.
+    - A malformed or unsafe artifact is preserved with a bounded error and never becomes zero-valued evidence.
   release_blocker: false
   severity: normal
   status: open
@@ -15,7 +19,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Allocate `external-metrics.json` inside each attempt artifact directory and pass its path to the child as `OPENEVAL_EXTERNAL_METRICS_PATH`"
+      description: "[external-measurement-ingestion:0.0.16] Ingest one bounded external measurement artifact per attempt"
       severity: normal
       status: open
-      order: 6
+      order: 50

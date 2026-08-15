@@ -2,7 +2,7 @@ id: ofdciouory
 artifact: todo
 record:
   kind: telemetry-shipped-slice
-  target_version: 0.0.11
+  target_version: 0.0.6
   title: Align Supported telemetry with shipped behavior
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[telemetry-shipped-slice:0.0.11] Align Supported telemetry with shipped behavior"
+      description: "[telemetry-shipped-slice:0.0.6] Align Supported telemetry with shipped behavior"
       status: resolved
-      order: 20
+      order: 28
       severity: normal

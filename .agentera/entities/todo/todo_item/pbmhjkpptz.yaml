@@ -2,13 +2,18 @@ id: pbmhjkpptz
 artifact: todo
 record:
   severity: normal
-  status: open
+  status: resolved
   description: Ship hook export for session cost, skills active, and tool calls
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
       description: Ship hook export for session cost, skills active, and tool calls
+      status: resolved
+      order: 32
       severity: normal
-      status: open
-      order: 52
+  lifecycle:
+    operation: supersede
+    reason: Rejected telemetry option is replaced by the completed 0.0.6 honest telemetry slice
+    date: 2026-08-15
+    replacement: ofdciouory

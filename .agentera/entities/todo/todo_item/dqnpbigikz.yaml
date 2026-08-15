@@ -10,5 +10,5 @@ record:
       present: true
       description: Check supported OpenCode version and `opencode auth list`
       status: resolved
-      order: 5
+      order: 6
       severity: normal

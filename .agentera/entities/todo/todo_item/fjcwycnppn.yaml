@@ -2,7 +2,7 @@ id: fjcwycnppn
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.13
+  target_version: 0.0.15
   title: Require every external measurement to declare a state and unit; measured values must be finite numbers, while unavailable and malformed values omit the value
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.13] Require every external measurement to declare a state and unit; measured values must be finite numbers, while unavailable and malformed values omit the value"
+      description: "[task:0.0.15] Require every external measurement to declare a state and unit; measured values must be finite numbers, while unavailable and malformed values omit the value"
       severity: normal
       status: open
-      order: 2
+      order: 46

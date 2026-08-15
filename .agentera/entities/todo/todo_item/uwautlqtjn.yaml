@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain enough diagnostics to classify setup and execution failures
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain enough diagnostics to classify setup and execution failures
+      description: "[task:0.0.23] Retain enough diagnostics to classify setup and execution failures"
       severity: normal
       status: open
-      order: 109
+      order: 98
+  kind: task
+  target_version: 0.0.23
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain enough diagnostics to classify setup and execution failures

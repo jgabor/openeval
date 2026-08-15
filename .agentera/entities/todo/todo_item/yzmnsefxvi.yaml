@@ -10,5 +10,5 @@ record:
       present: true
       description: Compare output documents pass@k, `cost_usd_total`, cost per passed task, and deltas
       status: resolved
-      order: 38
+      order: 53
       severity: normal

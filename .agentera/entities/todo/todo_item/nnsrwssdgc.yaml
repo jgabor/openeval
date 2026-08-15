@@ -2,7 +2,7 @@ id: nnsrwssdgc
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.18
+  target_version: 0.0.26
   title: Report unmatched, unavailable, malformed, and absent external evidence without inventing counterparts
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.18] Report unmatched, unavailable, malformed, and absent external evidence without inventing counterparts"
+      description: "[task:0.0.26] Report unmatched, unavailable, malformed, and absent external evidence without inventing counterparts"
       severity: normal
       status: open
-      order: 23
+      order: 115

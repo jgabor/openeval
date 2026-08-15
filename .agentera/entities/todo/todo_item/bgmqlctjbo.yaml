@@ -1,13 +1,17 @@
 id: bgmqlctjbo
 artifact: todo
 record:
-  kind: task
-  target_version: 0.0.13
-  title: Store versioned external producer metadata and producer-defined measurements on the corresponding attempt result
+  kind: external-measurement-contract
+  target_version: 0.0.15
+  title: Model producer-defined measurements per attempt
   requirements:
-    []
+    - Define versioned producer metadata and per-measurement name, state, unit, and finite value semantics.
+    - Keep measured zero distinct from missing, unavailable, and malformed evidence.
+    - Keep runtime usage, runtime cost, and producer measurements as separate authorities.
   acceptance:
-    []
+    - A measured zero round-trips separately from unavailable or malformed evidence.
+    - Every measured value has one unit and finite number while non-measured states omit value.
+    - Producer measurements remain attached to their attempt and separate from runtime usage and cost.
   release_blocker: false
   severity: normal
   status: open
@@ -15,7 +19,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.13] Store versioned external producer metadata and producer-defined measurements on the corresponding attempt result"
+      description: "[external-measurement-contract:0.0.15] Model producer-defined measurements per attempt"
       severity: normal
       status: open
-      order: 1
+      order: 45

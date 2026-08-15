@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Smoke path completes at least one task/round on a real agent
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Smoke path completes at least one task/round on a real agent
+      description: "[task:0.0.11] Smoke path completes at least one task/round on a real agent"
       severity: normal
       status: open
-      order: 49
+      order: 21
+  kind: task
+  target_version: 0.0.11
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Smoke path completes at least one task/round on a real agent

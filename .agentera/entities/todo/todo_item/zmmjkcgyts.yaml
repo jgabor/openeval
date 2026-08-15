@@ -10,5 +10,5 @@ record:
       present: true
       description: Split README into **Shipped** vs **Planned** sections
       status: resolved
-      order: 40
+      order: 55
       severity: normal

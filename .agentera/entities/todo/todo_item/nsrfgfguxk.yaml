@@ -10,5 +10,5 @@ record:
       present: true
       description: Add 3–5 tasks on a small fixture repo (e.g. fix a failing test, apply a lint rule, one-file feature with verifier)
       status: resolved
-      order: 19
+      order: 26
       severity: normal

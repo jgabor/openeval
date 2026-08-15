@@ -2,7 +2,7 @@ id: qzwovgoweh
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.18
+  target_version: 0.0.26
   title: Do not sum ratios, average counts across unequal task sets, combine external values with runtime usage, or infer that a producer caused runtime movement
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.18] Do not sum ratios, average counts across unequal task sets, combine external values with runtime usage, or infer that a producer caused runtime movement"
+      description: "[task:0.0.26] Do not sum ratios, average counts across unequal task sets, combine external values with runtime usage, or infer that a producer caused runtime movement"
       severity: normal
       status: open
-      order: 24
+      order: 116

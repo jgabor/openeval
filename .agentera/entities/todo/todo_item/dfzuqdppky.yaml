@@ -10,5 +10,5 @@ record:
       present: true
       description: Document that a new user with authenticated OpenCode should see a compare table from README alone
       status: resolved
-      order: 3
+      order: 4
       severity: normal

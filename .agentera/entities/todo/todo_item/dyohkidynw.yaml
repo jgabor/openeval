@@ -10,5 +10,5 @@ record:
       present: true
       description: Move mock to a secondary path (CI / no API key)
       status: resolved
-      order: 6
+      order: 7
       severity: normal

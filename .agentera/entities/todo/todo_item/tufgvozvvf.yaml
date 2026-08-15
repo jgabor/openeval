@@ -3,12 +3,12 @@ artifact: todo
 record:
   severity: normal
   status: resolved
-  description: Trim or relocate Supported telemetry content per `0.0.11`
+  description: Trim or relocate Supported telemetry content per `0.0.6`
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Trim or relocate Supported telemetry content per `0.0.11`
+      description: Trim or relocate Supported telemetry content per `0.0.6`
       status: resolved
-      order: 31
+      order: 44
       severity: normal

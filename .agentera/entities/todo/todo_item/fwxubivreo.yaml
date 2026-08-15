@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Annotate unusual attempts without removing them automatically
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Annotate unusual attempts without removing them automatically
+      description: "[task:0.0.25] Annotate unusual attempts without removing them automatically"
       severity: normal
       status: open
-      order: 121
+      order: 110
+  kind: task
+  target_version: 0.0.25
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Annotate unusual attempts without removing them automatically

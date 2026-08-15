@@ -2,19 +2,16 @@ id: chrlpdaedf
 artifact: todo
 record:
   kind: compare-hero-readme
-  target_version: 0.0.5
-  title: "Reorder README: compare and traces before mock quick start"
+  target_version: 0.0.7
+  title: Make compare and trace lookup the README hero
   requirements:
-    - Make the README opening present the shipped OpenCode comparison result and local trace lookup as the primary product story before CI-only mock guidance.
-    - Keep installation and setup prerequisites ahead of commands while preserving the explicit checkout-only install limitation.
-    - Keep Docker and Jaeger optional for trace viewing; do not imply that a collector is required for harness proof.
-    - Link the compare example, `openeval traces`, and the shipped `examples/otel/compose.yaml` workflow without duplicating the detailed telemetry reference.
+    - Lead with the shipped OpenCode comparison and local trace lookup before CI-only mock guidance.
+    - Preserve checkout installation prerequisites and the explicit no-clone limitation.
+    - Keep Docker optional and integrate portable skill discovery and skills.aliases variation guidance.
   acceptance:
-    - A new authenticated OpenCode user can follow the README opening from checkout installation through a comparison table without encountering mock as production evidence.
-    - The opening shows a concrete comparison result and a direct path from a recorded round to its Jaeger trace lookup.
-    - Mock remains labeled CI/hermetic only, and no opening path requires Docker or an OTLP collector to complete the comparison.
-    - The opening links to the detailed tracing workflow and preserves native OpenCode separate-trace and privacy caveats in their owning section.
-    - README structure checks fail if compare, trace lookup, mock labeling, or collector optionality regress.
+    - A new authenticated OpenCode user reaches a comparison table and trace lookup from the opening workflow.
+    - The opening connects portable skills, variation runs, compare output, and cost evidence.
+    - Mock stays CI-only and comparison remains collector-optional.
   release_blocker: false
   severity: normal
   status: open
@@ -22,16 +19,16 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[compare-hero-readme:0.0.5] Reorder README: compare and traces before mock quick start"
+      description: "[compare-hero-readme:0.0.7] Make compare and trace lookup the README hero"
       severity: normal
       status: open
-      order: 28
+      order: 1
   readiness:
     capability: document
-    reason: Train 0.0.4 shipped and verified local trace lookup, so the next README train can promote the complete compare-and-trace product story.
+    reason: Completed trains 0.0.1 through 0.0.6 provide the product foundations; this train consolidates their onboarding story.
     dependencies:
       []
     blocked: null
     gate: null
     queue_rank: 1
-    order_reason: Train 0.0.5 is the earliest open product train after completed 0.0.4.
+    order_reason: Train 0.0.7 is the first incomplete train.

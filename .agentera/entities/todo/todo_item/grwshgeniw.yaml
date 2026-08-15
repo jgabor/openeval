@@ -3,12 +3,23 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Let verifier scripts emit a versioned structured result
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Let verifier scripts emit a versioned structured result
+      description: "[structured-grading:0.0.19] Retain structured verifier evidence per task"
       severity: normal
       status: open
-      order: 83
+      order: 72
+  kind: structured-grading
+  target_version: 0.0.19
+  requirements:
+    - Let verifier scripts emit one versioned structured result.
+    - Retain deterministic test, semantic-equivalence, code-review, and footprint dimensions with stdout, stderr, exit status, and artifact hashes.
+    - Keep optional LLM grading separate from deterministic evidence and cost.
+  acceptance:
+    - A verifier infrastructure error remains distinct from a valid failing grade.
+    - Each supported dimension retains its evidence and artifact identity.
+    - Optional LLM grading cannot replace deterministic evidence.
+  release_blocker: false
+  title: Retain structured verifier evidence per task

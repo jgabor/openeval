@@ -2,7 +2,7 @@ id: hqneagzpng
 artifact: todo
 record:
   kind: paired-variation-scheduler
-  target_version: 0.0.16
+  target_version: 0.0.20
   title: Run controlled variation pairs in one campaign
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[paired-variation-scheduler:0.0.16] Run controlled variation pairs in one campaign"
+      description: "[paired-variation-scheduler:0.0.20] Run controlled variation pairs in one campaign"
       severity: normal
       status: open
-      order: 88
+      order: 77

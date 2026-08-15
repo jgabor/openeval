@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Validate that score rows and artifacts belong to the declared campaign
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Validate that score rows and artifacts belong to the declared campaign
+      description: "[task:0.0.14] Validate that score rows and artifacts belong to the declared campaign"
       severity: normal
       status: open
-      order: 75
+      order: 43
+  kind: task
+  target_version: 0.0.14
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Validate that score rows and artifacts belong to the declared campaign

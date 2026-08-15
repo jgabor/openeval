@@ -10,7 +10,7 @@ record:
       present: true
       description: After instrument + collector up, `openeval traces --task … --round …` yields a resolvable Jaeger URL
       status: resolved
-      order: 45
+      order: 13
       severity: normal
   lifecycle:
     operation: resolve

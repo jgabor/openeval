@@ -10,5 +10,5 @@ record:
       present: true
       description: README references doctor before first `run --agent opencode`
       status: resolved
-      order: 7
+      order: 8
       severity: normal

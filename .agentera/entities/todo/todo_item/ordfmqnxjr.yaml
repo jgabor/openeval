@@ -10,5 +10,5 @@ record:
       present: true
       description: Consistent with AGENTS.md and earn-your-complexity decision
       status: resolved
-      order: 22
+      order: 30
       severity: normal

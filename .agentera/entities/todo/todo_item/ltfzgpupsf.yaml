@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Mount only the attempt workspace, declared artifacts, and read-only credentials
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Mount only the attempt workspace, declared artifacts, and read-only credentials
+      description: "[task:0.0.22] Mount only the attempt workspace, declared artifacts, and read-only credentials"
       severity: normal
       status: open
-      order: 103
+      order: 92
+  kind: task
+  target_version: 0.0.22
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Mount only the attempt workspace, declared artifacts, and read-only credentials

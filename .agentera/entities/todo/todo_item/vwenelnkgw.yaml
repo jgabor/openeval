@@ -2,7 +2,7 @@ id: vwenelnkgw
 artifact: todo
 record:
   kind: frictionless-install
-  target_version: 0.0.7
+  target_version: 0.0.8
   title: Single documented install path without cloning
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[frictionless-install:0.0.7] Single documented install path without cloning"
+      description: "[frictionless-install:0.0.8] Single documented install path without cloning"
       severity: normal
       status: open
-      order: 30
+      order: 2

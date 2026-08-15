@@ -10,7 +10,7 @@ record:
       present: true
       description: "`docker compose` under `examples/otel/` (Jaeger on `:4318` / `:16686`), or"
       status: resolved
-      order: 44
+      order: 27
       severity: normal
   lifecycle:
     operation: resolve

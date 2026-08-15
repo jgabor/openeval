@@ -17,7 +17,7 @@ record:
       present: true
       description: "[task:0.0.3] Document the model default, overrides, catalog validation, shared-model comparison contract, and author selection factors"
       status: resolved
-      order: 41
+      order: 42
       severity: normal
   lifecycle:
     operation: resolve

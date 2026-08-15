@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Report exact recorded-workload token and cost totals per repetition
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Report exact recorded-workload token and cost totals per repetition
+      description: "[task:0.0.24] Report exact recorded-workload token and cost totals per repetition"
       severity: normal
       status: open
-      order: 113
+      order: 102
+  kind: task
+  target_version: 0.0.24
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Report exact recorded-workload token and cost totals per repetition

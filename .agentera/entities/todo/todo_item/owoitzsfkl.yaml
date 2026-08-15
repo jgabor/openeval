@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain input, output, reasoning, cache-read, and cache-write tokens independently
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain input, output, reasoning, cache-read, and cache-write tokens independently
+      description: "[task:0.0.12] Retain input, output, reasoning, cache-read, and cache-write tokens independently"
       severity: normal
       status: open
-      order: 59
+      order: 27
+  kind: task
+  target_version: 0.0.12
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain input, output, reasoning, cache-read, and cache-write tokens independently

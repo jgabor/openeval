@@ -10,5 +10,5 @@ record:
       present: true
       description: Exit 0 prints a compare table when OpenCode setup is valid
       status: resolved
-      order: 14
+      order: 17
       severity: normal

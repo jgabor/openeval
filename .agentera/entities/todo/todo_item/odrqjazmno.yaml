@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Treat repeated runs of one task as one task cluster when pooling
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Treat repeated runs of one task as one task cluster when pooling
+      description: "[task:0.0.24] Treat repeated runs of one task as one task cluster when pooling"
       severity: normal
       status: open
-      order: 116
+      order: 105
+  kind: task
+  target_version: 0.0.24
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Treat repeated runs of one task as one task cluster when pooling

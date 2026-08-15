@@ -17,5 +17,5 @@ record:
       present: true
       description: "[compare-first-quickstart:0.0.1] Compare-first quick start (OpenCode, not mock)"
       status: resolved
-      order: 34
+      order: 48
       severity: normal

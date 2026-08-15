@@ -2,7 +2,7 @@ id: qlvovfdclj
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.16
   title: Validate required producer metadata, unique measurement names, states, units, required or forbidden values by state, and finite numeric values
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Validate required producer metadata, unique measurement names, states, units, required or forbidden values by state, and finite numeric values"
+      description: "[task:0.0.16] Validate required producer metadata, unique measurement names, states, units, required or forbidden values by state, and finite numeric values"
       severity: normal
       status: open
-      order: 10
+      order: 54

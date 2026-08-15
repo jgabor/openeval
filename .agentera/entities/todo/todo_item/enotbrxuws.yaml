@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Keep OpenCode runtime usage and ktx delivery evidence as separate authorities
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Keep OpenCode runtime usage and ktx delivery evidence as separate authorities
+      description: "[task:0.0.27] Keep OpenCode runtime usage and ktx delivery evidence as separate authorities"
       severity: normal
       status: open
-      order: 130
+      order: 121
+  kind: task
+  target_version: 0.0.27
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Keep OpenCode runtime usage and ktx delivery evidence as separate authorities

@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Never replace missing measurements with zero
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Never replace missing measurements with zero
+      description: "[task:0.0.25] Never replace missing measurements with zero"
       severity: normal
       status: open
-      order: 120
+      order: 109
+  kind: task
+  target_version: 0.0.25
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Never replace missing measurements with zero

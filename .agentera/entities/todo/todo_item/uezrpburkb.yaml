@@ -10,5 +10,5 @@ record:
       present: true
       description: Missing or invalid config reports copy/fix steps
       status: resolved
-      order: 32
+      order: 46
       severity: normal

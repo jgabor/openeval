@@ -10,5 +10,5 @@ record:
       present: true
       description: Warn if OTLP endpoint unreachable (non-fatal)
       status: resolved
-      order: 9
+      order: 10
       severity: normal

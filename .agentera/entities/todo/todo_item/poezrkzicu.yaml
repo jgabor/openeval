@@ -10,5 +10,5 @@ record:
       present: true
       description: Mock labeled CI/hermetic only
       status: resolved
-      order: 24
+      order: 33
       severity: normal

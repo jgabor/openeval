@@ -17,5 +17,5 @@ record:
       present: true
       description: "[mini-production-scenario:0.0.3] Expand `example-fixtures` beyond hello-world tasks"
       status: resolved
-      order: 12
+      order: 14
       severity: normal

@@ -10,5 +10,5 @@ record:
       present: true
       description: "Quick start order: install → compare flow → optional instrument/traces"
       status: resolved
-      order: 8
+      order: 9
       severity: normal

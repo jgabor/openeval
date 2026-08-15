@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Require explicit execution approval for paid campaigns
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Require explicit execution approval for paid campaigns
+      description: "[task:0.0.21] Require explicit execution approval for paid campaigns"
       severity: normal
       status: open
-      order: 98
+      order: 88
+  kind: task
+  target_version: 0.0.21
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Require explicit execution approval for paid campaigns

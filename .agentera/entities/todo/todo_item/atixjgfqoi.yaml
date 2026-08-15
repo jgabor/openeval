@@ -10,5 +10,5 @@ record:
       present: true
       description: "`openeval report` output reflects realistic task names and verifiers"
       status: resolved
-      order: 1
+      order: 2
       severity: normal

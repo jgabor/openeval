@@ -2,7 +2,7 @@ id: ujdmjsiobr
 artifact: todo
 record:
   kind: init-scenario
-  target_version: 0.0.9
+  target_version: 0.0.10
   title: "`openeval init scenario`"
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[init-scenario:0.0.9] `openeval init scenario`"
+      description: "[init-scenario:0.0.10] `openeval init scenario`"
       severity: normal
       status: open
-      order: 40
+      order: 12

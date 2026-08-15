@@ -10,7 +10,7 @@ record:
       present: true
       description: README trace lookup references the bundled setup
       status: resolved
-      order: 46
+      order: 45
       severity: normal
   lifecycle:
     operation: resolve

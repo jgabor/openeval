@@ -2,7 +2,7 @@ id: evyzurfgav
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.16
   title: Retain exact artifact bytes, relative path, size, and SHA-256 and attach parsed valid measurements to the exact attempt
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Retain exact artifact bytes, relative path, size, and SHA-256 and attach parsed valid measurements to the exact attempt"
+      description: "[task:0.0.16] Retain exact artifact bytes, relative path, size, and SHA-256 and attach parsed valid measurements to the exact attempt"
       severity: normal
       status: open
-      order: 12
+      order: 56

@@ -10,5 +10,5 @@ record:
       present: true
       description: README does not imply full inventory is available today
       status: resolved
-      order: 25
+      order: 34
       severity: normal

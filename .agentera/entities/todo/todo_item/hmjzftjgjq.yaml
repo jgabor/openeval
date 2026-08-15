@@ -2,7 +2,7 @@ id: hmjzftjgjq
 artifact: todo
 record:
   kind: doctor-command
-  target_version: 0.0.6
+  target_version: 0.0.5
   title: "`openeval doctor`"
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[doctor-command:0.0.6] `openeval doctor`"
+      description: "[doctor-command:0.0.5] `openeval doctor`"
       status: resolved
-      order: 15
+      order: 18
       severity: normal

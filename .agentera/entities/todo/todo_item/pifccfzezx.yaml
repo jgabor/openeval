@@ -2,7 +2,7 @@ id: pifccfzezx
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.16
   title: Keep the raw per-attempt artifact authoritative; summaries and reports are derived views
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Keep the raw per-attempt artifact authoritative; summaries and reports are derived views"
+      description: "[task:0.0.16] Keep the raw per-attempt artifact authoritative; summaries and reports are derived views"
       severity: normal
       status: open
-      order: 13
+      order: 57

@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Keep optional LLM grading separate from deterministic test evidence and agent cost
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Keep optional LLM grading separate from deterministic test evidence and agent cost
+      description: "[task:0.0.19] Keep optional LLM grading separate from deterministic test evidence and agent cost"
       severity: normal
       status: open
-      order: 87
+      order: 76
+  kind: task
+  target_version: 0.0.19
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Keep optional LLM grading separate from deterministic test evidence and agent cost

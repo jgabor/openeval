@@ -3,12 +3,23 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retry only infrastructure-invalid attempts under an explicit bounded policy
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retry only infrastructure-invalid attempts under an explicit bounded policy
+      description: "[campaign-safety-controls:0.0.21] Add bounded campaign retry and approval controls"
       severity: normal
       status: open
-      order: 94
+      order: 85
+  kind: campaign-safety-controls
+  target_version: 0.0.21
+  requirements:
+    - Retry only infrastructure-invalid attempts under an explicit bound.
+    - Retain failed and superseding retry records without replacing evidence.
+    - Provide a no-agent schedule preflight and require explicit approval before paid execution.
+  acceptance:
+    - Quality failures do not trigger retries.
+    - Every retry preserves the original attempt and names its replacement.
+    - A paid campaign cannot start before the user reviews the complete schedule and approves it.
+  release_blocker: false
+  title: Add bounded campaign retry and approval controls

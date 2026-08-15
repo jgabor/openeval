@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: "`openeval run --scenario <chosen>` works with documented prerequisites"
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "`openeval run --scenario <chosen>` works with documented prerequisites"
+      description: "[task:0.0.11] `openeval run --scenario <chosen>` works with documented prerequisites"
       severity: normal
       status: open
-      order: 47
+      order: 19
+  kind: task
+  target_version: 0.0.11
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: "`openeval run --scenario <chosen>` works with documented prerequisites"

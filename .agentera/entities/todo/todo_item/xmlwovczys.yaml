@@ -2,7 +2,7 @@ id: xmlwovczys
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.16
   title: Validate a bounded regular non-symlink file, UTF-8, one complete JSON document without trailing data, and the `openeval.external-metrics.v1` schema
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Validate a bounded regular non-symlink file, UTF-8, one complete JSON document without trailing data, and the `openeval.external-metrics.v1` schema"
+      description: "[task:0.0.16] Validate a bounded regular non-symlink file, UTF-8, one complete JSON document without trailing data, and the `openeval.external-metrics.v1` schema"
       severity: normal
       status: open
-      order: 9
+      order: 53

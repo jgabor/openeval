@@ -10,7 +10,7 @@ record:
       present: true
       description: OpenCode native OTEL plus a documented local collector, or
       status: resolved
-      order: 47
+      order: 36
       severity: normal
   lifecycle:
     operation: resolve

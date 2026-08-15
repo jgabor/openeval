@@ -3,12 +3,12 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: DeepSWE and margin-eval both production-ready (one only in `0.0.10`)
+  description: DeepSWE and margin-eval both production-ready (one only in `0.0.11`)
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: DeepSWE and margin-eval both production-ready (one only in `0.0.10`)
+      description: DeepSWE and margin-eval both production-ready (one only in `0.0.11`)
       severity: normal
       status: open
-      order: 139
+      order: 134

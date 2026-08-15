@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain verifier stdout, stderr, exit status, and artifact hashes
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain verifier stdout, stderr, exit status, and artifact hashes
+      description: "[task:0.0.19] Retain verifier stdout, stderr, exit status, and artifact hashes"
       severity: normal
       status: open
-      order: 85
+      order: 74
+  kind: task
+  target_version: 0.0.19
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain verifier stdout, stderr, exit status, and artifact hashes

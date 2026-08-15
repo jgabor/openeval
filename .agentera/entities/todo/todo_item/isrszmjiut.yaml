@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Default to concurrency one; retain concurrency when explicitly changed
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Default to concurrency one; retain concurrency when explicitly changed
+      description: "[task:0.0.20] Default to concurrency one; retain concurrency when explicitly changed"
       severity: normal
       status: open
-      order: 96
+      order: 83
+  kind: task
+  target_version: 0.0.20
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Default to concurrency one; retain concurrency when explicitly changed

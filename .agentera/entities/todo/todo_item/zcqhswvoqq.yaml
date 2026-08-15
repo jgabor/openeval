@@ -10,5 +10,5 @@ record:
       present: true
       description: Check `opencode` on PATH or `agents.opencode.command`
       status: resolved
-      order: 39
+      order: 54
       severity: normal

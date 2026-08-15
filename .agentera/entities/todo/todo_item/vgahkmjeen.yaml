@@ -10,5 +10,5 @@ record:
       present: true
       description: Document portable `.agents/skills` discovery first and Cursor-only `--plugin-dir` behavior separately
       status: resolved
-      order: 35
+      order: 49
       severity: normal

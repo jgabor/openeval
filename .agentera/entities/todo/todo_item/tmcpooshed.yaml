@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Accept two or more named variations in one run
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Accept two or more named variations in one run
+      description: "[task:0.0.20] Accept two or more named variations in one run"
       severity: normal
       status: open
-      order: 89
+      order: 78
+  kind: task
+  target_version: 0.0.20
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Accept two or more named variations in one run

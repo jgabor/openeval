@@ -10,5 +10,5 @@ record:
       present: true
       description: Command runs baseline + skill variation + `compare` (or prints commands with `--dry-run`)
       status: resolved
-      order: 37
+      order: 52
       severity: normal

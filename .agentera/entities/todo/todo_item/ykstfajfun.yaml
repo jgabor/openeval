@@ -2,7 +2,7 @@ id: ykstfajfun
 artifact: todo
 record:
   kind: task
-  target_version: 0.0.14
+  target_version: 0.0.16
   title: Retain malformed artifacts and validation errors as attempt evidence rather than zero-valued measurements
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.14] Retain malformed artifacts and validation errors as attempt evidence rather than zero-valued measurements"
+      description: "[task:0.0.16] Retain malformed artifacts and validation errors as attempt evidence rather than zero-valued measurements"
       severity: normal
       status: open
-      order: 11
+      order: 55

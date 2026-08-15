@@ -2,7 +2,7 @@ id: ydbgmcezbt
 artifact: todo
 record:
   kind: external-benchmark
-  target_version: 0.0.10
+  target_version: 0.0.11
   title: One integrated external scenario end-to-end
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[external-benchmark:0.0.10] One integrated external scenario end-to-end"
+      description: "[external-benchmark:0.0.11] One integrated external scenario end-to-end"
       severity: normal
       status: open
-      order: 46
+      order: 18

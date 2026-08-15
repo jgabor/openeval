@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv
+      description: "[task:0.0.14] Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv"
       severity: normal
       status: open
-      order: 72
+      order: 40
+  kind: task
+  target_version: 0.0.14
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Hash the scenario, task, verifier, source fixture, variation, skills, environment contract, and effective agent argv

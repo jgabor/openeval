@@ -2,7 +2,7 @@ id: veyrwvzgug
 artifact: todo
 record:
   kind: ktx-paired-campaign-proof
-  target_version: 0.0.19
+  target_version: 0.0.28
   title: Prove the generic campaign contract with ktx
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[ktx-paired-campaign-proof:0.0.19] Prove the generic campaign contract with ktx"
+      description: "[ktx-paired-campaign-proof:0.0.28] Prove the generic campaign contract with ktx"
       severity: normal
       status: open
-      order: 125
+      order: 123

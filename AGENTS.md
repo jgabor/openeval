@@ -19,12 +19,12 @@ product earns a public version people should install and trust.
 - **Train tags in [TODO.md](./TODO.md)** (`0.0.1`, `0.0.2`, …) sequence
   incremental product work _while_ we remain on 0.0.x. They are a delivery
   ordering aid, not published semver.
-- When work completes, check off TODO items; do not renumber trains
-  retroactively.
+- When work completes, check off TODO items. Keep the consolidated train
+  sequence stable unless the user explicitly asks to restructure it.
 
 **Release-worthy** means roughly: compare-first onboarding works on a real
 agent, a credible shipped scenario, frictionless install/doctor, and honest
-docs — not merely “all tests pass.” See TODO trains `0.0.1`–`0.0.7` for the
+docs — not merely “all tests pass.” See TODO trains `0.0.1`–`0.0.11` for the
 current bar.
 
 ## Product scope
@@ -295,7 +295,7 @@ up as a viable option in a numbered list alongside real ones.
   story.
 - **Do not describe unshipped telemetry** in README as if it is available
   today. Split "shipped now" vs "planned" in Supported telemetry, or ship the
-  slice before documenting it (see TODO `[telemetry-shipped-slice:0.0.11]`).
+  slice before documenting it (see TODO `[telemetry-shipped-slice:0.0.6]`).
 - **Prettier** formats staged `*.md` and `*.json` via lefthook — don't fight
   hook rewrites on commit.
 - There is no separate `docs/` release tree; README changes land with the code

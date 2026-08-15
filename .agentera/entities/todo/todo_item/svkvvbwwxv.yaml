@@ -17,5 +17,5 @@ record:
       present: true
       description: "[demo-command:0.0.2] `openeval demo` for the compare-first flow"
       status: resolved
-      order: 29
+      order: 41
       severity: normal

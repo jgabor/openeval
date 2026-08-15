@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Allow each task to select its own frozen source bundle
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Allow each task to select its own frozen source bundle
+      description: "[task:0.0.18] Allow each task to select its own frozen source bundle"
       severity: normal
       status: open
-      order: 78
+      order: 67
+  kind: task
+  target_version: 0.0.18
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Allow each task to select its own frozen source bundle

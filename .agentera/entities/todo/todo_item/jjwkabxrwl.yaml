@@ -1,13 +1,17 @@
 id: jjwkabxrwl
 artifact: todo
 record:
-  kind: task
-  target_version: 0.0.18
-  title: Align external measurements only when paired attempts have matching names and units
+  kind: measurement-alignment
+  target_version: 0.0.26
+  title: Align external measurements without inventing counterparts
   requirements:
-    []
+    - Align external measurements only when names and units match.
+    - Report unmatched, unavailable, malformed, and absent evidence without inventing counterparts.
+    - Do not aggregate incompatible ratios, unequal task sets, or producer values with runtime usage.
   acceptance:
-    []
+    - Only same-name same-unit measurements form pairs.
+    - Every unpaired measurement has an explicit reason.
+    - No report implies causal movement from incompatible or missing evidence.
   release_blocker: false
   severity: normal
   status: open
@@ -15,7 +19,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[task:0.0.18] Align external measurements only when paired attempts have matching names and units"
+      description: "[measurement-alignment:0.0.26] Align external measurements without inventing counterparts"
       severity: normal
       status: open
-      order: 22
+      order: 114

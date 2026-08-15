@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Preserve runtime-reported cost separately from any price-derived estimate
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Preserve runtime-reported cost separately from any price-derived estimate
+      description: "[task:0.0.12] Preserve runtime-reported cost separately from any price-derived estimate"
       severity: normal
       status: open
-      order: 60
+      order: 28
+  kind: task
+  target_version: 0.0.12
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Preserve runtime-reported cost separately from any price-derived estimate

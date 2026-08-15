@@ -10,5 +10,5 @@ record:
       present: true
       description: Check config at `$XDG_CONFIG_HOME/openeval/config.yaml`
       status: resolved
-      order: 10
+      order: 11
       severity: normal

@@ -23,7 +23,7 @@ record:
       present: true
       description: "[otel-in-a-box:0.0.4] Bundled local OTLP for trace lookup"
       status: resolved
-      order: 49
+      order: 39
       severity: normal
   readiness:
     capability: plan

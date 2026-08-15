@@ -2,7 +2,7 @@ id: inclaigcgq
 artifact: todo
 record:
   kind: github-action-recipe
-  target_version: 0.0.8
+  target_version: 0.0.9
   title: Example GitHub Action workflow
   requirements:
     []
@@ -15,7 +15,7 @@ record:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: "[github-action-recipe:0.0.8] Example GitHub Action workflow"
+      description: "[github-action-recipe:0.0.9] Example GitHub Action workflow"
       severity: normal
       status: open
-      order: 33
+      order: 5

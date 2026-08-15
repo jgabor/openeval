@@ -10,7 +10,7 @@ record:
       present: true
       description: Documented one-liner in README
       status: resolved
-      order: 48
+      order: 25
       severity: normal
   lifecycle:
     operation: resolve

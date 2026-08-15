@@ -3,12 +3,19 @@ artifact: todo
 record:
   severity: normal
   status: open
-  description: Retain a campaign manifest before agent execution
   reconciliation:
     schema_version: agentera.todoReconciliation.v1
     public:
       present: true
-      description: Retain a campaign manifest before agent execution
+      description: "[task:0.0.14] Retain a campaign manifest before agent execution"
       severity: normal
       status: open
-      order: 71
+      order: 39
+  kind: task
+  target_version: 0.0.14
+  requirements:
+    []
+  acceptance:
+    []
+  release_blocker: false
+  title: Retain a campaign manifest before agent execution
