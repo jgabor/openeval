@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.27] Have both arms publish versioned per-attempt external measurement artifacts"
       severity: normal
       status: open
-      order: 121
+      order: 118

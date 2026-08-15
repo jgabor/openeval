@@ -1,0 +1,17 @@
+id: ekzhjcrlly
+artifact: progress
+record:
+  timestamp: 2026-08-15 20:24
+  type: chore
+  phase: build
+  what: Reconciled the 0.0.8 train from verified public installation proof while retaining the final publication audit.
+  context:
+    intent: Synchronize canonical and human train state from the public repository, anonymous installation, no-checkout demo, and documentation proof.
+    constraints: Keep version 0.0.0-dev; preserve runtime, CI, collector, environment-metrics, and literal-argv contracts; do not push, tag, change visibility, or complete the task or plan.
+    unknowns: The exact final candidate cannot match remote main until Prime audits and pushes the local documentation and synchronization commits.
+    scope: .agentera/entities/todo records vwenelnkgw, ivntyvxwqc, and uemgcurert; TODO.md and the install claim at README.md:12, local gates, public metadata, secret scans, and the pending remote identity check.
+  inspiration: Used the completed canonical Go installation path as the single replacement authority so optional packaging no longer appears as current work.
+  discovered: GitHub main still lacks the local documentation and synchronization state. Nine current Actions-log scanner findings were public Git commit identifiers, not secrets.
+  verified: Public GitHub metadata reports public visibility and Apache-2.0, and anonymous HTTPS resolves main. Durable proof records show credential-free public Go installation and the installed no-checkout demo, while the README documents that path and preserves OpenCode primary, Cursor secondary, mock CI-only, and optional collector boundaries. Prettier, git diff checks, mage check, README claim assertions, later-train contract comparison, Agentera validation, and gitleaks scans of all 85 reachable commits and the current tree passed. All nine Actions logs were scanned; the nine findings were triaged as public Git commit SHA false positives. The final local candidate is not pushed, so its exact remote identity check remains pending.
+  next: Prime must audit the exact local candidate, push only main, verify remote main matches that candidate, and obtain evaluator PASS before completing the task or plan.
+  publication_order: 28

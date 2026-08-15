@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Validate required producer metadata, unique measurement names, states, units, required or forbidden values by state, and finite numeric values"
       severity: normal
       status: open
-      order: 53
+      order: 50

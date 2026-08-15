@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.18] Retain source provenance and digest without fetching during execution"
       severity: normal
       status: open
-      order: 67
+      order: 64
   kind: task
   target_version: 0.0.18
   requirements:

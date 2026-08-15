@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.11] Smoke path completes at least one task/round on a real agent"
       severity: normal
       status: open
-      order: 20
+      order: 17
   kind: task
   target_version: 0.0.11
   requirements:

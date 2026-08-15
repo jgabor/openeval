@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.17] Keep existing scenarios without `command` byte-compatible when loaded"
       severity: normal
       status: open
-      order: 64
+      order: 61

@@ -10,7 +10,7 @@ record:
       description: "[ktx-campaign-integration:0.0.27] Integrate ktx through generic campaign contracts"
       severity: normal
       status: open
-      order: 116
+      order: 113
   kind: ktx-campaign-integration
   target_version: 0.0.27
   requirements:

@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.23] Keep mock and host execution available for tests and local development"
       severity: normal
       status: open
-      order: 98
+      order: 95
   kind: task
   target_version: 0.0.23
   requirements:

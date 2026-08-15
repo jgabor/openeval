@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.28] Verify that missing or unavailable ktx evidence does not become passthrough, success, or zero"
       severity: normal
       status: open
-      order: 129
+      order: 126

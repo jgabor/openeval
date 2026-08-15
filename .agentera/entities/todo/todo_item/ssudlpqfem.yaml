@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.17] Preserve the existing direct-agent invocation when `command` is absent or empty"
       severity: normal
       status: open
-      order: 58
+      order: 55

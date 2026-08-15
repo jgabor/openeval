@@ -18,4 +18,4 @@ record:
       description: "[github-action-recipe:0.0.9] Example GitHub Action workflow"
       severity: normal
       status: open
-      order: 4
+      order: 1

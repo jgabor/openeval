@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.14] Give each run and attempt a unique immutable ID"
       severity: normal
       status: open
-      order: 36
+      order: 33
   kind: task
   target_version: 0.0.14
   requirements:

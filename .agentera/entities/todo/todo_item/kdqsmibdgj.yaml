@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.24] Report paired per-task percentage changes and their geometric mean"
       severity: normal
       status: open
-      order: 102
+      order: 99
   kind: task
   target_version: 0.0.24
   requirements:

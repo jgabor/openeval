@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Validate a bounded regular non-symlink file, UTF-8, one complete JSON document without trailing data, and the `openeval.external-metrics.v1` schema"
       severity: normal
       status: open
-      order: 52
+      order: 49

@@ -7,7 +7,7 @@ record:
     - twyepivsrq
     - zaynwzhpoj
     - tbbboxffhv
-  status: pending
+  status: in_progress
   acceptance:
     - GIVEN all prior tasks pass WHEN project state is synchronized THEN the 0.0.8 parent and canonical Go-install child resolve with durable public-proof evidence.
     - GIVEN the canonical Go path ships WHEN optional packaging backlog is reconciled THEN curl and Homebrew are explicitly superseded rather than presented as current work.

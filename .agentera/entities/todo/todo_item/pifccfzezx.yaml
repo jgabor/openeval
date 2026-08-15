@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Keep the raw per-attempt artifact authoritative; summaries and reports are derived views"
       severity: normal
       status: open
-      order: 56
+      order: 53

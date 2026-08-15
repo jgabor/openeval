@@ -10,7 +10,7 @@ record:
       description: "[campaign-safety-controls:0.0.21] Add bounded campaign retry and approval controls"
       severity: normal
       status: open
-      order: 84
+      order: 81
   kind: campaign-safety-controls
   target_version: 0.0.21
   requirements:

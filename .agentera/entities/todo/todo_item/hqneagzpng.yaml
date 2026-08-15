@@ -18,4 +18,4 @@ record:
       description: "[paired-variation-scheduler:0.0.20] Run controlled variation pairs in one campaign"
       severity: normal
       status: open
-      order: 76
+      order: 73

@@ -24,10 +24,6 @@ follow in `0.0.20`–`0.0.28`.
 
 ## Open trains
 
-- [ ] [id:vwenelnkgw] [frictionless-install:0.0.8] Single documented install path without cloning
-- [ ] [id:ivntyvxwqc] [task:0.0.8] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
-- [ ] [id:uemgcurert] [task:0.0.8] Optional: curl script or Homebrew tap
-
 - [ ] [id:inclaigcgq] [github-action-recipe:0.0.9] Example GitHub Action workflow
 - [ ] [id:kwyfmyzdjh] [task:0.0.9] Add `examples/ci/openeval.yml` (or similar) for consumers
 - [ ] [id:cqonolslmc] [task:0.0.9] Fast job: `openeval run --agent mock --rounds 1` on `example-fixtures`, no secrets
@@ -247,3 +243,6 @@ Do not schedule these until the 0.0.x bar in AGENTS.md is met:
 - [x] [id:zcqhswvoqq] Check `opencode` on PATH or `agents.opencode.command`
 - [x] [id:zmmjkcgyts] Split README into **Shipped** vs **Planned** sections
 - [x] [id:chrlpdaedf] [compare-hero-readme:0.0.7] Make compare and trace lookup the README hero
+- [x] [id:ivntyvxwqc] [task:0.0.8] Verify and document `go install github.com/jgabor/openeval/cmd/openeval@latest` (or correct module path)
+- [x] [id:uemgcurert] [task:0.0.8] Optional: curl script or Homebrew tap
+- [x] [id:vwenelnkgw] [frictionless-install:0.0.8] Single documented install path without cloning

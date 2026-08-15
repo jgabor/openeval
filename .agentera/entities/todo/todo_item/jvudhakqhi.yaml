@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.23] Clean up containers after success, failure, timeout, or interruption"
       severity: normal
       status: open
-      order: 96
+      order: 93
   kind: task
   target_version: 0.0.23
   requirements:

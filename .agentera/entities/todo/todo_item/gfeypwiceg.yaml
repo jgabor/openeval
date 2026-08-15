@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.25] Keep runtime-reported cost separate from price-derived estimates"
       severity: normal
       status: open
-      order: 107
+      order: 104
   kind: task
   target_version: 0.0.25
   requirements:

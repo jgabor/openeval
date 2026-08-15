@@ -22,4 +22,4 @@ record:
       description: "[measurement-alignment:0.0.26] Align external measurements without inventing counterparts"
       severity: normal
       status: open
-      order: 113
+      order: 110

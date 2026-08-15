@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.15] Keep runtime usage, runtime cost, and producer measurements as separate authorities"
       severity: normal
       status: open
-      order: 47
+      order: 44

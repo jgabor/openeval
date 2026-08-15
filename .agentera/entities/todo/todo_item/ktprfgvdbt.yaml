@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.24] Report deterministic paired bootstrap intervals with a retained seed"
       severity: normal
       status: open
-      order: 103
+      order: 100
   kind: task
   target_version: 0.0.24
   requirements:

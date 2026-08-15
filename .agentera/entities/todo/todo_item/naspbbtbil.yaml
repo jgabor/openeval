@@ -18,4 +18,4 @@ record:
       description: "[sandboxed-attempt-execution:0.0.22] Implement explicit pinned-container runs"
       severity: normal
       status: open
-      order: 88
+      order: 85

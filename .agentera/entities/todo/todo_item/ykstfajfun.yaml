@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.16] Retain malformed artifacts and validation errors as attempt evidence rather than zero-valued measurements"
       severity: normal
       status: open
-      order: 54
+      order: 51

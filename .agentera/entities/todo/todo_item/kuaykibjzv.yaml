@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.15] Distinguish a missing external artifact, unavailable measurement, malformed measurement, and measured zero"
       severity: normal
       status: open
-      order: 46
+      order: 43

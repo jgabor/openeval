@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.24] Report exact recorded-workload token and cost totals per repetition"
       severity: normal
       status: open
-      order: 101
+      order: 98
   kind: task
   target_version: 0.0.24
   requirements:

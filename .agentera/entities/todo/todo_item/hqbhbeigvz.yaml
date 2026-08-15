@@ -22,4 +22,4 @@ record:
       description: "[variation-command:0.0.17] Support argv-safe per-variation wrappers"
       severity: normal
       status: open
-      order: 57
+      order: 54

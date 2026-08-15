@@ -10,7 +10,7 @@ record:
       description: "[attempt-failure-evidence:0.0.13] Retain failed attempts as classifiable evidence"
       severity: normal
       status: open
-      order: 30
+      order: 27
   kind: attempt-failure-evidence
   target_version: 0.0.13
   requirements:

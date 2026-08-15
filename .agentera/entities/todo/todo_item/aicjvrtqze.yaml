@@ -18,4 +18,4 @@ record:
       description: "[historical-task-bundles:0.0.18] Support frozen source bundles per task"
       severity: normal
       status: open
-      order: 65
+      order: 62

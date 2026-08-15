@@ -18,4 +18,4 @@ record:
       description: "[immutable-attempt-artifacts:0.0.14] Make attempt execution immutable and reproducible"
       severity: normal
       status: open
-      order: 35
+      order: 32

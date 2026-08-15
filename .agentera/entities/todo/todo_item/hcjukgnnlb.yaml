@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.14] Never remove an existing run directory implicitly"
       severity: normal
       status: open
-      order: 37
+      order: 34
   kind: task
   target_version: 0.0.14
   requirements:

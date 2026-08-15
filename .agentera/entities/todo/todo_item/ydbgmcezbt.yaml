@@ -18,4 +18,4 @@ record:
       description: "[external-benchmark:0.0.11] One integrated external scenario end-to-end"
       severity: normal
       status: open
-      order: 17
+      order: 14

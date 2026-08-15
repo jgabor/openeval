@@ -18,4 +18,4 @@ record:
       description: "[paired-campaign-report:0.0.24] Report paired task metrics and uncertainty"
       severity: normal
       status: open
-      order: 99
+      order: 96

@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.20] Preserve ordinary independent `openeval run` and pass@k behavior"
       severity: normal
       status: open
-      order: 83
+      order: 80
   kind: task
   target_version: 0.0.20
   requirements:

@@ -18,4 +18,4 @@ record:
       description: "[task:0.0.15] Do not add an aggregate external-measurement map to the variation-level telemetry summary"
       severity: normal
       status: open
-      order: 48
+      order: 45

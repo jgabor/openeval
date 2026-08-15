@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.11] README subsection: dependencies, cost/runtime, default task subset"
       severity: normal
       status: open
-      order: 19
+      order: 16
   kind: task
   target_version: 0.0.11
   requirements:

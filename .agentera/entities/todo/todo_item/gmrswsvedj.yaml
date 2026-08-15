@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.25] Report tool-call inflation, duration, patch size, and failure classes"
       severity: normal
       status: open
-      order: 106
+      order: 103
   kind: task
   target_version: 0.0.25
   requirements:

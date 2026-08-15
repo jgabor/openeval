@@ -22,4 +22,4 @@ record:
       description: "[external-measurement-ingestion:0.0.16] Ingest one bounded external measurement artifact per attempt"
       severity: normal
       status: open
-      order: 49
+      order: 46

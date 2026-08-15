@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.10] Scaffold `scenario.yaml`, `fixtures/`, stub verifier under `verifiers/`"
       severity: normal
       status: open
-      order: 12
+      order: 9
   kind: task
   target_version: 0.0.10
   requirements:

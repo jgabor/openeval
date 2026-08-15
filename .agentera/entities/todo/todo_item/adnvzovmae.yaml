@@ -10,7 +10,7 @@ record:
       description: "[task:0.0.9] Comment expected cost/runtime for real-agent jobs"
       severity: normal
       status: open
-      order: 8
+      order: 5
   kind: task
   target_version: 0.0.9
   requirements:
