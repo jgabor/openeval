@@ -7,10 +7,20 @@ record:
     - twyepivsrq
     - zaynwzhpoj
     - tbbboxffhv
-  status: in_progress
+  status: complete
   acceptance:
     - GIVEN all prior tasks pass WHEN project state is synchronized THEN the 0.0.8 parent and canonical Go-install child resolve with durable public-proof evidence.
     - GIVEN the canonical Go path ships WHEN optional packaging backlog is reconciled THEN curl and Homebrew are explicitly superseded rather than presented as current work.
     - GIVEN final verification runs WHEN the successor plan closes THEN formatting, full repository gates, secret scans, remote visibility and commit checks, documentation claims, and Agentera validation pass.
     - GIVEN any acceptance criterion remains unmet WHEN closeout is evaluated THEN the train and plan remain visibly incomplete.
   plan: asxngpusie
+  evaluation:
+    attempt_count: 1
+    failure_count: 0
+    last_verdict: pass
+    last_failure_evidence: null
+    provenance:
+      attempt_id: rmhshogfqb-closeout-pass-1
+      source: audit:ses_ff9536df3ffeTnOu5zg9jTOry4
+      recorded_at: 2026-08-15 20:35
+      writer_command: agentera state plan record-evaluation
